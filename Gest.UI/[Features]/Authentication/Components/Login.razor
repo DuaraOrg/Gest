@@ -1,0 +1,67 @@
+﻿@using System.ComponentModel.DataAnnotations 
+@using Microsoft.EntityFrameworkCore;
+<FluentCard class="px-5 py-2 space-y-2">
+      <div class="space-y-2">
+          <h2 class="text-gray-700 text-lg font-semibold">Bienvenu</h2>
+          <h3 class="text-gray-600 font-light">Veuillez vous identier pour vous connecter</h3>
+      </div>
+      <div class="h-[0.5px] w-full bg-gray-400 -mx-5 my-2"></div>
+
+      <EditForm class="space-y-3 my-2" Model=@_model OnValidSubmit=@OnSubmit>
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+            <h2 class="text-red-500 text-sm">@_errors</h2>
+            <div class="space-y-3 flex flex-col py-3">
+                <FluentTextField  autocomplete="username" aria-required="true"  @bind-Value=@_model.Email TextFieldType=@TextFieldType.Email Placeholder="admin@example.com" DisplayName="Email"/>
+                <FluentTextField  autocomplete="current-password" aria-required="true" @bind-Value=@_model.Password TextFieldType=@TextFieldType.Password Placeholder="************" DisplayName="Mot de passe"/>   
+            </div>
+            <FluentButton class="px-2 w-full" Disabled=@_isBusy type="submit" Appearance=@Appearance.Accent>
+            @if (_isBusy)
+            {
+                <FluentProgressRing />
+            }
+            else
+            {
+                <p>Se connecter</p>
+            }
+        </FluentButton>
+      </EditForm>
+</FluentCard>
+
+@code {
+
+    LoginInput _model = new LoginInput();
+    bool _isBusy = false;
+    string _errors = string.Empty;
+    [Inject] GestDbContext DbContext { get; set; } = null!;
+    [Inject] NavigationManager NavigationManager { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    async Task OnSubmit()
+    {
+        _isBusy = true;
+        var user = await DbContext.Users.SingleOrDefaultAsync(x => x.Email == _model.Email);
+        if(user is not null)
+        {
+            var isValidPassword = _model.Password.VerifyPassword(user.PasswordHash, user.PasswordSalt);
+            if (isValidPassword)
+            {
+                NavigationManager.NavigateTo("/home");
+                return;
+            }
+        }
+        _errors = "Email ou mot de passe incorrect";
+        _isBusy = false;
+    }
+    class LoginInput
+    {
+        [Required(ErrorMessage = "Veuillez spécifier un mail")]
+        public string Email { get; set; } = null!;
+        [Required(ErrorMessage = "Veuillez spécifier un mot de passe")]
+        public string Password { get; set; } = null!;
+    }
+}

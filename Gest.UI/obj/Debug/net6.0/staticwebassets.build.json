@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "Hash": "CyISVxlqlazwZdTY5gCX+wieL4josICE+59BAQGg5Fo=",
+  "Source": "Gest.UI",
+  "BasePath": "_content/Gest.UI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Gest.UI\\wwwroot",
+      "Source": "Gest.UI",
+      "ContentRoot": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\wwwroot\\",
+      "BasePath": "_content/Gest.UI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\Microsoft.Fast.Components.FluentUI.lib.module.js",
+      "SourceId": "Microsoft.Fast.Components.FluentUI",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\",
+      "BasePath": "_content/Microsoft.Fast.Components.FluentUI",
+      "RelativePath": "Microsoft.Fast.Components.FluentUI.lib.module.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "JSModule",
+      "AssetTraitValue": "JSLibraryModule",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\Microsoft.Fast.Components.FluentUI.lib.module.js"
+    },
+    {
+      "Identity": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\jsmodules\\jsmodules.build.manifest.json",
+      "SourceId": "Gest.UI",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\jsmodules\\",
+      "BasePath": "_content/Gest.UI",
+      "RelativePath": "Gest.UI.modules.json",
+      "AssetKind": "Build",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "JSModule",
+      "AssetTraitValue": "JSModuleManifest",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "obj\\Debug\\net6.0\\jsmodules\\jsmodules.build.manifest.json"
+    },
+    {
+      "Identity": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Gest.UI.styles.css",
+      "SourceId": "Gest.UI",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
+      "BasePath": "_content/Gest.UI",
+      "RelativePath": "Gest.UI.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Gest.UI.styles.css"
+    },
+    {
+      "Identity": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css",
+      "SourceId": "Gest.UI",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+      "BasePath": "_content/Gest.UI",
+      "RelativePath": "Gest.UI.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css"
+    }
+  ]
+}

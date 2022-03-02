@@ -1,0 +1,19 @@
+{
+  "name": "gest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tailwindcss -i styles.css -o ./Gest.UI/wwwroot/css/app.css",
+    "build:maui": "npx tailwindcss -i styles.css -o ./Gest/wwwroot/css/app.css",
+    "build:web": "npx tailwindcss -i styles.css -o ./Gest.Web/wwwroot/css/app.css",
+    "watch": "npx tailwindcss -i styles.css -o ./Gest.Web/wwwroot/css/app.css --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.2",
+    "tailwindcss": "^3.0.23"
+  }
+}

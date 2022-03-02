@@ -1,0 +1,14 @@
+D:\Projects\GestDuara\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.csproj.AssemblyReference.cache
+D:\Projects\GestDuara\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\GestDuara\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.AssemblyInfoInputs.cache
+D:\Projects\GestDuara\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.AssemblyInfo.cs
+D:\Projects\GestDuara\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.csproj.CoreCompileInputs.cache
+D:\Projects\GestDuara\Gest\Gest.Core\bin\Debug\net6.0\Gest.Core.deps.json
+D:\Projects\GestDuara\Gest\Gest.Core\bin\Debug\net6.0\Gest.Core.dll
+D:\Projects\GestDuara\Gest\Gest.Core\bin\Debug\net6.0\Gest.Core.pdb
+D:\Projects\GestDuara\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.dll
+D:\Projects\GestDuara\Gest\Gest.Core\obj\Debug\net6.0\refint\Gest.Core.dll
+D:\Projects\GestDuara\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.pdb
+D:\Projects\GestDuara\Gest\Gest.Core\obj\Debug\net6.0\ref\Gest.Core.dll
+D:\Projects\GestDuara\Gest\Gest.Core\bin\Debug\net6.0\Gest.Core.runtimeconfig.json
+D:\Projects\GestDuara\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.genruntimeconfig.cache
