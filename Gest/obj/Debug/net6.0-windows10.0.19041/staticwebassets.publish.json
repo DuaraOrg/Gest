@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fOl/paQHmw4rCUoXt/yZHGOQkysX7KjZazZBLoOUJv0=",
+  "Hash": "TcQNpmpoUn/9SksWwkrQTMjtSoRUd9hnj7t75QsbEmA=",
   "Source": "Gest",
   "BasePath": "/",
   "Mode": "Root",
@@ -22,7 +22,7 @@
     {
       "Name": "Gest.UI\\wwwroot",
       "Source": "Gest.UI",
-      "ContentRoot": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\wwwroot\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.UI\\wwwroot\\",
       "BasePath": "_content/Gest.UI",
       "Pattern": "**"
     },
@@ -51,6 +51,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\Microsoft.Fast.Components.FluentUI.lib.module.js"
+    },
+    {
+      "Identity": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css",
+      "SourceId": "Gest.UI",
+      "SourceType": "Project",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+      "BasePath": "_content/Gest.UI",
+      "RelativePath": "Gest.UI.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css"
     },
     {
       "Identity": "D:\\Projects\\Gest\\Gest\\obj\\Debug\\net6.0-windows10.0.19041\\win10-x64\\jsmodules\\jsmodules.publish.manifest.json",
@@ -153,23 +170,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
-    },
-    {
-      "Identity": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css",
-      "SourceId": "Gest.UI",
-      "SourceType": "Project",
-      "ContentRoot": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/Gest.UI",
-      "RelativePath": "Gest.UI.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css"
     }
   ]
 }

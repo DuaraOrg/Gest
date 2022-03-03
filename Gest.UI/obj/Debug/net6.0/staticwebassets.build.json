@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "CyISVxlqlazwZdTY5gCX+wieL4josICE+59BAQGg5Fo=",
+  "Hash": "VG5nAVrf8anB2jhz+RH/4kx+HQtdNh5XzoJgTskFKDI=",
   "Source": "Gest.UI",
   "BasePath": "_content/Gest.UI",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "Gest.UI\\wwwroot",
       "Source": "Gest.UI",
-      "ContentRoot": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\wwwroot\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.UI\\wwwroot\\",
       "BasePath": "_content/Gest.UI",
       "Pattern": "**"
     }
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\Microsoft.Fast.Components.FluentUI.lib.module.js"
     },
     {
-      "Identity": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\jsmodules\\jsmodules.build.manifest.json",
+      "Identity": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\jsmodules\\jsmodules.build.manifest.json",
       "SourceId": "Gest.UI",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\jsmodules\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\jsmodules\\",
       "BasePath": "_content/Gest.UI",
       "RelativePath": "Gest.UI.modules.json",
       "AssetKind": "Build",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "obj\\Debug\\net6.0\\jsmodules\\jsmodules.build.manifest.json"
     },
     {
-      "Identity": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Gest.UI.styles.css",
+      "Identity": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Gest.UI.styles.css",
       "SourceId": "Gest.UI",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
       "BasePath": "_content/Gest.UI",
       "RelativePath": "Gest.UI.styles.css",
       "AssetKind": "All",
@@ -65,13 +65,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Gest.UI.styles.css"
+      "OriginalItemSpec": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Gest.UI.styles.css"
     },
     {
-      "Identity": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css",
+      "Identity": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css",
       "SourceId": "Gest.UI",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/Gest.UI",
       "RelativePath": "Gest.UI.bundle.scp.css",
       "AssetKind": "All",
@@ -82,7 +82,7 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Projects\\GestDuara\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css"
+      "OriginalItemSpec": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css"
     }
   ]
 }

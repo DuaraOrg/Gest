@@ -1,4 +1,5 @@
 wwwroot\_content\Microsoft.Fast.Components.FluentUI\Microsoft.Fast.Components.FluentUI.lib.module.js
+wwwroot\_content\Gest.UI\Gest.UI.bundle.scp.css
 wwwroot\Gest.modules.json
 OpenSans-Regular.ttf
 appiconLargeTile.scale-100.png
@@ -47,4 +48,3 @@ wwwroot\css\app.css
 wwwroot\favicon.ico
 wwwroot\images\swala.jpg
 wwwroot\index.html
-wwwroot\_content\Gest.UI\Gest.UI.bundle.scp.css

@@ -18,6 +18,18 @@ namespace Gest.Core.Data
 
         public DbSet<Branch> Branches { get; set; } = null!;
 
+        public DbSet<Article> Articles { get; set; } = null!;
+
+        public DbSet<StockMouvement> StockMouvements { get; set; } = null!;
+
+        public DbSet<Client> Clients { get; set; } = null!;
+
+        public DbSet<Wallet> Wallets { get; set; } = null!;
+
+        public DbSet<Sale> Sales { get; set; } = null!;
+
+        public DbSet<Payment> Payments { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
@@ -34,6 +46,13 @@ namespace Gest.Core.Data
                 .HasOne(uc => uc.Company)
                 .WithMany(c => c.Users)
                 .HasForeignKey(uc => uc.CompanyId);
+
+            modelBuilder.Entity<Wallet>()
+                .OwnsOne(x => x.Cash);
+            modelBuilder.Entity<Wallet>()
+               .OwnsOne(x => x.Credit);
+            modelBuilder.Entity<Wallet>()
+              .OwnsOne(x => x.Bank);
 
             var (hash, salt) = "Admin@243".HashPassword();
             var user = new User()
@@ -58,13 +77,21 @@ namespace Gest.Core.Data
                 Id = new Guid("AFDC3370-ADB1-4DE9-AD12-7678145B4485"),
                 Name = "Ets TUUNGANE",
                 CreatedAt = DateTime.UtcNow,
-                Adress = "Bunia",
+                Adress = "Bunia"
             };
             var branch = new Branch()
             {
                 Id = new Guid("453412A3-578B-446B-9406-BD7077BDCE01"),
                 CompanyId = new Guid("AFDC3370-ADB1-4DE9-AD12-7678145B4485"),
                 Name = "Default",
+                CreatedAt = DateTime.UtcNow
+            };
+            var defaultClient = new Client()
+            {
+                Id = new Guid("654412A3-578B-446B-9406-BD7077BDCE01"),
+                Names = "Client Anonyme",
+                Email = "clientanonyme@swala.com",
+                CompanyId = new Guid("AFDC3370-ADB1-4DE9-AD12-7678145B4485"),
                 CreatedAt = DateTime.UtcNow
             };
 
@@ -76,6 +103,18 @@ namespace Gest.Core.Data
                 .HasData(branch);
             modelBuilder.Entity<UserCompany>()
                 .HasData(userCompany);
+            modelBuilder.Entity<Client>()
+            .HasData(defaultClient);
+
+            modelBuilder.Entity<Article>()
+                .OwnsOne(x => x.Stock);
+            modelBuilder.Entity<Article>()
+                .OwnsOne(x => x.Conditionnement);
+            modelBuilder.Entity<Article>()
+                .OwnsOne(x => x.Price);
+
+            modelBuilder.Entity<Sale>()
+                .OwnsMany(x => x.Items);
         }
     }
 }

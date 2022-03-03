@@ -892,6 +892,9 @@
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.fast.components.fluentui\1.1.0\staticwebassets\Microsoft.Fast.Components.FluentUI.lib.module.js">
       <PackagePath>wwwroot\_content\Microsoft.Fast.Components.FluentUI\Microsoft.Fast.Components.FluentUI.lib.module.js</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projects\Gest\Gest.UI\obj\Debug\net6.0\scopedcss\projectbundle\Gest.UI.bundle.scp.css">
+      <PackagePath>wwwroot\_content\Gest.UI\Gest.UI.bundle.scp.css</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\jsmodules\jsmodules.publish.manifest.json">
       <PackagePath>wwwroot\Gest.modules.json</PackagePath>
     </AppxPackagedFile>
@@ -909,9 +912,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\wwwroot\index.html">
       <PackagePath>wwwroot\index.html</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Projects\GestDuara\Gest\Gest.UI\obj\Debug\net6.0\scopedcss\projectbundle\Gest.UI.bundle.scp.css">
-      <PackagePath>wwwroot\_content\Gest.UI\Gest.UI.bundle.scp.css</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\appiconfgSplashScreen.scale-100.png">
       <PackagePath>appiconfgSplashScreen.scale-100.png</PackagePath>

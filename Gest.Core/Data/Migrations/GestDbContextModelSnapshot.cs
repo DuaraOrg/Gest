@@ -17,6 +17,48 @@ namespace Gest.Core.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.2");
 
+            modelBuilder.Entity("Gest.Core.Entities.Article", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("BranchId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UnitOfMeasure")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Articles");
+                });
+
             modelBuilder.Entity("Gest.Core.Entities.Branch", b =>
                 {
                     b.Property<Guid>("Id")
@@ -50,10 +92,61 @@ namespace Gest.Core.Data.Migrations
                         {
                             Id = new Guid("453412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 2, 11, 23, 23, 14, DateTimeKind.Utc).AddTicks(6718),
+                            CreatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3323),
                             FCToDollarRate = 2000m,
                             Name = "Default",
-                            UpdatedAt = new DateTime(2022, 3, 2, 11, 23, 23, 14, DateTimeKind.Utc).AddTicks(6712)
+                            UpdatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3318)
+                        });
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Client", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Names")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("WalletId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("WalletId");
+
+                    b.ToTable("Clients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("654412a3-578b-446b-9406-bd7077bdce01"),
+                            CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
+                            CreatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3328),
+                            Email = "clientanonyme@swala.com",
+                            Names = "Client Anonyme",
+                            UpdatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3324)
                         });
                 });
 
@@ -79,7 +172,12 @@ namespace Gest.Core.Data.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("WalletId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("WalletId");
 
                     b.ToTable("Companies");
 
@@ -88,11 +186,141 @@ namespace Gest.Core.Data.Migrations
                         {
                             Id = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
                             Adress = "Bunia",
-                            CreatedAt = new DateTime(2022, 3, 2, 11, 23, 23, 14, DateTimeKind.Utc).AddTicks(6710),
+                            CreatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3316),
                             FCToDollarRate = 2000m,
                             Name = "Ets TUUNGANE",
-                            UpdatedAt = new DateTime(2022, 3, 2, 11, 23, 23, 14, DateTimeKind.Utc).AddTicks(6706)
+                            UpdatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3314)
                         });
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Payment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AccountType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ClientId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("SaleId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TransType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("SaleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Sale", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("AmountPaid")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ArticleId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("BranchId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DeliverStatus")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PayStatus")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Sales");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.StockMouvement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ArticleId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Qty")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("StockMouvements");
                 });
 
             modelBuilder.Entity("Gest.Core.Entities.User", b =>
@@ -144,13 +372,13 @@ namespace Gest.Core.Data.Migrations
                         new
                         {
                             Id = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
-                            CreatedAt = new DateTime(2022, 3, 2, 11, 23, 23, 14, DateTimeKind.Utc).AddTicks(6681),
+                            CreatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3297),
                             Email = "admin@swala.com",
                             FirstName = "Admin",
                             LastName = "Swala",
-                            PasswordHash = "gVO+geip618dEdoz47JEKqVlgOQs9hCH4SB1v+jP1bQDgoKjUAVC0QVz3BcFNCylkR7V2TDQyu+dB5GyVACconzpm3j4xS+F8mPUQcTeQvgI3+SgrqDSX1jx7tw3JZDt6XfZFBbwIOdZACBeUKyMfODRKgvuJ5icPwJJhd5wlEMnjH7IUiBFBeSfWiUVSz+NQlf1lvrPa4la/+Hgm1qXCl5tpzi1/gDH5OOh4E/PLp7XQardleOLM31vHF2ngv8OP0wWrsXHGbORYSFdxIVcLqQBha7j76kRIqVpR30r71oDV69lpoSU5lFEOuKhf9VRS0ErHC3xattaIqwMYxUKBw==",
-                            PasswordSalt = "/5Zo2sYD6LHii+LRoxUJ2NJFHDP8N4x5Vz3JiWbMgvYM0Io88zdDPCM7byNlb6rKr2t6qEYlvlT/RQ0HG5dUmQ==",
-                            UpdatedAt = new DateTime(2022, 3, 2, 11, 23, 23, 14, DateTimeKind.Utc).AddTicks(6630)
+                            PasswordHash = "pL0U2FY+JRdJUT8j+83DI8cvzxZN9PZlmvKDx7DIgQ6NVB1XPpzol8UvZ25saYp25dC9ZssNzJzv8Bdns86LDZsBkwyZ/muLS1U8vOIU2Ac7mr3Ggv1grKMmFuAlUparaCYGQ/sA7eT4rY1lPOdQvk7hbF63mD2Brat+TtjLzR+BHD8r6ImoZEfH9fuRDUOd1NNvgDPCVkHBN+e1DYXt2E8dVxt1xGBuLkoBZT5vCvW7p0ywQwHJD14lwS1hKpi7FD9t2FttIkAFp8NCJrAJAKp/PfU8iU2uN2iLIC66giqH+StvDsn+q/VZvhizfOUvyDE++eij7UAGKrqmaSea5w==",
+                            PasswordSalt = "lD/8Mj8mgm7wr9A6G2dyIaMoie0Nk0jPWzDGypEp9n9uUITvx6rQsiaty5RdSL3fPQFLFZPOfOerVVCYaFjufw==",
+                            UpdatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3261)
                         });
                 });
 
@@ -183,10 +411,152 @@ namespace Gest.Core.Data.Migrations
                         {
                             UserId = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            Joined = new DateTime(2022, 3, 2, 11, 23, 23, 14, DateTimeKind.Utc).AddTicks(6692),
+                            Joined = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3306),
                             Role = "Propriétaire",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Wallet", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Wallets");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.WalletMovement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FromAccountType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("FromWalletId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ToAccountType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ToWalletId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TransType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ToWalletId");
+
+                    b.ToTable("WalletMovement");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Article", b =>
+                {
+                    b.HasOne("Gest.Core.Entities.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gest.Core.Entities.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("Gest.Core.Entities.Conditionnement", "Conditionnement", b1 =>
+                        {
+                            b1.Property<Guid>("ArticleId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.Property<double>("QtyPerUnitOfMeasure")
+                                .HasColumnType("REAL");
+
+                            b1.HasKey("ArticleId");
+
+                            b1.ToTable("Articles");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ArticleId");
+                        });
+
+                    b.OwnsOne("Gest.Core.Entities.Pricing", "Price", b1 =>
+                        {
+                            b1.Property<Guid>("ArticleId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal?>("PerConditionnement")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal>("PerUnitOfMeasure")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("ArticleId");
+
+                            b1.ToTable("Articles");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ArticleId");
+                        });
+
+                    b.OwnsOne("Gest.Core.Entities.Stock", "Stock", b1 =>
+                        {
+                            b1.Property<Guid>("ArticleId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<double?>("Maximum")
+                                .HasColumnType("REAL");
+
+                            b1.Property<double>("Minimum")
+                                .HasColumnType("REAL");
+
+                            b1.Property<double>("Qty")
+                                .HasColumnType("REAL");
+
+                            b1.HasKey("ArticleId");
+
+                            b1.ToTable("Articles");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ArticleId");
+                        });
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Conditionnement");
+
+                    b.Navigation("Price")
+                        .IsRequired();
+
+                    b.Navigation("Stock")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Gest.Core.Entities.Branch", b =>
@@ -198,6 +568,154 @@ namespace Gest.Core.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Client", b =>
+                {
+                    b.HasOne("Gest.Core.Entities.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gest.Core.Entities.Wallet", "Wallet")
+                        .WithMany()
+                        .HasForeignKey("WalletId");
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Wallet");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Company", b =>
+                {
+                    b.HasOne("Gest.Core.Entities.Wallet", "Wallet")
+                        .WithMany()
+                        .HasForeignKey("WalletId");
+
+                    b.Navigation("Wallet");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Payment", b =>
+                {
+                    b.HasOne("Gest.Core.Entities.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("Gest.Core.Entities.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gest.Core.Entities.Sale", "Sale")
+                        .WithMany("Payments")
+                        .HasForeignKey("SaleId");
+
+                    b.HasOne("Gest.Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Sale");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Sale", b =>
+                {
+                    b.HasOne("Gest.Core.Entities.Article", null)
+                        .WithMany("Sales")
+                        .HasForeignKey("ArticleId");
+
+                    b.HasOne("Gest.Core.Entities.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gest.Core.Entities.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gest.Core.Entities.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gest.Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsMany("Gest.Core.Entities.SaleItem", "Items", b1 =>
+                        {
+                            b1.Property<Guid>("SaleId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<Guid>("ArticleId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<double>("QtyDelivered")
+                                .HasColumnType("REAL");
+
+                            b1.Property<double>("QtyInUnitOfMeasure")
+                                .HasColumnType("REAL");
+
+                            b1.Property<decimal>("UnitPricePerUnitOfMeasure")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("SaleId", "Id");
+
+                            b1.HasIndex("ArticleId");
+
+                            b1.ToTable("SaleItem");
+
+                            b1.HasOne("Gest.Core.Entities.Article", "Article")
+                                .WithMany()
+                                .HasForeignKey("ArticleId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("SaleId");
+
+                            b1.Navigation("Article");
+                        });
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Items");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.StockMouvement", b =>
+                {
+                    b.HasOne("Gest.Core.Entities.Article", "Article")
+                        .WithMany("Mouvements")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
                 });
 
             modelBuilder.Entity("Gest.Core.Entities.UserCompany", b =>
@@ -219,6 +737,97 @@ namespace Gest.Core.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Gest.Core.Entities.Wallet", b =>
+                {
+                    b.OwnsOne("Gest.Core.Entities.Bank", "Bank", b1 =>
+                        {
+                            b1.Property<Guid>("WalletId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AccountNumber")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<DateTime>("LastUpdated")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("WalletId");
+
+                            b1.ToTable("Wallets");
+
+                            b1.WithOwner()
+                                .HasForeignKey("WalletId");
+                        });
+
+                    b.OwnsOne("Gest.Core.Entities.Cash", "Cash", b1 =>
+                        {
+                            b1.Property<Guid>("WalletId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<DateTime>("LastUpdated")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("WalletId");
+
+                            b1.ToTable("Wallets");
+
+                            b1.WithOwner()
+                                .HasForeignKey("WalletId");
+                        });
+
+                    b.OwnsOne("Gest.Core.Entities.Credit", "Credit", b1 =>
+                        {
+                            b1.Property<Guid>("WalletId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<DateTime>("LastUpdated")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("WalletId");
+
+                            b1.ToTable("Wallets");
+
+                            b1.WithOwner()
+                                .HasForeignKey("WalletId");
+                        });
+
+                    b.Navigation("Bank")
+                        .IsRequired();
+
+                    b.Navigation("Cash")
+                        .IsRequired();
+
+                    b.Navigation("Credit")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.WalletMovement", b =>
+                {
+                    b.HasOne("Gest.Core.Entities.Wallet", "ToWallet")
+                        .WithMany("WalletHistory")
+                        .HasForeignKey("ToWalletId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ToWallet");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Article", b =>
+                {
+                    b.Navigation("Mouvements");
+
+                    b.Navigation("Sales");
+                });
+
             modelBuilder.Entity("Gest.Core.Entities.Company", b =>
                 {
                     b.Navigation("Branches");
@@ -226,9 +835,19 @@ namespace Gest.Core.Data.Migrations
                     b.Navigation("Users");
                 });
 
+            modelBuilder.Entity("Gest.Core.Entities.Sale", b =>
+                {
+                    b.Navigation("Payments");
+                });
+
             modelBuilder.Entity("Gest.Core.Entities.User", b =>
                 {
                     b.Navigation("Companies");
+                });
+
+            modelBuilder.Entity("Gest.Core.Entities.Wallet", b =>
+                {
+                    b.Navigation("WalletHistory");
                 });
 #pragma warning restore 612, 618
         }
