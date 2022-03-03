@@ -27,8 +27,40 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Gest/Gest.UI/Pages/Sales.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2FsZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/Pages/Stock.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3RvY2sucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/Shared/AdminLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFkbWluTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/Shared/ConnectedUser.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbm5lY3RlZFVzZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/Shared/SideNav.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFNpZGVOYXYucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/Shared/SideNavItem.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFNpZGVOYXZJdGVtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/Shared/TopAdminNav.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFRvcEFkbWluTmF2LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Gest/Gest.UI/\[Features\]/Authentication/Components/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxBdXRoZW50aWNhdGlvblxDb21wb25lbnRzXExvZ2luLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Add/Components/ArticleEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xBZGRcQ29tcG9uZW50c1xBcnRpY2xlRWRpdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/Gest/Gest.UI/_Imports.razor]

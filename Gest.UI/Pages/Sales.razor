@@ -1,0 +1,22 @@
+﻿@page "/sales"
+@layout AdminLayout
+
+<PageTitle>Ventes</PageTitle>
+<TopAdminNav Title="Gestion des ventes" />
+<div class="h-full mt-16 p-0" style="padding:0rem;">
+    <h1>ventes</h1>
+</div>
+@code {
+
+    [Inject] AdminNavState AdminNavState { get; set; } = null!;
+  
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            AdminNavState.CurrentUrl = UrlKeys.Sales;
+        }
+        return base.OnAfterRenderAsync(firstRender);
+    }
+}

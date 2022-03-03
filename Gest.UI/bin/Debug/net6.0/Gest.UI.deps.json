@@ -10,12 +10,14 @@
         "dependencies": {
           "Gest.Core": "1.0.0",
           "Microsoft.AspNetCore.Components.Web": "6.0.2",
-          "Microsoft.Fast.Components.FluentUI": "1.1.0"
+          "Microsoft.Fast.Components.FluentUI": "1.1.0",
+          "Radzen.Blazor": "3.16.2"
         },
         "runtime": {
           "Gest.UI.dll": {}
         }
       },
+      "LibSassBuilder/2.0.1": {},
       "Microsoft.AspNetCore.Authorization/6.0.2": {
         "dependencies": {
           "Microsoft.AspNetCore.Metadata": "6.0.2",
@@ -76,6 +78,7 @@
           }
         }
       },
+      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.Data.Sqlite.Core/6.0.2": {
         "dependencies": {
           "SQLitePCLRaw.core": "2.0.6"
@@ -281,6 +284,21 @@
           }
         }
       },
+      "Radzen.Blazor/3.16.2": {
+        "dependencies": {
+          "LibSassBuilder": "2.0.1",
+          "Microsoft.AspNetCore.Components": "6.0.2",
+          "Microsoft.AspNetCore.Components.Web": "6.0.2",
+          "Microsoft.CSharp": "4.7.0",
+          "System.Linq.Dynamic.Core": "1.2.12"
+        },
+        "runtime": {
+          "lib/net5.0/Radzen.Blazor.dll": {
+            "assemblyVersion": "3.16.2.0",
+            "fileVersion": "3.16.2.0"
+          }
+        }
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
         "dependencies": {
           "SQLitePCLRaw.core": "2.0.6",
@@ -414,6 +432,14 @@
           }
         }
       },
+      "System.Linq.Dynamic.Core/1.2.12": {
+        "runtime": {
+          "lib/net5.0/System.Linq.Dynamic.Core.dll": {
+            "assemblyVersion": "1.2.12.0",
+            "fileVersion": "1.2.12.0"
+          }
+        }
+      },
       "System.Memory/4.5.4": {},
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
       "System.Text.Encodings.Web/6.0.0": {
@@ -442,6 +468,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "LibSassBuilder/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-f+7TWQtCirW94VdzKL9SaAfeSF96TeEqdtDztmTGbndrcUlZZlL6uJLZKQCXQgj1BB3OqX0584OCvqFHrkAusA==",
+      "path": "libsassbuilder/2.0.1",
+      "hashPath": "libsassbuilder.2.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authorization/6.0.2": {
       "type": "package",
@@ -484,6 +517,13 @@
       "sha512": "sha512-SE6xWyaY2n9LsfwNwppyqwVIRtS1RcYPaIFoqyTi8HA6l2Zze40lIvdTSTtDQC+EZpdDRmQY3CPQi9ZlCqOwTg==",
       "path": "microsoft.aspnetcore.metadata/6.0.2",
       "hashPath": "microsoft.aspnetcore.metadata.6.0.2.nupkg.sha512"
+    },
+    "Microsoft.CSharp/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
     "Microsoft.Data.Sqlite.Core/6.0.2": {
       "type": "package",
@@ -618,6 +658,13 @@
       "path": "microsoft.jsinterop/6.0.2",
       "hashPath": "microsoft.jsinterop.6.0.2.nupkg.sha512"
     },
+    "Radzen.Blazor/3.16.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TseeeTWAhOZq0O7aISF2gRmsknchw4MVDCQYiL/C2RieeLp9ObZXxUz5+N3/Q2nzmeDLHJ2uV0WDTmhGWiA0DQ==",
+      "path": "radzen.blazor/3.16.2",
+      "hashPath": "radzen.blazor.3.16.2.nupkg.sha512"
+    },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
       "type": "package",
       "serviceable": true,
@@ -673,6 +720,13 @@
       "sha512": "sha512-cb5OfQjnz+zjpJJei+f3QYK7+wWZrDdNHf3DykO6QCacpNZ80tuNgq1DC2kqlrjfEu+cMUTvulxPIrCMbBkjqg==",
       "path": "system.io.pipelines/6.0.2",
       "hashPath": "system.io.pipelines.6.0.2.nupkg.sha512"
+    },
+    "System.Linq.Dynamic.Core/1.2.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wJDLhidcJnLAJeZ4z10YVAxMm4rTW0zlYmUjriJTo4eGLHD5NKZOm6qFabkn5TinbfZ6LM9LeYFPyiQMpRly3Q==",
+      "path": "system.linq.dynamic.core/1.2.12",
+      "hashPath": "system.linq.dynamic.core.1.2.12.nupkg.sha512"
     },
     "System.Memory/4.5.4": {
       "type": "package",

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gest.Core.Entities
 {
@@ -7,6 +8,9 @@ namespace Gest.Core.Entities
         public string FirstName { get; set; } = null!;
 
         public string LastName { get; set; } = null!;
+
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
 
         public string? ProfileUrl { get; set; }
 

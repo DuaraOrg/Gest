@@ -1,0 +1,24 @@
+﻿@page "/stock"
+@layout AdminLayout
+
+<PageTitle>Stock</PageTitle>
+<TopAdminNav Title="Gestion de stock" />
+<div class="h-full mt-14 p-0" style="padding:0rem;">
+    <div>
+
+    </div>
+</div>
+@code {
+
+    [Inject] AdminNavState AdminNavState { get; set; } = null!;
+  
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            AdminNavState.CurrentUrl = UrlKeys.Stock;
+        }
+        return base.OnAfterRenderAsync(firstRender);
+    }
+}

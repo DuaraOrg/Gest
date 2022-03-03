@@ -850,6 +850,9 @@
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.windowsappsdk\1.0.0\lib\net5.0-windows10.0.18362.0\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll">
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.Net.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\lib\net5.0\Radzen.Blazor.dll">
+      <PackagePath>Radzen.Blazor.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\sqlitepclraw.bundle_e_sqlite3\2.0.6\lib\netstandard2.0\SQLitePCLRaw.batteries_v2.dll">
       <PackagePath>SQLitePCLRaw.batteries_v2.dll</PackagePath>
     </AppxPackagedFile>
@@ -864,6 +867,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.io.pipelines\6.0.2\lib\net6.0\System.IO.Pipelines.dll">
       <PackagePath>System.IO.Pipelines.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.linq.dynamic.core\1.2.12\lib\net5.0\System.Linq.Dynamic.Core.dll">
+      <PackagePath>System.Linq.Dynamic.Core.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.runtime.compilerservices.unsafe\6.0.2-mauipre.1.22102.15\lib\net6.0\System.Runtime.CompilerServices.Unsafe.dll">
       <PackagePath>System.Runtime.CompilerServices.Unsafe.dll</PackagePath>
@@ -891,6 +897,87 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.fast.components.fluentui\1.1.0\staticwebassets\Microsoft.Fast.Components.FluentUI.lib.module.js">
       <PackagePath>wwwroot\_content\Microsoft.Fast.Components.FluentUI\Microsoft.Fast.Components.FluentUI.lib.module.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\dark.css">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\css\dark.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\dark-base.css">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\css\dark-base.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\default.css">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\css\default.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\default-base.css">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\css\default-base.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\humanistic.css">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\css\humanistic.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\humanistic-base.css">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\css\humanistic-base.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\software.css">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\css\software.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\software-base.css">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\css\software-base.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\standard.css">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\css\standard.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\standard-base.css">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\css\standard-base.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\MaterialIcons-Regular.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\MaterialIcons-Regular.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\roboto-v15-latin-300.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\roboto-v15-latin-300.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\roboto-v15-latin-700.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\roboto-v15-latin-700.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\roboto-v15-latin-regular.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\roboto-v15-latin-regular.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-Black.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-Black.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-BlackIt.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-BlackIt.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-Bold.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-Bold.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-BoldIt.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-BoldIt.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-ExtraLight.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-ExtraLight.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-ExtraLightIt.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-ExtraLightIt.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-It.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-It.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-Light.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-Light.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-LightIt.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-LightIt.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-Regular.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-Regular.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-Semibold.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-Semibold.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-SemiboldIt.woff">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-SemiboldIt.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\Radzen.Blazor.js">
+      <PackagePath>wwwroot\_content\Radzen.Blazor\Radzen.Blazor.js</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest.UI\obj\Debug\net6.0\scopedcss\projectbundle\Gest.UI.bundle.scp.css">
       <PackagePath>wwwroot\_content\Gest.UI\Gest.UI.bundle.scp.css</PackagePath>

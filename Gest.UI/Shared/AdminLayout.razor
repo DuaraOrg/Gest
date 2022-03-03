@@ -1,0 +1,33 @@
+﻿@inherits LayoutComponentBase
+@inject AdminNavState _navState
+@inject CurrentItems _currentItems;
+@if(_currentItems.Company is not null)
+{
+    <div>
+        <div id="mainAdminBody" style="min-height: 100vh" class="sticky no-scrollbar @(_navState.IsSideNavOpen ? _isOpenTransition : _isClosedTransition)  bg-gray-100  overflow-x-hidden overflow-y-hidden"> @Body</div>
+        <SideNav IsOpen=@_navState.IsSideNavOpen Company=@_currentItems.Company CurrentUrl=@_navState.CurrentUrl />
+    </div>
+    <RadzenDialog />
+    <RadzenNotification />
+    <RadzenTooltip />
+}
+@code {
+
+    string _isOpenTransition = "transform transition ease-in-out duration-500 sm:duration-700 translate-x-[100%] w-[50%] md:translate-x-[42.8%] md:w-[70%] lg:translate-x-[25%] lg:w-[80%]";
+    string _isClosedTransition = "transform transition ease-in-out duration-500 sm:duration-700 translate-x-0 left-0 w-full";
+
+    protected override void OnInitialized()
+    {
+        _navState.OnChange += NavStateOnOnChange;
+    }
+
+    private void NavStateOnOnChange(bool value)
+    {
+       InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        _navState.OnChange -= NavStateOnOnChange;
+    }
+}

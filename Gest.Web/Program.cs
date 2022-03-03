@@ -1,11 +1,20 @@
 using Gest.Core.Data;
+using Gest.UI.Models;
+using Gest.UI.Shared;
 using Microsoft.EntityFrameworkCore;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<GestDbContext>(options => options.UseSqlite("Data Source=app.db"));
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddSingleton(_ => new CurrentItems());
+builder.Services.AddSingleton<AdminNavState>();
+builder.Services.AddScoped<DialogService>();
+builder.Services.AddScoped<NotificationService>();
+builder.Services.AddScoped<TooltipService>();
 
 var app = builder.Build();
 

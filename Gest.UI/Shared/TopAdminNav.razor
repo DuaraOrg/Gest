@@ -1,0 +1,48 @@
+﻿@using Gest.UI.Shared
+@inject IJSRuntime _jsRuntime
+@inject AdminNavState _navState
+@inject CurrentItems _currentItems
+<div  class="fixed top-0 z-10 flex justify-between px-3 py-1.5 w-full bg-mirage-500 border-0 border-b-[0.01rem] border-gray-200 max-h-24">
+    <div class="flex items-center space-x-2 text-scorpion-600">
+        <button @onclick="() => _navState.SetState(!_navState.IsSideNavOpen)" id="humbugerAdminMenu">
+            <svg class="fill-current text-scorpion-600" width="28.8" height="17.2" viewBox="0 0 28.8 17.2">
+                <path id="icons8_menu" d="M5.08,9A.989.989,0,0,0,4,9.86a.989.989,0,0,0,1.08.86H31.72a.989.989,0,0,0,1.08-.86A.989.989,0,0,0,31.72,9Zm0,7.74A.989.989,0,0,0,4,17.6a.989.989,0,0,0,1.08.86H31.72a.989.989,0,0,0,1.08-.86.989.989,0,0,0-1.08-.86Zm0,7.74a.882.882,0,1,0,0,1.72H31.72a.882.882,0,1,0,0-1.72Z" transform="translate(-4 -9)"/>
+            </svg>
+        </button>
+         <h2 style="font-size: 1rem; line-height: 1.75rem" class="text-gray-700 text-ellipsis overflow-hidden">@Title</h2>
+    </div>
+    <div class="hidden md:flex space-x-3 justify-between">
+        <div class="h-full bg-gray-400 w-[1px]"></div>
+        <div class="flex items-center space-x-5">
+            <div>
+                <h2 class="text-sm text-gray-600">Date des opérations</h2>
+                <RadzenDatePicker class="w-[7rem]" @bind-Value=@_currentItems.DateOfOperations DateFormat="d"/>
+            </div>
+            <h2 class="text-gray-500">-</h2>
+            <div>
+                <h2 class="text-sm text-gray-600">Taux</h2>
+                <div class="flex items-center space-x-2">
+                    <h3 class="font-semibold">1$</h3>
+                    <p>=</p>
+                    <div class="flex items-center">
+                         <FluentNumberField class="w-[5rem]" @bind-Value=@_currentItems.Company!.FCToDollarRate  />
+                         <h3 class="relative -left-[1.5rem] text-gray-500">FC</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="h-full bg-gray-400 w-[1px]"></div>
+    </div>
+    <div>
+        <ConnectedUser/>
+    </div>
+</div>
+
+@code {
+    [EditorRequired]
+    [Parameter]
+    public string Title { get; set; } = "Admin";
+    
+
+    
+}

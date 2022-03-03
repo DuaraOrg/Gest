@@ -1,0 +1,40 @@
+﻿@using Gest.UI.Shared
+<button @onclick=@(e => NavigateTo(Link)) class="w-full flex space-x-3 py-2 px-1 @(IsSelected ? "bg-gray-800 text-gray-50" : "text-scorpion-600") hover:bg-gray-600 hover:text-gray-50 hover:cursor-pointer">
+    <svg class="h-6 w-6 text-current fill-current" viewBox="@ViewBox">
+        <path d="@Path" />
+    </svg>
+    <p>@Text</p>
+</button>
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => IsSmall = e) /> 
+
+@code {
+
+    [Inject]
+    AdminNavState AdminNavState { get; set; } = null!;
+
+    [Inject]
+    NavigationManager NavigationManager { get; set; } = null!;
+
+    [Parameter]
+    public bool IsSelected { get; set; } = false;
+
+    [Parameter]
+    public string Text { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Link { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Path { get; set; } = string.Empty;
+
+    [Parameter]
+    public string ViewBox { get; set; } = string.Empty;
+
+    bool IsSmall = false;
+    void NavigateTo(string link)
+    {
+        if(IsSmall)
+            AdminNavState.SetState(false);
+        NavigationManager.NavigateTo(link);
+    }
+}
