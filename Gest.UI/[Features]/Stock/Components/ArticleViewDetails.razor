@@ -1,0 +1,70 @@
+﻿<div>
+<div class="shadow bg-gray-50">
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Nom de l'article</h2>
+        <h2 class="text-gray-800 font-medium">@Model.Name</h2>
+    </div>
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Catégorie</h2>
+        <h2 class="text-gray-800 font-medium">@Model.Category</h2>
+    </div>
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Unité de mesure</h2>
+        <h2 class="text-gray-800 font-medium">@Model.UnitOfMeasure</h2>
+    </div>
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Qté en stock</h2>
+        <h2 class="text-gray-800 font-medium rounded">@Model.Stock.Qty @Model.UnitOfMeasure</h2>
+    </div>
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Prix de vente par unité de mesure</h2>
+        <h2 class="text-gray-800 font-medium rounded">@Model.Price.SellingPricePerUnitOfMeasure $ par @Model.UnitOfMeasure</h2>
+    </div>
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Prix d'achat par unité de mesure</h2>
+        <h2 class="text-gray-800 font-medium rounded">@Model.Price.BuyingPricePerUnitOfMeasure $ par @Model.UnitOfMeasure</h2>
+    </div>
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Stock Minimum</h2>
+        <h2 class="text-gray-800 font-medium rounded">@Model.Stock.Minimum @Model.UnitOfMeasure</h2>
+    </div>
+     <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Stock Maximum</h2>
+        <h2 class="text-gray-800 font-medium rounded">@Model.Stock.Maximum @Model.UnitOfMeasure</h2>
+    </div>
+    @if(Model.Conditionnement is not null)
+    {
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+            <h2 class="font-light text-gray-600">Conditionnement</h2>
+            <h2 class="text-gray-800 font-medium">@Model.Conditionnement.Name</h2>
+        </div>
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+            <h2 class="font-light text-gray-600">Qté par conditionnement</h2>
+            <h2 class="text-gray-800 font-medium">@Model.Conditionnement.QtyPerUnitOfMeasure @Model.UnitOfMeasure par @Model.Conditionnement.Name</h2>
+        </div>
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+            <h2 class="font-light text-gray-600">Prix de vente par conditionnement</h2>
+            <h2 class="text-gray-800 font-medium">@Model.Price.SellingPricePerConditionnement $ par @Model.Conditionnement.Name</h2>
+        </div>
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+            <h2 class="font-light text-gray-600">Prix d'achat par conditionnement</h2>
+            <h2 class="text-gray-800 font-medium">@Model.Price.BuyingPricePerConditionnement $ par @Model.Conditionnement.Name</h2>
+        </div>
+    }
+</div>
+<div class="pt-4 space-y-1">
+    <p class="text-gray-600">Actions</p>
+    <div>
+        <button @onclick=@(_ => OnModifyClick.InvokeAsync()) class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow">Modifier</button>
+    </div>
+</div>
+</div>
+
+@code {
+    [EditorRequired]
+    [Parameter] 
+    public Article Model { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback OnModifyClick { get; set; }
+}

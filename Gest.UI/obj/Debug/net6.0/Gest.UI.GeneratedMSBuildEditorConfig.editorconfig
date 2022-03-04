@@ -19,6 +19,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Gest/Gest.UI/Components/PelekaAutoComplete.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQZWxla2FBdXRvQ29tcGxldGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Gest/Gest.UI/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -59,8 +63,44 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxBdXRoZW50aWNhdGlvblxDb21wb25lbnRzXExvZ2luLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/ToolBar.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXFRvb2xCYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Add/Components/ArticleEdit.razor]
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xBZGRcQ29tcG9uZW50c1xBcnRpY2xlRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Components/ArticleCard.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xDb21wb25lbnRzXEFydGljbGVDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Components/ArticleEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xDb21wb25lbnRzXEFydGljbGVFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Components/ArticleHistory.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xDb21wb25lbnRzXEFydGljbGVIaXN0b3J5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Components/ArticleView.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xDb21wb25lbnRzXEFydGljbGVWaWV3LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Components/ArticleViewDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xDb21wb25lbnRzXEFydGljbGVWaWV3RGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Components/List.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xDb21wb25lbnRzXExpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Components/ToolBar.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xDb21wb25lbnRzXFRvb2xCYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Stock/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/Gest/Gest.UI/_Imports.razor]

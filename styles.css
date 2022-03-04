@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .btn-main {
+        @apply bg-gray-600 hover:bg-gray-500 px-2 py-1 text-gray-50 rounded shadow;
+    }
+}
+
 .validation-message {
     color: red;
 }

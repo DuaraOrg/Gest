@@ -1,0 +1,38 @@
+﻿<div class="shadow flex items-center overflow-x-scroll space-x-3 px-2  py-1 h-full no-scrollbar">
+    <div>
+       <h2 class="text-sm text-gray-600">Rechercher</h2>
+       <RadzenTextBox  @oninput=@(args => OnSearchQuery.InvokeAsync(args.ToString())) class="min-w-[10rem]" Placeholder="Nom de l'article" />
+    </div>
+     <div class="pt-1" >
+       <h2 class="text-sm text-gray-600">Etat</h2>
+       <RadzenDropDown @bind-Value=@_selectedState TValue=string Change=@(args => OnStateSelected.InvokeAsync(args.ToString())) Data=@StockFilter.AllWithTous()/>
+    </div>
+     <div class="pt-4 flex space-x-2">
+        <RadzenButton Click=@(_ => NewItem.InvokeAsync()) MouseEnter=@(args => ShowTooltip(args,"Ajouter un article"))  Icon="add_circle_outline" ButtonStyle="ButtonStyle.Secondary" />
+        <RadzenButton Click=@(_ => OnRefresh.InvokeAsync()) Icon="refresh" ButtonStyle="ButtonStyle.Light" />
+    </div>
+</div>
+
+@code {
+    string _searchQuery = string.Empty;
+    string _selectedState = Period.Tous;
+
+    DateTime _startDate = DateTime.UtcNow.ToLocalTime();
+    DateTime _endDate = DateTime.UtcNow.ToLocalTime();
+
+    [Parameter]
+    public EventCallback<string> OnSearchQuery { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnStateSelected { get; set; }
+
+    [Parameter]
+    public EventCallback OnRefresh { get; set; } 
+
+    [Parameter]
+    public EventCallback NewItem { get; set; } 
+
+    [Inject] TooltipService TooltipService { get; set; } = null!;
+    void ShowTooltip(ElementReference elementReference, string message, TooltipOptions options = null!)
+      => TooltipService.Open(elementReference, message, options);
+}

@@ -1,0 +1,26 @@
+﻿<RadzenTabs class="w-full">
+    <Tabs>
+        <RadzenTabsItem Text="Détails">
+            <ArticleViewDetails OnModifyClick=@(_ => EditItem(Model)) Model=@Model/>
+        </RadzenTabsItem>
+        <RadzenTabsItem Text="Historique">
+            <ArticleHistory Model=@Model/>
+        </RadzenTabsItem>
+    </Tabs>
+</RadzenTabs>
+@code {
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [EditorRequired]
+    [Parameter] 
+    public Article Model { get; set; } = null!;
+
+    async Task EditItem(Article item)
+    {
+        var itemModel = item?.Adapt<ArticleModel>() ?? new ArticleModel();
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", itemModel } };
+        var title = item is null ? "Ajouter un article" : $"{itemModel.Name}";
+        await DialogService.OpenAsync<ArticleEdit>(title, param);
+    }
+
+}

@@ -718,6 +718,18 @@
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.22\lib\WinRT.Runtime.dll">
       <PackagePath>WinRT.Runtime.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\mapster\7.3.0\lib\netstandard2.0\Mapster.dll">
+      <PackagePath>Mapster.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\mapster.core\1.2.0\lib\netstandard2.0\Mapster.Core.dll">
+      <PackagePath>Mapster.Core.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\mapster.dependencyinjection\1.0.0\lib\netstandard2.0\Mapster.DependencyInjection.dll">
+      <PackagePath>Mapster.DependencyInjection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\mapster.efcore\5.1.0\lib\netstandard2.1\Mapster.EFCore.dll">
+      <PackagePath>Mapster.EFCore.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.authorization\6.0.2\lib\net6.0\Microsoft.AspNetCore.Authorization.dll">
       <PackagePath>Microsoft.AspNetCore.Authorization.dll</PackagePath>
     </AppxPackagedFile>

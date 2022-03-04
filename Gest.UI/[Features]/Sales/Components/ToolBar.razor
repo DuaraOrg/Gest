@@ -1,0 +1,46 @@
+﻿<div class="shadow flex items-center overflow-x-scroll space-x-3 px-2  py-1 h-full no-scrollbar">
+    <div>
+       <h2 class="text-sm text-gray-600">Rechercher</h2>
+       <FluentTextField class="min-w-[10rem]" Placeholder="No de vente" />
+    </div>
+     <div class="pt-1" >
+       <h2 class="text-sm text-gray-600">Paiement</h2>
+       <RadzenDropDown @bind-Value=@_selectedPaymentState TValue=string Data=@PaymentStatus.AllWithTous()/>
+    </div>
+      <div>
+       <h2 class="text-sm text-gray-600">Livraison</h2>
+       <RadzenDropDown @bind-Value=@_selectedDeliveryState TValue=string Data=@DeliveryStatus.AllWithTous()/>
+    </div>
+     <div>
+       <h2 class="text-sm text-gray-600">Période</h2>
+       <RadzenDropDown @bind-Value=@_selectedPeriod  Data=@Period.AllWithTous()/>
+    </div>
+    <div class="flex items-center space-x-4">
+    @if(_selectedPeriod == Period.Date || _selectedPeriod == Period.IntervalDate)
+    {
+       <div>
+        <h2 class="text-sm text-gray-600">@(_selectedPeriod == Period.Date ? "Date" : "Date de début")</h2>
+        <RadzenDatePicker class="w-[7rem]" @bind-Value=@_startDate DateFormat="d"/>
+       </div>
+    }
+    @if(_selectedPeriod == Period.IntervalDate)
+    {
+      <h2 class="text-gray-600">-</h2>
+      <div>
+       <h2 class="text-sm text-gray-600">Date de fin</h2>
+       <RadzenDatePicker class="w-[7rem]" @bind-Value=@_endDate DateFormat="d"/>
+    </div>
+    }
+    </div>
+
+</div>
+
+@code {
+    string? _searchQuery;
+    string _selectedPeriod = Period.Tous;
+    string _selectedDeliveryState = DeliveryStatus.Tous;
+    string _selectedPaymentState = PaymentStatus.Tous;
+
+    DateTime _startDate = DateTime.UtcNow.ToLocalTime();
+    DateTime _endDate = DateTime.UtcNow.ToLocalTime();
+}

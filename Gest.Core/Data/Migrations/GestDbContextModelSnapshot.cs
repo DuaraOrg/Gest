@@ -92,10 +92,10 @@ namespace Gest.Core.Data.Migrations
                         {
                             Id = new Guid("453412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3323),
+                            CreatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2551),
                             FCToDollarRate = 2000m,
                             Name = "Default",
-                            UpdatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3318)
+                            UpdatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2546)
                         });
                 });
 
@@ -143,10 +143,10 @@ namespace Gest.Core.Data.Migrations
                         {
                             Id = new Guid("654412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3328),
+                            CreatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2561),
                             Email = "clientanonyme@swala.com",
                             Names = "Client Anonyme",
-                            UpdatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3324)
+                            UpdatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2553)
                         });
                 });
 
@@ -186,10 +186,10 @@ namespace Gest.Core.Data.Migrations
                         {
                             Id = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
                             Adress = "Bunia",
-                            CreatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3316),
+                            CreatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2543),
                             FCToDollarRate = 2000m,
                             Name = "Ets TUUNGANE",
-                            UpdatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3314)
+                            UpdatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2538)
                         });
                 });
 
@@ -372,13 +372,13 @@ namespace Gest.Core.Data.Migrations
                         new
                         {
                             Id = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
-                            CreatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3297),
+                            CreatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2515),
                             Email = "admin@swala.com",
                             FirstName = "Admin",
                             LastName = "Swala",
-                            PasswordHash = "pL0U2FY+JRdJUT8j+83DI8cvzxZN9PZlmvKDx7DIgQ6NVB1XPpzol8UvZ25saYp25dC9ZssNzJzv8Bdns86LDZsBkwyZ/muLS1U8vOIU2Ac7mr3Ggv1grKMmFuAlUparaCYGQ/sA7eT4rY1lPOdQvk7hbF63mD2Brat+TtjLzR+BHD8r6ImoZEfH9fuRDUOd1NNvgDPCVkHBN+e1DYXt2E8dVxt1xGBuLkoBZT5vCvW7p0ywQwHJD14lwS1hKpi7FD9t2FttIkAFp8NCJrAJAKp/PfU8iU2uN2iLIC66giqH+StvDsn+q/VZvhizfOUvyDE++eij7UAGKrqmaSea5w==",
-                            PasswordSalt = "lD/8Mj8mgm7wr9A6G2dyIaMoie0Nk0jPWzDGypEp9n9uUITvx6rQsiaty5RdSL3fPQFLFZPOfOerVVCYaFjufw==",
-                            UpdatedAt = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3261)
+                            PasswordHash = "SLbUaGMvd4TMQyuw1+v3vbW4uMJXd6PngfnJ0GoICgQVGQuLAxnj5noIaMewqSWR/oPu0UPp9FYAWhQ6lUFYznXeE4KidZwvtUQfuay3Ko21YDHtg3EesiiBOmpPQIp/hcouD6ZqE0veR7bwv5ukkfiMEWwhZxVUFCiFY8Dwd9zwH3IUNZy7TQkDGqKCZ9L1toSAz0dWQeWWtGHf6PnEfS4m1lGFmhwRKG6P29UH3PeWLe4RX+prGWC3HulILaXQXy+LnljoRAFGoLxDcb7BtxaKuiI2nFdD5HoPFYCvsqeIN4g9KftoXSD70gIekPiajeyFVcpqPteGfxmk2T2csg==",
+                            PasswordSalt = "B8Thl3l1wXyf27URJzi2le/UNidO16KlrnLb8kd8B8cFE9bHd/9DYzB9RlhO1aGE0c+XUwONFuxe43fuPax6Yg==",
+                            UpdatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2451)
                         });
                 });
 
@@ -411,7 +411,7 @@ namespace Gest.Core.Data.Migrations
                         {
                             UserId = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            Joined = new DateTime(2022, 3, 3, 7, 24, 0, 618, DateTimeKind.Utc).AddTicks(3306),
+                            Joined = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2525),
                             Role = "Propriétaire",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -510,10 +510,16 @@ namespace Gest.Core.Data.Migrations
                             b1.Property<Guid>("ArticleId")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<decimal?>("PerConditionnement")
+                            b1.Property<decimal?>("BuyingPricePerConditionnement")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<decimal>("PerUnitOfMeasure")
+                            b1.Property<decimal>("BuyingPricePerUnitOfMeasure")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal?>("SellingPricePerConditionnement")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal>("SellingPricePerUnitOfMeasure")
                                 .HasColumnType("TEXT");
 
                             b1.HasKey("ArticleId");

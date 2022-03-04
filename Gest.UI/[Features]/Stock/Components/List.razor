@@ -1,0 +1,190 @@
+﻿<div class="space-y-1">
+    <ToolBar NewItem=@(_ => EditItem()) OnRefresh=@(_ => InitialLoad()) OnStateSelected=@(e => OnStateFilter(e)) OnSearchQuery=@(e => OnSearch(e)) />
+    @if (_isBusy)
+    {
+        <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+    }
+    <div class="grid md:grid-cols-5 gap-2">
+        <RadzenDataList class="col-span-2" Count=@_count Data=@_items TItem=@Article LoadData=@LoadData AllowPaging=true>
+            <Template Context="item">
+                <ArticleCard Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item) BtnActionText="Ajouter au stock"/>
+            </Template>
+        </RadzenDataList>
+        @if(_selectedItem is not null)
+        {
+             <div class="hidden md:block col-span-3 ">
+                <ArticleView  Model=@_selectedItem/>
+             </div>
+        }
+    </div>
+</div>
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+
+@code {
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    bool _isSmall = false;
+    bool _isBusy = true;
+    string _searchQuery = string.Empty;
+    string _selectedFilterState = StockFilter.Tous;
+    Article? _selectedItem;
+    int _count;
+    int _skip = 0;
+    int _take = 10;
+    IEnumerable<Article> _items = new List<Article>();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitialLoad();
+            await InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    async Task InitialLoad()
+    {
+        _skip = 0;
+        _take = 10;
+        await LoadData(new LoadDataArgs() { Skip = _skip, Top = _take });
+        _selectedItem = _items.FirstOrDefault();
+    }
+
+    async Task OnSearch(string value)
+    {
+        _searchQuery = value;
+        await InitialLoad();
+    }
+
+    async Task OnStateFilter(string value)
+    {
+        _selectedFilterState = value;
+        await InitialLoad();
+    }
+
+    async Task OnSelectItem(Article value)
+    {
+        _selectedItem = value;
+        if (_isSmall)
+        {
+            await ViewDetails(value);
+        }
+    }
+
+    async Task LoadData(LoadDataArgs args)
+    {
+        _isBusy = true;
+        if (string.IsNullOrEmpty(_searchQuery))
+        {
+            if(_selectedFilterState == StockFilter.Tous)
+            {
+                _items = await DbContext.Articles
+                 .AsNoTracking()
+                 .Where(x => x.Name.Contains(_searchQuery))
+                 .OrderByDescending(x => x.CreatedAt)
+                 .Paginate(_skip,_take).ToListAsync();
+                _count = await DbContext.Articles
+                  .AsNoTracking()
+                 .Where(x => x.Name.Contains(_searchQuery))
+                  .OrderByDescending(x => x.CreatedAt)
+                 .CountAsync();
+            }
+            if(_selectedFilterState == StockFilter.OutOfStock)
+            {
+                _items = await DbContext.Articles
+                  .AsNoTracking()
+                 .Where(x => x.Name.Contains(_searchQuery))
+                 .Where(x => x.Stock.Qty <= x.Stock.Minimum)
+                  .OrderByDescending(x => x.CreatedAt)
+                 .Paginate(_skip,_take).ToListAsync();
+                _count = await DbContext.Articles
+                  .AsNoTracking()
+                 .Where(x => x.Name.Contains(_searchQuery))
+                 .Where(x => x.Stock.Qty <= x.Stock.Minimum)
+                  .OrderByDescending(x => x.CreatedAt)
+                 .CountAsync();
+            }
+
+            if(_selectedFilterState == StockFilter.InExcess)
+            {
+                _items = await DbContext.Articles
+                  .AsNoTracking()
+                 .Where(x => x.Name.Contains(_searchQuery))
+                 .Where(x => x.Stock.Qty >= x.Stock.Maximum)
+                  .OrderByDescending(x => x.CreatedAt)
+                 .Paginate(_skip,_take).ToListAsync();
+                _count = await DbContext.Articles
+                   .AsNoTracking()
+                 .Where(x => x.Name.Contains(_searchQuery))
+                 .Where(x => x.Stock.Qty >= x.Stock.Maximum)
+                  .OrderByDescending(x => x.CreatedAt)
+                 .CountAsync();
+            }
+        }
+        else
+        {
+            if(_selectedFilterState == StockFilter.Tous)
+            {
+                _items = await DbContext.Articles
+                     .AsNoTracking()
+                    .OrderByDescending(x => x.CreatedAt)
+                    .Paginate(_skip,_take).ToListAsync();
+                _count = await DbContext.Articles
+                    .OrderByDescending(x => x.CreatedAt)
+                    .CountAsync();
+            }
+
+            if(_selectedFilterState == StockFilter.OutOfStock)
+            {
+                _items = await DbContext.Articles
+                     .AsNoTracking()
+                    .Where(x => x.Stock.Qty <= x.Stock.Minimum) 
+                     .OrderByDescending(x => x.CreatedAt)
+                    .Paginate(_skip,_take).ToListAsync();
+                _count = await DbContext.Articles
+                    .Where(x => x.Stock.Qty <= x.Stock.Minimum)
+                     .OrderByDescending(x => x.CreatedAt)
+                    .CountAsync();
+            }
+
+            if(_selectedFilterState == StockFilter.InExcess)
+            {
+                _items = await DbContext.Articles
+                     .AsNoTracking()
+                    .Where(x => x.Stock.Qty >= x.Stock.Maximum) 
+                     .OrderByDescending(x => x.CreatedAt)
+                    .Paginate(_skip,_take).ToListAsync();
+                _count = await DbContext.Articles
+                    .Where(x => x.Stock.Qty >= x.Stock.Maximum)
+                    .OrderByDescending(x => x.CreatedAt)
+                    .CountAsync();
+            }
+        }
+        _isBusy = false;
+    }
+
+    async Task EditItem(Article? item = null)
+    {
+
+        var itemModel = item?.Adapt<ArticleModel>() ?? new ArticleModel();
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", itemModel } };
+        var title = item is null ? "Ajouter un article" : $"Article {itemModel.Name}";
+        var result = await DialogService.OpenAsync<ArticleEdit>(title, param);
+            if (result is bool canRefresh && canRefresh == true)
+                await InitialLoad();
+    }
+    async Task ViewDetails(Article item)
+    {
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", item } };
+        var title = $"{item!.Name}";
+        var result = await DialogService.OpenAsync<ArticleView>(title, param);
+           if (result is bool canRefresh && canRefresh == true)
+                await LoadData(new LoadDataArgs() { Skip = 0, Top = 10 });
+    }
+
+    [Inject] TooltipService TooltipService { get; set; } = null!;
+    void ShowTooltip(ElementReference elementReference, string message, TooltipOptions options = null!)
+      => TooltipService.Open(elementReference, message, options);
+}

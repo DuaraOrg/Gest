@@ -1,0 +1,30 @@
+﻿<div @onclick=@(_ => Click.InvokeAsync()) class="flex items-center justify-between -m-4 p-2 hover:cursor-pointer hover:bg-gray-100 @(IsSelected ? "border border-gray-600" : "")">
+    <div class="flex space-x-2">
+                        <div class="bg-gray-600 flex items-center justify-center p-4 rounded-full w-12 h-12">
+                            <h2 class="text-gray-50 font-semibold">@Model.Name.ToAvatar()</h2>
+                        </div>
+                        <div>
+                            <h2 class="font-medium">@Model.Name</h2>
+                            <p class="text-sm text-gray-500">En stock: @Model.Stock.Qty @Model.UnitOfMeasure</p>
+                        </div>
+   </div>
+   <button @onclick=@(_ => BtnActionClick.InvokeAsync()) class="btn-main">@BtnActionText</button>
+</div>
+
+@code {
+    [EditorRequired]
+    [Parameter]
+    public Article Model { get; set; } = null!;
+
+    [Parameter]
+    public bool IsSelected { get; set; }
+
+    [Parameter]
+    public EventCallback Click { get; set; }
+
+    [Parameter]
+    public string BtnActionText { get; set; } = "Ajouter";
+
+    [Parameter]
+    public EventCallback BtnActionClick { get; set; }
+}

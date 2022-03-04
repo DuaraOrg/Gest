@@ -54,7 +54,8 @@
             var isValidPassword = _model.Password.VerifyPassword(user.PasswordHash, user.PasswordSalt);
             if (isValidPassword)
             {
-                CurrentItems.Company = user.Companies.First().Company;
+                CurrentItems.Company = user.Companies.First().Company!;
+                CurrentItems.Branch = DbContext.Branches.First(x => x.CompanyId == CurrentItems.Company.Id);
                 CurrentItems.User = user;
 
                 NavigationManager.NavigateTo(UrlKeys.Sales);

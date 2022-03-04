@@ -19,9 +19,13 @@ namespace Gest.Core.Entities
 
     public class Pricing
     {
-        public decimal PerUnitOfMeasure { get; set; }
+        public decimal BuyingPricePerUnitOfMeasure { get; set; }
 
-        public decimal? PerConditionnement { get; set; }
+        public decimal? BuyingPricePerConditionnement { get; set; }
+
+        public decimal SellingPricePerUnitOfMeasure { get; set; }
+
+        public decimal? SellingPricePerConditionnement { get; set; }
     }
 
     public class Article:BaseEntity
@@ -48,12 +52,26 @@ namespace Gest.Core.Entities
         public ICollection<Sale> Sales { get; set; } = new Collection<Sale>();
     }
 
+    public class StockFilter
+    {
+        public const string Tous = "Tous";
+        public const string OutOfStock = "En rupture";
+        public const string InExcess = "En excès";
+
+        public static IEnumerable<string> AllWithTous() => new List<string>() { Tous, OutOfStock, InExcess};
+
+        public static IEnumerable<string> All() => new List<string>() { OutOfStock, InExcess };
+    }
     public class StockState
     {
+        public const string Tous = "Tous";
         public const string In = "Entrer";
         public const string Out = "Sortie";
         public const string Demaged = "Endomager";
 
+        public static IEnumerable<string> AllWithTous() => new List<string>() { Tous,In,Out,Demaged };
+
+        public static IEnumerable<string> All() => new List<string>() { In, Out, Demaged };
     }
     public class StockMouvement
     {

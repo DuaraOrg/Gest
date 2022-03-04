@@ -1,4 +1,5 @@
 using Gest.Core.Data;
+using Gest.UI.Extensions;
 using Gest.UI.Models;
 using Gest.UI.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ builder.Services.AddSingleton<AdminNavState>();
 builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<TooltipService>();
+builder.Services.AddMapster();
 
 var app = builder.Build();
 

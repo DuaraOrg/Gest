@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Gest.UI.Models;
 using Gest.UI.Shared;
 using Radzen;
+using Gest.UI.Extensions;
 
 namespace Gest;
 
@@ -24,6 +25,7 @@ public static class MauiProgram
 		builder.Services.AddScoped<DialogService>();
 		builder.Services.AddScoped<NotificationService>();
 		builder.Services.AddScoped<TooltipService>();
+		builder.Services.AddMapster();
 
 		return builder.Build();
 	}

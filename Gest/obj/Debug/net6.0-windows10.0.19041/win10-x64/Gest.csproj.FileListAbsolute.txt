@@ -86,6 +86,10 @@ D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Gest.pdb
 D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\resources.pri
 D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\AppxManifest.xml
 D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Microsoft.Graphics.Canvas.dll
+D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Mapster.dll
+D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Mapster.Core.dll
+D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Mapster.DependencyInjection.dll
+D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Mapster.EFCore.dll
 D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Microsoft.AspNetCore.Authorization.dll
 D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Microsoft.AspNetCore.Components.dll
 D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Microsoft.AspNetCore.Components.Forms.dll
