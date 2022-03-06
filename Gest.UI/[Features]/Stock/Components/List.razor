@@ -7,7 +7,7 @@
     <div class="grid md:grid-cols-5 gap-2">
         <RadzenDataList class="col-span-2" Count=@_count Data=@_items TItem=@Article LoadData=@LoadData AllowPaging=true>
             <Template Context="item">
-                <ArticleCard Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item) BtnActionText="Ajouter au stock"/>
+                <ArticleCard BtnActionClick=@(_ => NewStock(item)) Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item) BtnActionText="Ajouter au stock"/>
             </Template>
         </RadzenDataList>
         @if(_selectedItem is not null)
@@ -171,8 +171,8 @@
                : new Dictionary<string, object?>() { { "Model", itemModel } };
         var title = item is null ? "Ajouter un article" : $"Article {itemModel.Name}";
         var result = await DialogService.OpenAsync<ArticleEdit>(title, param);
-            if (result is bool canRefresh && canRefresh == true)
-                await InitialLoad();
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
     }
     async Task ViewDetails(Article item)
     {
@@ -180,8 +180,18 @@
                : new Dictionary<string, object?>() { { "Model", item } };
         var title = $"{item!.Name}";
         var result = await DialogService.OpenAsync<ArticleView>(title, param);
-           if (result is bool canRefresh && canRefresh == true)
-                await LoadData(new LoadDataArgs() { Skip = 0, Top = 10 });
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+
+    async Task NewStock(Article item)
+    {
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", item } };
+        var title = $"{item!.Name}";
+        var result = await DialogService.OpenAsync<AddToStock>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
     }
 
     [Inject] TooltipService TooltipService { get; set; } = null!;

@@ -1012,20 +1012,20 @@
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\wwwroot\index.html">
       <PackagePath>wwwroot\index.html</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\appiconfgSplashScreen.scale-100.png">
-      <PackagePath>appiconfgSplashScreen.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\splashscreenSplashScreen.scale-100.png">
+      <PackagePath>splashscreenSplashScreen.scale-100.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\appiconfgSplashScreen.scale-125.png">
-      <PackagePath>appiconfgSplashScreen.scale-125.png</PackagePath>
+    <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\splashscreenSplashScreen.scale-125.png">
+      <PackagePath>splashscreenSplashScreen.scale-125.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\appiconfgSplashScreen.scale-150.png">
-      <PackagePath>appiconfgSplashScreen.scale-150.png</PackagePath>
+    <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\splashscreenSplashScreen.scale-150.png">
+      <PackagePath>splashscreenSplashScreen.scale-150.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\appiconfgSplashScreen.scale-200.png">
-      <PackagePath>appiconfgSplashScreen.scale-200.png</PackagePath>
+    <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\splashscreenSplashScreen.scale-200.png">
+      <PackagePath>splashscreenSplashScreen.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\appiconfgSplashScreen.scale-400.png">
-      <PackagePath>appiconfgSplashScreen.scale-400.png</PackagePath>
+    <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\splashscreenSplashScreen.scale-400.png">
+      <PackagePath>splashscreenSplashScreen.scale-400.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\f\OpenSans-Regular.ttf">
       <PackagePath>OpenSans-Regular.ttf</PackagePath>

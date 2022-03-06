@@ -1,0 +1,134 @@
+﻿@using System.ComponentModel.DataAnnotations
+<div>
+    @if(_newStock is not null)
+    {
+       <EditForm class="space-y-2" Model=@_newStock OnValidSubmit=@Save>
+          <DataAnnotationsValidator/>
+          <ValidationSummary/>
+          <div class="grid @(Model.Conditionnement is   null ? "" : "md:grid-cols-2") gap-2">
+           <div>
+               <p class="text-sm text-gray-600">Qté en @Model.UnitOfMeasure (En stock: @Model.Stock.Qty)</p>
+               <RadzenNumeric Min=0 class="w-full" @bind-Value=@_newStock.QtyInUnitOfMeasure Placeholder=@($"Qté en {Model.UnitOfMeasure}")/>
+           </div>
+            @if (Model.Conditionnement is not null)
+            {
+                 <div>
+                    <p class="text-sm text-gray-600">Qté en @Model.Conditionnement?.Name</p>
+                     <RadzenNumeric Min=0 class="w-full" @bind-Value=@_newStock.QtyInConditionnement Placeholder=@($"Qté en {Model.Conditionnement}")/>
+                </div>
+            }
+       </div>
+        <div class="grid md:grid-cols-2 gap-2">
+            <div>
+               <p class="text-sm text-gray-600">Prix de vente par @Model.UnitOfMeasure</p>
+               <RadzenNumeric class="w-full" @bind-Value=@_newStock.SellingPriceInUnitOfMeasure Min=0 Format=@($"#.## $ par {Model.UnitOfMeasure}") Placeholder=@($"Prix de vente par {Model.UnitOfMeasure ??  "unité de mesure"}")/>
+           </div>
+            <div>
+               <p class="text-sm text-gray-600">Prix de vente par @Model.Conditionnement?.Name</p>
+               <RadzenNumeric class="w-full" @bind-Value=@_newStock.SellingPriceInConditionnement Min=0 Format=@($"#.## $ par {Model.Conditionnement?.Name}") Placeholder=@($"Prix de vente par {Model.Conditionnement?.Name ?? "conditionnement"}")/>
+           </div>
+       </div>
+        <div class="grid md:grid-cols-2 gap-2">
+           <div>
+               <p class="text-sm text-gray-600">Prix d'achat par @Model.UnitOfMeasure</p>
+               <RadzenNumeric class="w-full" @bind-Value=@_newStock.BuyingPriceInUnitOfMeasure Min=0 Format=@($"#.## $ par {Model.UnitOfMeasure}") Placeholder=@($"Prix d'achat par {Model.UnitOfMeasure ??  "unité de mesure"}")/>
+           </div>
+           <div>
+               <p class="text-sm text-gray-600">Prix d'achat par @Model.Conditionnement?.Name</p>
+                <RadzenNumeric class="w-full" @bind-Value=@_newStock.BuyingPriceInConditionnement Min=0 Format=@($"#.## $ par {Model.Conditionnement?.Name}") Placeholder=@($"Prix d'achat par {Model.Conditionnement?.Name ?? "conditionnement"}")/>
+           </div>
+          
+       </div>
+        <div class="py-2">
+            <RadzenButton class="m-1 px-2" type="submit" IsBusy=@_isBusy Icon="save" Text="Enregistrer" ButtonStyle="ButtonStyle.Secondary" />
+           <RadzenButton class="m-1 px-2" Click=@(_ => Cancel(false)) Icon="close" Text="Annuler" ButtonStyle="ButtonStyle.Light" />
+        </div>
+   </EditForm>
+    }
+</div>
+@code {
+    bool _isBusy = false;
+    NewStock? _newStock;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public DialogService DialogService { get; set; } = null!;
+
+    [Parameter] public Article Model { get; set; } = new Article();
+
+    protected override void OnParametersSet()
+    {
+        _newStock = new NewStock(Model);
+    }
+
+
+    void Cancel(bool canRefresh = false) => DialogService.Close(canRefresh);
+
+    async Task Save()
+    {
+        _isBusy = true;
+        Model.Stock.Qty += _newStock!.QtyInUnitOfMeasure;
+        Model.Price = new Pricing()
+        {
+            BuyingPricePerUnitOfMeasure = _newStock.BuyingPriceInUnitOfMeasure,
+            SellingPricePerUnitOfMeasure = _newStock.SellingPriceInUnitOfMeasure,
+            BuyingPricePerConditionnement = _newStock.BuyingPriceInConditionnement,
+            SellingPricePerConditionnement = _newStock.SellingPriceInConditionnement
+        };
+        Model.UpdatedAt = DateTime.UtcNow;
+        DbContext.Update(Model);
+        var result = await DbContext.SaveChangesAsync();
+        if (result > 0)
+            Cancel(true);
+        _isBusy = false;
+    }
+
+    class NewStock
+    {
+        Article _article;
+        double _qtyInUnitOfMeasure;
+        double _qtyInConditionnement;
+
+        public NewStock(Article article)
+        {
+            _article = article;
+            BuyingPriceInUnitOfMeasure = _article.Price.BuyingPricePerUnitOfMeasure;
+            SellingPriceInUnitOfMeasure = _article.Price.SellingPricePerUnitOfMeasure;
+            BuyingPriceInConditionnement = _article.Price.BuyingPricePerConditionnement;
+            SellingPriceInConditionnement = _article.Price.SellingPricePerConditionnement;
+        }
+
+        
+        [Required(ErrorMessage = "Veuillez spécifier la qté à ajouter en unité de mesure")]
+        [Range(double.Epsilon, double.MaxValue)]
+        public double QtyInUnitOfMeasure
+        {
+            get => _qtyInUnitOfMeasure;
+            set
+            {
+                _qtyInUnitOfMeasure = value;
+                if(_article.Conditionnement is not null)
+                    _qtyInConditionnement = _qtyInUnitOfMeasure * _article.Conditionnement.QtyPerUnitOfMeasure;
+            }
+        }
+
+        public double QtyInConditionnement
+        {
+            get => _qtyInConditionnement;
+            set
+            {
+                _qtyInConditionnement = value;
+                 if(_article.Conditionnement is not null)
+                    _qtyInUnitOfMeasure = _qtyInConditionnement / _article.Conditionnement.QtyPerUnitOfMeasure;
+            }
+        }
+
+        [Required(ErrorMessage = "Veuillez spécifier la qté à ajouter en unité de mesure")]
+        [Range(double.Epsilon, double.MaxValue)]
+        public decimal SellingPriceInUnitOfMeasure { get; set; }
+
+        public decimal BuyingPriceInUnitOfMeasure { get; set; }
+
+        public decimal? SellingPriceInConditionnement { get; set; }
+
+        public decimal? BuyingPriceInConditionnement { get; set; }
+    }
+}

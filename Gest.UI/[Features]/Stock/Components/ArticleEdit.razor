@@ -76,10 +76,10 @@
     {
         _isBusy = true;
         var item = Model.Adapt<Article>();
-        item.CompanyId = CurrentItems.Company!.Id;
-        item.BranchId = CurrentItems.Branch!.Id;
         if (_isNew)
         {
+            item.CompanyId = CurrentItems.Company!.Id;
+            item.BranchId = CurrentItems.Branch!.Id;
             item.CreatedAt = DateTime.UtcNow;
             await DbContext.Articles.AddAsync(item);
         }

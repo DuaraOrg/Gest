@@ -11,6 +11,8 @@ namespace Gest.UI._Features_.Stock.Components
         public Guid? Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public Guid CompanyId { get; set; }
+        public Guid BranchId { get; set; }
 
         [Required(ErrorMessage = "Veuillez spécifier un nom pour cet article")]
         public string? Name { get; set; }

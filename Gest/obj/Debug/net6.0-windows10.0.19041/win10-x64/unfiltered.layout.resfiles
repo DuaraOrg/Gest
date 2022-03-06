@@ -64,11 +64,11 @@ dotnet_bot.scale-125.png
 dotnet_bot.scale-150.png
 dotnet_bot.scale-200.png
 dotnet_bot.scale-400.png
-appiconfgSplashScreen.scale-100.png
-appiconfgSplashScreen.scale-125.png
-appiconfgSplashScreen.scale-150.png
-appiconfgSplashScreen.scale-200.png
-appiconfgSplashScreen.scale-400.png
+splashscreenSplashScreen.scale-100.png
+splashscreenSplashScreen.scale-125.png
+splashscreenSplashScreen.scale-150.png
+splashscreenSplashScreen.scale-200.png
+splashscreenSplashScreen.scale-400.png
 wwwroot\Gest.styles.css
 AboutAssets.txt
 wwwroot\css\app.css
