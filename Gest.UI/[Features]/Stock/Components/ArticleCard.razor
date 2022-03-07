@@ -8,7 +8,9 @@
                             <p class="text-sm text-gray-500">En stock: @Model.Stock.Qty @Model.UnitOfMeasure</p>
                         </div>
    </div>
-   <button @onclick=@(_ => BtnActionClick.InvokeAsync()) class="btn-main">@BtnActionText</button>
+   <div @onclick:stopPropagation=@true @onclick:preventDefault=@true>
+       <button @onclick=@(_ => BtnActionClick.InvokeAsync()) class="btn-main">@BtnActionText</button>
+   </div>
 </div>
 
 @code {

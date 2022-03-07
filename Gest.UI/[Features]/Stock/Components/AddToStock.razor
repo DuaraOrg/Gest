@@ -64,21 +64,42 @@
 
     async Task Save()
     {
-        _isBusy = true;
-        Model.Stock.Qty += _newStock!.QtyInUnitOfMeasure;
-        Model.Price = new Pricing()
+        try
+        {
+            _isBusy = true;
+            Model.Stock.Qty += _newStock!.QtyInUnitOfMeasure;
+            Model.Price = new Pricing()
         {
             BuyingPricePerUnitOfMeasure = _newStock.BuyingPriceInUnitOfMeasure,
             SellingPricePerUnitOfMeasure = _newStock.SellingPriceInUnitOfMeasure,
             BuyingPricePerConditionnement = _newStock.BuyingPriceInConditionnement,
             SellingPricePerConditionnement = _newStock.SellingPriceInConditionnement
         };
-        Model.UpdatedAt = DateTime.UtcNow;
-        DbContext.Update(Model);
-        var result = await DbContext.SaveChangesAsync();
-        if (result > 0)
-            Cancel(true);
-        _isBusy = false;
+            Model.UpdatedAt = DateTime.UtcNow;
+            DbContext.Update(Model);
+            var stockMouvement = new StockMouvement()
+            {
+                ArticleId = Model.Id,
+                Date = DateTime.UtcNow,
+                Qty = _newStock.QtyInUnitOfMeasure,
+                State = StockState.In,
+                PrevStock = Model.Stock.Qty -_newStock!.QtyInUnitOfMeasure,
+                NewStock = Model.Stock.Qty,
+                NewBuyingPrice = Model.Price.BuyingPricePerUnitOfMeasure,
+                NewSellingPrice = Model.Price.SellingPricePerUnitOfMeasure
+            };
+            await DbContext.StockMouvements.AddAsync(stockMouvement);
+            var result = await DbContext.SaveChangesAsync();
+            if (result > 0)
+                Cancel(true);
+            _isBusy = false;
+        }
+        catch(Exception ex)
+        {
+            DbContext.ChangeTracker.Clear();
+            Console.WriteLine(ex.Message);
+        }
+
     }
 
     class NewStock

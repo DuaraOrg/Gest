@@ -81,7 +81,19 @@ namespace Gest.Core.Entities
 
         public string State { get; set; } = StockState.Out;
 
-        public decimal Qty { get; set; }
+        public double Qty { get; set; }
+
+        public double PrevStock { get; set; }
+
+        public double NewStock { get; set; }
+
+        public decimal NewBuyingPrice { get; set; }
+
+        public decimal NewSellingPrice { get; set; }
+
+        public decimal PrevBuyingPrice { get; set; }
+
+        public decimal PrevSellingPrice { get; set; }
 
         public DateTime Date { get; set; }
     }

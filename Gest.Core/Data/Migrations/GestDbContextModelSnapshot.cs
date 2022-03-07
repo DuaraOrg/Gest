@@ -92,10 +92,10 @@ namespace Gest.Core.Data.Migrations
                         {
                             Id = new Guid("453412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2551),
+                            CreatedAt = new DateTime(2022, 3, 7, 7, 10, 35, 293, DateTimeKind.Utc).AddTicks(7269),
                             FCToDollarRate = 2000m,
                             Name = "Default",
-                            UpdatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2546)
+                            UpdatedAt = new DateTime(2022, 3, 7, 7, 10, 35, 293, DateTimeKind.Utc).AddTicks(7266)
                         });
                 });
 
@@ -143,10 +143,10 @@ namespace Gest.Core.Data.Migrations
                         {
                             Id = new Guid("654412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2561),
+                            CreatedAt = new DateTime(2022, 3, 7, 7, 10, 35, 293, DateTimeKind.Utc).AddTicks(7275),
                             Email = "clientanonyme@swala.com",
                             Names = "Client Anonyme",
-                            UpdatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2553)
+                            UpdatedAt = new DateTime(2022, 3, 7, 7, 10, 35, 293, DateTimeKind.Utc).AddTicks(7271)
                         });
                 });
 
@@ -186,10 +186,10 @@ namespace Gest.Core.Data.Migrations
                         {
                             Id = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
                             Adress = "Bunia",
-                            CreatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2543),
+                            CreatedAt = new DateTime(2022, 3, 7, 7, 10, 35, 293, DateTimeKind.Utc).AddTicks(7263),
                             FCToDollarRate = 2000m,
                             Name = "Ets TUUNGANE",
-                            UpdatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2538)
+                            UpdatedAt = new DateTime(2022, 3, 7, 7, 10, 35, 293, DateTimeKind.Utc).AddTicks(7260)
                         });
                 });
 
@@ -309,8 +309,26 @@ namespace Gest.Core.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Qty")
+                    b.Property<decimal>("NewBuyingPrice")
                         .HasColumnType("TEXT");
+
+                    b.Property<decimal>("NewSellingPrice")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("NewStock")
+                        .HasColumnType("REAL");
+
+                    b.Property<decimal>("PrevBuyingPrice")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("PrevSellingPrice")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("PrevStock")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("Qty")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("State")
                         .IsRequired()
@@ -372,13 +390,13 @@ namespace Gest.Core.Data.Migrations
                         new
                         {
                             Id = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
-                            CreatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2515),
+                            CreatedAt = new DateTime(2022, 3, 7, 7, 10, 35, 293, DateTimeKind.Utc).AddTicks(7245),
                             Email = "admin@swala.com",
                             FirstName = "Admin",
                             LastName = "Swala",
-                            PasswordHash = "SLbUaGMvd4TMQyuw1+v3vbW4uMJXd6PngfnJ0GoICgQVGQuLAxnj5noIaMewqSWR/oPu0UPp9FYAWhQ6lUFYznXeE4KidZwvtUQfuay3Ko21YDHtg3EesiiBOmpPQIp/hcouD6ZqE0veR7bwv5ukkfiMEWwhZxVUFCiFY8Dwd9zwH3IUNZy7TQkDGqKCZ9L1toSAz0dWQeWWtGHf6PnEfS4m1lGFmhwRKG6P29UH3PeWLe4RX+prGWC3HulILaXQXy+LnljoRAFGoLxDcb7BtxaKuiI2nFdD5HoPFYCvsqeIN4g9KftoXSD70gIekPiajeyFVcpqPteGfxmk2T2csg==",
-                            PasswordSalt = "B8Thl3l1wXyf27URJzi2le/UNidO16KlrnLb8kd8B8cFE9bHd/9DYzB9RlhO1aGE0c+XUwONFuxe43fuPax6Yg==",
-                            UpdatedAt = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2451)
+                            PasswordHash = "ljP12Z0iDP16WdWoBlamyEjBqvnPJlZikcbBHa6B9kreFc1WQHI1ZacbEdLVNumqaPQcqZ5TzilUziYNvC3BrKXrnSGx53w//jr2b9g7kXBB3bgpu/FDE39kU3X4CbFW4P43i8MCX5pfdlkGDN3oCYlUQdOm8m2PjMhZVrqbLEjs0+KAkpQjauQUmXxFgeXRFYDIiZU2bsLTqWQPagD6BYF8EZA2eaMLKBP7nIBPjoOIQ8ztlx/RwsrFcBA6Kr7t3F5bWSsum+HRt68okMEshVI8ZZD4f4M2nUR7cgO5MHQA1KRJBL+UXVDEE7oazvY87buxYbgX2gvvULZxteFNMw==",
+                            PasswordSalt = "SZD8vt7x1bQHGH1yn+hHdc3UKd9t/RXBjWdaszLe2h/HHh4UAjHS17khhijTZ/TJ7vlTFWvjtcomqsmmhVL4Gw==",
+                            UpdatedAt = new DateTime(2022, 3, 7, 7, 10, 35, 293, DateTimeKind.Utc).AddTicks(7212)
                         });
                 });
 
@@ -411,7 +429,7 @@ namespace Gest.Core.Data.Migrations
                         {
                             UserId = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            Joined = new DateTime(2022, 3, 4, 8, 49, 36, 578, DateTimeKind.Utc).AddTicks(2525),
+                            Joined = new DateTime(2022, 3, 7, 7, 10, 35, 293, DateTimeKind.Utc).AddTicks(7251),
                             Role = "Propriétaire",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
