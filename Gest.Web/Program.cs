@@ -7,12 +7,14 @@ using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<GestDbContext>(options => options.UseSqlite("Data Source=app.db"));
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<GestDbContext>(options => 
+    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Gest.SqlServerMigration")));
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddSingleton(_ => new CurrentItems());
-builder.Services.AddSingleton<AdminNavState>();
+builder.Services.AddScoped(_ => new CurrentItems());
+builder.Services.AddScoped<AdminNavState>();
 builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<TooltipService>();

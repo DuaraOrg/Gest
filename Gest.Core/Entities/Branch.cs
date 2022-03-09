@@ -1,4 +1,6 @@
-﻿namespace Gest.Core.Entities
+﻿using System.Collections.ObjectModel;
+
+namespace Gest.Core.Entities
 {
     public class Branch:BaseEntity
     {
@@ -8,5 +10,7 @@
 
         public Guid CompanyId { get; set; }
         public Company? Company { get; set; }
+
+        public ICollection<Sale> Sales { get; set; } = new Collection<Sale>();
     }
 }

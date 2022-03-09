@@ -106,6 +106,14 @@ namespace Gest.Core.Data
             modelBuilder.Entity<Client>()
             .HasData(defaultClient);
 
+            modelBuilder.Entity<Company>()
+                .HasMany(x => x.Articles)
+                .WithOne(x => x.Company)
+                .HasForeignKey(x => x.CompanyId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Article>()
+                .HasIndex(x => x.Name)
+                .IsUnique();
             modelBuilder.Entity<Article>()
                 .OwnsOne(x => x.Stock);
             modelBuilder.Entity<Article>()
@@ -115,6 +123,26 @@ namespace Gest.Core.Data
 
             modelBuilder.Entity<Sale>()
                 .OwnsMany(x => x.Items);
+            modelBuilder.Entity<Client>()
+                .HasMany(x => x.Sales)
+                .WithOne(x => x.Client)
+                .HasForeignKey(x => x.ClientId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Company>()
+             .HasMany(x => x.Sales)
+             .WithOne(x => x.Company)
+             .HasForeignKey(x => x.CompanyId)
+             .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Branch>()
+            .HasMany(x => x.Sales)
+            .WithOne(x => x.Branch)
+            .HasForeignKey(x => x.BranchId)
+            .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<User>()
+            .HasMany(x => x.Sales)
+            .WithOne(x => x.Seller)
+            .HasForeignKey(x => x.SellerId)
+            .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

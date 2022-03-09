@@ -17,7 +17,7 @@ public static class MauiProgram
 			.RegisterBlazorMauiWebView()
 			.UseMauiApp<App>();
 		var localConString = $"Data Source={FileSystem.AppDataDirectory}/app.db";
-		builder.Services.AddDbContext<GestDbContext>(opt => opt.UseSqlite(localConString),ServiceLifetime.Singleton);
+		builder.Services.AddDbContext<GestDbContext>(opt => opt.UseSqlite(localConString, b => b.MigrationsAssembly("Gest.SqliteMigration")),ServiceLifetime.Singleton);
 		builder.Services.AddBlazorWebView();
 
 		builder.Services.AddSingleton(_ => new CurrentItems());

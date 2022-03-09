@@ -16,5 +16,9 @@ namespace Gest.Core.Entities
         public ICollection<Branch> Branches { get; set; } = new Collection<Branch>();
 
         public ICollection<UserCompany> Users { get; set; } = new Collection<UserCompany>();
+
+        public ICollection<Article> Articles { get; set; } = new Collection<Article>();
+
+        public ICollection<Sale> Sales { get; set; } = new Collection<Sale>();
     }
 }

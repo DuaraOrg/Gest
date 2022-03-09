@@ -22,5 +22,7 @@ namespace Gest.Core.Entities
         public string PasswordSalt { get; set; } = null!;
 
         public ICollection<UserCompany> Companies { get; set; } = new Collection<UserCompany>();
+
+        public ICollection<Sale> Sales { get; set; } = new Collection<Sale>();
     }
 }

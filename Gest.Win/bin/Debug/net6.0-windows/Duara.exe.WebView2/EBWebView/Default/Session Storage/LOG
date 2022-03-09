@@ -1,3 +1,2 @@
-2022/03/07-09:14:04.491 1ed4 Reusing MANIFEST D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\Session Storage/MANIFEST-000001
-2022/03/07-09:14:04.504 1ed4 Recovering log #3
-2022/03/07-09:14:04.506 1ed4 Reusing old log D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\Session Storage/000003.log 
+2022/03/09-18:25:23.394 44c4 Creating DB D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\Session Storage since it was missing.
+2022/03/09-18:25:23.403 44c4 Reusing MANIFEST D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\Session Storage/MANIFEST-000001

@@ -1,0 +1,13 @@
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.SqlServerMigration.deps.json
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.SqlServerMigration.dll
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.SqlServerMigration.pdb
+D:\Projects\Gest\Gest.SqlServerMigration\obj\Debug\net6.0\Gest.SqlServerMigration.csproj.AssemblyReference.cache
+D:\Projects\Gest\Gest.SqlServerMigration\obj\Debug\net6.0\Gest.SqlServerMigration.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Gest\Gest.SqlServerMigration\obj\Debug\net6.0\Gest.SqlServerMigration.AssemblyInfoInputs.cache
+D:\Projects\Gest\Gest.SqlServerMigration\obj\Debug\net6.0\Gest.SqlServerMigration.AssemblyInfo.cs
+D:\Projects\Gest\Gest.SqlServerMigration\obj\Debug\net6.0\Gest.SqlServerMigration.csproj.CoreCompileInputs.cache
+D:\Projects\Gest\Gest.SqlServerMigration\obj\Debug\net6.0\Gest.SqlServerMigration.dll
+D:\Projects\Gest\Gest.SqlServerMigration\obj\Debug\net6.0\refint\Gest.SqlServerMigration.dll
+D:\Projects\Gest\Gest.SqlServerMigration\obj\Debug\net6.0\Gest.SqlServerMigration.pdb
+D:\Projects\Gest\Gest.SqlServerMigration\obj\Debug\net6.0\ref\Gest.SqlServerMigration.dll
+D:\Projects\Gest\Gest.SqlServerMigration\obj\Debug\net6.0\Gest.SqlServerMigration.csproj.CopyComplete

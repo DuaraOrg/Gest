@@ -1,4 +1,6 @@
-﻿namespace Gest.Core.Entities
+﻿using System.Collections.ObjectModel;
+
+namespace Gest.Core.Entities
 {
     public class Client:BaseEntity
     {
@@ -15,5 +17,7 @@
 
         public Guid? WalletId { get; set; }
         public Wallet? Wallet { get; set; }
+
+        public ICollection<Sale> Sales { get; set; } = new Collection<Sale>();
     }
 }

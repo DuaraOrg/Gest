@@ -69,7 +69,7 @@ namespace Gest.Core.Entities
         public Guid BranchId { get; set; }
         public Branch? Branch { get; set; }
 
-        public Guid UserId { get; set; }
-        public User? User { get; set; }
+        public Guid SellerId { get; set; }
+        public User? Seller { get; set; }
     }
 }

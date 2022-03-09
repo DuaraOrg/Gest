@@ -1,0 +1,22 @@
+﻿@page "/reports"
+@layout AdminLayout
+
+<PageTitle>Rapports</PageTitle>
+<TopAdminNav Title="Rapport de l'entreprise" />
+<div class="h-full mt-16 p-0 px-2" style="padding:0rem;">
+    <h1>Rapports en cours de developement</h1>
+</div>
+@code {
+
+    [Inject] AdminNavState AdminNavState { get; set; } = null!;
+  
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            AdminNavState.CurrentUrl = UrlKeys.Report;
+        }
+        return base.OnAfterRenderAsync(firstRender);
+    }
+}

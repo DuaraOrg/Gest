@@ -730,16 +730,16 @@
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\mapster.efcore\5.1.0\lib\netstandard2.1\Mapster.EFCore.dll">
       <PackagePath>Mapster.EFCore.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.authorization\6.0.2\lib\net6.0\Microsoft.AspNetCore.Authorization.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.authorization\6.0.3\lib\net6.0\Microsoft.AspNetCore.Authorization.dll">
       <PackagePath>Microsoft.AspNetCore.Authorization.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.components\6.0.2\lib\net6.0\Microsoft.AspNetCore.Components.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.components\6.0.3\lib\net6.0\Microsoft.AspNetCore.Components.dll">
       <PackagePath>Microsoft.AspNetCore.Components.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.components.forms\6.0.2\lib\net6.0\Microsoft.AspNetCore.Components.Forms.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.components.forms\6.0.3\lib\net6.0\Microsoft.AspNetCore.Components.Forms.dll">
       <PackagePath>Microsoft.AspNetCore.Components.Forms.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.components.web\6.0.2\lib\net6.0\Microsoft.AspNetCore.Components.Web.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.components.web\6.0.3\lib\net6.0\Microsoft.AspNetCore.Components.Web.dll">
       <PackagePath>Microsoft.AspNetCore.Components.Web.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.components.webview\6.0.1\lib\net6.0\Microsoft.AspNetCore.Components.WebView.dll">
@@ -748,23 +748,29 @@
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.components.webview.maui\6.0.200-preview.13.2865\lib\net6.0-windows10.0.19041\Microsoft.AspNetCore.Components.WebView.Maui.dll">
       <PackagePath>Microsoft.AspNetCore.Components.WebView.Maui.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.metadata\6.0.2\lib\net6.0\Microsoft.AspNetCore.Metadata.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.aspnetcore.metadata\6.0.3\lib\net6.0\Microsoft.AspNetCore.Metadata.dll">
       <PackagePath>Microsoft.AspNetCore.Metadata.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.data.sqlite.core\6.0.2\lib\net6.0\Microsoft.Data.Sqlite.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.data.sqlclient\2.1.4\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll">
+      <PackagePath>Microsoft.Data.SqlClient.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.data.sqlite.core\6.0.3\lib\net6.0\Microsoft.Data.Sqlite.dll">
       <PackagePath>Microsoft.Data.Sqlite.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.entityframeworkcore\6.0.2\lib\net6.0\Microsoft.EntityFrameworkCore.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.entityframeworkcore\6.0.3\lib\net6.0\Microsoft.EntityFrameworkCore.dll">
       <PackagePath>Microsoft.EntityFrameworkCore.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.entityframeworkcore.abstractions\6.0.2\lib\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.entityframeworkcore.abstractions\6.0.3\lib\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll">
       <PackagePath>Microsoft.EntityFrameworkCore.Abstractions.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.entityframeworkcore.relational\6.0.2\lib\net6.0\Microsoft.EntityFrameworkCore.Relational.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.entityframeworkcore.relational\6.0.3\lib\net6.0\Microsoft.EntityFrameworkCore.Relational.dll">
       <PackagePath>Microsoft.EntityFrameworkCore.Relational.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.entityframeworkcore.sqlite.core\6.0.2\lib\net6.0\Microsoft.EntityFrameworkCore.Sqlite.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.entityframeworkcore.sqlite.core\6.0.3\lib\net6.0\Microsoft.EntityFrameworkCore.Sqlite.dll">
       <PackagePath>Microsoft.EntityFrameworkCore.Sqlite.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.entityframeworkcore.sqlserver\6.0.3\lib\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll">
+      <PackagePath>Microsoft.EntityFrameworkCore.SqlServer.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.extensions.caching.abstractions\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll">
       <PackagePath>Microsoft.Extensions.Caching.Abstractions.dll</PackagePath>
@@ -829,7 +835,25 @@
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.graphics.win2d\1.0.0.30\lib\net5.0-windows10.0.18362.0\Microsoft.Graphics.Canvas.Interop.dll">
       <PackagePath>Microsoft.Graphics.Canvas.Interop.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.jsinterop\6.0.2\lib\net6.0\Microsoft.JSInterop.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.identity.client\4.21.1\lib\netcoreapp2.1\Microsoft.Identity.Client.dll">
+      <PackagePath>Microsoft.Identity.Client.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.identitymodel.jsonwebtokens\6.8.0\lib\netstandard2.0\Microsoft.IdentityModel.JsonWebTokens.dll">
+      <PackagePath>Microsoft.IdentityModel.JsonWebTokens.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.identitymodel.logging\6.8.0\lib\netstandard2.0\Microsoft.IdentityModel.Logging.dll">
+      <PackagePath>Microsoft.IdentityModel.Logging.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.identitymodel.protocols\6.8.0\lib\netstandard2.0\Microsoft.IdentityModel.Protocols.dll">
+      <PackagePath>Microsoft.IdentityModel.Protocols.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.identitymodel.protocols.openidconnect\6.8.0\lib\netstandard2.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll">
+      <PackagePath>Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.identitymodel.tokens\6.8.0\lib\netstandard2.0\Microsoft.IdentityModel.Tokens.dll">
+      <PackagePath>Microsoft.IdentityModel.Tokens.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.jsinterop\6.0.3\lib\net6.0\Microsoft.JSInterop.dll">
       <PackagePath>Microsoft.JSInterop.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.maui.graphics\6.0.200-preview.13.935\lib\net6.0-windows10.0.18362\Microsoft.Maui.Graphics.dll">
@@ -837,6 +861,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.maui.graphics.win2d.winui.desktop\6.0.200-preview.13.935\lib\net6.0-windows10.0.18362\Microsoft.Maui.Graphics.Win2D.WinUI.Desktop.dll">
       <PackagePath>Microsoft.Maui.Graphics.Win2D.WinUI.Desktop.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.win32.systemevents\4.7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll">
+      <PackagePath>Microsoft.Win32.SystemEvents.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.windowsappsdk\1.0.0\lib\net5.0-windows10.0.18362.0\Microsoft.InteractiveExperiences.Projection.dll">
       <PackagePath>Microsoft.InteractiveExperiences.Projection.dll</PackagePath>
@@ -862,7 +889,7 @@
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.windowsappsdk\1.0.0\lib\net5.0-windows10.0.18362.0\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll">
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.Net.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\lib\net5.0\Radzen.Blazor.dll">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\lib\net5.0\Radzen.Blazor.dll">
       <PackagePath>Radzen.Blazor.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\sqlitepclraw.bundle_e_sqlite3\2.0.6\lib\netstandard2.0\SQLitePCLRaw.batteries_v2.dll">
@@ -874,8 +901,17 @@
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\sqlitepclraw.provider.e_sqlite3\2.0.6\lib\net5.0\SQLitePCLRaw.provider.e_sqlite3.dll">
       <PackagePath>SQLitePCLRaw.provider.e_sqlite3.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.configuration.configurationmanager\4.7.0\lib\netstandard2.0\System.Configuration.ConfigurationManager.dll">
+      <PackagePath>System.Configuration.ConfigurationManager.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.diagnostics.diagnosticsource\6.0.2-mauipre.1.22102.15\lib\net6.0\System.Diagnostics.DiagnosticSource.dll">
       <PackagePath>System.Diagnostics.DiagnosticSource.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.drawing.common\4.7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll">
+      <PackagePath>System.Drawing.Common.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.identitymodel.tokens.jwt\6.8.0\lib\netstandard2.0\System.IdentityModel.Tokens.Jwt.dll">
+      <PackagePath>System.IdentityModel.Tokens.Jwt.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.io.pipelines\6.0.2\lib\net6.0\System.IO.Pipelines.dll">
       <PackagePath>System.IO.Pipelines.dll</PackagePath>
@@ -883,8 +919,23 @@
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.linq.dynamic.core\1.2.12\lib\net5.0\System.Linq.Dynamic.Core.dll">
       <PackagePath>System.Linq.Dynamic.Core.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.runtime.caching\4.7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll">
+      <PackagePath>System.Runtime.Caching.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.runtime.compilerservices.unsafe\6.0.2-mauipre.1.22102.15\lib\net6.0\System.Runtime.CompilerServices.Unsafe.dll">
       <PackagePath>System.Runtime.CompilerServices.Unsafe.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.security.cryptography.protecteddata\4.7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll">
+      <PackagePath>System.Security.Cryptography.ProtectedData.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.security.permissions\4.7.0\lib\netcoreapp3.0\System.Security.Permissions.dll">
+      <PackagePath>System.Security.Permissions.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\system.windows.extensions\4.7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll">
+      <PackagePath>System.Windows.Extensions.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.data.sqlclient.sni.runtime\2.1.1\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll">
+      <PackagePath>Microsoft.Data.SqlClient.SNI.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.windowsappsdk\1.0.0\runtimes\win10-x64\native\Microsoft.WindowsAppRuntime.Bootstrap.dll">
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.dll</PackagePath>
@@ -910,85 +961,85 @@
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.fast.components.fluentui\1.1.0\staticwebassets\Microsoft.Fast.Components.FluentUI.lib.module.js">
       <PackagePath>wwwroot\_content\Microsoft.Fast.Components.FluentUI\Microsoft.Fast.Components.FluentUI.lib.module.js</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\dark.css">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\css\dark.css">
       <PackagePath>wwwroot\_content\Radzen.Blazor\css\dark.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\dark-base.css">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\css\dark-base.css">
       <PackagePath>wwwroot\_content\Radzen.Blazor\css\dark-base.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\default.css">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\css\default.css">
       <PackagePath>wwwroot\_content\Radzen.Blazor\css\default.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\default-base.css">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\css\default-base.css">
       <PackagePath>wwwroot\_content\Radzen.Blazor\css\default-base.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\humanistic.css">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\css\humanistic.css">
       <PackagePath>wwwroot\_content\Radzen.Blazor\css\humanistic.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\humanistic-base.css">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\css\humanistic-base.css">
       <PackagePath>wwwroot\_content\Radzen.Blazor\css\humanistic-base.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\software.css">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\css\software.css">
       <PackagePath>wwwroot\_content\Radzen.Blazor\css\software.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\software-base.css">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\css\software-base.css">
       <PackagePath>wwwroot\_content\Radzen.Blazor\css\software-base.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\standard.css">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\css\standard.css">
       <PackagePath>wwwroot\_content\Radzen.Blazor\css\standard.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\css\standard-base.css">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\css\standard-base.css">
       <PackagePath>wwwroot\_content\Radzen.Blazor\css\standard-base.css</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\MaterialIcons-Regular.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\MaterialIcons-Regular.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\MaterialIcons-Regular.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\roboto-v15-latin-300.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\roboto-v15-latin-300.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\roboto-v15-latin-300.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\roboto-v15-latin-700.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\roboto-v15-latin-700.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\roboto-v15-latin-700.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\roboto-v15-latin-regular.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\roboto-v15-latin-regular.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\roboto-v15-latin-regular.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-Black.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-Black.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-Black.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-BlackIt.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-BlackIt.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-BlackIt.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-Bold.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-Bold.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-Bold.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-BoldIt.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-BoldIt.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-BoldIt.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-ExtraLight.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-ExtraLight.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-ExtraLight.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-ExtraLightIt.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-ExtraLightIt.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-ExtraLightIt.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-It.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-It.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-It.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-Light.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-Light.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-Light.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-LightIt.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-LightIt.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-LightIt.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-Regular.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-Regular.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-Regular.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-Semibold.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-Semibold.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-Semibold.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\fonts\SourceSansPro-SemiboldIt.woff">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\fonts\SourceSansPro-SemiboldIt.woff">
       <PackagePath>wwwroot\_content\Radzen.Blazor\fonts\SourceSansPro-SemiboldIt.woff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.2\staticwebassets\Radzen.Blazor.js">
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\staticwebassets\Radzen.Blazor.js">
       <PackagePath>wwwroot\_content\Radzen.Blazor\Radzen.Blazor.js</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest.UI\obj\Debug\net6.0\scopedcss\projectbundle\Gest.UI.bundle.scp.css">
