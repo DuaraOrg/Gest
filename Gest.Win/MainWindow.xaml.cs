@@ -1,4 +1,5 @@
-﻿using Gest.Core.Data;
+﻿using Blazored.LocalStorage;
+using Gest.Core.Data;
 using Gest.UI.Extensions;
 using Gest.UI.Models;
 using Gest.UI.Shared;
@@ -29,6 +30,7 @@ namespace Gest.Win
             serviceCollection.AddScoped<NotificationService>();
             serviceCollection.AddScoped<TooltipService>();
             serviceCollection.AddMapster();
+            serviceCollection.AddBlazoredLocalStorage();
             var app = serviceCollection.BuildServiceProvider();
             using var serviceScope = app.CreateAsyncScope();
             var db = serviceScope.ServiceProvider.GetRequiredService<GestDbContext>();

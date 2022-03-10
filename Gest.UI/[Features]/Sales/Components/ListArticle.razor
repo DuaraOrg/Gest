@@ -1,0 +1,117 @@
+﻿@using Gest.UI._Features_.Stock.Components
+<div class="bg-gray-100 h-full px-2 py-1 space-y-1">
+    <div class="flex items-center justify-between">
+        <p>Articles</p>
+        <div class="flex space-x-2">
+            <RadzenButton Click=@AddItem MouseEnter=@(args => ShowTooltip(args,"Ajouter un article"))  Icon="add_circle_outline" ButtonStyle="ButtonStyle.Secondary" />
+            <RadzenButton Click=@InitialLoad Icon="refresh" ButtonStyle="ButtonStyle.Light" />
+        </div>
+    </div>
+    <div class="bg-gray-50 h-[1px] w-full"></div>
+    <div class="py-1">
+        <RadzenTextBox class="w-full" @oninput=@(args => OnSearch(args.Value?.ToString() ?? string.Empty)) Placeholder="Rechercher un article par nom"/>
+        @if (IsBusy)
+        {
+            <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+        }
+    </div>
+    <div class="bg-gray-50 h-[1px] w-full"></div>
+    <div>
+        <RadzenDataList class="col-span-2 md:-mx-3 md:-space-y-5" Count=@_count Data=@_items TItem=@Article LoadData=@LoadData AllowPaging=true>
+            <Template Context="item">
+                <div>
+                     <ArticleCard Model=@item IsSelected=@(_selectedItem == item)  Click=@(_ => OnSelection(item)) BtnActionClick=@(_ => OnSelection(item)) BtnActionText="Ajouter"/>
+                </div>
+            </Template>
+        </RadzenDataList>
+    </div>
+</div>
+
+@code {
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [Parameter] public EventCallback<Article> OnSelect { get; set; }
+    [Parameter] public bool IsBusy { get; set; } = false;
+
+
+    string _searchQuery = string.Empty;
+    Article? _selectedItem;
+    int _count;
+    int _skip = 0;
+    int _take = 10;
+
+    IEnumerable<Article> _items = new List<Article>();
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitialLoad();
+            StateHasChanged();
+        }
+    }
+
+    async Task OnSearch(string value)
+    {
+        _searchQuery = value;
+        await InitialLoad();
+    }
+    async Task InitialLoad()
+    {
+        _skip = 0;
+        _take = 10;
+        await Policy.Handle<Exception>()
+     .WaitAndRetryAsync(5, attempt => TimeSpan.FromMilliseconds(1000 * attempt),(ex,attemp) => IsBusy = false)
+         .ExecuteAsync(() => LoadData(new LoadDataArgs() { Skip = _skip, Top = _take }));
+    }
+
+    async Task LoadData(LoadDataArgs args)
+    {
+        if (IsBusy)
+            return;
+        IsBusy = true;
+        if (!string.IsNullOrEmpty(_searchQuery))
+        {
+            _items = await DbContext.Articles
+                  .AsNoTracking()
+                  .Where(x => x.Name.Contains(_searchQuery))
+                  .OrderByDescending(x => x.CreatedAt)
+                  .Paginate(args.Skip,args.Top).ToListAsync();
+            _count = await DbContext.Articles
+               .AsNoTracking()
+             .Where(x => x.Name.Contains(_searchQuery))
+             .CountAsync();
+        }
+        else
+        {
+            _items = await DbContext.Articles
+                   .AsNoTracking()
+                   .OrderByDescending(x => x.CreatedAt)
+                  .Paginate(args.Skip,args.Top).ToListAsync();
+            _count = await DbContext.Articles
+                .CountAsync();
+        }
+        IsBusy = false;
+
+    }
+
+    async Task AddItem()
+    {
+        var param = new Dictionary<string, object?>();
+        var title = "Ajouter un article";
+        var result = await DialogService.OpenAsync<ArticleEdit>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+
+    async Task OnSelection(Article? item)
+    {
+        _selectedItem = item;
+        if(item is not null)
+            await OnSelect.InvokeAsync(item);
+    }
+
+    [Inject] TooltipService TooltipService { get; set; } = null!;
+    void ShowTooltip(ElementReference elementReference, string message, TooltipOptions options = null!)
+      => TooltipService.Open(elementReference, message, options);
+}

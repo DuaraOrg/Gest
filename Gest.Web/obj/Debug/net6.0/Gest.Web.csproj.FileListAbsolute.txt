@@ -100,3 +100,5 @@ D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstract
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Humanizer.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.SqlServerMigration.pdb
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Polly.dll
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Blazored.LocalStorage.dll

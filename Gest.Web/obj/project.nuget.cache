@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "WCBfXyP+6WeX5ICS/2jCJ7GzlcsZY8yXaUYdvhn3GY5GmXT/T5NCNNP2Mbrg6hxGw9hdZmq+gRbymsqoDP7Sng==",
+  "dgSpecHash": "aHNkje6DMecWKIBtz5taRt7uz7zdYD7JOr6Dc6tA68Z5Esq7Aaofw4AEaQuX2efJQkoDgm8q8f0O4DdepIE16g==",
   "success": true,
   "projectFilePath": "D:\\Projects\\Gest\\Gest.Web\\Gest.Web.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\blazored.localstorage\\4.2.0\\blazored.localstorage.4.2.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\libsassbuilder\\2.0.1\\libsassbuilder.2.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\mapster\\7.3.0\\mapster.7.3.0.nupkg.sha512",
@@ -50,6 +51,7 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\polly\\7.2.3\\polly.7.2.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\radzen.blazor\\3.16.3\\radzen.blazor.3.16.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.6\\sqlitepclraw.bundle_e_sqlite3.2.0.6.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\sqlitepclraw.core\\2.0.6\\sqlitepclraw.core.2.0.6.nupkg.sha512",

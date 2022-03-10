@@ -1,0 +1,101 @@
+﻿@using Gest.UI._Features_.Clients.Components
+<div class="bg-gray-100 h-full px-2 py-1 space-y-1">
+    <div class="flex items-center justify-between">
+        <p>Clients</p>
+        <div class="flex space-x-2">
+            <RadzenButton MouseEnter=@(args => ShowTooltip(args,"Ajouter un client"))  Icon="add_circle_outline" ButtonStyle="ButtonStyle.Secondary" />
+            <RadzenButton Click=@InitialLoad Icon="refresh" ButtonStyle="ButtonStyle.Light" />
+        </div>
+    </div>
+    <div class="bg-gray-50 h-[1px] w-full"></div>
+    <div class="py-1">
+        <RadzenTextBox class="w-full" Placeholder="Rechercher un client par nom"/>
+        @if (_isBusy)
+        {
+            <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+        }
+    </div>
+    <div class="bg-gray-50 h-[1px] w-full"></div>
+    <div>
+        <RadzenDataList class="col-span-2 md:-mx-3" Count=@_count Data=@_items TItem=@Client LoadData=@LoadData AllowPaging=true>
+            <Template Context="item">
+                <ClientCard Model=@item Click=@(_ => OnSelection(item)) IsSelected=@(_selectedItem == item) />
+            </Template>
+        </RadzenDataList>
+    </div>
+</div>
+
+@code {
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Parameter] public EventCallback<Client> OnSelect { get; set; } 
+
+    bool _isBusy = false;
+    string _searchQuery = string.Empty;
+    Client? _selectedItem;
+    int _count;
+    int _skip = 0;
+    int _take = 10;
+
+    IEnumerable<Client> _items = new List<Client>();
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Policy.Handle<Exception>()
+             .WaitAndRetryAsync(3, attempt => TimeSpan.FromMilliseconds(200 * attempt),(ex,attempt) => _isBusy = false)
+             .ExecuteAsync(InitialLoad);
+            StateHasChanged();
+        }
+    }
+    async Task InitialLoad()
+    {
+        _skip = 0;
+        _take = 10;
+        await LoadData(new LoadDataArgs() { Skip = _skip, Top = _take });
+        _selectedItem = _items.FirstOrDefault();
+        await OnSelection(_selectedItem);
+    }
+
+    async Task LoadData(LoadDataArgs args)
+    {
+        if (_isBusy)
+            return;
+        _isBusy = true;
+        if (!string.IsNullOrEmpty(_searchQuery))
+        {
+            _items = await DbContext.Clients
+                  .AsNoTracking()
+                  .Where(x => x.Names.Contains(_searchQuery))
+                  .OrderByDescending(x => x.CreatedAt)
+                  .Paginate(args.Skip,args.Top).ToListAsync();
+            _count = await DbContext.Clients
+               .AsNoTracking()
+             .Where(x => x.Names.Contains(_searchQuery))
+             .CountAsync();
+        }
+        else
+        {
+            _items = await DbContext.Clients
+                   .AsNoTracking()
+                   .OrderByDescending(x => x.CreatedAt)
+                  .Paginate(args.Skip,args.Top).ToListAsync();
+            _count = await DbContext.Clients
+                .CountAsync();
+        }
+        _isBusy = false;
+    }
+
+    async Task OnSelection(Client? client)
+    {
+        _selectedItem = client;
+        if(client is not null)
+        {
+            await InvokeAsync(() => OnSelect.InvokeAsync(client));
+        } 
+    }
+
+    [Inject] TooltipService TooltipService { get; set; } = null!;
+    void ShowTooltip(ElementReference elementReference, string message, TooltipOptions options = null!)
+      => TooltipService.Open(elementReference, message, options);
+}

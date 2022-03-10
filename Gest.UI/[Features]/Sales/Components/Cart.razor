@@ -1,0 +1,84 @@
+﻿@using Gest.UI._Features_.Clients.Components
+@using Gest.UI._Features_.Stock.Components
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+<div class="bg-gray-100 h-full px-2 py-1 space-y-1">
+     <div class="flex items-center justify-between">
+        <p>Panier</p>
+    </div>
+    <div class="px-4 space-y-1">
+        <p class="-ml-4">Client</p>
+         <ClientCard Model=@Client IsSelected/>
+    </div>
+    <div>
+        <p>Articles</p>
+        @foreach(var item in _items)
+        {
+            <div>
+                <p>@item.Article!.Name</p>
+                <p>@item.QtyInUnitOfMeasure</p>
+            </div>
+            
+        }
+    </div>
+    
+</div>
+
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+
+@code {
+    bool _isSmall = false;
+    [Parameter]
+    [EditorRequired]
+    public Client Client { get; set; } = null!;
+
+    [Parameter]
+    public Article? AddArticle { get; set; }
+
+    List<SaleItem> _items = new List<SaleItem>();
+
+    protected override void OnParametersSet()
+    {
+        if(AddArticle is not null)
+        {
+            var article = _items.FirstOrDefault(x => x.ArticleId == AddArticle.Id);
+            if(article is not null)
+            {
+                var index = _items.IndexOf(article);
+                article.QtyInUnitOfMeasure++;
+                _items[index] = article;
+            }
+            else
+            {
+                _items.Add(new SaleItem()
+                {
+                    ArticleId = AddArticle.Id,
+                    Article = AddArticle,
+                    QtyInUnitOfMeasure = 1,
+                    UnitPricePerUnitOfMeasure = AddArticle.Price.SellingPricePerUnitOfMeasure
+                });
+            }
+        }
+    }
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && _items.Count <= 1)
+        {
+            var articles = await localStorage.GetItemAsync<List<Article>>("cart");
+                if(articles is not null)
+                {
+                    foreach(var item in articles)
+                    {
+                        _items.Add(new SaleItem()
+                        {
+                            ArticleId = item.Id,
+                            Article = item,
+                            QtyInUnitOfMeasure = 1,
+                            UnitPricePerUnitOfMeasure = item.Price.SellingPricePerUnitOfMeasure
+                        });
+                    }
+                    StateHasChanged();
+                }
+        }
+    }
+
+}

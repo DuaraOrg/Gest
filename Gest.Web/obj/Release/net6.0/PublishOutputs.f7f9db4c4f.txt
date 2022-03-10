@@ -2,10 +2,9 @@ D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.Web.exe
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\appsettings.json
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.Web.dll
-D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.Web.deps.json
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.Web.runtimeconfig.json
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.Web.pdb
-D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Humanizer.dll
+D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Blazored.LocalStorage.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Mapster.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Mapster.Core.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Mapster.DependencyInjection.dll
@@ -19,7 +18,6 @@ D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.SqlClient
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.Sqlite.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
-D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Design.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Relational.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Sqlite.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.SqlServer.dll
@@ -35,6 +33,7 @@ D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.JSInterop.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Polly.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Radzen.Blazor.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\SQLitePCLRaw.batteries_v2.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\SQLitePCLRaw.core.dll
@@ -76,6 +75,9 @@ D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netstan
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.Core.dll
+D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.SqlServerMigration.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.UI.dll
+D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.SqlServerMigration.pdb
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.UI.pdb
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.Core.pdb
+D:\Projects\Gest\Gest.Web\obj\Release\net6.0\PubTmp\Out\Gest.Web.deps.json

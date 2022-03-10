@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using Gest.Core.Data;
 using Gest.UI.Extensions;
 using Gest.UI.Models;
@@ -11,13 +12,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<GestDbContext>(options => 
     options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Gest.SqlServerMigration")));
 builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
+builder.Services.AddServerSideBlazor(o => o.DetailedErrors = true);
 
 builder.Services.AddScoped(_ => new CurrentItems());
 builder.Services.AddScoped<AdminNavState>();
 builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<TooltipService>();
+builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddMapster();
 
 var app = builder.Build();

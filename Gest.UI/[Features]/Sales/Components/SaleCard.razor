@@ -1,0 +1,13 @@
+﻿<h3>SaleCard</h3>
+
+@code {
+    [EditorRequired]
+    [Parameter]
+    public Sale Model { get; set; } = null!;
+
+    [Parameter]
+    public bool IsSelected { get; set; }
+
+    [Parameter]
+    public EventCallback Click { get; set; }
+}

@@ -71,12 +71,40 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxBdXRoZW50aWNhdGlvblxDb21wb25lbnRzXExvZ2luLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/ToolBar.razor]
-build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXFRvb2xCYXIucmF6b3I=
+[D:/Projects/Gest/Gest.UI/\[Features\]/Clients/Components/ClientCard.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxDbGllbnRzXENvbXBvbmVudHNcQ2xpZW50Q2FyZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Add/Components/ArticleEdit.razor]
-build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xBZGRcQ29tcG9uZW50c1xBcnRpY2xlRWRpdC5yYXpvcg==
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/Cart.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXENhcnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/List.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXExpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/ListArticle.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXExpc3RBcnRpY2xlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/ListClient.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXExpc3RDbGllbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/SaleCard.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXFNhbGVDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/SaleNew.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXFNhbGVOZXcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/SaleView.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXFNhbGVWaWV3LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/ToolBar.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXFRvb2xCYXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/Gest/Gest.UI/\[Features\]/Stock/Components/AddToStock.razor]

@@ -1,0 +1,70 @@
+﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@if(_isSmall)
+{
+    <RadzenSteps>
+        <Steps>
+            <RadzenStepsItem Text="Client">
+                <div class="py-1"><ListClient OnSelect=@(e => _selectedClient = e)/></div>
+            </RadzenStepsItem>
+             <RadzenStepsItem Text="Article">
+                  <div class="py-1"><ListArticle OnSelect=@(e => OnArticleSelected(e))/></div>
+            </RadzenStepsItem>
+             <RadzenStepsItem Text="Panier">
+                @if(_selectedClient is not null)
+                {
+                    <div class="py-1"><Cart AddArticle=@_lastSelectedArticle Client=@_selectedClient/></div>
+                }
+            </RadzenStepsItem>
+        </Steps>
+    </RadzenSteps>
+}
+else
+{
+    <div class="grid grid-cols-3 gap-1">
+        <div>
+            <ListClient OnSelect=@(e => _selectedClient = e)/>
+        </div>
+    <div>
+        <ListArticle OnSelect=@(e => OnArticleSelected(e))/>
+    </div>
+    <div>
+        <Cart  AddArticle=@_lastSelectedArticle Client=@_selectedClient/>
+    </div>
+</div>
+}
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+@code {
+
+    [Inject] IJSRuntime JSRuntime { get; set; } = null!;
+
+    bool _isSmall = false;
+    bool _isBusy = true;
+
+    Client? _selectedClient;
+    Article? _lastSelectedArticle;
+    List<Article> _selectedArticles = new List<Article>();
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if(!_isSmall)
+                await JSRuntime.InvokeVoidAsync("changeDialogSize", "1000px");
+        }
+    }
+
+    async Task OnArticleSelected(Article article)
+    {
+        if (_isSmall && !_selectedArticles.Any(x => x.Id == article.Id))
+        {
+            _selectedArticles.Add(article);
+            await localStorage.SetItemAsync("cart", _selectedArticles);
+        }
+        else
+        {
+            _lastSelectedArticle = article;
+        }
+    }
+
+
+}

@@ -14,7 +14,7 @@
             {
                  <div>
                     <p class="text-sm text-gray-600">Qté en @Model.Conditionnement?.Name</p>
-                     <RadzenNumeric Min=0 class="w-full" @bind-Value=@_newStock.QtyInConditionnement Placeholder=@($"Qté en {Model.Conditionnement}")/>
+                     <RadzenNumeric Min=0 class="w-full" @bind-Value=@_newStock.QtyInConditionnement Placeholder=@($"Qté en {Model.Conditionnement}(optionel)")/>
                 </div>
             }
        </div>
@@ -23,21 +23,26 @@
                <p class="text-sm text-gray-600">Prix de vente par @Model.UnitOfMeasure</p>
                <RadzenNumeric class="w-full" @bind-Value=@_newStock.SellingPriceInUnitOfMeasure Min=0 Format=@($"#.## $ par {Model.UnitOfMeasure}") Placeholder=@($"Prix de vente par {Model.UnitOfMeasure ??  "unité de mesure"}")/>
            </div>
-            <div>
-               <p class="text-sm text-gray-600">Prix de vente par @Model.Conditionnement?.Name</p>
-               <RadzenNumeric class="w-full" @bind-Value=@_newStock.SellingPriceInConditionnement Min=0 Format=@($"#.## $ par {Model.Conditionnement?.Name}") Placeholder=@($"Prix de vente par {Model.Conditionnement?.Name ?? "conditionnement"}")/>
-           </div>
+                @if(Model.Conditionnement is not null)
+                {
+                    <div>
+                        <p class="text-sm text-gray-600">Prix de vente par @Model.Conditionnement?.Name (optionel)</p>
+                        <RadzenNumeric class="w-full" @bind-Value=@_newStock.SellingPriceInConditionnement Min=0 Format=@($"#.## $ par {Model.Conditionnement?.Name}") Placeholder=@($"Prix de vente par {Model.Conditionnement?.Name ?? "conditionnement"}")/>
+                    </div>
+                }
        </div>
         <div class="grid md:grid-cols-2 gap-2">
            <div>
                <p class="text-sm text-gray-600">Prix d'achat par @Model.UnitOfMeasure</p>
                <RadzenNumeric class="w-full" @bind-Value=@_newStock.BuyingPriceInUnitOfMeasure Min=0 Format=@($"#.## $ par {Model.UnitOfMeasure}") Placeholder=@($"Prix d'achat par {Model.UnitOfMeasure ??  "unité de mesure"}")/>
            </div>
-           <div>
-               <p class="text-sm text-gray-600">Prix d'achat par @Model.Conditionnement?.Name</p>
-                <RadzenNumeric class="w-full" @bind-Value=@_newStock.BuyingPriceInConditionnement Min=0 Format=@($"#.## $ par {Model.Conditionnement?.Name}") Placeholder=@($"Prix d'achat par {Model.Conditionnement?.Name ?? "conditionnement"}")/>
-           </div>
-          
+                @if(Model.Conditionnement is not null)
+                {
+                      <div>
+                        <p class="text-sm text-gray-600">Prix d'achat par @Model.Conditionnement?.Name (optionel)</p>
+                        <RadzenNumeric class="w-full" @bind-Value=@_newStock.BuyingPriceInConditionnement Min=0 Format=@($"#.## $ par {Model.Conditionnement?.Name}") Placeholder=@($"Prix d'achat par {Model.Conditionnement?.Name ?? "conditionnement"}")/>
+                      </div>
+                }
        </div>
         <div class="py-2">
             <RadzenButton class="m-1 px-2" type="submit" IsBusy=@_isBusy Icon="save" Text="Enregistrer" ButtonStyle="ButtonStyle.Secondary" />
@@ -69,27 +74,16 @@
             _isBusy = true;
             Model.Stock.Qty += _newStock!.QtyInUnitOfMeasure;
             Model.Price = new Pricing()
-        {
-            BuyingPricePerUnitOfMeasure = _newStock.BuyingPriceInUnitOfMeasure,
-            SellingPricePerUnitOfMeasure = _newStock.SellingPriceInUnitOfMeasure,
-            BuyingPricePerConditionnement = _newStock.BuyingPriceInConditionnement,
-            SellingPricePerConditionnement = _newStock.SellingPriceInConditionnement
-        };
-            Model.UpdatedAt = DateTime.UtcNow;
-            DbContext.Update(Model);
-            var stockMouvement = new StockMouvement()
             {
-                ArticleId = Model.Id,
-                Date = DateTime.UtcNow,
-                Qty = _newStock.QtyInUnitOfMeasure,
-                State = StockState.In,
-                PrevStock = Model.Stock.Qty -_newStock!.QtyInUnitOfMeasure,
-                NewStock = Model.Stock.Qty,
-                NewBuyingPrice = Model.Price.BuyingPricePerUnitOfMeasure,
-                NewSellingPrice = Model.Price.SellingPricePerUnitOfMeasure
+                BuyingPricePerUnitOfMeasure = _newStock.BuyingPriceInUnitOfMeasure,
+                SellingPricePerUnitOfMeasure = _newStock.SellingPriceInUnitOfMeasure,
+                BuyingPricePerConditionnement = _newStock.BuyingPriceInConditionnement,
+                SellingPricePerConditionnement = _newStock.SellingPriceInConditionnement
             };
-            await DbContext.StockMouvements.AddAsync(stockMouvement);
-            var result = await DbContext.SaveChangesAsync();
+            Model.UpdatedAt = DateTime.UtcNow;
+            var result = await Policy.Handle<Exception>()
+                .RetryAsync(3, (ex, attempt) => DbContext.ChangeTracker.Clear())
+                .ExecuteAsync(() => UpdateAndSave(Model));
             if (result > 0)
                 Cancel(true);
             _isBusy = false;
@@ -100,6 +94,25 @@
             Console.WriteLine(ex.Message);
         }
 
+    }
+
+    async Task<int> UpdateAndSave(Article article)
+    {
+        DbContext.Update(Model);
+            var stockMouvement = new StockMouvement()
+            {
+                ArticleId = Model.Id,
+                Date = DateTime.UtcNow,
+                Qty = _newStock!.QtyInUnitOfMeasure,
+                State = StockState.In,
+                PrevStock = Model.Stock.Qty -_newStock!.QtyInUnitOfMeasure,
+                NewStock = Model.Stock.Qty,
+                NewBuyingPrice = Model.Price.BuyingPricePerUnitOfMeasure,
+                NewSellingPrice = Model.Price.SellingPricePerUnitOfMeasure
+            };
+            await DbContext.StockMouvements.AddAsync(stockMouvement);
+            var result = await DbContext.SaveChangesAsync();
+        return result;
     }
 
     class NewStock

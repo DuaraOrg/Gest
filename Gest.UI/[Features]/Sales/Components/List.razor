@@ -1,0 +1,121 @@
+﻿<div class="space-y-1">
+    <ToolBar NewItem=@(_ => NewSale()) OnRefresh=@(_ => InitialLoad())  OnSearchQuery=@(e => OnSearch(e)) />
+    @if (_isBusy)
+    {
+        <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+    }
+    <div class="grid md:grid-cols-5 gap-2">
+        <RadzenDataList class="col-span-2" Count=@_count Data=@_items TItem=@Sale LoadData=@LoadData AllowPaging=true>
+            <Template Context="item">
+                <SaleCard  Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item) />
+            </Template>
+        </RadzenDataList>
+        @if(_selectedItem is not null)
+        {
+             <div class="hidden md:block col-span-3 ">
+                <SaleView  Model=@_selectedItem/>
+             </div>
+        }
+    </div>
+</div>
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+@code{
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    bool _isSmall = false;
+    bool _isBusy = true;
+    string _searchQuery = string.Empty;
+    Sale? _selectedItem;
+    int _count;
+    int _skip = 0;
+    int _take = 10;
+    IEnumerable<Sale> _items = new List<Sale>();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Policy.Handle<InvalidOperationException>()
+             .WaitAndRetryAsync(3, attempt => TimeSpan.FromMilliseconds(100 * attempt))
+             .ExecuteAsync(InitialLoad);
+            await InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    async Task InitialLoad()
+    {
+        _skip = 0;
+        _take = 10;
+        await LoadData(new LoadDataArgs() { Skip = _skip, Top = _take });
+        _selectedItem = _items.FirstOrDefault();
+    }
+
+    async Task OnSearch(string value)
+    {
+        _searchQuery = value;
+        await InitialLoad();
+    }
+
+    async Task OnSelectItem(Sale value)
+    {
+        _selectedItem = value;
+        if (_isSmall)
+        {
+            await ViewDetails(value);
+        }
+    }
+
+    async Task LoadData(LoadDataArgs args)
+    {
+        _isBusy = true;
+        if (string.IsNullOrEmpty(_searchQuery))
+        {
+            _items = await DbContext.Sales.Include(x => x.Items).ThenInclude(x => x.Article)
+                  .AsNoTracking()
+                  .Where(x => x.Items.Any(i => i.Article!.Name.Contains(_searchQuery)))
+                  .OrderByDescending(x => x.UpdatedAt)
+                  .Paginate(args.Skip,args.Top).ToListAsync();
+            _count = await DbContext.Sales
+               .AsNoTracking()
+             .Where(x => x.Items.Any(i => i.Article!.Name.Contains(_searchQuery)))
+             .CountAsync();
+        }
+        else
+        {
+            _items = await DbContext.Sales
+                   .AsNoTracking()
+                   .OrderByDescending(x => x.UpdatedAt)
+                  .Paginate(args.Skip,args.Top).ToListAsync();
+            _count = await DbContext.Sales
+                .CountAsync();
+        }
+        _isBusy = false;
+    }
+
+    async Task EditItem(Sale? item = null)
+    {
+
+        var itemModel = item?.Adapt<Sale>() ?? new Sale();
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", itemModel } };
+        var title = item is null ? "Ajouter un article" : $"Sale {itemModel.Id}";
+        var result = await DialogService.OpenAsync<SaleCard>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+    async Task NewSale()
+    {
+        var result = await DialogService.OpenAsync<SaleNew>("Nouvelle vente", new Dictionary<string, object>());
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+    async Task ViewDetails(Sale item)
+    {
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", item } };
+        var title = $"{item!.Id}";
+        var result = await DialogService.OpenAsync<SaleView>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+}

@@ -1,0 +1,21 @@
+﻿<h3>SaleView</h3>
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+@code {
+    [EditorRequired]
+    [Parameter]
+    public Sale Model { get; set; } = null!;
+
+    [Inject] IJSRuntime JSRuntime { get; set; } = null!;
+
+    bool _isSmall = false;
+    bool _isBusy = true;
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if(!_isSmall)
+                await JSRuntime.InvokeVoidAsync("changeDialogSize", "800px");
+        }
+    }
+}

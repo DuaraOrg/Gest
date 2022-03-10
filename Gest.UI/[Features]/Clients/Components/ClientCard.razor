@@ -1,0 +1,25 @@
+﻿@if(Model is not null)
+{
+    <div @onclick=@(_ => Click.InvokeAsync(Model)) class="bg-gray-50 flex items-center justify-between -m-4 p-2 hover:cursor-pointer hover:bg-gray-100 @(IsSelected ? "border border-gray-600" : "")">
+     <div class="flex space-x-2">
+          <div class="bg-gray-600 flex items-center justify-center p-4 rounded-full w-12 h-12">
+               <h2 class="text-gray-50 font-semibold">@Model.Names.ToAvatar()</h2>
+          </div>
+          <div>
+               <h2 class="font-medium">@Model.Names</h2>
+               <p class="text-sm text-gray-500">@(string.IsNullOrEmpty(Model.Phone) ? Model.Email : Model.Phone)</p>
+          </div>
+      </div>
+</div>
+
+}
+@code {
+    [EditorRequired]
+    [Parameter] 
+    public Client? Model { get; set; }
+
+     [Parameter] public bool IsSelected { get; set; }
+
+    [Parameter]
+    public EventCallback<Client> Click { get; set; }
+}

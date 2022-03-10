@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "W7JPw2EeLo0klxHNnYwk7V2kKSeTW3afQQjtNAkxTSvSZOK10KLQ+cLXhG2Tia3vgfqVV4l6CE+WK7XUcuQFoQ==",
+  "dgSpecHash": "t/Hzu8LJFqYSECzNNLt5QlI+eNhl+2cbgir7NOByK93LpCf4mjnj5lRJFbNmRHk9GXzXuSK4FMGc37hUcqwBMw==",
   "success": true,
   "projectFilePath": "D:\\Projects\\Gest\\Gest\\Gest.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\blazored.localstorage\\4.2.0\\blazored.localstorage.4.2.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\googlegson\\2.8.8.2\\googlegson.2.8.8.2.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\libsassbuilder\\2.0.1\\libsassbuilder.2.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\mapster\\7.3.0\\mapster.7.3.0.nupkg.sha512",
@@ -67,6 +68,7 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.22000.194\\microsoft.windows.sdk.buildtools.10.0.22000.194.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.windowsappsdk\\1.0.0\\microsoft.windowsappsdk.1.0.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\polly\\7.2.3\\polly.7.2.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\radzen.blazor\\3.16.3\\radzen.blazor.3.16.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\runtime.any.system.io\\4.3.0\\runtime.any.system.io.4.3.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\runtime.any.system.reflection\\4.3.0\\runtime.any.system.reflection.4.3.0.nupkg.sha512",

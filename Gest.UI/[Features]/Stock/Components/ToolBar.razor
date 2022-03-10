@@ -1,7 +1,7 @@
 ﻿<div class="shadow flex items-center overflow-x-scroll space-x-3 px-2  py-1 h-full no-scrollbar">
     <div>
        <h2 class="text-sm text-gray-600">Rechercher</h2>
-       <RadzenTextBox  @oninput=@(args => OnSearchQuery.InvokeAsync(args.ToString())) class="min-w-[10rem]" Placeholder="Nom de l'article" />
+       <RadzenTextBox  @oninput=@(args => OnSearchQuery.InvokeAsync(args.Value?.ToString())) class="min-w-[10rem]" Placeholder="Nom de l'article" />
     </div>
      <div class="pt-1" >
        <h2 class="text-sm text-gray-600">Etat</h2>

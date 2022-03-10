@@ -99,3 +99,6 @@ D:\Projects\Gest\Gest.Web\obj\Release\net6.0\refint\Gest.Web.dll
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\Gest.Web.pdb
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\Gest.Web.genruntimeconfig.cache
 D:\Projects\Gest\Gest.Web\obj\Release\net6.0\ref\Gest.Web.dll
+D:\Projects\Gest\Gest.Web\bin\Release\net6.0\Gest.SqlServerMigration.pdb
+D:\Projects\Gest\Gest.Web\bin\Release\net6.0\Blazored.LocalStorage.dll
+D:\Projects\Gest\Gest.Web\bin\Release\net6.0\Polly.dll

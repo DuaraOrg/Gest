@@ -5,3 +5,11 @@
     Layout = "_Layout";
 }
 <component type="typeof(Gest.UI.App)" render-mode="ServerPrerendered" />
+
+<script>
+   window.changeDialogSize = (width) => {
+       const dialog = document.getElementsByClassName('rz-dialog')[0];
+       dialog.style.width = width;
+       dialog.style.height = "95vh";
+  };
+  </script>

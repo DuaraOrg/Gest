@@ -5,7 +5,7 @@
         <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
     }
     <div class="grid md:grid-cols-5 gap-2">
-        <RadzenDataList class="col-span-2" Count=@_count Data=@_items TItem=@Article LoadData=@LoadData AllowPaging=true>
+        <RadzenDataList class="col-span-2 -space-y-5" Count=@_count Data=@_items TItem=@Article LoadData=@LoadData AllowPaging=true>
             <Template Context="item">
                 <ArticleCard BtnActionClick=@(_ => NewStock(item)) Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item) BtnActionText="Ajouter au stock"/>
             </Template>
@@ -24,7 +24,7 @@
     [Inject] public DialogService DialogService { get; set; } = null!;
     [Inject] public GestDbContext DbContext { get; set; } = null!;
     bool _isSmall = false;
-    bool _isBusy = true;
+    bool _isBusy = false;
     string _searchQuery = string.Empty;
     string _selectedFilterState = StockFilter.Tous;
     Article? _selectedItem;
@@ -37,7 +37,9 @@
     {
         if (firstRender)
         {
-            await InitialLoad();
+            await Policy.Handle<InvalidOperationException>()
+             .WaitAndRetryAsync(3, attempt => TimeSpan.FromMilliseconds(100 * attempt))
+             .ExecuteAsync(InitialLoad);
             await InvokeAsync(() => StateHasChanged());
         }
     }
@@ -73,8 +75,10 @@
 
     async Task LoadData(LoadDataArgs args)
     {
+        if (_isBusy)
+            return;
         _isBusy = true;
-        if (string.IsNullOrEmpty(_searchQuery))
+        if (!string.IsNullOrEmpty(_searchQuery))
         {
             if(_selectedFilterState == StockFilter.Tous)
             {

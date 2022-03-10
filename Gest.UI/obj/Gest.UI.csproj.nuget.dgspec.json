@@ -132,6 +132,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Blazored.LocalStorage": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
             "Mapster": {
               "target": "Package",
               "version": "[7.3.0, )"
@@ -151,6 +155,10 @@
             "Microsoft.Fast.Components.FluentUI": {
               "target": "Package",
               "version": "[1.1.0, )"
+            },
+            "Polly": {
+              "target": "Package",
+              "version": "[7.2.3, )"
             },
             "Radzen.Blazor": {
               "target": "Package",

@@ -5,6 +5,7 @@ using Gest.UI.Models;
 using Gest.UI.Shared;
 using Radzen;
 using Gest.UI.Extensions;
+using Blazored.LocalStorage;
 
 namespace Gest;
 
@@ -26,6 +27,7 @@ public static class MauiProgram
 		builder.Services.AddScoped<NotificationService>();
 		builder.Services.AddScoped<TooltipService>();
 		builder.Services.AddMapster();
+		builder.Services.AddBlazoredLocalStorage();
 
 		return builder.Build();
 	}
