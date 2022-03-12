@@ -19,7 +19,7 @@
     <div>
         <RadzenDataList class="col-span-2 md:-mx-3" Count=@_count Data=@_items TItem=@Client LoadData=@LoadData AllowPaging=true>
             <Template Context="item">
-                <ClientCard Model=@item Click=@(_ => OnSelection(item)) IsSelected=@(_selectedItem == item) />
+                <ClientCard Overflow=@false Model=@item Click=@(_ => OnSelection(item)) IsSelected=@(_selectedItem == item) />
             </Template>
         </RadzenDataList>
     </div>
@@ -34,7 +34,7 @@
     Client? _selectedItem;
     int _count;
     int _skip = 0;
-    int _take = 10;
+    int _take = 6;
 
     IEnumerable<Client> _items = new List<Client>();
 

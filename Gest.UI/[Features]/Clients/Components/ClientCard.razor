@@ -6,8 +6,8 @@
                <h2 class="text-gray-50 font-semibold">@Model.Names.ToAvatar()</h2>
           </div>
           <div>
-               <h2 class="font-medium">@Model.Names</h2>
-               <p class="text-sm text-gray-500">@(string.IsNullOrEmpty(Model.Phone) ? Model.Email : Model.Phone)</p>
+               <h2 class="font-medium truncate">@Model.Names</h2>
+               <p class="text-sm text-gray-500 text-ellipsis overflow-hidden">@GetContact()</p>
           </div>
       </div>
 </div>
@@ -18,8 +18,19 @@
     [Parameter] 
     public Client? Model { get; set; }
 
-     [Parameter] public bool IsSelected { get; set; }
+    [Parameter] public bool IsSelected { get; set; }
 
     [Parameter]
     public EventCallback<Client> Click { get; set; }
+
+    [Parameter]
+    public bool Overflow { get; set; } = true;
+
+    string GetContact()
+    {
+        var contact = string.IsNullOrEmpty(Model!.Phone) ? Model.Email : Model.Phone;
+        if (Overflow)
+            return contact;
+        return contact?.Length > 21 ? $"{contact?.Substring(0, 21)}" : contact ?? string.Empty;
+    }
 }

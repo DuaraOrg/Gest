@@ -1,0 +1,74 @@
+﻿<div class="space-y-2">
+    <div class="grid grid-cols-2 items-center gap-2">
+        <p>Montant payé en dollar</p>
+        <div class="flex items-center space-x-2">
+              <RadzenNumeric class="full" TValue=@decimal  Placeholder="1"/>
+              <p>USD</p>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-2">
+        <p>Montant payé en franc</p>
+         <div class="flex items-center space-x-2">
+              <RadzenNumeric  TValue=@decimal   Placeholder="1"/>
+              <p>FC</p>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-2">
+        <p>Méthode de paiement</p>
+         <div class="flex items-center space-x-2">
+             <RadzenDropDown  @bind-Value=@_selectedPaymentMethod TValue=@string Data=@_paymentMethodes/>
+        </div>
+    </div>
+    <div class="bg-gray-50 shadow px-2 my-4">
+       <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+            <h2 class="font-light text-gray-600">Total à payer</h2>
+            <h2 class="text-gray-800 font-medium">@_total.ToString("#.##")$</h2>
+        </div>
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+            <h2 class="font-light text-gray-600">Total à payé</h2>
+            <h2 class="text-gray-800 font-medium">@_totalPayé.ToString("#.##")$</h2>
+        </div>
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+            <h2 class="font-light text-gray-600">Reste</h2>
+            <h2 class="text-gray-800 font-medium">@_restEnFC.ToString("#.##")FC</h2>
+            <h2 class="text-gray-800 font-medium">@_restEnUSD.ToString("#.##")$</h2>
+        </div>
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+            <h2 class="font-light text-gray-600">Echange</h2>
+            <h2 class="text-gray-800 font-medium">@_excessEnFC.ToString("#.##")FC</h2>
+            <h2 class="text-gray-800 font-medium">@_excessEnUSD.ToString("#.##")$</h2>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-2 pt-4">
+          <button @onclick=@(_ => Pay()) class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Confirmer</button>
+           <button @onclick=@(_ => Cancel()) class="bg-gray-100 hover:bg-gray-200 px-4 py-2 text-gray-600 rounded shadow w-full">Annuler</button>
+   </div>
+</div>
+
+@code {
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [Parameter] public List<SaleItem> Items { get; set; } = null!;
+    string _selectedPaymentMethod = "Cash";
+    decimal _total = 0;
+    decimal _totalPayé = 0;
+    decimal _restEnUSD = 0;
+    decimal _restEnFC = 0;
+    decimal _excessEnUSD = 0;
+    decimal _excessEnFC = 0;
+    IEnumerable<string> _paymentMethodes = new List<string>(){"Cash","Credit","Wallet"};
+
+    protected override void OnParametersSet()
+    {
+        _total = Items.Sum(x => x.SubTotal);
+    }
+
+    void Cancel()
+    {
+        DialogService.Close(false);
+    }
+
+    void Pay()
+    {
+        
+    }
+}

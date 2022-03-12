@@ -4,29 +4,43 @@
 <div class="bg-gray-100 h-full px-2 py-1 space-y-1">
      <div class="flex items-center justify-between">
         <p>Panier</p>
+         <RadzenButton Click=@ClearCart Icon="close" ButtonStyle="ButtonStyle.Danger" />
     </div>
     <div class="px-4 space-y-1">
-        <p class="-ml-4">Client</p>
+        <p class="-ml-4">Client séléctionné</p>
          <ClientCard Model=@Client IsSelected/>
     </div>
     <div>
-        <p>Articles</p>
-        @foreach(var item in _items)
-        {
-            <div>
-                <p>@item.Article!.Name</p>
-                <p>@item.QtyInUnitOfMeasure</p>
-            </div>
-            
-        }
+        <p>Article(s) séléctionné(s)</p>
+        <div class="space-y-1">
+            @foreach(var item in _items)
+            {
+                <CartItem Remove=@RemoveFromCart Change=@OnItemChanged Item=@item/>
+            }
+        </div>
     </div>
-    
+    @if(_items.Count > 0)
+    {
+       <div class="py-2 bg-gray-50 shadow px-2">
+         <div class="flex justify-between px-2 py-2">
+            <p class="font-medium">Total</p>
+            <p class="font-semibold">@_total $</p>
+         </div>
+         <div class="grid grid-cols-2 gap-2">
+            <button @onclick=@(_ => OpenPayment()) class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Payer</button>
+            <button @onclick=@(_ => Cancel()) class="bg-gray-100 hover:bg-gray-200 px-4 py-2 text-gray-600 rounded shadow w-full">Annuler</button>
+         </div>
+        </div>
+    }
 </div>
 
 <RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
 
 @code {
     bool _isSmall = false;
+
+    [Inject] public DialogService DialogService { get; set; } = null!;
+
     [Parameter]
     [EditorRequired]
     public Client Client { get; set; } = null!;
@@ -35,6 +49,7 @@
     public Article? AddArticle { get; set; }
 
     List<SaleItem> _items = new List<SaleItem>();
+    decimal _total = 0;
 
     protected override void OnParametersSet()
     {
@@ -57,6 +72,7 @@
                     UnitPricePerUnitOfMeasure = AddArticle.Price.SellingPricePerUnitOfMeasure
                 });
             }
+            _total = _items.Sum(x => x.SubTotal);
         }
     }
     protected async override Task OnAfterRenderAsync(bool firstRender)
@@ -64,21 +80,68 @@
         if (firstRender && _items.Count <= 1)
         {
             var articles = await localStorage.GetItemAsync<List<Article>>("cart");
-                if(articles is not null)
+            if(articles is not null)
+            {
+                foreach(var item in articles)
                 {
-                    foreach(var item in articles)
-                    {
-                        _items.Add(new SaleItem()
+                    _items.Add(new SaleItem()
                         {
                             ArticleId = item.Id,
                             Article = item,
                             QtyInUnitOfMeasure = 1,
                             UnitPricePerUnitOfMeasure = item.Price.SellingPricePerUnitOfMeasure
                         });
-                    }
-                    StateHasChanged();
                 }
+                StateHasChanged();
+                _total = _items.Sum(x => x.SubTotal);
+            }
         }
     }
 
+    async Task ClearCart()
+    {
+        await localStorage.RemoveItemAsync("cart");
+        _items.Clear();
+        _total = _items.Sum(x => x.SubTotal);
+    }
+
+    async Task RemoveFromCart(SaleItem item)
+    {
+        try
+        {
+            var itemToRemove = _items.FirstOrDefault(x => x.ArticleId == item.ArticleId);
+            if(itemToRemove is not null)
+            {
+                _items.Remove(itemToRemove);
+                await localStorage.SetItemAsync("cart", _items.Select(x => x.Article));
+                _total = _items.Sum(x => x.SubTotal);
+            }
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    async Task OnItemChanged(SaleItem item)
+    {
+        var itemToRemove = _items.First(x => x.ArticleId == item.ArticleId);
+        var index = _items.IndexOf(itemToRemove);
+        _items[index] = item;
+        await localStorage.SetItemAsync("cart", _items.Select(x => x.Article));
+        _total = _items.Sum(x => x.SubTotal);
+    }
+
+    async Task OpenPayment()
+    {
+        var param = new Dictionary<string, object?>() { { "Items", _items} };
+        var title = $"Paiement vente";
+        await DialogService.OpenAsync<CartPay>(title, param);
+    }
+
+    async Task Cancel()
+    {
+        await ClearCart();
+        DialogService.Close(false);
+    }
 }

@@ -20,14 +20,14 @@
 }
 else
 {
-    <div class="grid grid-cols-3 gap-1">
-        <div>
+    <div class="grid grid-cols-12 gap-1">
+        <div class="col-span-3">
             <ListClient OnSelect=@(e => _selectedClient = e)/>
         </div>
-    <div>
+    <div class="col-span-4">
         <ListArticle OnSelect=@(e => OnArticleSelected(e))/>
     </div>
-    <div>
+    <div class="col-span-5">
         <Cart  AddArticle=@_lastSelectedArticle Client=@_selectedClient/>
     </div>
 </div>
