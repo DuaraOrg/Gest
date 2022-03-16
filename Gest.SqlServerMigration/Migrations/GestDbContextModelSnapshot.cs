@@ -100,10 +100,10 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             Id = new Guid("453412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 8, 18, 58, 14, 157, DateTimeKind.Utc).AddTicks(8915),
+                            CreatedAt = new DateTime(2022, 3, 13, 8, 42, 22, 753, DateTimeKind.Utc).AddTicks(8250),
                             FCToDollarRate = 2000m,
                             Name = "Default",
-                            UpdatedAt = new DateTime(2022, 3, 8, 18, 58, 14, 157, DateTimeKind.Utc).AddTicks(8909)
+                            UpdatedAt = new DateTime(2022, 3, 13, 8, 42, 22, 753, DateTimeKind.Utc).AddTicks(8243)
                         });
                 });
 
@@ -151,10 +151,10 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             Id = new Guid("654412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 8, 18, 58, 14, 157, DateTimeKind.Utc).AddTicks(8922),
+                            CreatedAt = new DateTime(2022, 3, 13, 8, 42, 22, 753, DateTimeKind.Utc).AddTicks(8268),
                             Email = "clientanonyme@swala.com",
                             Names = "Client Anonyme",
-                            UpdatedAt = new DateTime(2022, 3, 8, 18, 58, 14, 157, DateTimeKind.Utc).AddTicks(8919)
+                            UpdatedAt = new DateTime(2022, 3, 13, 8, 42, 22, 753, DateTimeKind.Utc).AddTicks(8257)
                         });
                 });
 
@@ -194,10 +194,10 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             Id = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
                             Adress = "Bunia",
-                            CreatedAt = new DateTime(2022, 3, 8, 18, 58, 14, 157, DateTimeKind.Utc).AddTicks(8906),
+                            CreatedAt = new DateTime(2022, 3, 13, 8, 42, 22, 753, DateTimeKind.Utc).AddTicks(8240),
                             FCToDollarRate = 2000m,
                             Name = "Ets TUUNGANE",
-                            UpdatedAt = new DateTime(2022, 3, 8, 18, 58, 14, 157, DateTimeKind.Utc).AddTicks(8903)
+                            UpdatedAt = new DateTime(2022, 3, 13, 8, 42, 22, 753, DateTimeKind.Utc).AddTicks(8237)
                         });
                 });
 
@@ -222,6 +222,9 @@ namespace Gest.SqlServerMigration.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("PayementId")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("SaleId")
                         .HasColumnType("uniqueidentifier");
@@ -280,6 +283,9 @@ namespace Gest.SqlServerMigration.Migrations
                     b.Property<string>("PayStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SaleId")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("SellerId")
                         .HasColumnType("uniqueidentifier");
@@ -398,13 +404,13 @@ namespace Gest.SqlServerMigration.Migrations
                         new
                         {
                             Id = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
-                            CreatedAt = new DateTime(2022, 3, 8, 18, 58, 14, 157, DateTimeKind.Utc).AddTicks(8874),
+                            CreatedAt = new DateTime(2022, 3, 13, 8, 42, 22, 753, DateTimeKind.Utc).AddTicks(8206),
                             Email = "admin@swala.com",
                             FirstName = "Admin",
                             LastName = "Swala",
-                            PasswordHash = "OntNV7WL9lhYeZ5LXVxX84XlcBv+d4mC8TpEUTZyD+xwbaLGwWJwcidKq7C3nXEasKrU+e09Pi7wu9BNgqDVBdFtogHMTcegtNzinL6gesSPsICv9XRiQo0nw60E8TmH/2yLJFcOTauDNMHiRFz6d+1dKVNhV92kHGrCIF7ODmuOk0yv2X2jzBgF6Dx4AdMxYZHS54po9dXwdUh/39ss3+JEqDyWtiQNDxK2vL6qXs85laKgtiOcUrE7wvEkfkwc1meyo0aZEzyukpQybCXinMQ2eCnOTYE5rVFWMxdSkRBunW/wqtWUUfaaPQ9I/zBHE+p4+nEa7cVggdEVIlqknA==",
-                            PasswordSalt = "sp66BJ8qsud3AkG2uSmiUD/b3BgX2UWwbBIJuFcYHvBsn75oxcy/m/AfoaTEQyirfzRygH0VIS6uxmRshZ9/8A==",
-                            UpdatedAt = new DateTime(2022, 3, 8, 18, 58, 14, 157, DateTimeKind.Utc).AddTicks(8847)
+                            PasswordHash = "6ZJ8cyZeZs250u7jqCcPOowFQOeFmdWt8oKsWAAb+4ZciC88btOS6KJ3ICtsFY1kb/dqxgx1LUTWpOQ06mMeAVKnzGHOVXYGJeWEyy+CPmCScyHH4uTUQ3Naz7rACehWb8CBbIIZngurVPoMLxaALqwhvAPhr5VG6wDkUMoiEqs4QDTMsqJMeI7uipgSasVV4w0/ea4OBJUKVPgOIpQa71w5hiBxYC/n67S11+Tthg07Es1njh+4eIavfqG46LgB7Ze1wDAZTHA3Trst0vTnqhE5qvzybtKAWgeAFE7M0nGxBFQTZ6F7JDxyg9vv+QRzEmu96u+INXDn6iqB6nY9rA==",
+                            PasswordSalt = "Gi94McWZ28QUvgqBcZCaChYVacwk6FaLJrpens16h5HdIxnsQkSQJoT416N+kEFbcG7+WiK3dRrIhOqEH9ikRA==",
+                            UpdatedAt = new DateTime(2022, 3, 13, 8, 42, 22, 753, DateTimeKind.Utc).AddTicks(8161)
                         });
                 });
 
@@ -437,7 +443,7 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             UserId = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            Joined = new DateTime(2022, 3, 8, 18, 58, 14, 157, DateTimeKind.Utc).AddTicks(8883),
+                            Joined = new DateTime(2022, 3, 13, 8, 42, 22, 753, DateTimeKind.Utc).AddTicks(8217),
                             Role = "Propriétaire",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -702,6 +708,9 @@ namespace Gest.SqlServerMigration.Migrations
 
                             b1.Property<Guid>("ArticleId")
                                 .HasColumnType("uniqueidentifier");
+
+                            b1.Property<decimal>("BuyingUnitPricePerUnitOfMeasure")
+                                .HasColumnType("decimal(18,2)");
 
                             b1.Property<double>("QtyDelivered")
                                 .HasColumnType("float");

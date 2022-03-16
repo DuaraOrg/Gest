@@ -1,2 +1,3 @@
-2022/03/09-18:25:21.806 32c0 Creating DB D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\shared_proto_db since it was missing.
-2022/03/09-18:25:21.826 32c0 Reusing MANIFEST D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\shared_proto_db/MANIFEST-000001
+2022/03/12-22:34:52.871 1d18 Reusing MANIFEST D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\shared_proto_db/MANIFEST-000001
+2022/03/12-22:34:52.871 1d18 Recovering log #3
+2022/03/12-22:34:52.872 1d18 Reusing old log D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\shared_proto_db/000003.log 

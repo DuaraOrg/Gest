@@ -9,6 +9,8 @@ namespace Gest.Core.Entities
         public const string Credit = nameof(Credit);
 
         public const string Bank = nameof(Bank);
+
+        public static IEnumerable<string> All() => new List<string>() { Cash, Credit };
     }
 
     public class TransactionType
@@ -39,6 +41,10 @@ namespace Gest.Core.Entities
 
     public class Bank : AccountType
     {
+        public Bank()
+        {
+            AccountNumber = "000000000";
+        }
         public string AccountNumber { get; set; } = null!;
     }
     public class Wallet:BaseEntity

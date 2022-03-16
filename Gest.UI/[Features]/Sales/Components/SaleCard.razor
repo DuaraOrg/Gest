@@ -1,4 +1,29 @@
-﻿<h3>SaleCard</h3>
+﻿<div @onclick=@(_ => Click.InvokeAsync()) class="grid grid-cols-12 gap-2 items-center -m-4 p-2 hover:cursor-pointer hover:bg-gray-100 @(IsSelected ? "border border-gray-600" : "")">
+    <div class="col-span-1 bg-gray-600 flex items-center justify-center p-4 rounded-full w-10 h-10">
+        <h2 class="text-gray-50 font-semibold">@Model.Client!.Names.ToAvatar()</h2>
+    </div>
+    <div class="col-span-5 ml-3">
+        <p class="text-sm font-medium">Vente No #@Model.SaleId</p>
+        <p class="text-sm text-gray-600">@Model.Client.Names</p>
+        <p class="text-sm text-gray-500">@Model.Items.First().Article!.Name...</p>
+    </div>
+    <div class="col-span-4">
+        <p class="text-sm">Total: <span class="text-sm font-medium">@Model.TotalAmount.ToString("#.##")$</span></p>
+        @if((Model.TotalAmount - Model.AmountPaid) > 0)
+        {
+           <p class="text-sm">Reste: <span class="text-sm font-medium">@((Model.TotalAmount - Model.AmountPaid).ToString("#.##"))$</span></p>
+        }
+        <p class="text-sm text-gray-600">@Model.CreatedAt.ToLocalTime()</p>
+    </div>
+    <div class="col-span-2 space-y-2">
+        <div class="bg-sky-400 text-gray-50 rounded-full">
+            <p class="text-center text-sm">@Model.PayStatus</p>
+        </div>
+        <div class="bg-slate-400 text-gray-50 rounded-full">
+            <p class="text-center text-sm">@Model.DeliverStatus</p>
+        </div>
+    </div>
+</div>
 
 @code {
     [EditorRequired]

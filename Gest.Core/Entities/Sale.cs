@@ -45,10 +45,13 @@ namespace Gest.Core.Entities
 
         public decimal UnitPricePerUnitOfMeasure { get; set; }
 
+        public decimal BuyingUnitPricePerUnitOfMeasure { get; set; }
+
         public decimal SubTotal => UnitPricePerUnitOfMeasure * (decimal)QtyInUnitOfMeasure;
     }
     public class Sale:BaseEntity
     {
+        public int SaleId { get; set; }
         public Guid ClientId { get; set; }
         public Client? Client { get; set; }
 

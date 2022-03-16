@@ -7,6 +7,8 @@ D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.Web.deps.json
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.Web.runtimeconfig.json
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.Web.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.Web.pdb
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Blazored.LocalStorage.dll
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Humanizer.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Mapster.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Mapster.Core.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Mapster.DependencyInjection.dll
@@ -20,11 +22,13 @@ D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Data.Sqlite.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Sqlite.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Fast.Components.FluentUI.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Identity.Client.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
@@ -34,6 +38,7 @@ D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.Ope
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.JSInterop.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Polly.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Radzen.Blazor.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\SQLitePCLRaw.batteries_v2.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\SQLitePCLRaw.core.dll
@@ -76,6 +81,7 @@ D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\Syste
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.Core.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.UI.dll
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.SqlServerMigration.pdb
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.UI.pdb
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.Core.pdb
 D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\Gest.Web.csproj.AssemblyReference.cache
@@ -96,9 +102,3 @@ D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\refint\Gest.Web.dll
 D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\Gest.Web.pdb
 D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\Gest.Web.genruntimeconfig.cache
 D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\ref\Gest.Web.dll
-D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
-D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Humanizer.dll
-D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
-D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.SqlServerMigration.pdb
-D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Polly.dll
-D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Blazored.LocalStorage.dll

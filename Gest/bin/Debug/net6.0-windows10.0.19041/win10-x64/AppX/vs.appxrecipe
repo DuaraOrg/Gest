@@ -29,29 +29,29 @@
     <AppXManifest Include="D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2022-03-09T17:32:42.322</Modified>
+      <Modified>2022-03-12T21:31:57.614</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2022-03-09T17:32:29.435</Modified>
+      <Modified>2022-03-12T21:31:56.753</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Gest.runtimeconfig.json">
       <PackagePath>Gest.runtimeconfig.json</PackagePath>
-      <Modified>2022-03-09T17:32:41.620</Modified>
+      <Modified>2022-03-12T21:31:56.068</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Gest.dll">
       <PackagePath>Gest.dll</PackagePath>
-      <Modified>2022-03-09T17:32:27.412</Modified>
+      <Modified>2022-03-12T21:31:52.383</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\apphost.exe">
       <PackagePath>Gest.exe</PackagePath>
-      <Modified>2022-03-09T17:32:27.428</Modified>
+      <Modified>2022-03-12T21:31:52.455</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\bin\Debug\net6.0-windows10.0.19041\win10-x64\Gest.deps.json">
       <PackagePath>Gest.deps.json</PackagePath>
-      <Modified>2022-03-09T17:32:41.609</Modified>
+      <Modified>2022-03-12T21:31:55.742</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\microsoft.netcore.app.runtime.win-x64\6.0.2\runtimes\win-x64\lib\net6.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -957,6 +957,10 @@
       <PackagePath>WinRT.Runtime.dll</PackagePath>
       <Modified>2021-11-17T10:43:46.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\blazored.localstorage\4.2.0\lib\net6.0\Blazored.LocalStorage.dll">
+      <PackagePath>Blazored.LocalStorage.dll</PackagePath>
+      <Modified>2022-02-04T21:25:36.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\mapster\7.3.0\lib\netstandard2.0\Mapster.dll">
       <PackagePath>Mapster.dll</PackagePath>
       <Modified>2022-02-20T12:02:40.000</Modified>
@@ -1185,6 +1189,10 @@
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.Net.dll</PackagePath>
       <Modified>2021-11-16T05:08:40.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\user\.nuget\packages\polly\7.2.3\lib\netstandard2.0\Polly.dll">
+      <PackagePath>Polly.dll</PackagePath>
+      <Modified>2022-01-17T13:25:08.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\user\.nuget\packages\radzen.blazor\3.16.3\lib\net5.0\Radzen.Blazor.dll">
       <PackagePath>Radzen.Blazor.dll</PackagePath>
       <Modified>2022-03-07T08:31:28.000</Modified>
@@ -1263,15 +1271,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest.Core\bin\Debug\net6.0\Gest.Core.dll">
       <PackagePath>Gest.Core.dll</PackagePath>
-      <Modified>2022-03-09T17:32:12.234</Modified>
+      <Modified>2022-03-10T15:37:34.027</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest.UI\bin\Debug\net6.0\Gest.UI.dll">
       <PackagePath>Gest.UI.dll</PackagePath>
-      <Modified>2022-03-09T17:32:15.202</Modified>
+      <Modified>2022-03-12T21:31:39.824</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\Platforms\Windows\App.xbf">
       <PackagePath>Platforms\Windows\App.xbf</PackagePath>
-      <Modified>2022-03-09T17:32:25.594</Modified>
+      <Modified>2022-03-12T21:31:51.266</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -1391,7 +1399,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest.UI\obj\Debug\net6.0\scopedcss\projectbundle\Gest.UI.bundle.scp.css">
       <PackagePath>wwwroot\_content\Gest.UI\Gest.UI.bundle.scp.css</PackagePath>
-      <Modified>2022-03-09T17:32:15.532</Modified>
+      <Modified>2022-03-10T13:53:08.055</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\jsmodules\jsmodules.publish.manifest.json">
       <PackagePath>wwwroot\Gest.modules.json</PackagePath>
@@ -1415,7 +1423,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\wwwroot\index.html">
       <PackagePath>wwwroot\index.html</PackagePath>
-      <Modified>2022-03-03T08:08:58.466</Modified>
+      <Modified>2022-03-09T18:50:02.822</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\win10-x64\resizetizer\sp\splashscreenSplashScreen.scale-100.png">
       <PackagePath>splashscreenSplashScreen.scale-100.png</PackagePath>
@@ -1583,7 +1591,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest.UI\obj\Debug\net6.0\staticwebassets.development.json">
       <PackagePath>Gest.UI.staticwebassets.runtime.json</PackagePath>
-      <Modified>2022-03-09T17:32:15.234</Modified>
+      <Modified>2022-03-10T13:53:07.694</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Gest\Gest\obj\Debug\net6.0-windows10.0.19041\staticwebassets.development.json">
       <PackagePath>Gest.staticwebassets.runtime.json</PackagePath>

@@ -44,8 +44,16 @@
             </div>
             <div class="flex justify-between">
                 <div class="space-y-1">
-                    <h2 class="text-sm font-light">Nouvelle Qté:</h2>
-                    <h2 class="text-sm font-medium">@item.Qty @item.Article!.UnitOfMeasure</h2>
+                        @if(GetType(item) == "Sortie")
+                        {
+                            <h2 class="text-sm font-light">Qté sortie:</h2>
+                            <h2 class="text-sm font-medium">@item.Qty @item.Article!.UnitOfMeasure</h2>
+                        }
+                        else
+                        {
+                            <h2 class="text-sm font-light">Nouvelle Qté:</h2>
+                            <h2 class="text-sm font-medium">@item.Qty @item.Article!.UnitOfMeasure</h2>
+                        }
                 </div>
                 <div class="space-y-1">
                     <h2 class="text-sm font-light">Nouveau Stock:</h2>

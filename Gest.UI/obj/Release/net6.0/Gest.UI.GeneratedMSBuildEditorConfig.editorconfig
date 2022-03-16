@@ -83,6 +83,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXENhcnRJdGVtLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/CartPay.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXENhcnRQYXkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/List.razor]
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXExpc3QucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -97,6 +101,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/SaleCard.razor]
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXFNhbGVDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/SaleItemView.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXFNhbGVJdGVtVmlldy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/SaleNew.razor]

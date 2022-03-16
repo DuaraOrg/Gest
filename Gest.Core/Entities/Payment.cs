@@ -2,6 +2,7 @@
 {
     public class Payment:BaseEntity
     {
+        public int PayementId { get; set; }
         public Guid? ClientId { get; set; }
         public Client? Client { get; set; }
 

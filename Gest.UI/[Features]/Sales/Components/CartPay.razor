@@ -1,15 +1,19 @@
 ﻿<div class="space-y-2">
+    @if (_isBusy)
+    {
+        <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+    }
     <div class="grid grid-cols-2 items-center gap-2">
         <p>Montant payé en dollar</p>
         <div class="flex items-center space-x-2">
-              <RadzenNumeric class="full" TValue=@decimal  Placeholder="1"/>
+              <RadzenNumeric class="full" Min="0" Change=@(e => OnPaid(e,true)) @bind-Value=@_paidInUSD TValue=@decimal  Placeholder="1"/>
               <p>USD</p>
         </div>
     </div>
     <div class="grid grid-cols-2 gap-2">
         <p>Montant payé en franc</p>
          <div class="flex items-center space-x-2">
-              <RadzenNumeric  TValue=@decimal   Placeholder="1"/>
+              <RadzenNumeric Min="0" Change=@(e => OnPaid(e,false))  TValue=@decimal  @bind-Value=@_paidInFC   Placeholder="1"/>
               <p>FC</p>
         </div>
     </div>
@@ -19,24 +23,29 @@
              <RadzenDropDown  @bind-Value=@_selectedPaymentMethod TValue=@string Data=@_paymentMethodes/>
         </div>
     </div>
+    <div class="flex items-center spac-x-2">
+         <RadzenCheckBox @bind-Value=@_notDelivered  Name="Aretirer" TValue="bool"/>
+         <RadzenLabel class="ml-2" Text="A retirer" Component="Aretirer" />
+    </div>
     <div class="bg-gray-50 shadow px-2 my-4">
        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
             <h2 class="font-light text-gray-600">Total à payer</h2>
+            <h2 class="text-gray-800 font-medium">@_totalInFC.ToString("#.##")FC</h2>
             <h2 class="text-gray-800 font-medium">@_total.ToString("#.##")$</h2>
         </div>
         <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Total à payé</h2>
-            <h2 class="text-gray-800 font-medium">@_totalPayé.ToString("#.##")$</h2>
+            <h2 class="font-light text-gray-600">Total payé</h2>
+            <h2 class="text-gray-800 font-medium">@_totalPaid.ToString("#.##")$</h2>
         </div>
         <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
             <h2 class="font-light text-gray-600">Reste</h2>
-            <h2 class="text-gray-800 font-medium">@_restEnFC.ToString("#.##")FC</h2>
-            <h2 class="text-gray-800 font-medium">@_restEnUSD.ToString("#.##")$</h2>
+            <h2 class="text-gray-800 font-medium">@_restInFC.ToString("#.##")FC</h2>
+            <h2 class="text-gray-800 font-medium">@_restInUSD.ToString("#.##")$</h2>
         </div>
         <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
             <h2 class="font-light text-gray-600">Echange</h2>
-            <h2 class="text-gray-800 font-medium">@_excessEnFC.ToString("#.##")FC</h2>
-            <h2 class="text-gray-800 font-medium">@_excessEnUSD.ToString("#.##")$</h2>
+            <h2 class="text-gray-800 font-medium">@_excessInFC.ToString("#.##")FC</h2>
+            <h2 class="text-gray-800 font-medium">@_excessInUSD.ToString("#.##")$</h2>
         </div>
     </div>
     <div class="grid grid-cols-2 gap-2 pt-4">
@@ -47,28 +56,247 @@
 
 @code {
     [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
     [Parameter] public List<SaleItem> Items { get; set; } = null!;
+    [Parameter] public Client Client { get; set; } = null!;
+    [Parameter] public Sale? Sale { get; set; }
     string _selectedPaymentMethod = "Cash";
+    decimal _totalInFC = 0;
     decimal _total = 0;
-    decimal _totalPayé = 0;
-    decimal _restEnUSD = 0;
-    decimal _restEnFC = 0;
-    decimal _excessEnUSD = 0;
-    decimal _excessEnFC = 0;
-    IEnumerable<string> _paymentMethodes = new List<string>(){"Cash","Credit","Wallet"};
+    decimal _totalPaid = 0;
+    decimal _paidInUSD = 0;
+    decimal _paidInFC = 0;
+    decimal _restInUSD = 0;
+    decimal _restInFC = 0;
+    decimal _excessInUSD = 0;
+    decimal _excessInFC = 0;
+    bool _notDelivered = false;
+    bool _isBusy = false;
+    bool _isNew = true;
+    IEnumerable<string> _paymentMethodes = TypeOfAccount.All();
 
     protected override void OnParametersSet()
     {
-        _total = Items.Sum(x => x.SubTotal);
+        _isNew = Sale is null;
+        if (_isNew)
+            _total = Items.Sum(x => x.SubTotal);
+        else
+            _total = Sale!.TotalAmount - Sale.AmountPaid;
+        _totalInFC = _total * CurrentItems.Company.FCToDollarRate;
     }
 
-    void Cancel()
+    void Cancel(bool canRefresh = false) => DialogService.Close(canRefresh);
+
+    void OnPaid(decimal amount, bool isDollar)
     {
-        DialogService.Close(false);
+        _totalPaid = (_paidInFC / CurrentItems.Company.FCToDollarRate) + _paidInUSD;
+        _excessInUSD = _total >= _totalPaid ? 0 : _totalPaid - _total;
+        _excessInFC = _excessInUSD * CurrentItems.Company.FCToDollarRate;
+        _restInUSD = _totalPaid >= _total ? 0 : _total - _totalPaid;
+        _restInFC = _restInUSD * CurrentItems.Company.FCToDollarRate;
     }
 
-    void Pay()
+    async void Pay()
     {
-        
+        if (_isNew)
+        {
+            _selectedPaymentMethod = _totalPaid == 0 ? TypeOfAccount.Credit : TypeOfAccount.Cash;
+            var result = await Save();
+            Cancel(result > 0);
+        }
+        else
+        {
+            if(_totalPaid > 0)
+            {
+                _selectedPaymentMethod = TypeOfAccount.Cash;
+                var result = await Update();
+                Cancel(result > 0);
+            }
+        }
+    }
+
+    async Task<int> Save()
+    {
+        _isBusy = true;
+        DbContext.ChangeTracker.Clear();
+        if (!_notDelivered)
+        {
+            foreach(var item in Items)
+            {
+                var stockMovement = new StockMouvement()
+                    {
+                        ArticleId = item.Article!.Id,
+                        Date = DateTime.UtcNow,
+                        PrevStock = item.Article.Stock.Qty,
+                        NewStock = item.Article.Stock.Qty - item.QtyInUnitOfMeasure,
+                        Qty = item.QtyInUnitOfMeasure,
+                        State = StockState.Out,
+                        PrevSellingPrice = item.Article.Price.SellingPricePerUnitOfMeasure,
+                        NewSellingPrice = item.Article.Price.SellingPricePerUnitOfMeasure,
+                        NewBuyingPrice = item.Article.Price.BuyingPricePerUnitOfMeasure,
+                        PrevBuyingPrice = item.Article.Price.BuyingPricePerUnitOfMeasure
+                    };
+                var article = DbContext.Articles.First(x => x.Id == item.ArticleId);
+                article.Stock.Qty = stockMovement.NewStock;
+                await DbContext.StockMouvements.AddAsync(stockMovement);
+                DbContext.Update(article);
+            }
+            Items.ForEach(x =>
+            {
+                x.QtyDelivered = x.QtyInUnitOfMeasure;
+                x.Article = null;
+            });
+        }
+        var lastSaleId = DbContext.Sales
+       .Where(x => x.CompanyId == CurrentItems.Company.Id)
+       .OrderBy(x => x.CreatedAt)
+       .LastOrDefault()?.SaleId ?? 0;
+        var sale = new Sale()
+        {
+            SaleId = lastSaleId + 1,
+            Items = Items,
+            AmountPaid = _totalPaid,
+            ClientId = Client.Id,
+            CompanyId = CurrentItems.Company.Id,
+            BranchId = CurrentItems.Branch.Id,
+            CreatedAt = DateTime.UtcNow,
+            DeliverStatus = _notDelivered ? DeliveryStatus.Pending : DeliveryStatus.Delivered,
+            PayStatus = _totalPaid >= _total ? PaymentStatus.Paid : _totalPaid > 0 ? PaymentStatus.InPayement : PaymentStatus.InPayement,
+            SellerId = CurrentItems.User.Id,
+            TotalAmount = _total
+        };
+        var addedSale = await DbContext.AddAsync(sale);
+        var wallet = DbContext.Wallets.SingleOrDefault(x => x.Id == CurrentItems.Company.WalletId);
+        if(wallet is null)
+        {
+            var newWallet = new Wallet()
+                {
+                    CreatedAt = DateTime.UtcNow
+                };
+            var addWallet = await DbContext.AddAsync(newWallet);
+            wallet = addWallet.Entity;
+            CurrentItems.Company.WalletId = wallet.Id;
+            var company = DbContext.Companies.First(x => x.Id == CurrentItems.Company.Id);
+            company.WalletId = wallet.Id;
+            DbContext.Update(company);
+            await DbContext.SaveChangesAsync();
+        }
+        if(_totalPaid > 0)
+        {
+            var lastPaymentId = DbContext.Payments
+            .Where(x => x.CompanyId == CurrentItems.Company.Id)
+            .OrderBy(x => x.CreatedAt)
+            .LastOrDefault()?.PayementId ?? 0;
+            var payment = new Payment()
+            {
+                PayementId = lastPaymentId + 1,
+                ClientId = Client.Id,
+                AccountType = _selectedPaymentMethod,
+                Amount = _totalPaid,
+                CreatedAt = DateTime.UtcNow,
+                SaleId = addedSale.Entity.Id,
+                CompanyId = CurrentItems.Company.Id,
+                TransType = TransactionType.SalePayment,
+                UserId = CurrentItems.User.Id,
+                UpdatedAt = DateTime.UtcNow
+            };
+            await DbContext.AddAsync(payment);
+            var walletMouvement = new WalletMovement()
+                {
+                    ToAccountType = TypeOfAccount.Cash,
+                    Amount = _totalPaid,
+                    ToWalletId = wallet.Id,
+                    Date = DateTime.UtcNow,
+                    TransType = TransactionType.SalePayment
+                };
+            await DbContext.AddAsync(walletMouvement);
+            wallet.Cash.Amount += _totalPaid;
+            wallet.UpdatedAt = DateTime.UtcNow;
+            DbContext.Update(wallet);
+        }
+        if(_restInUSD > 0)
+        {
+            var clientWallet = DbContext.Wallets.SingleOrDefault(x => x.Id == Client.WalletId);
+            if(clientWallet is null)
+            {
+                var newWallet = new Wallet()
+                {
+                    CreatedAt = DateTime.UtcNow
+                };
+                var addWallet = await DbContext.AddAsync(newWallet);
+                clientWallet = addWallet.Entity;
+                var client = DbContext.Clients.First(x => x.Id == Client.Id);
+                client.WalletId = wallet.Id;
+                DbContext.Update(client);
+                await DbContext.SaveChangesAsync();
+            }
+            var walletMouvement = new WalletMovement()
+                {
+                    FromWalletId = wallet.Id,
+                    ToAccountType = TypeOfAccount.Credit,
+                    Amount = _restInUSD,
+                    ToWalletId = clientWallet.Id,
+                    Date = DateTime.UtcNow,
+                    TransType = TransactionType.SalePayment
+                };
+            await DbContext.AddAsync(walletMouvement);
+            wallet.Credit.Amount += _restInUSD;
+            wallet.UpdatedAt = DateTime.UtcNow;
+            DbContext.Update(wallet);
+        }
+
+        var result =  await DbContext.SaveChangesAsync();
+        _isBusy = false;
+        return result;
+    }
+
+    async Task<int> Update()
+    {
+        _isBusy = true;
+        var sale = DbContext.Sales.Single(x => x.Id == Sale!.Id);
+        var lastPaymentId = DbContext.Payments
+            .Where(x => x.CompanyId == CurrentItems.Company.Id)
+            .OrderBy(x => x.CreatedAt)
+            .LastOrDefault()?.PayementId ?? 0;
+        var payment = new Payment()
+            {
+                PayementId = lastPaymentId + 1,
+                ClientId = Client.Id,
+                AccountType = _selectedPaymentMethod,
+                Amount = _totalPaid,
+                CreatedAt = DateTime.UtcNow,
+                SaleId = sale.Id,
+                CompanyId = CurrentItems.Company.Id,
+                TransType = TransactionType.SalePayment,
+                UserId = CurrentItems.User.Id,
+                UpdatedAt = DateTime.UtcNow
+            };
+        await DbContext.AddAsync(payment);
+        var wallet = DbContext.Wallets.Single(x => x.Id == CurrentItems.Company.WalletId);
+        var clientWallet = DbContext.Wallets.Single(x => x.Id == Client.WalletId);
+        clientWallet.Credit.Amount -= _totalPaid;
+        clientWallet.UpdatedAt = DateTime.UtcNow;
+        var walletMouvement = new WalletMovement()
+                {
+                    FromWalletId = clientWallet.Id,
+                    FromAccountType = TypeOfAccount.Credit,
+                    ToAccountType = TypeOfAccount.Cash,
+                    Amount = _totalPaid,
+                    ToWalletId = wallet.Id,
+                    Date = DateTime.UtcNow,
+                    TransType = TransactionType.SalePayment
+                };
+        await DbContext.AddAsync(walletMouvement);
+        wallet.Cash.Amount += _totalPaid;
+        wallet.UpdatedAt = DateTime.UtcNow;
+        DbContext.Update(wallet);
+        DbContext.Update(clientWallet);
+        sale.AmountPaid += _totalPaid;
+        sale.PayStatus = sale.TotalAmount >= sale.AmountPaid ? PaymentStatus.Paid : PaymentStatus.InPayement;
+        DbContext.Update(sale);
+        var result =  await DbContext.SaveChangesAsync();
+        _isBusy = false;
+        return result;
     }
 }

@@ -1,0 +1,116 @@
+﻿<div @onfocusout=@(e => Change.InvokeAsync(Item))>
+    <div class="shadow bg-gray-50 flex justify-between items-center px-2 py-1 space-x-1">
+    <div class="bg-gray-600 flex items-center justify-center p-4 rounded-full w-12 h-12">
+           <h2 class="text-gray-50 font-semibold">@Item.Article!.Name.ToAvatar()</h2>
+     </div>
+     <div class="space-y-1">
+          <h2 class="font-medium text-sm">@Item.Article.Name</h2>
+          <p class="text-sm text-gray-500">@Item.UnitPricePerUnitOfMeasure.ToString("#.##") $ par @Item.Article.UnitOfMeasure</p>
+          <p class="text-sm font-medium">Total: @Item.SubTotal.ToString("#.##") $</p>
+    </div>
+     <div  class="space-y-1">
+         <p class="text-sm font-medium">Qté total</p>
+         <p class="text-sm">@Item.QtyInUnitOfMeasure @Item.Article.UnitOfMeasure</p>
+        @if(Item.Article.Conditionnement is not null)
+        {
+          <p class="text-sm">@(Item.QtyInUnitOfMeasure * Item.Article.Conditionnement.QtyPerUnitOfMeasure) @Item.Article.Conditionnement.Name</p>
+        }
+     </div>
+      <div  class="space-y-1">
+         <p class="text-sm font-medium">Qté livré</p>
+         <p class="text-sm">@Item.QtyDelivered @Item.Article.UnitOfMeasure</p>
+        @if(Item.Article.Conditionnement is not null)
+        {
+          <p class="text-sm">@(Item.QtyDelivered * Item.Article.Conditionnement.QtyPerUnitOfMeasure) @Item.Article.Conditionnement.Name</p>
+        }
+     </div>
+        @if (!_isDelivered)
+        {
+           <div class="space-y-2">
+                <button @onclick=@(e => _canAdjustDelivery = !_canAdjustDelivery)  class="bg-gray-700 hover:bg-gray-600 text-gray-50 flex items-center justify-center py-1 px-1 rounded">
+                    <svg class="h-6 fill-current text-current" viewBox="0 0 80 80" fill="#FFFFFF">
+                        <path d="M33.847656 12L13.980469 68L25.886719 68L30.527344 54L47.875 54C48.308594 53.304688 48.769531 52.632813 49.285156 52L29.078125 52L24.4375 66L16.8125 66L35.261719 14L44.703125 14L56.308594 46.640625C56.914063 46.371094 57.535156 46.128906 58.171875 45.921875L46.113281 12 Z M 38.734375 22.292969L30.671875 47L48.800781 47L40.824219 22.292969 Z M 39.773438 25.550781L46.054688 45L33.425781 45 Z M 64 48C55.175781 48 48 55.175781 48 64C48 72.824219 55.175781 80 64 80C72.824219 80 80 72.824219 80 64C80 55.175781 72.824219 48 64 48 Z M 64 50C71.742188 50 78 56.257813 78 64C78 71.742188 71.742188 78 64 78C56.257813 78 50 71.742188 50 64C50 56.257813 56.257813 50 64 50 Z M 33 57C32.449219 57 32 57.449219 32 58C32 58.550781 32.449219 59 33 59C33.550781 59 34 58.550781 34 58C34 57.449219 33.550781 57 33 57 Z M 37 57C36.449219 57 36 57.449219 36 58C36 58.550781 36.449219 59 37 59C37.550781 59 38 58.550781 38 58C38 57.449219 37.550781 57 37 57 Z M 41 57C40.449219 57 40 57.449219 40 58C40 58.550781 40.449219 59 41 59C41.550781 59 42 58.550781 42 58C42 57.449219 41.550781 57 41 57 Z M 45 57C44.449219 57 44 57.449219 44 58C44 58.550781 44.449219 59 45 59C45.550781 59 46 58.550781 46 58C46 57.449219 45.550781 57 45 57 Z M 63 57L63 63L57 63L57 65L63 65L63 71L65 71L65 65L71 65L71 63L65 63L65 57Z" />
+                    </svg>
+                </button>
+            </div>
+        }
+</div>
+    @if (_canAdjustDelivery)
+    {
+       <div class="bg-gray-50 px-2 py-2 my-1 shadow">
+         <p class="text-sm">Nouvelle livraison</p>
+         <div class="flex space-x-2 items-end justify-center">
+            <div>
+                <p class="text-sm">@Item.Article.UnitOfMeasure</p>
+                <RadzenNumeric Change=@(e => OnQtyChanged(e.ToString(),true)) @oninput=@(e => OnQtyChanged(e.Value?.ToString(),true)) TValue=@double class="w-16" @bind-Value=@Item.QtyInUnitOfMeasure Placeholder="1"/>
+            </div>
+            @if(Item.Article.Conditionnement is not null)
+            {
+             <div>
+                <p class="text-sm">@Item.Article.Conditionnement.Name</p>
+                <RadzenNumeric Change=@(e => OnQtyChanged(e.ToString(),false)) @oninput=@(e => OnQtyChanged(e.Value?.ToString(),false)) TValue=@double    class="w-16" @bind-Value=@_qtyPerConidtionnement Placeholder="1"/>
+            </div>
+            }
+            <div>
+                 <button  class="bg-gray-600 hover:bg-gray-500 px-2 py-1 text-gray-50 rounded shadow w-28 mb-0.5">Enregistrer</button>
+                 <button @onclick=@(e => _canAdjustDelivery = !_canAdjustDelivery)  class="bg-gray-100 w-28 hover:bg-gray-200 px-2 py-1 text-gray-600 rounded shadow mb-0.5">Annuler</button>
+            </div>
+           
+         </div>
+     </div>
+    }
+</div>
+
+@code {
+    [Parameter] public SaleItem Item { get; set; } = null!;
+    [Parameter] public EventCallback<SaleItem> Remove { get; set; }
+    [Parameter] public EventCallback<SaleItem> Change { get; set; }
+    double _qtyPerConidtionnement = 0;
+    bool _canAdjustDelivery = false;
+    bool _isDelivered = false;
+    protected override void OnParametersSet()
+    {
+        _isDelivered = Item.QtyDelivered >= Item.QtyInUnitOfMeasure;
+        OnQtyChanged(Item.QtyInUnitOfMeasure.ToString(), true);
+    }
+
+    void SwitchPrice(bool isGros)
+    {
+        if (!isGros)
+            Item.UnitPricePerUnitOfMeasure = Item.Article!.Price.SellingPricePerUnitOfMeasure;
+        else
+        {
+            ChangePriceOnGros();
+        }
+        Change.InvokeAsync(Item);
+    }
+
+    void ChangePriceOnGros()
+    {
+        var itemPerUnitOfMeasure = Convert.ToDecimal(Item.Article!.Conditionnement?.QtyPerUnitOfMeasure ?? 1);
+        var selllingPrice = Item.Article!.Price.SellingPricePerConditionnement ?? 0M;
+        Item.UnitPricePerUnitOfMeasure = selllingPrice / itemPerUnitOfMeasure;
+    }
+
+    void OnQtyChanged(string? value, bool isUnitOfMeasure)
+    {
+        if(double.TryParse(value ?? "",out var newValue))
+        {
+            if (isUnitOfMeasure)
+            {
+                if (Item.Article!.Conditionnement is not null)
+                {
+                    _qtyPerConidtionnement = Math.Round(newValue * Item.Article.Conditionnement.QtyPerUnitOfMeasure, 0);
+                }
+            }
+            else
+            {
+                if (Item.Article!.Conditionnement is not null)
+                {
+                    Item.QtyInUnitOfMeasure = Math.Round(newValue / Item.Article!.Conditionnement!.QtyPerUnitOfMeasure, 0);
+                }
+            }
+        }
+    }
+
+}

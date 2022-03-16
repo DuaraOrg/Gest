@@ -23,6 +23,7 @@
 @code {
     [Inject] public DialogService DialogService { get; set; } = null!;
     [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
     bool _isSmall = false;
     bool _isBusy = false;
     string _searchQuery = string.Empty;
@@ -85,11 +86,13 @@
                 _items = await DbContext.Articles
                  .AsNoTracking()
                  .Where(x => x.Name.Contains(_searchQuery))
+                 .Where(x => x.CompanyId == CurrentItems.Company.Id)
                  .OrderByDescending(x => x.CreatedAt)
                  .Paginate(args.Skip,args.Top).ToListAsync();
                 _count = await DbContext.Articles
                   .AsNoTracking()
                  .Where(x => x.Name.Contains(_searchQuery))
+                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
                   .OrderByDescending(x => x.CreatedAt)
                  .CountAsync();
             }
@@ -98,12 +101,14 @@
                 _items = await DbContext.Articles
                   .AsNoTracking()
                  .Where(x => x.Name.Contains(_searchQuery))
+                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
                  .Where(x => x.Stock.Qty <= x.Stock.Minimum)
                   .OrderByDescending(x => x.CreatedAt)
                  .Paginate(args.Skip,args.Top).ToListAsync();
                 _count = await DbContext.Articles
                   .AsNoTracking()
                  .Where(x => x.Name.Contains(_searchQuery))
+                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
                  .Where(x => x.Stock.Qty <= x.Stock.Minimum)
                   .OrderByDescending(x => x.CreatedAt)
                  .CountAsync();
@@ -115,12 +120,14 @@
                   .AsNoTracking()
                  .Where(x => x.Name.Contains(_searchQuery))
                  .Where(x => x.Stock.Qty >= x.Stock.Maximum)
+                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
                   .OrderByDescending(x => x.CreatedAt)
                  .Paginate(args.Skip,args.Top).ToListAsync();
                 _count = await DbContext.Articles
                    .AsNoTracking()
                  .Where(x => x.Name.Contains(_searchQuery))
                  .Where(x => x.Stock.Qty >= x.Stock.Maximum)
+                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
                   .OrderByDescending(x => x.CreatedAt)
                  .CountAsync();
             }
@@ -132,9 +139,11 @@
                 _items = await DbContext.Articles
                      .AsNoTracking()
                     .OrderByDescending(x => x.CreatedAt)
+                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
                     .Paginate(args.Skip,args.Top).ToListAsync();
                 _count = await DbContext.Articles
                     .OrderByDescending(x => x.CreatedAt)
+                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
                     .CountAsync();
             }
 
@@ -142,11 +151,13 @@
             {
                 _items = await DbContext.Articles
                      .AsNoTracking()
-                    .Where(x => x.Stock.Qty <= x.Stock.Minimum) 
+                    .Where(x => x.Stock.Qty <= x.Stock.Minimum)
+                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
                      .OrderByDescending(x => x.CreatedAt)
                     .Paginate(args.Skip,args.Top).ToListAsync();
                 _count = await DbContext.Articles
                     .Where(x => x.Stock.Qty <= x.Stock.Minimum)
+                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
                      .OrderByDescending(x => x.CreatedAt)
                     .CountAsync();
             }
@@ -156,10 +167,12 @@
                 _items = await DbContext.Articles
                      .AsNoTracking()
                     .Where(x => x.Stock.Qty >= x.Stock.Maximum) 
+                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
                      .OrderByDescending(x => x.CreatedAt)
                     .Paginate(args.Skip,args.Top).ToListAsync();
                 _count = await DbContext.Articles
                     .Where(x => x.Stock.Qty >= x.Stock.Maximum)
+                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
                     .OrderByDescending(x => x.CreatedAt)
                     .CountAsync();
             }

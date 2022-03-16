@@ -5,7 +5,7 @@
         <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
     }
     <div class="grid md:grid-cols-5 gap-2">
-        <RadzenDataList class="col-span-2" Count=@_count Data=@_items TItem=@Sale LoadData=@LoadData AllowPaging=true>
+        <RadzenDataList class="col-span-2 -space-y-5" Count=@_count Data=@_items TItem=@Sale LoadData=@LoadData AllowPaging=true>
             <Template Context="item">
                 <SaleCard  Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item) />
             </Template>
@@ -70,9 +70,11 @@
         _isBusy = true;
         if (string.IsNullOrEmpty(_searchQuery))
         {
-            _items = await DbContext.Sales.Include(x => x.Items).ThenInclude(x => x.Article)
+            _items = await DbContext.Sales
+                   .Include(x => x.Client)
+                  .Include(x => x.Items).ThenInclude(x => x.Article)
                   .AsNoTracking()
-                  .Where(x => x.Items.Any(i => i.Article!.Name.Contains(_searchQuery)))
+                  .Where(x => x.SaleId.ToString().Contains(_searchQuery) || x.Items.Any(i => i.Article!.Name.Contains(_searchQuery)))
                   .OrderByDescending(x => x.UpdatedAt)
                   .Paginate(args.Skip,args.Top).ToListAsync();
             _count = await DbContext.Sales
@@ -83,6 +85,8 @@
         else
         {
             _items = await DbContext.Sales
+                    .Include(x => x.Client)
+                     .Include(x => x.Items).ThenInclude(x => x.Article)
                    .AsNoTracking()
                    .OrderByDescending(x => x.UpdatedAt)
                   .Paginate(args.Skip,args.Top).ToListAsync();
@@ -92,17 +96,6 @@
         _isBusy = false;
     }
 
-    async Task EditItem(Sale? item = null)
-    {
-
-        var itemModel = item?.Adapt<Sale>() ?? new Sale();
-        var param = item is null ? new Dictionary<string, object?>()
-               : new Dictionary<string, object?>() { { "Model", itemModel } };
-        var title = item is null ? "Ajouter un article" : $"Sale {itemModel.Id}";
-        var result = await DialogService.OpenAsync<SaleCard>(title, param);
-        if (result is bool canRefresh && canRefresh == true)
-            await InitialLoad();
-    }
     async Task NewSale()
     {
         var result = await DialogService.OpenAsync<SaleNew>("Nouvelle vente", new Dictionary<string, object>());
@@ -111,9 +104,8 @@
     }
     async Task ViewDetails(Sale item)
     {
-        var param = item is null ? new Dictionary<string, object?>()
-               : new Dictionary<string, object?>() { { "Model", item } };
-        var title = $"{item!.Id}";
+        var param = new Dictionary<string, object?>() { { "Model", item } };
+        var title = $"Vente No #{item.SaleId}";
         var result = await DialogService.OpenAsync<SaleView>(title, param);
         if (result is bool canRefresh && canRefresh == true)
             await InitialLoad();

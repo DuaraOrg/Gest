@@ -33,11 +33,13 @@ else
 </div>
 }
 <RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+<RadzenMediaQuery Query="(min-width: 992px)" Change=@(e => _isLarge = e)/>
 @code {
 
     [Inject] IJSRuntime JSRuntime { get; set; } = null!;
 
     bool _isSmall = false;
+    bool _isLarge = false;
     bool _isBusy = true;
 
     Client? _selectedClient;
@@ -49,7 +51,7 @@ else
         if (firstRender)
         {
             if(!_isSmall)
-                await JSRuntime.InvokeVoidAsync("changeDialogSize", "1000px");
+                await JSRuntime.InvokeVoidAsync("changeDialogSize", _isLarge ? "1000px" : "900px");
         }
     }
 
