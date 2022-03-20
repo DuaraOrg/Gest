@@ -6,9 +6,9 @@
     </div>
     <div class="space-y-1">
         <p class="-ml-2 text-sm">Panier</p>
-        @foreach(var item in Model.Items)
+        @foreach(var item in Model.Items.Where(x => x.Article is not null))
         {
-            <SaleItemView Item=@item/>
+            <SaleItemView Sale=@Model Item=@item/>
         }
     </div>
     <div class="bg-gray-50 shadow px-2 my-4">
@@ -36,13 +36,20 @@
             </div>
         }
     </div>
+    @if (_isBusy)
+    {
+        <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+    }
     <div class="grid @(_isSmall ? (Model.TotalAmount - Model.AmountPaid) >= 0 ? "grid-cols-4" : "grid-cols-3" : "grid-cols-3") gap-2 pt-4">
         @if((Model.TotalAmount - Model.AmountPaid) > 0)
         {
             <button @onclick=@(_ => OpenPayment())  class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Payer</button>
         }
-        <button  class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Facture</button>
-        <button  class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Livrer</button>
+        <button class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Facture</button>
+        @if(Model.DeliverStatus != DeliveryStatus.Delivered)
+        {
+             <button @onclick=@DeliverAll class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Livrer</button>
+        }
         @if (_isSmall)
         {
             <button @onclick=@(_ => Cancel()) class="bg-gray-100 hover:bg-gray-200 px-4 py-2 text-gray-600 rounded shadow w-full">Annuler</button>
@@ -53,6 +60,7 @@
 @code {
 
     [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
 
     [EditorRequired]
     [Parameter]
@@ -73,5 +81,42 @@
         var result = await DialogService.OpenAsync<CartPay>(title, param);
         if(result is bool canRefresh)
             Cancel(canRefresh);
+    }
+    async Task DeliverAll()
+    {
+        _isBusy = true;
+        var items = new List<SaleItem>();
+        foreach(var item in Model.Items)
+        {
+            var stockMovement = new StockMouvement()
+                    {
+                        ArticleId = item.Article!.Id,
+                        Date = DateTime.UtcNow,
+                        PrevStock = item.Article.Stock.Qty,
+                        NewStock = item.Article.Stock.Qty - item.QtyInUnitOfMeasure,
+                        Qty = item.QtyInUnitOfMeasure,
+                        State = StockState.Out,
+                        PrevSellingPrice = item.Article.Price.SellingPricePerUnitOfMeasure,
+                        NewSellingPrice = item.Article.Price.SellingPricePerUnitOfMeasure,
+                        NewBuyingPrice = item.Article.Price.BuyingPricePerUnitOfMeasure,
+                        PrevBuyingPrice = item.Article.Price.BuyingPricePerUnitOfMeasure
+                    };
+            var article = DbContext.Articles.First(x => x.Id == item.ArticleId);
+            article.Stock.Qty = stockMovement.NewStock;
+            await DbContext.StockMouvements.AddAsync(stockMovement);
+            var saleItem = Model.Items.Single(x => x.ArticleId == item.ArticleId);
+            saleItem.QtyDelivered = item.QtyInUnitOfMeasure;
+            saleItem.Article = null;
+            items.Add(saleItem);
+            DbContext.Update(article);
+        }
+        var sale = DbContext.Sales.Single(x => x.Id == Model.Id);
+        sale.Items = items;
+        sale.DeliverStatus = Model.Items.Any(x => x.QtyDelivered != x.QtyInUnitOfMeasure)
+                            ? DeliveryStatus.InDelivery : DeliveryStatus.Delivered;
+        DbContext.Update(sale);
+        await DbContext.SaveChangesAsync();
+        _isBusy = false;
+        Model = DbContext.Sales.Include(x => x.Items).ThenInclude(x => x.Article).Single(x => x.Id == Model.Id);
     }
 }

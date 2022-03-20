@@ -148,6 +148,13 @@
                 x.Article = null;
             });
         }
+        else
+        {
+            Items.ForEach(x =>
+            {
+                x.Article = null;
+            });
+        }
         var lastSaleId = DbContext.Sales
        .Where(x => x.CompanyId == CurrentItems.Company.Id)
        .OrderBy(x => x.CreatedAt)

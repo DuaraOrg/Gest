@@ -1,4 +1,4 @@
-﻿<div @onfocusout=@(e => Change.InvokeAsync(Item))>
+﻿<div>
     <div class="shadow bg-gray-50 flex justify-between items-center px-2 py-1 space-x-1">
     <div class="bg-gray-600 flex items-center justify-center p-4 rounded-full w-12 h-12">
            <h2 class="text-gray-50 font-semibold">@Item.Article!.Name.ToAvatar()</h2>
@@ -39,10 +39,14 @@
     {
        <div class="bg-gray-50 px-2 py-2 my-1 shadow">
          <p class="text-sm">Nouvelle livraison</p>
+        @if(_isNewDeliveryBusy)
+        {
+            <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+        }
          <div class="flex space-x-2 items-end justify-center">
             <div>
                 <p class="text-sm">@Item.Article.UnitOfMeasure</p>
-                <RadzenNumeric Change=@(e => OnQtyChanged(e.ToString(),true)) @oninput=@(e => OnQtyChanged(e.Value?.ToString(),true)) TValue=@double class="w-16" @bind-Value=@Item.QtyInUnitOfMeasure Placeholder="1"/>
+                <RadzenNumeric  Min="0"  Change=@(e => OnQtyChanged(e.ToString(),true)) @oninput=@(e => OnQtyChanged(e.Value?.ToString(),true)) TValue=@double class="w-16" @bind-Value=@_qtyInUnitOfMeasure Placeholder="1"/>
             </div>
             @if(Item.Article.Conditionnement is not null)
             {
@@ -52,8 +56,8 @@
             </div>
             }
             <div>
-                 <button  class="bg-gray-600 hover:bg-gray-500 px-2 py-1 text-gray-50 rounded shadow w-28 mb-0.5">Enregistrer</button>
-                 <button @onclick=@(e => _canAdjustDelivery = !_canAdjustDelivery)  class="bg-gray-100 w-28 hover:bg-gray-200 px-2 py-1 text-gray-600 rounded shadow mb-0.5">Annuler</button>
+                 <button @onclick=@Save  class="bg-gray-600 hover:bg-gray-500 px-2 py-1 text-gray-50 rounded shadow w-28 mb-0.5">Enregistrer</button>
+                 <button @onclick=@Cancel  class="bg-gray-100 w-28 hover:bg-gray-200 px-2 py-1 text-gray-600 rounded shadow mb-0.5">Annuler</button>
             </div>
            
          </div>
@@ -63,33 +67,21 @@
 
 @code {
     [Parameter] public SaleItem Item { get; set; } = null!;
-    [Parameter] public EventCallback<SaleItem> Remove { get; set; }
-    [Parameter] public EventCallback<SaleItem> Change { get; set; }
+    [Parameter] public Sale Sale { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
     double _qtyPerConidtionnement = 0;
     bool _canAdjustDelivery = false;
     bool _isDelivered = false;
+    bool _isNewDeliveryBusy = false;
+    double _qtyInUnitOfMeasure = 0;
+    double _qtyNewTotalUnitOfMeasure = 0;
+    double _qtyAlreadyDelivered = 0;
     protected override void OnParametersSet()
     {
         _isDelivered = Item.QtyDelivered >= Item.QtyInUnitOfMeasure;
-        OnQtyChanged(Item.QtyInUnitOfMeasure.ToString(), true);
-    }
-
-    void SwitchPrice(bool isGros)
-    {
-        if (!isGros)
-            Item.UnitPricePerUnitOfMeasure = Item.Article!.Price.SellingPricePerUnitOfMeasure;
-        else
-        {
-            ChangePriceOnGros();
-        }
-        Change.InvokeAsync(Item);
-    }
-
-    void ChangePriceOnGros()
-    {
-        var itemPerUnitOfMeasure = Convert.ToDecimal(Item.Article!.Conditionnement?.QtyPerUnitOfMeasure ?? 1);
-        var selllingPrice = Item.Article!.Price.SellingPricePerConditionnement ?? 0M;
-        Item.UnitPricePerUnitOfMeasure = selllingPrice / itemPerUnitOfMeasure;
+        _qtyAlreadyDelivered = Item.QtyDelivered;
+        if(!_isDelivered)
+            _qtyNewTotalUnitOfMeasure = Item.QtyInUnitOfMeasure - Item.QtyDelivered;
     }
 
     void OnQtyChanged(string? value, bool isUnitOfMeasure)
@@ -107,10 +99,57 @@
             {
                 if (Item.Article!.Conditionnement is not null)
                 {
-                    Item.QtyInUnitOfMeasure = Math.Round(newValue / Item.Article!.Conditionnement!.QtyPerUnitOfMeasure, 0);
+                    _qtyInUnitOfMeasure = Math.Round(newValue / Item.Article!.Conditionnement!.QtyPerUnitOfMeasure, 0);
                 }
             }
+            Item.QtyDelivered = _qtyAlreadyDelivered + _qtyInUnitOfMeasure;
         }
+    }
+
+    async Task Save()
+    {
+        _isNewDeliveryBusy = true;
+        if(_qtyInUnitOfMeasure <= 0 || _qtyInUnitOfMeasure > _qtyNewTotalUnitOfMeasure)
+        {
+            _qtyInUnitOfMeasure = _qtyNewTotalUnitOfMeasure;
+            _isNewDeliveryBusy = false;
+            return;
+        }
+        var stockMovement = new StockMouvement()
+         {
+              ArticleId = Item.Article!.Id,
+              Date = DateTime.UtcNow,
+              PrevStock = Item.Article.Stock.Qty,
+              NewStock = Item.Article.Stock.Qty - _qtyInUnitOfMeasure,
+              Qty = _qtyInUnitOfMeasure,
+              State = StockState.Out,
+              PrevSellingPrice = Item.Article.Price.SellingPricePerUnitOfMeasure,
+              NewSellingPrice = Item.Article.Price.SellingPricePerUnitOfMeasure,
+              NewBuyingPrice = Item.Article.Price.BuyingPricePerUnitOfMeasure,
+              PrevBuyingPrice = Item.Article.Price.BuyingPricePerUnitOfMeasure
+          };
+        var article = DbContext.Articles.First(x => x.Id == Item.ArticleId);
+        article.Stock.Qty = stockMovement.NewStock;
+        await DbContext.StockMouvements.AddAsync(stockMovement);
+        DbContext.Update(article);
+        var sale = DbContext.Sales.Single(x => x.Id == Sale.Id);
+        var saleItem = sale.Items.Single(x => x.ArticleId == Item.ArticleId);
+        sale.Items.Remove(saleItem);
+        saleItem.QtyDelivered = Item.QtyDelivered;
+        sale.Items.Add(saleItem);
+        sale.DeliverStatus = sale.Items.Any(x => x.QtyDelivered != x.QtyInUnitOfMeasure)
+                            ? DeliveryStatus.InDelivery : DeliveryStatus.Delivered;
+        DbContext.Update(sale);
+        await DbContext.SaveChangesAsync();
+        _isNewDeliveryBusy = false;
+        _canAdjustDelivery = false;
+        StateHasChanged();
+    }
+
+    void Cancel()
+    {
+        _canAdjustDelivery = false;
+        Item.QtyDelivered = _qtyAlreadyDelivered;
     }
 
 }
