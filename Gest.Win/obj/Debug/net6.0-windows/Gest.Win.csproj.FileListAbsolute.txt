@@ -9,6 +9,7 @@ D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.deps.json
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.runtimeconfig.json
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.pdb
+D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Blazored.LocalStorage.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Humanizer.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Mapster.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Mapster.Core.dll
@@ -59,6 +60,7 @@ D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Microsoft.JSInterop.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Microsoft.Web.WebView2.Core.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Microsoft.Web.WebView2.WinForms.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Microsoft.Web.WebView2.Wpf.dll
+D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Polly.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Radzen.Blazor.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\SQLitePCLRaw.batteries_v2.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\SQLitePCLRaw.core.dll
@@ -120,5 +122,3 @@ D:\Projects\Gest\Gest.Win\obj\Debug\net6.0-windows\refint\Duara.dll
 D:\Projects\Gest\Gest.Win\obj\Debug\net6.0-windows\Duara.pdb
 D:\Projects\Gest\Gest.Win\obj\Debug\net6.0-windows\Gest.Win.genruntimeconfig.cache
 D:\Projects\Gest\Gest.Win\obj\Debug\net6.0-windows\ref\Duara.dll
-D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Blazored.LocalStorage.dll
-D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Polly.dll

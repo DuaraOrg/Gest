@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between">
         <p>Clients</p>
         <div class="flex space-x-2">
-            <RadzenButton MouseEnter=@(args => ShowTooltip(args,"Ajouter un client"))  Icon="add_circle_outline" ButtonStyle="ButtonStyle.Secondary" />
+            <RadzenButton Click=@AddItem MouseEnter=@(args => ShowTooltip(args,"Ajouter un client"))  Icon="add_circle_outline" ButtonStyle="ButtonStyle.Secondary" />
             <RadzenButton Click=@InitialLoad Icon="refresh" ButtonStyle="ButtonStyle.Light" />
         </div>
     </div>
@@ -27,6 +27,7 @@
 
 @code {
     [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public DialogService DialogService { get; set; } = null!;
     [Parameter] public EventCallback<Client> OnSelect { get; set; } 
 
     bool _isBusy = false;
@@ -93,6 +94,15 @@
         {
             await InvokeAsync(() => OnSelect.InvokeAsync(client));
         } 
+    }
+
+    async Task AddItem()
+    {
+        var param = new Dictionary<string, object?>();
+        var title = "Ajouter un client";
+        var result = await DialogService.OpenAsync<ClientEdit>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
     }
 
     [Inject] TooltipService TooltipService { get; set; } = null!;

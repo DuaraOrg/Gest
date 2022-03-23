@@ -1,5 +1,7 @@
 ﻿<div class="space-y-1">
-    <ToolBar NewItem=@(_ => NewSale()) OnRefresh=@(_ => InitialLoad())  OnSearchQuery=@(e => OnSearch(e)) />
+    <ToolBar NewItem=@(_ => NewSale()) OnRefresh=@(_ => InitialLoad())  
+        OnSearchQuery=@(e => OnSearch(e)) PeriodChanged=@(e => OnPeriodChanged(e)) DateChanged=@(e => OnDateChanged(e.startDate,e.endDate)) 
+        PaymentStateChanged=@(e => OnPaymentStateChanged(e)) DeliveryStateChanged=@(e => OnDeliveryStateChanged(e))/>
     @if (_isBusy)
     {
         <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
@@ -29,6 +31,11 @@
     int _count;
     int _skip = 0;
     int _take = 10;
+    string _selectedPeriod = Period.Tous;
+    string _selectedPaymentState = Period.Tous;
+    string _selectedDeliveryState = Period.Tous;
+    DateTime _startDate = DateTime.UtcNow.ToLocalTime();
+    DateTime _endDate = DateTime.UtcNow.ToLocalTime();
     IEnumerable<Sale> _items = new List<Sale>();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -56,6 +63,29 @@
         await InitialLoad();
     }
 
+    async Task OnPeriodChanged(string period)
+    {
+        _selectedPeriod = period;
+        await InitialLoad();
+    }
+    async Task OnPaymentStateChanged(string state)
+    {
+        _selectedPaymentState = state;
+        await InitialLoad();
+    }
+    async Task OnDeliveryStateChanged(string state)
+    {
+        _selectedDeliveryState = state;
+        await InitialLoad();
+    }
+
+    async Task OnDateChanged(DateTime start, DateTime end)
+    {
+        _startDate = start;
+        _endDate = end;
+        await InitialLoad();
+    }
+
     async Task OnSelectItem(Sale value)
     {
         _selectedItem = value;
@@ -68,29 +98,40 @@
     async Task LoadData(LoadDataArgs args)
     {
         _isBusy = true;
-        if (string.IsNullOrEmpty(_searchQuery))
-        {
-            _items = await DbContext.Sales
+        var query = DbContext.Sales
                    .Include(x => x.Client)
                   .Include(x => x.Items).ThenInclude(x => x.Article)
-                  .AsNoTracking()
-                  .Where(x => x.SaleId.ToString().Contains(_searchQuery) || x.Items.Any(i => i.Article!.Name.Contains(_searchQuery)))
+                  .Where(x => _selectedPaymentState == PaymentStatus.Tous || x.PayStatus == _selectedPaymentState)
+                  .Where(x => _selectedDeliveryState == DeliveryStatus.Tous || x.DeliverStatus == _selectedDeliveryState)
+                  .AsNoTracking();
+        var queryWithPeriodFilter = _selectedPeriod switch
+        {
+            Period.Tous => query,
+            Period.Today => query.Where(x => x.CreatedAt == DateTime.Today),
+            Period.ThisWeek => query.Where(x => x.CreatedAt <= DateTime.Today && x.CreatedAt >= DateTime.Today.AddDays(-7)),
+            Period.Yesterday => query.Where(x => x.CreatedAt.Date == DateTime.Today.AddDays(-1)),
+            Period.ThisMonth => query.Where(x => x.CreatedAt <= DateTime.Today && x.CreatedAt >= DateTime.Today.AddDays(-30)),
+            Period.Date => query.Where(x => x.CreatedAt.Date == _startDate.Date),
+            Period.IntervalDate => query.Where(x => x.CreatedAt >= _startDate && x.CreatedAt <= _endDate),
+            _ => query
+        };
+        if(string.IsNullOrEmpty(_searchQuery))
+        {
+            int saleId =  int.TryParse(_searchQuery, out saleId) ? saleId : 0;
+            _items = await queryWithPeriodFilter
+                  .Where(x => x.SaleId == saleId || x.Items.Any(i => i.Article!.Name.Contains(_searchQuery)))
                   .OrderByDescending(x => x.UpdatedAt)
                   .Paginate(args.Skip,args.Top).ToListAsync();
-            _count = await DbContext.Sales
-               .AsNoTracking()
+            _count = await queryWithPeriodFilter
              .Where(x => x.Items.Any(i => i.Article!.Name.Contains(_searchQuery)))
              .CountAsync();
         }
         else
         {
-            _items = await DbContext.Sales
-                    .Include(x => x.Client)
-                     .Include(x => x.Items).ThenInclude(x => x.Article)
-                   .AsNoTracking()
+            _items = await queryWithPeriodFilter
                    .OrderByDescending(x => x.UpdatedAt)
                   .Paginate(args.Skip,args.Top).ToListAsync();
-            _count = await DbContext.Sales
+            _count = await queryWithPeriodFilter
                 .CountAsync();
         }
         _isBusy = false;

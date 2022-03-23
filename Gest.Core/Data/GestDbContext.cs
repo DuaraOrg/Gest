@@ -122,7 +122,7 @@ namespace Gest.Core.Data
                 .OwnsOne(x => x.Price);
 
             modelBuilder.Entity<Sale>()
-                .OwnsMany(x => x.Items);
+                .OwnsMany(x => x.Items, i => i.HasKey("Id"));
             modelBuilder.Entity<Client>()
                 .HasMany(x => x.Sales)
                 .WithOne(x => x.Client)

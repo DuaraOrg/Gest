@@ -17,9 +17,6 @@
     string _searchQuery = string.Empty;
     string _selectedState = Period.Tous;
 
-    DateTime _startDate = DateTime.UtcNow.ToLocalTime();
-    DateTime _endDate = DateTime.UtcNow.ToLocalTime();
-
     [Parameter]
     public EventCallback<string> OnSearchQuery { get; set; }
 

@@ -1,3 +1,2 @@
-2022/03/12-22:34:57.060 4dcc Reusing MANIFEST D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
-2022/03/12-22:34:57.063 4dcc Recovering log #3
-2022/03/12-22:34:57.064 4dcc Reusing old log D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\EdgeCoupons/coupons_data.db/000003.log 
+2022/03/22-21:54:06.834 4cb0 Creating DB D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\EdgeCoupons/coupons_data.db since it was missing.
+2022/03/22-21:54:06.841 4cb0 Reusing MANIFEST D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Duara.exe.WebView2\EBWebView\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001

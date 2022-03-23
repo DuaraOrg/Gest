@@ -95,10 +95,10 @@ namespace Gest.SqliteMigration.Migrations
                         {
                             Id = new Guid("453412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 13, 8, 26, 21, 316, DateTimeKind.Utc).AddTicks(5117),
+                            CreatedAt = new DateTime(2022, 3, 22, 20, 46, 26, 829, DateTimeKind.Utc).AddTicks(9431),
                             FCToDollarRate = 2000m,
                             Name = "Default",
-                            UpdatedAt = new DateTime(2022, 3, 13, 8, 26, 21, 316, DateTimeKind.Utc).AddTicks(5115)
+                            UpdatedAt = new DateTime(2022, 3, 22, 20, 46, 26, 829, DateTimeKind.Utc).AddTicks(9428)
                         });
                 });
 
@@ -146,10 +146,10 @@ namespace Gest.SqliteMigration.Migrations
                         {
                             Id = new Guid("654412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 13, 8, 26, 21, 316, DateTimeKind.Utc).AddTicks(5120),
+                            CreatedAt = new DateTime(2022, 3, 22, 20, 46, 26, 829, DateTimeKind.Utc).AddTicks(9435),
                             Email = "clientanonyme@swala.com",
                             Names = "Client Anonyme",
-                            UpdatedAt = new DateTime(2022, 3, 13, 8, 26, 21, 316, DateTimeKind.Utc).AddTicks(5119)
+                            UpdatedAt = new DateTime(2022, 3, 22, 20, 46, 26, 829, DateTimeKind.Utc).AddTicks(9433)
                         });
                 });
 
@@ -189,10 +189,10 @@ namespace Gest.SqliteMigration.Migrations
                         {
                             Id = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
                             Adress = "Bunia",
-                            CreatedAt = new DateTime(2022, 3, 13, 8, 26, 21, 316, DateTimeKind.Utc).AddTicks(5114),
+                            CreatedAt = new DateTime(2022, 3, 22, 20, 46, 26, 829, DateTimeKind.Utc).AddTicks(9426),
                             FCToDollarRate = 2000m,
                             Name = "Ets TUUNGANE",
-                            UpdatedAt = new DateTime(2022, 3, 13, 8, 26, 21, 316, DateTimeKind.Utc).AddTicks(5107)
+                            UpdatedAt = new DateTime(2022, 3, 22, 20, 46, 26, 829, DateTimeKind.Utc).AddTicks(9423)
                         });
                 });
 
@@ -399,13 +399,13 @@ namespace Gest.SqliteMigration.Migrations
                         new
                         {
                             Id = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
-                            CreatedAt = new DateTime(2022, 3, 13, 8, 26, 21, 316, DateTimeKind.Utc).AddTicks(5092),
+                            CreatedAt = new DateTime(2022, 3, 22, 20, 46, 26, 829, DateTimeKind.Utc).AddTicks(9407),
                             Email = "admin@swala.com",
                             FirstName = "Admin",
                             LastName = "Swala",
-                            PasswordHash = "AeCBjHabRWTA11fgDc1onZRA6X2KOeXg+bGCMYTmGKbSav7Fa0GUWTeCzR+fcgmrg6Z2JsnVwLWpXIlHsbkPMD5NQAW3kwFgAxXcqhT0qjhe9cpbvzJ0UTyf7sbva/hPWf2AnhH48U/aNcl/TI3CdWHsMwC9mr4x1JNQGN0wzeftZsleaS0FGFNg/L8pf6S88oFDQhwPkQ/oEz70xG5ZJnRshftsGaGMbFb7+kEFx4dZJZW6gBP5ax1s5AVE+Lg1PcNQ9/FJDeKP1/diOeXu+mYn+ylJF75eVtGdFzpRLoAe7//udtA9cdGIiP6eeIXkRrANXfoxCyd3LlG7z+7iVQ==",
-                            PasswordSalt = "w4VA6eatiXF21vAY3VuNscKEaipb8E0bFFsTn7K7u4IcYOH3zd8TxNlC4ru3WDMjJPCs0eSZKwuQEWv1GP71kg==",
-                            UpdatedAt = new DateTime(2022, 3, 13, 8, 26, 21, 316, DateTimeKind.Utc).AddTicks(5069)
+                            PasswordHash = "uC8W7OCxJbCrEwQpbYFe8C2WtfxY7Zx4MdFqlK2AQwMwuC0NvxuN2pFHl37tAFNJFoJkKo71vX60Y3JHejVrnNLiYGJDkx4rYHkogRgpu2zZ/uRH7WVTKqojF8Kc5c6qPzdgQTN33wgdN4MkO4lzGrkZXr51yIFqhdMkulmtz45x13CeLYd79Pd7E7TOP9aIyv9ykFT7U7RPBWUkpsNs4PMwaOjJupGkVErk9FYv+0x842cO83ju/1nnTzVDfUHFUDBa7gN6q0HnHM9B8Pjn2ESNpl3NtH80WLb24vnPa1PDA+QSU+HLkqcoxnU+EBMh9ZhBCrHSrcWHW0C8qu8UXw==",
+                            PasswordSalt = "z/GVSh2V+S6QswNz3wdWYTEBO9bplYQse3kqmYlExVQ3B2yioAtR8ULhcZyoq+qggfgY1/Vp9R+w9XF5Ik1phg==",
+                            UpdatedAt = new DateTime(2022, 3, 22, 20, 46, 26, 829, DateTimeKind.Utc).AddTicks(9382)
                         });
                 });
 
@@ -438,7 +438,7 @@ namespace Gest.SqliteMigration.Migrations
                         {
                             UserId = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            Joined = new DateTime(2022, 3, 13, 8, 26, 21, 316, DateTimeKind.Utc).AddTicks(5097),
+                            Joined = new DateTime(2022, 3, 22, 20, 46, 26, 829, DateTimeKind.Utc).AddTicks(9412),
                             Role = "Propriétaire",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -692,9 +692,6 @@ namespace Gest.SqliteMigration.Migrations
 
                     b.OwnsMany("Gest.Core.Entities.SaleItem", "Items", b1 =>
                         {
-                            b1.Property<Guid>("SaleId")
-                                .HasColumnType("TEXT");
-
                             b1.Property<int>("Id")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("INTEGER");
@@ -711,12 +708,17 @@ namespace Gest.SqliteMigration.Migrations
                             b1.Property<double>("QtyInUnitOfMeasure")
                                 .HasColumnType("REAL");
 
+                            b1.Property<Guid>("SaleId")
+                                .HasColumnType("TEXT");
+
                             b1.Property<decimal>("UnitPricePerUnitOfMeasure")
                                 .HasColumnType("TEXT");
 
-                            b1.HasKey("SaleId", "Id");
+                            b1.HasKey("Id");
 
                             b1.HasIndex("ArticleId");
+
+                            b1.HasIndex("SaleId");
 
                             b1.ToTable("SaleItem");
 

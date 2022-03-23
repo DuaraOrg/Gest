@@ -5,22 +5,22 @@
     </div>
      <div class="pt-1" >
        <h2 class="text-sm text-gray-600">Paiement</h2>
-       <RadzenDropDown @bind-Value=@_selectedPaymentState TValue=string Data=@PaymentStatus.AllWithTous()/>
+       <RadzenDropDown @bind-Value=@_selectedPaymentState Change=@(args => PaymentStateChanged.InvokeAsync(args.ToString())) TValue=string Data=@PaymentStatus.AllWithTous()/>
     </div>
       <div>
        <h2 class="text-sm text-gray-600">Livraison</h2>
-       <RadzenDropDown @bind-Value=@_selectedDeliveryState TValue=string Data=@DeliveryStatus.AllWithTous()/>
+       <RadzenDropDown @bind-Value=@_selectedDeliveryState Change=@(args => DeliveryStateChanged.InvokeAsync(args.ToString())) TValue=string Data=@DeliveryStatus.AllWithTous()/>
     </div>
      <div>
        <h2 class="text-sm text-gray-600">Période</h2>
-       <RadzenDropDown @bind-Value=@_selectedPeriod  Data=@Period.AllWithTous()/>
+       <RadzenDropDown @bind-Value=@_selectedPeriod Change=@(e => PeriodChanged.InvokeAsync(e.ToString())) Data=@Period.AllWithTous()/>
     </div>
     <div class="flex items-center space-x-4">
     @if(_selectedPeriod == Period.Date || _selectedPeriod == Period.IntervalDate)
     {
        <div>
         <h2 class="text-sm text-gray-600">@(_selectedPeriod == Period.Date ? "Date" : "Date de début")</h2>
-        <RadzenDatePicker class="w-[7rem]" @bind-Value=@_startDate DateFormat="d"/>
+        <RadzenDatePicker class="w-[7rem]" @bind-Value=@_startDate Change=@OnDateChanged DateFormat="d"/>
        </div>
     }
     @if(_selectedPeriod == Period.IntervalDate)
@@ -28,7 +28,7 @@
       <h2 class="text-gray-600">-</h2>
       <div>
        <h2 class="text-sm text-gray-600">Date de fin</h2>
-       <RadzenDatePicker class="w-[7rem]" @bind-Value=@_endDate DateFormat="d"/>
+       <RadzenDatePicker class="w-[7rem]" @bind-Value=@_endDate Change=@OnDateChanged DateFormat="d"/>
     </div>
     }
     </div>
@@ -40,7 +40,7 @@
 </div>
 
 @code {
-     [Parameter]
+    [Parameter]
     public EventCallback<string> OnSearchQuery { get; set; }
 
     [Parameter]
@@ -49,6 +49,18 @@
     [Parameter]
     public EventCallback NewItem { get; set; } 
 
+    [Parameter]
+    public EventCallback<string> DeliveryStateChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<string> PaymentStateChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<string> PeriodChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<(DateTime startDate,DateTime endDate)> DateChanged { get; set; }
+
     string? _searchQuery;
     string _selectedPeriod = Period.Tous;
     string _selectedDeliveryState = DeliveryStatus.Tous;
@@ -56,6 +68,11 @@
 
     DateTime _startDate = DateTime.UtcNow.ToLocalTime();
     DateTime _endDate = DateTime.UtcNow.ToLocalTime();
+
+    void OnDateChanged()
+    {
+        DateChanged.InvokeAsync((_startDate, _endDate));
+    }
 
     [Inject] TooltipService TooltipService { get; set; } = null!;
     void ShowTooltip(ElementReference elementReference, string message, TooltipOptions options = null!)

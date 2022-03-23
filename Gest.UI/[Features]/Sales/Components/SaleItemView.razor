@@ -108,14 +108,16 @@
 
     async Task Save()
     {
-        _isNewDeliveryBusy = true;
-        if(_qtyInUnitOfMeasure <= 0 || _qtyInUnitOfMeasure > _qtyNewTotalUnitOfMeasure)
+        try
         {
-            _qtyInUnitOfMeasure = _qtyNewTotalUnitOfMeasure;
-            _isNewDeliveryBusy = false;
-            return;
-        }
-        var stockMovement = new StockMouvement()
+            _isNewDeliveryBusy = true;
+            if(_qtyInUnitOfMeasure <= 0 || _qtyInUnitOfMeasure > _qtyNewTotalUnitOfMeasure)
+            {
+                _qtyInUnitOfMeasure = _qtyNewTotalUnitOfMeasure;
+                _isNewDeliveryBusy = false;
+                return;
+            }
+            var stockMovement = new StockMouvement()
          {
               ArticleId = Item.Article!.Id,
               Date = DateTime.UtcNow,
@@ -128,22 +130,31 @@
               NewBuyingPrice = Item.Article.Price.BuyingPricePerUnitOfMeasure,
               PrevBuyingPrice = Item.Article.Price.BuyingPricePerUnitOfMeasure
           };
-        var article = DbContext.Articles.First(x => x.Id == Item.ArticleId);
-        article.Stock.Qty = stockMovement.NewStock;
-        await DbContext.StockMouvements.AddAsync(stockMovement);
-        DbContext.Update(article);
-        var sale = DbContext.Sales.Single(x => x.Id == Sale.Id);
-        var saleItem = sale.Items.Single(x => x.ArticleId == Item.ArticleId);
-        sale.Items.Remove(saleItem);
-        saleItem.QtyDelivered = Item.QtyDelivered;
-        sale.Items.Add(saleItem);
-        sale.DeliverStatus = sale.Items.Any(x => x.QtyDelivered != x.QtyInUnitOfMeasure)
-                            ? DeliveryStatus.InDelivery : DeliveryStatus.Delivered;
-        DbContext.Update(sale);
-        await DbContext.SaveChangesAsync();
-        _isNewDeliveryBusy = false;
-        _canAdjustDelivery = false;
-        StateHasChanged();
+            var article = DbContext.Articles.First(x => x.Id == Item.ArticleId);
+            article.Stock.Qty = stockMovement.NewStock;
+            await DbContext.StockMouvements.AddAsync(stockMovement);
+            DbContext.Update(article);
+            var sale = DbContext.Sales.Include(x => x.Items).Single(x => x.Id == Sale.Id);
+            var saleItem = sale.Items.Single(x => x.ArticleId == Item.ArticleId);
+            sale.Items.Remove(saleItem);
+            saleItem.QtyDelivered = Item.QtyDelivered;
+            sale.Items.Add(saleItem);
+            sale.DeliverStatus = sale.Items.Any(x => x.QtyDelivered != x.QtyInUnitOfMeasure)
+                                ? DeliveryStatus.InDelivery : DeliveryStatus.Delivered;
+            DbContext.Update(sale);
+            await DbContext.SaveChangesAsync();
+            _isNewDeliveryBusy = false;
+            _canAdjustDelivery = false;
+            StateHasChanged();
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            _isNewDeliveryBusy = false;
+        }
     }
 
     void Cancel()

@@ -1,0 +1,119 @@
+﻿<div>
+    <EditForm class="space-y-2" Model=@Model OnValidSubmit=@OnSave>
+       <DataAnnotationsValidator/>
+       <ValidationSummary/>
+       <div class="grid md:grid-cols-2 gap-2">
+           <RadzenTextBox class="w-full" @bind-Value=@Model.FirstName Placeholder="Prénom"/>
+           <RadzenTextBox class="w-full" @bind-Value=@Model.LastName Placeholder="Postnom"/>
+       </div>
+       <span class="grid md:grid-cols-1"/>@*For tailwind css*@
+       <div class="grid md:@(Model.Type == "Autres" ? "grid-cols-2" : "grid-cols-1") gap-2">
+           <RadzenDropDown class="w-full" Data=@_types @bind-Value=@Model.Type  Placeholder="Catégorie" />
+            @if(Model.Type == "Autres")
+            {
+                 <RadzenTextBox class="w-full" @bind-Value=@Model.Type  Placeholder="Catégorie"/>
+            }
+       </div>
+       <div class="grid md:grid-cols-2 gap-2">
+           <RadzenTextBox class="w-full" @bind-Value=@Model.Email Placeholder="Email"/>
+           <RadzenTextBox class="w-full" @bind-Value=@Model.Phone Placeholder="No. Téléphone"/>
+       </div>
+        <div class="py-2">
+            <RadzenButton class="m-1 px-2" type="submit" IsBusy=@_isBusy Icon="save" Text="Enregistrer" ButtonStyle="ButtonStyle.Secondary" />
+            @if (_isNew)
+            {
+                 <RadzenButton class="m-1 px-2" Click=@(_ => Cancel(false)) Icon="close" Text="Annuler" ButtonStyle="ButtonStyle.Light" />
+            }
+            else
+            {
+                 <RadzenButton class="m-1 px-2" Click=@ConfirmDelete Icon="delete" Text="Supprimer" ButtonStyle="ButtonStyle.Danger" />
+            }
+        </div>
+   </EditForm>
+</div>
+@code {
+    bool _isBusy = false;
+    bool _isNew = true;
+    IEnumerable<string?> _types = new List<string?>();
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
+
+    [Parameter] public ClientModel Model { get; set; } = new ClientModel();
+
+    protected override void OnParametersSet()
+    {
+        _isNew = Model.Id is null;
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var types = await DbContext.Clients.Select(x => x.Type)
+                    .Distinct().ToListAsync();
+            if (!types.Any(x => x == "Autres"))
+                types.Add("Autres");
+            _types = types;
+            await InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    async Task OnSave()
+    {
+        _isBusy = true;
+        var item = Model.Adapt<Client>();
+        var result = await Policy.Handle<Exception>()
+                .RetryAsync(3, (ex, attempt) => DbContext.ChangeTracker.Clear())
+                .ExecuteAsync(() => Save(item));
+        if(result > 0)
+            Cancel(true);
+        _isBusy = false;
+    }
+
+    async Task<int> Save(Client item)
+    {
+        if (_isNew)
+        {
+            var walletId = await CreateWallet();
+            item.CompanyId = CurrentItems.Company!.Id;
+            item.CreatedAt = DateTime.UtcNow;
+            item.WalletId = walletId;
+            await DbContext.Clients.AddAsync(item);
+        }
+        else
+        {
+            item.UpdatedAt = DateTime.UtcNow;
+            DbContext.Update(item);
+        }
+        var result = await DbContext.SaveChangesAsync();
+        return result;
+    }
+
+    void Cancel(bool canRefresh = false) => DialogService.Close(canRefresh);
+    async Task<Guid> CreateWallet()
+    {
+        var wallet = new Wallet() { CreatedAt = DateTime.UtcNow };
+        var addWallet = await DbContext.AddAsync(wallet);
+        await DbContext.SaveChangesAsync();
+        return addWallet.Entity.Id;
+    }
+    async Task Delete()
+    {
+        if (_isNew)
+            return;
+        _isBusy = true;
+        var item = DbContext.Clients.First(x => x.Id == Model.Id);
+        DbContext.Clients.Remove(item);
+        await DbContext.SaveChangesAsync();
+        Cancel(true);
+        _isBusy = false;
+    }
+    async Task ConfirmDelete()
+    {
+        var result = await DialogService
+        .Confirm("Etes-vous sûre?", $"Supprimer {Model.Names}", new ConfirmOptions() { OkButtonText = "Oui", CancelButtonText = "Non" });
+        if (result.Value == true)
+            await Delete();
+    }
+}
