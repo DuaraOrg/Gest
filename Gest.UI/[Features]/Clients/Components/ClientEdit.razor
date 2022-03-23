@@ -50,13 +50,20 @@
     {
         if (firstRender)
         {
-            var types = await DbContext.Clients.Select(x => x.Type)
+           await Policy.Handle<InvalidOperationException>()
+             .WaitAndRetryAsync(5, attempt => TimeSpan.FromMilliseconds(100 * attempt))
+             .ExecuteAsync(LoadCategories);
+            await InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    async Task LoadCategories()
+    {
+          var types = await DbContext.Clients.Select(x => x.Type)
                     .Distinct().ToListAsync();
             if (!types.Any(x => x == "Autres"))
                 types.Add("Autres");
             _types = types;
-            await InvokeAsync(() => StateHasChanged());
-        }
     }
 
     async Task OnSave()

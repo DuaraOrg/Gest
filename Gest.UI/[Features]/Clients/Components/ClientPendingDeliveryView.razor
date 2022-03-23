@@ -1,0 +1,57 @@
+﻿@using Gest.UI._Features_.Sales.Components
+<RadzenDataList class=" -mx-5 -px-4 -py-4 -space-y-5" Count=@_count Data=@_items TItem=@Sale LoadData=@LoadData AllowPaging=true>
+     <Template Context="model">
+         <div class="space-y-1.5">
+             <h2>Vente No #@model.SaleId</h2>
+             @foreach(var item in model.Items.Where(x => x.Article is not null))
+            {
+                <SaleItemView ShowAvatar=false Sale=@model Item=@item/>
+            }
+         </div>
+     </Template>
+</RadzenDataList>
+@code {
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
+    int _count;
+    int _skip = 0;
+    int _take = 5;
+    bool _isBusy = true;
+    IEnumerable<Sale> _items = new List<Sale>();
+
+    [EditorRequired]
+    [Parameter]
+    public Client Model { get; set; } = null!;
+
+     protected override async Task OnParametersSetAsync()
+    {
+        await InitialLoad();
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    async Task InitialLoad()
+    {
+        _skip = 0;
+        _take = 5;
+        await LoadData(new LoadDataArgs() { Skip = _skip, Top = _take });
+    }
+    async Task LoadData(LoadDataArgs args)
+    {
+        _isBusy = true;
+        var query = DbContext.Sales
+                   .Include(x => x.Client)
+                  .Include(x => x.Items).ThenInclude(x => x.Article)
+                  .Where(x => x.DeliverStatus == DeliveryStatus.Pending || x.DeliverStatus == DeliveryStatus.InDelivery)
+                  .Where(x => x.ClientId == Model.Id)
+                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
+                  .AsNoTracking();
+        _items = await query
+                   .OrderByDescending(x => x.UpdatedAt)
+                  .Paginate(args.Skip,args.Top).ToListAsync();
+        _count = await query
+                .CountAsync();
+        _isBusy = false;
+    }
+
+    
+}

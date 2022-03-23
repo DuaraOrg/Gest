@@ -30,7 +30,7 @@
     {
         var contact = string.IsNullOrEmpty(Model!.Phone) ? Model.Email : Model.Phone;
         if (Overflow)
-            return contact;
+            return contact ?? string.Empty;
         return contact?.Length > 21 ? $"{contact?.Substring(0, 21)}" : contact ?? string.Empty;
     }
 }

@@ -30,6 +30,7 @@
 @code {
     [Inject] public GestDbContext DbContext { get; set; } = null!;
     [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
     [Parameter] public EventCallback<Article> OnSelect { get; set; }
     [Parameter] public bool IsBusy { get; set; } = false;
 
@@ -74,11 +75,13 @@
         {
             _items = await DbContext.Articles
                   .AsNoTracking()
+                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
                   .Where(x => x.Name.Contains(_searchQuery))
                   .OrderByDescending(x => x.CreatedAt)
                   .Paginate(args.Skip,args.Top).ToListAsync();
             _count = await DbContext.Articles
                .AsNoTracking()
+                 .Where(x => x.CompanyId == CurrentItems.Company.Id)
              .Where(x => x.Name.Contains(_searchQuery))
              .CountAsync();
         }
@@ -86,9 +89,11 @@
         {
             _items = await DbContext.Articles
                    .AsNoTracking()
+                   .Where(x => x.CompanyId == CurrentItems.Company.Id)
                    .OrderByDescending(x => x.CreatedAt)
                   .Paginate(args.Skip,args.Top).ToListAsync();
             _count = await DbContext.Articles
+                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
                 .CountAsync();
         }
         IsBusy = false;

@@ -1,0 +1,148 @@
+﻿<div class="space-y-1">
+    <ToolBar NewItem=@(_ => EditItem()) OnRefresh=@(_ => InitialLoad()) OnStateSelected=@(e => OnStateFilter(e)) OnSearchQuery=@(e => OnSearch(e)) OnCategorySelected=@(e => OnCategorySelect(e)) />
+    @if (_isBusy)
+    {
+        <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+    }
+    <div class="grid md:grid-cols-5 gap-2">
+        <RadzenDataList class="col-span-2 -space-y-5" Count=@_count Data=@_items TItem=@Client LoadData=@LoadData AllowPaging=true>
+            <Template Context="item">
+                <ClientCard  Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item)/>
+            </Template>
+        </RadzenDataList>
+        @if(_selectedItem is not null)
+        {
+             <div class="hidden md:block col-span-3 ">
+                <ClientView  Model=@_selectedItem/>
+             </div>
+        }
+    </div>
+</div>
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+
+@code {
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
+    bool _isSmall = false;
+    bool _isBusy = false;
+    string _searchQuery = string.Empty;
+    string _selectedFilterState = ClientState.Tous;
+    string _selectedCategorie = "Tous";
+    Client? _selectedItem;
+    int _count;
+    int _skip = 0;
+    int _take = 10;
+    IEnumerable<Client> _items = new List<Client>();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Policy.Handle<InvalidOperationException>()
+             .WaitAndRetryAsync(5, attempt => TimeSpan.FromMilliseconds(200 * attempt))
+             .ExecuteAsync(InitialLoad);
+            await InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    async Task InitialLoad()
+    {
+        _skip = 0;
+        _take = 10;
+        await LoadData(new LoadDataArgs() { Skip = _skip, Top = _take });
+        _selectedItem = _items.FirstOrDefault();
+    }
+
+    async Task OnSearch(string value)
+    {
+        _searchQuery = value;
+        await InitialLoad();
+    }
+
+    async Task OnStateFilter(string value)
+    {
+        _selectedFilterState = value;
+        await InitialLoad();
+    }
+
+    async Task OnCategorySelect(string value)
+    {
+        _selectedCategorie = value;
+        await InitialLoad();
+    }
+
+    async Task OnSelectItem(Client value)
+    {
+        _selectedItem = value;
+        if (_isSmall)
+        {
+            await ViewDetails(value);
+        }
+    }
+
+    async Task LoadData(LoadDataArgs args)
+    {
+        if (_isBusy)
+            return;
+        _isBusy = true;
+        var query = DbContext.Clients
+            .Include(x => x.Wallet)
+            .Where(x => x.CompanyId == CurrentItems.Company.Id)
+            .Where(x => _selectedCategorie == "Tous" || x.Type == _selectedCategorie)
+            .AsNoTracking();
+        var queryWithStateFilter = _selectedFilterState switch
+        {
+            ClientState.Tous => query,
+            ClientState.InDebt => DbContext.Clients.Include(x => x.Wallet).Where(x => x.Wallet!.Credit.Amount > 0),
+            ClientState.WithDeliveryPending => DbContext.Clients.Include(x => x.Sales).Where(x => x.Sales.Any(x => x.DeliverStatus == DeliveryStatus.Pending || x.DeliverStatus == DeliveryStatus.InDelivery)),
+            _ => query
+        };
+        if (!string.IsNullOrEmpty(_searchQuery))
+        {
+            _items = await queryWithStateFilter
+                 .Where(x => x.Names.Contains(_searchQuery))
+                 .OrderByDescending(x => x.CreatedAt)
+                 .Paginate(args.Skip,args.Top).ToListAsync();
+                _count = await queryWithStateFilter
+                 .Where(x => x.Names.Contains(_searchQuery))
+                  .OrderByDescending(x => x.CreatedAt)
+                 .CountAsync();
+        }
+        else
+        {
+            _items = await queryWithStateFilter
+                 .OrderByDescending(x => x.CreatedAt)
+                 .Paginate(args.Skip,args.Top).ToListAsync();
+                _count = await queryWithStateFilter
+                  .OrderByDescending(x => x.CreatedAt)
+                 .CountAsync();
+        }
+        _isBusy = false;
+    }
+
+    async Task EditItem(Client? item = null)
+    {
+
+        var itemModel = item?.Adapt<ClientModel>() ?? new ClientModel();
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", itemModel } };
+        var title = item is null ? "Ajouter un client" : $"Client {itemModel.Names}";
+        var result = await DialogService.OpenAsync<ClientEdit>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+    async Task ViewDetails(Client item)
+    {
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", item } };
+        var title = $"{item!.Names}";
+        var result = await DialogService.OpenAsync<ClientView>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+
+    [Inject] TooltipService TooltipService { get; set; } = null!;
+    void ShowTooltip(ElementReference elementReference, string message, TooltipOptions options = null!)
+      => TooltipService.Open(elementReference, message, options);
+}

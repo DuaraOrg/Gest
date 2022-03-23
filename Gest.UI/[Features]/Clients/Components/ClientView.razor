@@ -1,0 +1,31 @@
+﻿<RadzenTabs class="w-full">
+    <Tabs>
+        <RadzenTabsItem Text="Détails">
+            <ClientDetailsView OnModifyClick=@(_ => EditItem(Model)) Model=@Model/>
+        </RadzenTabsItem>
+        <RadzenTabsItem Text="Achats">
+            <ClientSalesView Model=@Model/>
+        </RadzenTabsItem>
+        <RadzenTabsItem Text="Livraison en attente">
+            <ClientPendingDeliveryView Model=@Model/>
+        </RadzenTabsItem>
+    </Tabs>
+</RadzenTabs>
+@code {
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [EditorRequired]
+    [Parameter] 
+    public Client Model { get; set; } = null!;
+
+    async Task EditItem(Client item)
+    {
+        var itemModel = item?.Adapt<ClientModel>() ?? new ClientModel();
+        itemModel.FirstName = item!.Names.Split(' ').First();
+        itemModel.LastName = item.Names.Split(' ').Last();
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", itemModel } };
+        var title = item is null ? "Ajouter un client" : $"{itemModel.Names}";
+        await DialogService.OpenAsync<ClientEdit>(title, param);
+    }
+
+}

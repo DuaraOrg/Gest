@@ -167,7 +167,8 @@
             ClientId = Client.Id,
             CompanyId = CurrentItems.Company.Id,
             BranchId = CurrentItems.Branch.Id,
-            CreatedAt = DateTime.UtcNow,
+            CreatedAt = CurrentItems.DateOfOperations,
+            UpdatedAt = DateTime.UtcNow,
             DeliverStatus = _notDelivered ? DeliveryStatus.Pending : DeliveryStatus.Delivered,
             PayStatus = _totalPaid >= _total ? PaymentStatus.Paid : _totalPaid > 0 ? PaymentStatus.InPayement : PaymentStatus.InPayement,
             SellerId = CurrentItems.User.Id,
@@ -248,8 +249,8 @@
                     TransType = TransactionType.SalePayment
                 };
             await DbContext.AddAsync(walletMouvement);
-            wallet.Credit.Amount += _restInUSD;
-            wallet.UpdatedAt = DateTime.UtcNow;
+            clientWallet.Credit.Amount += _restInUSD;
+            clientWallet.UpdatedAt = DateTime.UtcNow;
             DbContext.Update(wallet);
         }
 

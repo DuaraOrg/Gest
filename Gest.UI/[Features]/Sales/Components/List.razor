@@ -24,6 +24,7 @@
 @code{
     [Inject] public DialogService DialogService { get; set; } = null!;
     [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
     bool _isSmall = false;
     bool _isBusy = true;
     string _searchQuery = string.Empty;
@@ -103,6 +104,7 @@
                   .Include(x => x.Items).ThenInclude(x => x.Article)
                   .Where(x => _selectedPaymentState == PaymentStatus.Tous || x.PayStatus == _selectedPaymentState)
                   .Where(x => _selectedDeliveryState == DeliveryStatus.Tous || x.DeliverStatus == _selectedDeliveryState)
+                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
                   .AsNoTracking();
         var queryWithPeriodFilter = _selectedPeriod switch
         {

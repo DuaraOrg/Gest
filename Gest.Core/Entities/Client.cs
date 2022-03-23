@@ -2,6 +2,15 @@
 
 namespace Gest.Core.Entities
 {
+    public class ClientState
+    {
+        public const string Tous = "Tous";
+        public const string InDebt = "En dette";
+        public const string WithDeliveryPending = "En attente de livraison";
+        public static IEnumerable<string> AllWithTous() => new List<string>() { Tous,InDebt,WithDeliveryPending };
+
+        public static IEnumerable<string> All() => new List<string>() { InDebt,WithDeliveryPending };
+    }
     public class Client:BaseEntity
     {
         public string Names { get; set; } = null!;

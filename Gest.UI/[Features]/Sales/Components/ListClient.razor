@@ -28,6 +28,7 @@
 @code {
     [Inject] public GestDbContext DbContext { get; set; } = null!;
     [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
     [Parameter] public EventCallback<Client> OnSelect { get; set; } 
 
     bool _isBusy = false;
@@ -67,11 +68,13 @@
         {
             _items = await DbContext.Clients
                   .AsNoTracking()
+                    .Where(x => x.CompanyId == CurrentItems.Company.Id)
                   .Where(x => x.Names.Contains(_searchQuery))
                   .OrderByDescending(x => x.CreatedAt)
                   .Paginate(args.Skip,args.Top).ToListAsync();
             _count = await DbContext.Clients
                .AsNoTracking()
+              .Where(x => x.CompanyId == CurrentItems.Company.Id)
              .Where(x => x.Names.Contains(_searchQuery))
              .CountAsync();
         }
@@ -79,9 +82,11 @@
         {
             _items = await DbContext.Clients
                    .AsNoTracking()
+                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
                    .OrderByDescending(x => x.CreatedAt)
                   .Paginate(args.Skip,args.Top).ToListAsync();
             _count = await DbContext.Clients
+                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
                 .CountAsync();
         }
         _isBusy = false;

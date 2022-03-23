@@ -1,4 +1,5 @@
 ﻿using Gest.Core.Entities;
+using Gest.UI._Features_.Clients.Components;
 using Gest.UI._Features_.Stock.Components;
 using Mapster;
 using MapsterMapper;

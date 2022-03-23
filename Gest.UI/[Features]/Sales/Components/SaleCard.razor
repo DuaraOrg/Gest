@@ -1,4 +1,6 @@
-﻿<div @onclick=@(_ => Click.InvokeAsync()) class="grid grid-cols-12 gap-2 items-center -m-4 p-2 hover:cursor-pointer hover:bg-gray-100 @(IsSelected ? "border border-gray-600" : "")">
+﻿@if(Model.Items.Count > 0)
+{
+    <div @onclick=@(_ => Click.InvokeAsync()) class="grid grid-cols-12 gap-2 items-center -m-4 p-2 hover:cursor-pointer hover:bg-gray-100 @(IsSelected ? "border border-gray-600" : "")">
     <div class="col-span-1 bg-gray-600 flex items-center justify-center p-4 rounded-full w-10 h-10">
         <h2 class="text-gray-50 font-semibold">@Model.Client!.Names.ToAvatar()</h2>
     </div>
@@ -24,6 +26,7 @@
         </div>
     </div>
 </div>
+}
 
 @code {
     [EditorRequired]

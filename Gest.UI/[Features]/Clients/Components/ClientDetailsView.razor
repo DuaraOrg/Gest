@@ -1,0 +1,50 @@
+﻿<div class="space-y-2 py-2 bg-gray-100 @(_isSmall ? "-px-2" : "px-2 pb-4")">
+    @if(Model.Wallet is not null)
+    {
+            <div class="px-2 flex space-x-4 py-2 bg-gray-50 shadow">
+        <div>
+            <p class="font-light">Balance</p>
+            <p class="text-lg font-semibold">@Model.Wallet!.Cash.Amount $</p>
+        </div>
+         <div>
+            <p class="font-light">Dette</p>
+            <p class="text-lg font-semibold">@Model.Wallet!.Credit.Amount $</p>
+        </div>
+    </div>
+    }
+    <div class="shadow bg-gray-50">
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Noms du client</h2>
+        <h2 class="text-gray-800 font-medium">@Model.Names</h2>
+    </div>
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Catégorie</h2>
+        <h2 class="text-gray-800 font-medium">@Model.Type</h2>
+    </div>
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Numéro de téléphone </h2>
+        <h2 class="text-gray-800 font-medium">@Model.Phone</h2>
+    </div>
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Email</h2>
+        <h2 class="text-gray-800 font-medium rounded">@Model.Email</h2>
+    </div>
+  </div>
+  <div class="pt-4 space-y-1 px-2">
+    <p class="text-gray-600">Actions</p>
+    <div>
+        <button @onclick=@(_ => OnModifyClick.InvokeAsync()) class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow">Modifier</button>
+    </div>
+</div>
+</div>
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+@code {
+    bool _isSmall = false;
+
+    [EditorRequired]
+    [Parameter]
+    public Client Model { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback OnModifyClick { get; set; }
+}

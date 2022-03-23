@@ -1,10 +1,13 @@
 ﻿<div>
     <div class="shadow bg-gray-50 flex justify-between items-center px-2 py-1 space-x-1">
-    <div class="bg-gray-600 flex items-center justify-center p-4 rounded-full w-12 h-12">
-           <h2 class="text-gray-50 font-semibold">@Item.Article!.Name.ToAvatar()</h2>
-     </div>
+        @if (ShowAvatar)
+        {
+            <div class="bg-gray-600 flex items-center justify-center p-4 rounded-full w-12 h-12">
+                <h2 class="text-gray-50 font-semibold">@Item.Article!.Name.ToAvatar()</h2>
+            </div>
+        }
      <div class="space-y-1">
-          <h2 class="font-medium text-sm">@Item.Article.Name</h2>
+          <h2 class="font-medium text-sm">@Item.Article!.Name</h2>
           <p class="text-sm text-gray-500">@Item.UnitPricePerUnitOfMeasure.ToString("#.##") $ par @Item.Article.UnitOfMeasure</p>
           <p class="text-sm font-medium">Total: @Item.SubTotal.ToString("#.##") $</p>
     </div>
@@ -68,6 +71,7 @@
 @code {
     [Parameter] public SaleItem Item { get; set; } = null!;
     [Parameter] public Sale Sale { get; set; } = null!;
+     [Parameter] public bool ShowAvatar { get; set; } = true;
     [Inject] public GestDbContext DbContext { get; set; } = null!;
     double _qtyPerConidtionnement = 0;
     bool _canAdjustDelivery = false;
