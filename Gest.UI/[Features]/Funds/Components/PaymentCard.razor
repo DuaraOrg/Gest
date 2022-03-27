@@ -1,0 +1,39 @@
+﻿<div @onclick=@(_ => Click.InvokeAsync()) class="grid @(ShowAvatar ? "grid-cols-12" : "grid-cols-11") gap-2 items-center -m-4 p-2 hover:cursor-pointer hover:bg-gray-100 @(IsSelected ? "border border-gray-600" : "")">
+        @if (ShowAvatar)
+        {
+            <div class="col-span-2 bg-gray-600 flex items-center justify-center p-4 rounded-full w-10 h-10">
+                <h2 class="text-gray-50 font-semibold">@(Model.Client is not null ? Model.Client.Names.ToAvatar() : Model.ClientNames?.ToAvatar())</h2>
+            </div>
+        }
+    <div class="col-span-6 ml-3">
+        @if(Model.TransType == TransactionType.Expense)
+        {
+            <p class="text-sm font-medium">@Model.Title</p>
+        }
+        else
+        {
+             <p class="text-sm font-medium">Paiement No #@Model.PayementId</p>
+        }
+        <p class="text-sm text-gray-600">@(Model.Client?.Names ?? Model.ClientNames)</p>
+        <p class="text-sm text-gray-500">@(Model.Description?.Length > 15 ? Model.Description.Substring(0,15) : Model.Description)...</p>
+    </div>
+    <div class="col-span-4">
+        <p class="text-sm">Montant: <span class="text-sm font-medium">@Model.Amount.ToString("#.##")$</span></p>
+        <p class="text-sm text-gray-600">@Model.CreatedAt.ToLocalTime()</p>
+    </div>
+</div>
+
+@code {
+    [EditorRequired]
+    [Parameter]
+    public Payment Model { get; set; } = null!;
+
+    [Parameter]
+    public bool IsSelected { get; set; }
+
+    [Parameter]
+    public bool ShowAvatar { get; set; } = true;
+
+    [Parameter]
+    public EventCallback Click { get; set; }
+}

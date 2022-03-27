@@ -100,10 +100,10 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             Id = new Guid("453412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 22, 21, 9, 37, 828, DateTimeKind.Utc).AddTicks(2804),
+                            CreatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2701),
                             FCToDollarRate = 2000m,
                             Name = "Default",
-                            UpdatedAt = new DateTime(2022, 3, 22, 21, 9, 37, 828, DateTimeKind.Utc).AddTicks(2800)
+                            UpdatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2694)
                         });
                 });
 
@@ -151,10 +151,10 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             Id = new Guid("654412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 22, 21, 9, 37, 828, DateTimeKind.Utc).AddTicks(2811),
+                            CreatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2711),
                             Email = "clientanonyme@swala.com",
                             Names = "Client Anonyme",
-                            UpdatedAt = new DateTime(2022, 3, 22, 21, 9, 37, 828, DateTimeKind.Utc).AddTicks(2807)
+                            UpdatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2705)
                         });
                 });
 
@@ -194,10 +194,10 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             Id = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
                             Adress = "Bunia",
-                            CreatedAt = new DateTime(2022, 3, 22, 21, 9, 37, 828, DateTimeKind.Utc).AddTicks(2798),
+                            CreatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2690),
                             FCToDollarRate = 2000m,
                             Name = "Ets TUUNGANE",
-                            UpdatedAt = new DateTime(2022, 3, 22, 21, 9, 37, 828, DateTimeKind.Utc).AddTicks(2792)
+                            UpdatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2687)
                         });
                 });
 
@@ -214,8 +214,14 @@ namespace Gest.SqlServerMigration.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("ClientId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ClientNames")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier");
@@ -223,11 +229,17 @@ namespace Gest.SqlServerMigration.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PayementId")
                         .HasColumnType("int");
 
                     b.Property<Guid?>("SaleId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TransType")
                         .IsRequired()
@@ -404,13 +416,13 @@ namespace Gest.SqlServerMigration.Migrations
                         new
                         {
                             Id = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
-                            CreatedAt = new DateTime(2022, 3, 22, 21, 9, 37, 828, DateTimeKind.Utc).AddTicks(2771),
+                            CreatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2659),
                             Email = "admin@swala.com",
                             FirstName = "Admin",
                             LastName = "Swala",
-                            PasswordHash = "5+/0MoJ1mup9FR+xhIPpCX7Y6oLHGLbfUQuYoiGtf6I4ti4ti77ldZXyS6VbgRAPNgDh9HscXGx/vsHFGC1m3R5MNtydhVbQfWPn4/VE1KdpyFNbHJSVYnlcGbfOCnjGNtnm0Dv0wnO/D1Jng5/qQqe0GLrXuwJOUZbWIX1BOnk+GOuzHpsQvR0phpXijIKVC3BhIRCMq9l4hYAw8AWJwzw5iPOP0BRBhbHybTflLc0/X0DN+/SUANDtasjbTExbTIj6xoB8rVmEtAbZ3hlHRjwuXg5ubMTWyIKa+oRAxB51B4yzOWsoNKnZhdysfMDgVXnFgWjxT/rv1iR0AhNfFw==",
-                            PasswordSalt = "u9w/IBLCwNweSFLxltYPjBj8hRZ77DshLwKttpixHgqgVtDao24XTroPYuNp8uG+qKnjVitAIJgNpR/BfouP4w==",
-                            UpdatedAt = new DateTime(2022, 3, 22, 21, 9, 37, 828, DateTimeKind.Utc).AddTicks(2747)
+                            PasswordHash = "dzghSLPKG3GTVdAAO7ooJAN5ym3UDXXyWbDhFjS5O/GPzJFe0bCL6ALdGW1Quqw7LcM04Uz54+/b4FWYfW/KIcjUgBE4ywWyH6qIGhylwTTwQMcT4rlUz2gYQ8UzbpMoxdgEHV9qT0rM5qat/CvwTYDdHoLnGJejp8rZr6x/wfqq8xdhAI1MUihxonU+5BV/JKBISf6t3GiXMiaHmxriOui2n1+8g2A2OoAi8PkXmvRc071h1eAuk/y6LPtzpG5N2HDe2XiPmagkJ0chXMkNWGLKRE1Rk530f+J8En+XMyaqLb8xaeYqzHprcqGQI46C4hBf81cPdDjzg5vzvld23w==",
+                            PasswordSalt = "0O7nEzCAAegTYiOT0eK/8NT6mdzZEC5nDqakkYRpiwIo9FWQ63lQXqpY6a44PEtbmMwXLsG/+fbuIYwPcSx9Hw==",
+                            UpdatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2624)
                         });
                 });
 
@@ -443,7 +455,7 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             UserId = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            Joined = new DateTime(2022, 3, 22, 21, 9, 37, 828, DateTimeKind.Utc).AddTicks(2779),
+                            Joined = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2670),
                             Role = "Propriétaire",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -845,6 +857,25 @@ namespace Gest.SqlServerMigration.Migrations
                                 .HasForeignKey("WalletId");
                         });
 
+                    b.OwnsOne("Gest.Core.Entities.Expense", "Expense", b1 =>
+                        {
+                            b1.Property<Guid>("WalletId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("decimal(18,2)");
+
+                            b1.Property<DateTime>("LastUpdated")
+                                .HasColumnType("datetime2");
+
+                            b1.HasKey("WalletId");
+
+                            b1.ToTable("Wallets");
+
+                            b1.WithOwner()
+                                .HasForeignKey("WalletId");
+                        });
+
                     b.Navigation("Bank")
                         .IsRequired();
 
@@ -852,6 +883,9 @@ namespace Gest.SqlServerMigration.Migrations
                         .IsRequired();
 
                     b.Navigation("Credit")
+                        .IsRequired();
+
+                    b.Navigation("Expense")
                         .IsRequired();
                 });
 

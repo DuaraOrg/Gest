@@ -27,6 +27,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Gest/Gest.UI/Pages/Funds.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRnVuZHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Gest/Gest.UI/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -101,6 +105,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Projects/Gest/Gest.UI/\[Features\]/Clients/Components/ToolBar.razor]
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxDbGllbnRzXENvbXBvbmVudHNcVG9vbEJhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Funds/Components/List.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxGdW5kc1xDb21wb25lbnRzXExpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Funds/Components/PaymentCard.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxGdW5kc1xDb21wb25lbnRzXFBheW1lbnRDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Funds/Components/PaymentEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxGdW5kc1xDb21wb25lbnRzXFBheW1lbnRFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Funds/Components/PaymentView.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxGdW5kc1xDb21wb25lbnRzXFBheW1lbnRWaWV3LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Funds/Components/ToolBar.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxGdW5kc1xDb21wb25lbnRzXFRvb2xCYXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/Cart.razor]

@@ -11,7 +11,7 @@
        <h2 class="text-sm text-gray-600">Livraison</h2>
        <RadzenDropDown @bind-Value=@_selectedDeliveryState Change=@(args => DeliveryStateChanged.InvokeAsync(args.ToString())) TValue=string Data=@DeliveryStatus.AllWithTous()/>
     </div>
-     <div>
+    <div>
        <h2 class="text-sm text-gray-600">Période</h2>
        <RadzenDropDown @bind-Value=@_selectedPeriod Change=@(e => PeriodChanged.InvokeAsync(e.ToString())) Data=@Period.AllWithTous()/>
     </div>

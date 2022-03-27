@@ -7,5 +7,6 @@
         public const string Stock = "/stock";
         public const string Clients = "/clients";
         public const string Report = "/reports";
+        public const string Funds = "/caisse";
     }
 }

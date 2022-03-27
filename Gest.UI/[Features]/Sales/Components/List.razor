@@ -109,7 +109,7 @@
         var queryWithPeriodFilter = _selectedPeriod switch
         {
             Period.Tous => query,
-            Period.Today => query.Where(x => x.CreatedAt == DateTime.Today),
+            Period.Today => query.Where(x => x.CreatedAt.Date == DateTime.Today),
             Period.ThisWeek => query.Where(x => x.CreatedAt <= DateTime.Today && x.CreatedAt >= DateTime.Today.AddDays(-7)),
             Period.Yesterday => query.Where(x => x.CreatedAt.Date == DateTime.Today.AddDays(-1)),
             Period.ThisMonth => query.Where(x => x.CreatedAt <= DateTime.Today && x.CreatedAt >= DateTime.Today.AddDays(-30)),

@@ -1,0 +1,189 @@
+﻿<div class="space-y-1">
+        <ToolBar NewItem=@(_ => EditItem()) OnRefresh=@(_ => InitialLoad()) PeriodChanged=@(e => OnPeriodChanged(e))
+        OnTransTypeSelected=@(e => OnTransTypeSelected(e)) DateChanged=@(e => OnDateChanged(e.startDate,e.endDate)) 
+        OnSearchQuery=@(e => OnSearch(e)) OnCategorySelected=@(e => OnCategorySelect(e)) />
+    @if (_isBusy)
+    {
+        <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+    }
+    <div class="grid md:grid-cols-5 gap-2">
+        <RadzenDataList class="col-span-2 -space-y-5" Count=@_count Data=@_items TItem=@Payment LoadData=@LoadData AllowPaging=true>
+            <Template Context="item">
+                <PaymentCard  Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item)/>
+            </Template>
+        </RadzenDataList>
+        @if(_selectedItem is not null)
+        {
+             <div class="hidden md:block col-span-3 ">
+                @if(_companyWallet is not null)
+                {
+                    <PaymentView  Model=@_selectedItem CompanyWallet=@_companyWallet/>
+                }
+             </div>
+        }
+    </div>
+</div>
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+
+@code {
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
+    bool _isSmall = false;
+    bool _isBusy = false;
+    string _searchQuery = string.Empty;
+    string _selectedCategorie = "Tous";
+    string _selectedTransactionType = TransactionType.Tous;
+    string _selectedPeriod = Period.Tous;
+    DateTime _startDate = DateTime.UtcNow.ToLocalTime();
+    DateTime _endDate = DateTime.UtcNow.ToLocalTime();
+    Payment? _selectedItem;
+    Wallet? _companyWallet;
+    int _count;
+    int _skip = 0;
+    int _take = 10;
+    IEnumerable<Payment> _items = new List<Payment>();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Policy.Handle<InvalidOperationException>()
+             .WaitAndRetryAsync(5, attempt => TimeSpan.FromMilliseconds(200 * attempt),(ex,t) => _isBusy = false)
+             .ExecuteAsync(InitialLoad);
+            await InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    async Task InitialLoad()
+    {
+        _skip = 0;
+        _take = 10;
+        await LoadData(new LoadDataArgs() { Skip = _skip, Top = _take });
+        _selectedItem = _items.FirstOrDefault();
+       _companyWallet = DbContext.Wallets.Single(x => x.Id == CurrentItems.Company.WalletId);
+    }
+    async Task OnPeriodChanged(string period)
+    {
+        _selectedPeriod = period;
+        await InitialLoad();
+    }
+
+    async Task OnDateChanged(DateTime start, DateTime end)
+    {
+        _startDate = start;
+        _endDate = end;
+        await InitialLoad();
+    }
+
+    async Task OnSearch(string value)
+    {
+        _searchQuery = value;
+        await InitialLoad();
+    }
+
+    async Task OnTransTypeSelected(string value)
+    {
+        _selectedTransactionType = value;
+        await InitialLoad();
+    }
+
+    async Task OnCategorySelect(string value)
+    {
+        _selectedCategorie = value;
+        await InitialLoad();
+    }
+
+    async Task OnSelectItem(Payment value)
+    {
+        _selectedItem = value;
+        if (_isSmall)
+        {
+            await ViewDetails(value);
+        }
+    }
+
+    async Task LoadData(LoadDataArgs args)
+    {
+        try
+        {
+            if (_isBusy)
+                return;
+            _isBusy = true;
+            var query = DbContext.Payments
+                .Include(x => x.Client)
+                .Include(x => x.User)
+                .Where(x => x.CompanyId == CurrentItems.Company.Id)
+                .Where(x => _selectedCategorie == "Tous" || x.Category == _selectedCategorie)
+                .Where(x => _selectedTransactionType == TransactionType.Tous || x.TransType == _selectedTransactionType)
+                .AsNoTracking();
+            var queryWithPeriodFilter = _selectedPeriod switch
+            {
+                Period.Tous => query,
+                Period.Today => query.Where(x => x.CreatedAt.Date == DateTime.Today),
+                Period.ThisWeek => query.Where(x => x.CreatedAt <= DateTime.Today && x.CreatedAt >= DateTime.Today.AddDays(-7)),
+                Period.Yesterday => query.Where(x => x.CreatedAt.Date == DateTime.Today.AddDays(-1)),
+                Period.ThisMonth => query.Where(x => x.CreatedAt <= DateTime.Today && x.CreatedAt >= DateTime.Today.AddDays(-30)),
+                Period.Date => query.Where(x => x.CreatedAt.Date == _startDate.Date),
+                Period.IntervalDate => query.Where(x => x.CreatedAt >= _startDate && x.CreatedAt <= _endDate),
+                _ => query
+            };
+            if (!string.IsNullOrEmpty(_searchQuery))
+            {
+                _items = await queryWithPeriodFilter
+                     .Where(x => x.Client!.Names.Contains(_searchQuery))
+                     .Where(x => (x.TransType == TransactionType.Expense && x.ClientNames!.Contains(_searchQuery)) || x.TransType != TransactionType.Expense)
+                     .OrderByDescending(x => x.CreatedAt)
+                     .Paginate(args.Skip,args.Top).ToListAsync();
+
+                _count = await queryWithPeriodFilter
+                     .Where(x => x.Client!.Names.Contains(_searchQuery))
+                     .Where(x => (x.TransType == TransactionType.Expense && x.ClientNames!.Contains(_searchQuery)) || x.TransType != TransactionType.Expense)
+                      .OrderByDescending(x => x.CreatedAt)
+                     .CountAsync();
+            }
+            else
+            {
+                _items = await queryWithPeriodFilter
+                     .OrderByDescending(x => x.CreatedAt)
+                     .Paginate(args.Skip,args.Top).ToListAsync();
+                _count = await queryWithPeriodFilter
+                     .OrderByDescending(x => x.CreatedAt)
+                     .CountAsync();
+            }
+            _isBusy = false;
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+    async Task EditItem(Payment? item = null)
+    {
+        var itemModel = item?.Adapt<PaymentModel>() ?? new PaymentModel();
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", itemModel } };
+        var title = item is null ? "Ajouter une dépense" : $"Dépense {itemModel.ClientNames}";
+        var result = await DialogService.OpenAsync<PaymentEdit>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+    async Task ViewDetails(Payment item)
+    {
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", item }, {"CompanyWallet", _companyWallet }};
+    var title = $"{item!.Title}";
+        var result = await DialogService.OpenAsync<PaymentView>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+
+    [Inject] TooltipService TooltipService { get; set; } = null!;
+    void ShowTooltip(ElementReference elementReference, string message, TooltipOptions options = null!)
+      => TooltipService.Open(elementReference, message, options);
+}

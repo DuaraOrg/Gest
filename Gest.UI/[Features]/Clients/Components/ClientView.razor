@@ -6,16 +6,18 @@
         <RadzenTabsItem Text="Achats">
             <ClientSalesView Model=@Model/>
         </RadzenTabsItem>
-        <RadzenTabsItem Text="Livraison en attente">
+        <RadzenTabsItem Text="@(_isSmall ? "Livraison" : "Livraison en attente")">
             <ClientPendingDeliveryView Model=@Model/>
         </RadzenTabsItem>
     </Tabs>
 </RadzenTabs>
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
 @code {
     [Inject] public DialogService DialogService { get; set; } = null!;
     [EditorRequired]
     [Parameter] 
     public Client Model { get; set; } = null!;
+    bool _isSmall = false;
 
     async Task EditItem(Client item)
     {

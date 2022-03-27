@@ -192,10 +192,7 @@
         }
         if(_totalPaid > 0)
         {
-            var lastPaymentId = DbContext.Payments
-            .Where(x => x.CompanyId == CurrentItems.Company.Id)
-            .OrderBy(x => x.CreatedAt)
-            .LastOrDefault()?.PayementId ?? 0;
+            var lastPaymentId = DbContext.GetLastPaymentId(CurrentItems.Company.Id);
             var payment = new Payment()
             {
                 PayementId = lastPaymentId + 1,
@@ -263,10 +260,7 @@
     {
         _isBusy = true;
         var sale = DbContext.Sales.Single(x => x.Id == Sale!.Id);
-        var lastPaymentId = DbContext.Payments
-            .Where(x => x.CompanyId == CurrentItems.Company.Id)
-            .OrderBy(x => x.CreatedAt)
-            .LastOrDefault()?.PayementId ?? 0;
+        var lastPaymentId = DbContext.GetLastPaymentId(CurrentItems.Company.Id);
         var payment = new Payment()
             {
                 PayementId = lastPaymentId + 1,

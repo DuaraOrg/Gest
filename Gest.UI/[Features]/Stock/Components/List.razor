@@ -1,5 +1,6 @@
 ﻿<div class="space-y-1">
-    <ToolBar NewItem=@(_ => EditItem()) OnRefresh=@(_ => InitialLoad()) OnStateSelected=@(e => OnStateFilter(e)) OnSearchQuery=@(e => OnSearch(e)) />
+    <ToolBar NewItem=@(_ => EditItem()) OnRefresh=@(_ => InitialLoad()) OnCategorySelected=@(e => OnSelectCategorie(e))
+        OnStateSelected=@(e => OnStateFilter(e)) OnSearchQuery=@(e => OnSearch(e)) />
     @if (_isBusy)
     {
         <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
@@ -28,6 +29,7 @@
     bool _isBusy = false;
     string _searchQuery = string.Empty;
     string _selectedFilterState = StockFilter.Tous;
+    string _selectedCategorie = "Tous";
     Article? _selectedItem;
     int _count;
     int _skip = 0;
@@ -65,6 +67,12 @@
         await InitialLoad();
     }
 
+    async Task OnSelectCategorie(string value)
+    {
+        _selectedCategorie = value;
+        await InitialLoad();
+    }
+
     async Task OnSelectItem(Article value)
     {
         _selectedItem = value;
@@ -79,103 +87,34 @@
         if (_isBusy)
             return;
         _isBusy = true;
+        var query = DbContext.Articles
+                 .Where(x => _selectedCategorie == "Tous" || x.Category == _selectedCategorie)
+                 .Where(x => x.CompanyId == CurrentItems.Company.Id)
+                 .AsNoTracking();
+        var queryWithFilterState = _selectedFilterState switch
+        {
+            StockFilter.OutOfStock => query.Where(x => x.Stock.Qty <= x.Stock.Minimum),
+            StockFilter.InExcess => query.Where(x => x.Stock.Qty >= x.Stock.Maximum),
+            _ => query
+        };
+
         if (!string.IsNullOrEmpty(_searchQuery))
         {
-            if(_selectedFilterState == StockFilter.Tous)
-            {
-                _items = await DbContext.Articles
-                 .AsNoTracking()
+             _items = await queryWithFilterState
                  .Where(x => x.Name.Contains(_searchQuery))
-                 .Where(x => x.CompanyId == CurrentItems.Company.Id)
                  .OrderByDescending(x => x.CreatedAt)
                  .Paginate(args.Skip,args.Top).ToListAsync();
-                _count = await DbContext.Articles
-                  .AsNoTracking()
+              _count = await queryWithFilterState
                  .Where(x => x.Name.Contains(_searchQuery))
-                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                  .OrderByDescending(x => x.CreatedAt)
                  .CountAsync();
-            }
-            if(_selectedFilterState == StockFilter.OutOfStock)
-            {
-                _items = await DbContext.Articles
-                  .AsNoTracking()
-                 .Where(x => x.Name.Contains(_searchQuery))
-                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                 .Where(x => x.Stock.Qty <= x.Stock.Minimum)
-                  .OrderByDescending(x => x.CreatedAt)
-                 .Paginate(args.Skip,args.Top).ToListAsync();
-                _count = await DbContext.Articles
-                  .AsNoTracking()
-                 .Where(x => x.Name.Contains(_searchQuery))
-                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                 .Where(x => x.Stock.Qty <= x.Stock.Minimum)
-                  .OrderByDescending(x => x.CreatedAt)
-                 .CountAsync();
-            }
-
-            if(_selectedFilterState == StockFilter.InExcess)
-            {
-                _items = await DbContext.Articles
-                  .AsNoTracking()
-                 .Where(x => x.Name.Contains(_searchQuery))
-                 .Where(x => x.Stock.Qty >= x.Stock.Maximum)
-                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                  .OrderByDescending(x => x.CreatedAt)
-                 .Paginate(args.Skip,args.Top).ToListAsync();
-                _count = await DbContext.Articles
-                   .AsNoTracking()
-                 .Where(x => x.Name.Contains(_searchQuery))
-                 .Where(x => x.Stock.Qty >= x.Stock.Maximum)
-                  .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                  .OrderByDescending(x => x.CreatedAt)
-                 .CountAsync();
-            }
         }
         else
         {
-            if(_selectedFilterState == StockFilter.Tous)
-            {
-                _items = await DbContext.Articles
-                     .AsNoTracking()
-                    .OrderByDescending(x => x.CreatedAt)
-                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                    .Paginate(args.Skip,args.Top).ToListAsync();
-                _count = await DbContext.Articles
-                    .OrderByDescending(x => x.CreatedAt)
-                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                    .CountAsync();
-            }
-
-            if(_selectedFilterState == StockFilter.OutOfStock)
-            {
-                _items = await DbContext.Articles
-                     .AsNoTracking()
-                    .Where(x => x.Stock.Qty <= x.Stock.Minimum)
-                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                     .OrderByDescending(x => x.CreatedAt)
-                    .Paginate(args.Skip,args.Top).ToListAsync();
-                _count = await DbContext.Articles
-                    .Where(x => x.Stock.Qty <= x.Stock.Minimum)
-                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                     .OrderByDescending(x => x.CreatedAt)
-                    .CountAsync();
-            }
-
-            if(_selectedFilterState == StockFilter.InExcess)
-            {
-                _items = await DbContext.Articles
-                     .AsNoTracking()
-                    .Where(x => x.Stock.Qty >= x.Stock.Maximum) 
-                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                     .OrderByDescending(x => x.CreatedAt)
-                    .Paginate(args.Skip,args.Top).ToListAsync();
-                _count = await DbContext.Articles
-                    .Where(x => x.Stock.Qty >= x.Stock.Maximum)
-                     .Where(x => x.CompanyId == CurrentItems.Company.Id)
-                    .OrderByDescending(x => x.CreatedAt)
-                    .CountAsync();
-            }
+            _items = await queryWithFilterState
+                 .OrderByDescending(x => x.CreatedAt)
+                 .Paginate(args.Skip,args.Top).ToListAsync();
+              _count = await queryWithFilterState
+                 .CountAsync();
         }
         _isBusy = false;
     }

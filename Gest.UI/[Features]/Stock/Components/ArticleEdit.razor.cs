@@ -38,6 +38,7 @@ namespace Gest.UI._Features_.Stock.Components
         [Range(double.Epsilon, double.MaxValue)]
         public double? ConditionnementQtyPerUnitOfMeasure { get; set; }
 
+        [Required(ErrorMessage = "Veuillez spécifier une catégorie")]
         public string? Category { get; set; }
 
         [Required(ErrorMessage = "Veuillez spécifier un prix d'achat par unité de mesure")]

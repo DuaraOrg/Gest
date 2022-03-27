@@ -53,6 +53,8 @@ namespace Gest.Core.Data
                .OwnsOne(x => x.Credit);
             modelBuilder.Entity<Wallet>()
               .OwnsOne(x => x.Bank);
+            modelBuilder.Entity<Wallet>()
+              .OwnsOne(x => x.Expense);
 
             var (hash, salt) = "Admin@243".HashPassword();
             var user = new User()

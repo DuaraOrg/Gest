@@ -10,7 +10,9 @@ namespace Gest.Core.Entities
 
         public const string Bank = nameof(Bank);
 
-        public static IEnumerable<string> All() => new List<string>() { Cash, Credit };
+        public const string Expense = nameof(Expense);
+
+        public static IEnumerable<string> All() => new List<string>() { Cash, Credit,Bank,Expense };
     }
 
     public class TransactionType
@@ -22,12 +24,19 @@ namespace Gest.Core.Entities
         public const string Withdraw = "Retrait";
 
         public const string Transfer = "Transfert";
+
+        public const string Expense = "Dépense";
+
+        public const string Tous = "Tous";
+
+        public static IEnumerable<string> All() => new List<string>() { Expense, Deposit,SalePayment, Withdraw, Transfer };
+        public static IEnumerable<string> AllWithTous() => new List<string>() { Tous,Expense, Deposit, SalePayment, Withdraw, Transfer };
     }
     public class AccountType 
     {
         public decimal Amount { get; set; } = 0;
 
-        public DateTime LastUpdated { get; set; }
+        public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
     }
     public class Cash:AccountType
     {
@@ -35,6 +44,11 @@ namespace Gest.Core.Entities
     }
 
     public class Credit : AccountType
+    {
+
+    }
+
+    public class Expense : AccountType
     {
 
     }
@@ -52,6 +66,8 @@ namespace Gest.Core.Entities
         public Cash Cash { get; set; } = new Cash();
         public Credit Credit { get; set; } = new Credit();
         public Bank Bank { get; set; } = new Bank();
+
+        public Expense Expense { get; set; } = new Expense();
         
         public ICollection<WalletMovement> WalletHistory { get; set; } = new Collection<WalletMovement>();
     }

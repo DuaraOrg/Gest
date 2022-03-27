@@ -134,7 +134,7 @@
             var itemsWithPeriod = _selectedPeriod switch
             {
                 Period.Today => itemsStockMvmts.Where(x => x.Date.Date == DateTime.UtcNow.Date),
-                Period.ThisWeek => itemsStockMvmts.Where(x => x.Date.Month == DateTime.UtcNow.Month),
+                Period.ThisWeek => itemsStockMvmts.Where(x => x.Date <= DateTime.Today && x.Date >= DateTime.Today.AddDays(-7)),
                 Period.ThisMonth => itemsStockMvmts.Where(x => x.Date.Month == DateTime.UtcNow.Month),
                 Period.Date => itemsStockMvmts.Where(x => x.Date.Date == _startDate.Date),
                 Period.IntervalDate => itemsStockMvmts.Where(x => x.Date >= _startDate && x.Date <= _endDate),

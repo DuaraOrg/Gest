@@ -1,0 +1,158 @@
+﻿@using Gest.UI._Features_.Clients.Components
+<div>
+    <EditForm class="space-y-2" Model=@Model OnValidSubmit=@OnSave>
+       <DataAnnotationsValidator/>
+       <ValidationSummary/>
+       <span class="grid md:grid-cols-3"/>@*For tailwind css*@
+       <div class="grid md:@(Model.Category == "Autres" ? "grid-cols-3" : "grid-cols-2") gap-2">
+           <RadzenTextBox class="w-full" @bind-Value=@Model.Title Placeholder="Libellé"/>
+           <RadzenDropDown class="w-full" Data=@_categories @bind-Value=@Model.Category  Placeholder="Catégorie" />
+            @if(Model.Category == "Autres")
+            {
+                 <RadzenTextBox class="w-full" @bind-Value=@Model.Category  Placeholder="Catégorie"/>
+            }
+       </div>
+        <div class="grid md:grid-cols-2 gap-2">
+             <RadzenTextBox class="w-full" @bind-Value=@Model.ClientNames Placeholder="Noms de la personne"/>
+              <div class="flex items-center space-x-2">
+                <RadzenNumeric class="w-full" Min="0" @bind-Value=@Model.Amount   Placeholder="Montant en $"/>
+                <p>USD</p>
+              </div>
+       </div>
+       <div>
+           <RadzenTextArea class="w-full" Placeholder="Description" @bind-Value=@Model.Description/>
+       </div>
+        <div class="py-2">
+            <RadzenButton class="m-1 px-2" type="submit" IsBusy=@_isBusy Icon="save" Text="Enregistrer" ButtonStyle="ButtonStyle.Secondary" />
+            @if (_isNew)
+            {
+                 <RadzenButton class="m-1 px-2" Click=@(_ => Cancel(false)) Icon="close" Text="Annuler" ButtonStyle="ButtonStyle.Light" />
+            }
+            else
+            {
+                 <RadzenButton class="m-1 px-2" Click=@ConfirmDelete Icon="delete" Text="Supprimer" ButtonStyle="ButtonStyle.Danger" />
+            }
+        </div>
+   </EditForm>
+</div>
+@code {
+    bool _isBusy = false;
+    bool _isNew = true;
+    IEnumerable<string?> _categories = new List<string?>();
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
+
+    [Parameter] public PaymentModel Model { get; set; } = new PaymentModel();
+
+    protected override void OnParametersSet()
+    {
+        _isNew = Model.Id is null;
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Policy.Handle<InvalidOperationException>()
+              .WaitAndRetryAsync(5, attempt => TimeSpan.FromMilliseconds(100 * attempt),(ex,t) => _isBusy = false)
+              .ExecuteAsync(LoadCategories);
+            await InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    async Task LoadCategories()
+    {
+        var categories = await DbContext.Payments.Select(x => x.Category)
+                  .Distinct().ToListAsync();
+        if (!categories.Any(x => x == "Autres"))
+            categories.Add("Autres");
+        _categories = categories;
+    }
+
+    async Task OnSave()
+    {
+        _isBusy = true;
+        var item = Model.Adapt<Payment>();
+        var result = await Policy.Handle<Exception>()
+                .RetryAsync(3, (ex, attempt) => DbContext.ChangeTracker.Clear())
+                .ExecuteAsync(() => Save(item));
+        if(result > 0)
+            Cancel(true);
+        _isBusy = false;
+    }
+
+    async Task<int> Save(Payment item)
+    {
+        var wallet = DbContext.Wallets.SingleOrDefault(x => x.Id == CurrentItems.Company.WalletId);
+        wallet ??= await CreateWallet();
+        if (_isNew)
+        {
+            item.AccountType = TypeOfAccount.Cash;
+            item.TransType = TransactionType.Expense;
+            item.CompanyId = CurrentItems.Company!.Id;
+            item.CreatedAt = CurrentItems.DateOfOperations;
+            item.UpdatedAt = DateTime.UtcNow;
+            item.PayementId = DbContext.GetLastPaymentId(CurrentItems.Company.Id) + 1;
+            item.UserId = CurrentItems.User.Id;
+            await DbContext.Payments.AddAsync(item);
+
+            var walletMouvement = new WalletMovement()
+                {
+                    FromAccountType = TypeOfAccount.Cash,
+                    FromWalletId = CurrentItems.Company.WalletId,
+                    ToAccountType = TypeOfAccount.Expense,
+                    Amount = item.Amount,
+                    ToWalletId = CurrentItems.Company.WalletId ?? Guid.Empty,
+                    Date = DateTime.UtcNow,
+                    TransType = TransactionType.Expense
+                };
+            await DbContext.AddAsync(walletMouvement);
+            wallet.Cash.Amount -= item.Amount;
+            wallet.Expense.Amount += item.Amount;
+            wallet.UpdatedAt = DateTime.UtcNow;
+            DbContext.Update(wallet);
+        }
+        else
+        {
+            item.UserId = CurrentItems.User.Id;
+            item.UpdatedAt = DateTime.UtcNow;
+            DbContext.Update(item);
+        }
+        var result = await DbContext.SaveChangesAsync();
+        return result;
+    }
+
+    void Cancel(bool canRefresh = false) => DialogService.Close(canRefresh);
+    async Task<Wallet> CreateWallet()
+    {
+        var newWallet = new Wallet(){ CreatedAt = DateTime.UtcNow };
+        var addWallet = await DbContext.AddAsync(newWallet);
+        CurrentItems.Company.WalletId = addWallet.Entity.Id;
+        var company = DbContext.Companies.First(x => x.Id == CurrentItems.Company.Id);
+        company.WalletId = addWallet.Entity.Id;
+        DbContext.Update(company);
+        await DbContext.SaveChangesAsync();
+        return addWallet.Entity;
+    }
+
+    async Task Delete()
+    {
+        if (_isNew)
+            return;
+        _isBusy = true;
+        var item = DbContext.Clients.First(x => x.Id == Model.Id);
+        DbContext.Clients.Remove(item);
+        await DbContext.SaveChangesAsync();
+        Cancel(true);
+        _isBusy = false;
+    }
+
+    async Task ConfirmDelete()
+    {
+        var result = await DialogService
+        .Confirm("Etes-vous sûre?", $"Supprimer {Model.ClientNames}", new ConfirmOptions() { OkButtonText = "Oui", CancelButtonText = "Non" });
+        if (result.Value == true)
+            await Delete();
+    }
+}

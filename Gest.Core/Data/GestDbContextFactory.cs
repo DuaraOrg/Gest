@@ -9,7 +9,7 @@ namespace Gest.Core.Data
         public GestDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<GestDbContext>();
-            var provider = "Sqlit";
+            var provider = "Sqlite";
             if(provider == "Sqlite")
             {
                 optionsBuilder.UseSqlite("Data Source=app.db", b => b.MigrationsAssembly("Gest.SqliteMigration"));
