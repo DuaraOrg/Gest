@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Projects\Gest\Gest.Win\obj\Debug\net6.0-windows\
+D:\Projects\Gest\new\Gest\Gest.Win\obj\Debug\net6.0-windows\
 Gest.Win
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\Projects\Gest\Gest.Win\App.xaml
+D:\Projects\Gest\new\Gest\Gest.Win\App.xaml
 11407045341
 42122295
 3-1233169557
-253418030187
+253-694591119
 MainWindow.xaml;
 
 False

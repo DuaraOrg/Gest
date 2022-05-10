@@ -12,3 +12,17 @@ D:\Projects\Gest\Gest.Core\obj\Debug\net6.0\refint\Gest.Core.dll
 D:\Projects\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.pdb
 D:\Projects\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.genruntimeconfig.cache
 D:\Projects\Gest\Gest.Core\obj\Debug\net6.0\ref\Gest.Core.dll
+D:\Projects\Gest\new\Gest\Gest.Core\bin\Debug\net6.0\Gest.Core.deps.json
+D:\Projects\Gest\new\Gest\Gest.Core\bin\Debug\net6.0\Gest.Core.runtimeconfig.json
+D:\Projects\Gest\new\Gest\Gest.Core\bin\Debug\net6.0\Gest.Core.dll
+D:\Projects\Gest\new\Gest\Gest.Core\bin\Debug\net6.0\Gest.Core.pdb
+D:\Projects\Gest\new\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.csproj.AssemblyReference.cache
+D:\Projects\Gest\new\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Gest\new\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.AssemblyInfoInputs.cache
+D:\Projects\Gest\new\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.AssemblyInfo.cs
+D:\Projects\Gest\new\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.csproj.CoreCompileInputs.cache
+D:\Projects\Gest\new\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.dll
+D:\Projects\Gest\new\Gest\Gest.Core\obj\Debug\net6.0\refint\Gest.Core.dll
+D:\Projects\Gest\new\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.pdb
+D:\Projects\Gest\new\Gest\Gest.Core\obj\Debug\net6.0\Gest.Core.genruntimeconfig.cache
+D:\Projects\Gest\new\Gest\Gest.Core\obj\Debug\net6.0\ref\Gest.Core.dll

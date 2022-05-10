@@ -26,12 +26,20 @@
         <h2 class="text-gray-800 font-medium">@Model.Category</h2>
     </div>
     <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Montant</h2>
+        <h2 class="text-gray-800 font-medium">@Model.Amount.ToString("#.##")$</h2>
+    </div>
+    <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
         <h2 class="font-light text-gray-600">Paiement en</h2>
         <h2 class="text-gray-800 font-medium">@Model.AccountType</h2>
     </div>
     <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
         <h2 class="font-light text-gray-600">Type de transaction</h2>
         <h2 class="text-gray-800 font-medium rounded">@Model.TransType</h2>
+    </div>
+     <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
+        <h2 class="font-light text-gray-600">Description</h2>
+        <h2 class="text-gray-800 font-medium rounded max-w-md">@(Model.TransType == TransactionType.SalePayment && Model.Sale is not null ? $"Vente No #{Model.Sale.SaleId}" : Model.Description)</h2>
     </div>
     <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
         <h2 class="font-light text-gray-600">Date</h2>

@@ -204,7 +204,8 @@
                 CompanyId = CurrentItems.Company.Id,
                 TransType = TransactionType.SalePayment,
                 UserId = CurrentItems.User.Id,
-                UpdatedAt = DateTime.UtcNow
+                UpdatedAt = DateTime.UtcNow,
+                Category = "Vente"
             };
             await DbContext.AddAsync(payment);
             var walletMouvement = new WalletMovement()
@@ -272,7 +273,8 @@
                 CompanyId = CurrentItems.Company.Id,
                 TransType = TransactionType.SalePayment,
                 UserId = CurrentItems.User.Id,
-                UpdatedAt = DateTime.UtcNow
+                UpdatedAt = DateTime.UtcNow,
+                Category = "Vente"
             };
         await DbContext.AddAsync(payment);
         var wallet = DbContext.Wallets.Single(x => x.Id == CurrentItems.Company.WalletId);

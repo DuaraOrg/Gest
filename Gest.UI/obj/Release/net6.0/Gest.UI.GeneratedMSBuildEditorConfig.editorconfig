@@ -119,6 +119,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxGdW5kc1xDb21wb25lbnRzXFBheW1lbnRFZGl0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Gest/Gest.UI/\[Features\]/Funds/Components/PaymentView.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxGdW5kc1xDb21wb25lbnRzXFBheW1lbnRWaWV3LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Gest/Gest.UI/\[Features\]/Funds/Components/ToolBar.razor]
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxGdW5kc1xDb21wb25lbnRzXFRvb2xCYXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

@@ -3,7 +3,7 @@
 @inject CurrentItems _currentItems;
 @if(_currentItems.Company is not null)
 {
-    <div>
+    <div data-theme="cupcake">
         <div id="mainAdminBody" style="min-height: 100vh" class="sticky no-scrollbar @(_navState.IsSideNavOpen ? _isOpenTransition : _isClosedTransition)  bg-gray-100  overflow-x-hidden overflow-y-hidden"> @Body</div>
         <SideNav IsOpen=@_navState.IsSideNavOpen Company=@_currentItems.Company CurrentUrl=@_navState.CurrentUrl />
     </div>

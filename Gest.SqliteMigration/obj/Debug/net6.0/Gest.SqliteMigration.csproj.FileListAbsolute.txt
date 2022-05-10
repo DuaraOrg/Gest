@@ -14,3 +14,16 @@ D:\Projects\Gest\Gest.Core\bin\Debug\net6.0\Gest.SqliteMigration.deps.json
 D:\Projects\Gest\Gest.Core\bin\Debug\net6.0\Gest.SqliteMigration.dll
 D:\Projects\Gest\Gest.Core\bin\Debug\net6.0\Gest.SqliteMigration.pdb
 D:\Projects\Gest\Gest.SqliteMigration\obj\Debug\net6.0\Gest.SqliteMigration.csproj.CopyComplete
+D:\Projects\Gest\new\Gest\Gest.Core\bin\Debug\net6.0\Gest.SqliteMigration.deps.json
+D:\Projects\Gest\new\Gest\Gest.Core\bin\Debug\net6.0\Gest.SqliteMigration.dll
+D:\Projects\Gest\new\Gest\Gest.Core\bin\Debug\net6.0\Gest.SqliteMigration.pdb
+D:\Projects\Gest\new\Gest\Gest.SqliteMigration\obj\Debug\net6.0\Gest.SqliteMigration.csproj.AssemblyReference.cache
+D:\Projects\Gest\new\Gest\Gest.SqliteMigration\obj\Debug\net6.0\Gest.SqliteMigration.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Gest\new\Gest\Gest.SqliteMigration\obj\Debug\net6.0\Gest.SqliteMigration.AssemblyInfoInputs.cache
+D:\Projects\Gest\new\Gest\Gest.SqliteMigration\obj\Debug\net6.0\Gest.SqliteMigration.AssemblyInfo.cs
+D:\Projects\Gest\new\Gest\Gest.SqliteMigration\obj\Debug\net6.0\Gest.SqliteMigration.csproj.CoreCompileInputs.cache
+D:\Projects\Gest\new\Gest\Gest.SqliteMigration\obj\Debug\net6.0\Gest.SqliteMigration.csproj.CopyComplete
+D:\Projects\Gest\new\Gest\Gest.SqliteMigration\obj\Debug\net6.0\Gest.SqliteMigration.dll
+D:\Projects\Gest\new\Gest\Gest.SqliteMigration\obj\Debug\net6.0\refint\Gest.SqliteMigration.dll
+D:\Projects\Gest\new\Gest\Gest.SqliteMigration\obj\Debug\net6.0\Gest.SqliteMigration.pdb
+D:\Projects\Gest\new\Gest\Gest.SqliteMigration\obj\Debug\net6.0\ref\Gest.SqliteMigration.dll

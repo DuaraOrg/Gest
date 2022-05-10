@@ -113,6 +113,7 @@
             var query = DbContext.Payments
                 .Include(x => x.Client)
                 .Include(x => x.User)
+                .Include(x => x.Sale)
                 .Where(x => x.CompanyId == CurrentItems.Company.Id)
                 .Where(x => _selectedCategorie == "Tous" || x.Category == _selectedCategorie)
                 .Where(x => _selectedTransactionType == TransactionType.Tous || x.TransType == _selectedTransactionType)
