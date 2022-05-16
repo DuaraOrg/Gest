@@ -1,11 +1,11 @@
 ﻿@using Gest.UI._Features_.Clients.Components
-<div class="space-y-2 bg-gray-100 @(_isSmall ? "" : "px-2 pb-4")">
+<div class="space-y-2 bg-gray-100 -m-4 p-2 @(_isSmall ? "" : "px-2 pb-4")">
     <div class="px-2 space-y-1">
-        <p class="-ml-4 text-sm">Client</p>
+        <p class=" text-sm">Client</p>
          <ClientCard Model=@Model.Client IsSelected/>
     </div>
     <div class="space-y-1">
-        <p class="-ml-2 text-sm">Panier</p>
+        <p class="text-sm">Panier</p>
         @foreach(var item in Model.Items.Where(x => x.Article is not null))
         {
             <SaleItemView Sale=@Model Item=@item/>

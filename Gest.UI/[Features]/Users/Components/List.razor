@@ -1,0 +1,87 @@
+﻿ <div class="space-y-1">
+     <ToolBar NewItem=@(_ => EditItem()) OnRefresh=@(_ => InitialLoad())/>
+    @if (_isBusy)
+    {
+        <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+    }
+    <div class="grid md:grid-cols-5 gap-2">
+        <RadzenDataList class="col-span-2 md:-mx-3"  Data=@_items TItem=@User AllowPaging=true>
+            <Template Context="item">
+                <UserCard Overflow=@false Model=@item Click=@(_ => OnSelectItem(item)) IsSelected=@(_selectedItem == item) />
+            </Template>
+        </RadzenDataList>
+        @if(_selectedItem is not null)
+        {
+             <div class="hidden md:block col-span-3 ">
+                <UserView OnModifyClick="() => EditItem(_selectedItem)"  Model=@_selectedItem/>
+             </div>
+        }
+    </div>
+
+</div>
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+@code {
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
+
+    IEnumerable<User> _items = new List<User>();
+    bool _isBusy = false;
+    bool _isSmall = false;
+    User? _selectedItem;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Policy.Handle<InvalidOperationException>()
+             .WaitAndRetryAsync(5, attempt => TimeSpan.FromMilliseconds(200 * attempt),(ex,t) => _isBusy = false)
+             .ExecuteAsync(InitialLoad);
+            await InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+
+    async Task InitialLoad()
+    {
+        _items = await DbContext.Users.Include(x => x.Companies)
+             .Where(x => x.Companies.Any(x => x.CompanyId == CurrentItems.Company.Id))
+             .OrderByDescending(x => x.UpdatedAt)
+             .ThenBy(x => x.CreatedAt)
+             .ToListAsync();
+        _selectedItem = _items.FirstOrDefault();
+    }
+
+    async Task OnSelectItem(User value)
+    {
+        _selectedItem = value;
+        if (_isSmall)
+        {
+            await ViewDetails(value);
+        }
+    }
+
+    async Task EditItem(User? item = null)
+    {
+        var itemModel = item?.Adapt<UserModel>() ?? new UserModel();
+        itemModel.User = item;
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", itemModel } };
+        var title = item is null ? "Ajouter un utilisateur" : $"Utilisateur {itemModel.FullName}";
+        var result = await DialogService.OpenAsync<UserEdit>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+
+      async Task ViewDetails(User item)
+    {
+        var param = item is null ? new Dictionary<string, object?>()
+               : new Dictionary<string, object?>() { { "Model", item } };
+        var title = $"{item!.FullName}";
+        var result = await DialogService.OpenAsync<UserView>(title, param);
+        if (result is bool canRefresh && canRefresh == true)
+            await InitialLoad();
+    }
+
+
+}

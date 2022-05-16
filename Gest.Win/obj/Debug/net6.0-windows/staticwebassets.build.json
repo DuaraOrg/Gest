@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "tAgoa0S+KxcKCw1Rsrt51ng2Kr8+G38KY2kWtLK1e8c=",
+  "Hash": "VLQVfVI76AoohSCuH1qqAJIy9Q2rbOVnVx2GMVDm/eI=",
   "Source": "Duara",
   "BasePath": "/",
   "Mode": "Root",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\Projects\\Gest\\new\\Gest\\Gest.UI\\Gest.UI.csproj",
+      "Identity": "D:\\Projects\\Gest\\Gest.UI\\Gest.UI.csproj",
       "Version": 2,
       "Source": "Gest.UI",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
@@ -22,14 +22,14 @@
     {
       "Name": "Duara\\wwwroot",
       "Source": "Duara",
-      "ContentRoot": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\wwwroot\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.Win\\wwwroot\\",
       "BasePath": "/",
       "Pattern": "**"
     },
     {
       "Name": "Gest.UI\\wwwroot",
       "Source": "Gest.UI",
-      "ContentRoot": "D:\\Projects\\Gest\\new\\Gest\\Gest.UI\\wwwroot\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.UI\\wwwroot\\",
       "BasePath": "_content/Gest.UI",
       "Pattern": "**"
     }
@@ -512,10 +512,10 @@
       "OriginalItemSpec": "C:\\Users\\user\\.nuget\\packages\\radzen.blazor\\3.16.3\\staticwebassets\\Radzen.Blazor.js"
     },
     {
-      "Identity": "D:\\Projects\\Gest\\new\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css",
+      "Identity": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css",
       "SourceId": "Gest.UI",
       "SourceType": "Project",
-      "ContentRoot": "D:\\Projects\\Gest\\new\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/Gest.UI",
       "RelativePath": "Gest.UI.bundle.scp.css",
       "AssetKind": "All",
@@ -526,13 +526,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Projects\\Gest\\new\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css"
+      "OriginalItemSpec": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css"
     },
     {
-      "Identity": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\obj\\Debug\\net6.0-windows\\jsmodules\\jsmodules.build.manifest.json",
+      "Identity": "D:\\Projects\\Gest\\Gest.Win\\obj\\Debug\\net6.0-windows\\jsmodules\\jsmodules.build.manifest.json",
       "SourceId": "Duara",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\obj\\Debug\\net6.0-windows\\jsmodules\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.Win\\obj\\Debug\\net6.0-windows\\jsmodules\\",
       "BasePath": "/",
       "RelativePath": "Duara.modules.json",
       "AssetKind": "Build",
@@ -546,10 +546,10 @@
       "OriginalItemSpec": "obj\\Debug\\net6.0-windows\\jsmodules\\jsmodules.build.manifest.json"
     },
     {
-      "Identity": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\obj\\Debug\\net6.0-windows\\scopedcss\\bundle\\Duara.styles.css",
+      "Identity": "D:\\Projects\\Gest\\Gest.Win\\obj\\Debug\\net6.0-windows\\scopedcss\\bundle\\Duara.styles.css",
       "SourceId": "Duara",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\obj\\Debug\\net6.0-windows\\scopedcss\\bundle\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.Win\\obj\\Debug\\net6.0-windows\\scopedcss\\bundle\\",
       "BasePath": "/",
       "RelativePath": "Duara.styles.css",
       "AssetKind": "All",
@@ -560,13 +560,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\obj\\Debug\\net6.0-windows\\scopedcss\\bundle\\Duara.styles.css"
+      "OriginalItemSpec": "D:\\Projects\\Gest\\Gest.Win\\obj\\Debug\\net6.0-windows\\scopedcss\\bundle\\Duara.styles.css"
     },
     {
-      "Identity": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\wwwroot\\css\\app.css",
+      "Identity": "D:\\Projects\\Gest\\Gest.Win\\wwwroot\\css\\app.css",
       "SourceId": "Duara",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\wwwroot\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.Win\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/app.css",
       "AssetKind": "All",
@@ -580,10 +580,10 @@
       "OriginalItemSpec": "wwwroot\\css\\app.css"
     },
     {
-      "Identity": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\wwwroot\\favicon.ico",
+      "Identity": "D:\\Projects\\Gest\\Gest.Win\\wwwroot\\favicon.ico",
       "SourceId": "Duara",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\wwwroot\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.Win\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -597,10 +597,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\wwwroot\\images\\swala.jpg",
+      "Identity": "D:\\Projects\\Gest\\Gest.Win\\wwwroot\\images\\swala.jpg",
       "SourceId": "Duara",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\wwwroot\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.Win\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "images/swala.jpg",
       "AssetKind": "All",
@@ -614,10 +614,10 @@
       "OriginalItemSpec": "wwwroot\\images\\swala.jpg"
     },
     {
-      "Identity": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\wwwroot\\index.html",
+      "Identity": "D:\\Projects\\Gest\\Gest.Win\\wwwroot\\index.html",
       "SourceId": "Duara",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\Gest\\new\\Gest\\Gest.Win\\wwwroot\\",
+      "ContentRoot": "D:\\Projects\\Gest\\Gest.Win\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "index.html",
       "AssetKind": "All",

@@ -30,7 +30,7 @@
         if (firstRender)
         {
             await Policy.Handle<InvalidOperationException>()
-             .WaitAndRetryAsync(3, attempt => TimeSpan.FromMilliseconds(100 * attempt))
+             .WaitAndRetryAsync(6, attempt => TimeSpan.FromMilliseconds(100 * attempt))
              .ExecuteAsync(LoadCategories);
             await InvokeAsync(() => StateHasChanged());
         }

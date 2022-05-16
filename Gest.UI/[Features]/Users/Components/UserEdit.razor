@@ -1,0 +1,138 @@
+﻿<div class="px-4">
+    <p>@_errorMessage</p>
+    <EditForm class=" space-y-2" Model=@Model OnValidSubmit=@OnSave>
+         <DataAnnotationsValidator/>
+        <ValidationSummary/>
+         <div class="grid md:grid-cols-2 gap-2">
+           <RadzenTextBox class="w-full" @bind-Value=@Model.FirstName Placeholder="Prénom"/>
+           <RadzenTextBox class="w-full" @bind-Value=@Model.LastName Placeholder="Postnom"/>
+       </div>
+       <div class="grid md:grid-cols-2 gap-2">
+           <RadzenTextBox class="w-full" @bind-Value=@Model.Email Placeholder="Email"/>
+           <RadzenTextBox class="w-full" @bind-Value=@Model.PhoneNumber Placeholder="No. Téléphone"/>
+       </div>
+       <div class="grid">
+            <h1>Role</h1>
+           <RadzenDropDown class="w-full" @bind-Value=@Model.Role Placeholder="Role" Data=@_roles/>
+       </div>
+      <div class="grid">
+          <h1>Permissions</h1>
+          <div class="grid grid-cols-2 md:gird-cols-3 gap-2">
+            @foreach(var item in Model.PermissionsCheck)
+            {
+                <div class=" text-gray-800">
+                    <h1 class="font-semibold">@item.Key</h1>
+                    <div>
+                        @foreach(var perm in item.Value)
+                        {
+                            <div class="flex items-center space-x-2">
+                                <RadzenCheckBox Placeholder=@perm.Permission @bind-Value=@perm.IsChecked/>
+                                <p>@perm.Permission</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+          </div>
+        </div>
+        <div class="py-2">
+            <RadzenButton class="m-1 px-2" type="submit" IsBusy=@_isBusy Icon="save" Text="Enregistrer" ButtonStyle="ButtonStyle.Secondary" />
+            @if (_isNew)
+            {
+                 <RadzenButton class="m-1 px-2" Click=@(_ => Cancel(false)) Icon="close" Text="Annuler" ButtonStyle="ButtonStyle.Light" />
+            }
+            else
+            {
+                 <RadzenButton class="m-1 px-2" Click=@ConfirmDelete Icon="delete" Text="Supprimer" ButtonStyle="ButtonStyle.Danger" />
+            }
+        </div>
+    </EditForm>
+</div>
+
+@code {
+
+    bool _isNew = true;
+    bool _isBusy = false;
+    string _errorMessage = string.Empty;
+    IEnumerable<string> _roles = UserRole.All();
+
+    [Inject] public DialogService DialogService { get; set; } = null!;
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public CurrentItems CurrentItems { get; set; } = null!;
+
+    [Parameter]
+    public UserModel Model { get; set; } = new UserModel();
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if(firstRender)
+        {
+            Model.PermissionsCheck = _isNew 
+                ? Model.User.GetAllPermissions()
+                : Model.User.GetPermissions();
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        _isNew = Model.Id is null;
+    }
+
+    void Cancel(bool canRefresh = false) => DialogService.Close(canRefresh);
+
+    async Task OnSave()
+    {
+        _isBusy = true;
+        Model.Permissions = Model.PermissionsCheck.ToStringPermissions();
+        var user = Model.Adapt<User>();
+        var (hash, salt) = "Duara@243".HashPassword();
+        if (_isNew)
+        {
+            user.PasswordHash = hash;
+            user.PasswordSalt = salt;
+            user.Companies.Add(new UserCompany() { CompanyId = CurrentItems.Company.Id });
+            user.CreatedAt = DateTime.UtcNow;
+            user.UpdatedAt = DateTime.UtcNow;
+            await DbContext.Users.AddAsync(user);
+        }
+        else
+        {
+            var savedUser = DbContext.Users.Single(x => x.Id == Model.Id);
+            savedUser.FirstName = Model.FirstName;
+            savedUser.LastName = Model.LastName;
+            savedUser.Role = Model.Role;
+            savedUser.PhoneNumber = Model.PhoneNumber;
+            savedUser.UpdatedAt = DateTime.UtcNow;
+            savedUser.Permissions = Model.Permissions;
+            savedUser.ProfileUrl = Model.ProfileUrl;
+            DbContext.Update(savedUser);
+        }
+        var result = await DbContext.SaveChangesAsync();
+        if (result > 0)
+            Cancel(true);
+        else
+            _errorMessage = "Une erreur est survenue";
+        _isBusy = false;
+    }
+
+     async Task Delete()
+    {
+        if (_isNew)
+            return;
+        _isBusy = true;
+        var item = DbContext.Users.First(x => x.Id == Model.Id);
+        DbContext.Users.Remove(item);
+        await DbContext.SaveChangesAsync();
+        Cancel(true);
+        _isBusy = false;
+    }
+    async Task ConfirmDelete()
+    {
+        var result = await DialogService
+        .Confirm("Etes-vous sûre?", $"Supprimer {Model.FullName}", new ConfirmOptions() { OkButtonText = "Oui", CancelButtonText = "Non" });
+        if (result.Value == true)
+            await Delete();
+    }
+}

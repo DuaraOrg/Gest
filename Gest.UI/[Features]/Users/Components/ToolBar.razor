@@ -1,0 +1,19 @@
+﻿<div class="shadow flex items-center overflow-x-scroll space-x-3 px-2  py-1 h-full no-scrollbar">
+     <div class="pt-4 flex space-x-2">
+        <RadzenButton Click=@(_ => NewItem.InvokeAsync()) MouseEnter=@(args => ShowTooltip(args,"Ajouter un utilisateur"))  Icon="add_circle_outline" ButtonStyle="ButtonStyle.Secondary" />
+        <RadzenButton Click=@(_ => OnRefresh.InvokeAsync()) Icon="refresh" ButtonStyle="ButtonStyle.Light" />
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public EventCallback OnRefresh { get; set; } 
+
+    [Parameter]
+    public EventCallback NewItem { get; set; } 
+
+    [Inject] TooltipService TooltipService { get; set; } = null!;
+    void ShowTooltip(ElementReference elementReference, string message, TooltipOptions options = null!)
+      => TooltipService.Open(elementReference, message, options);
+}

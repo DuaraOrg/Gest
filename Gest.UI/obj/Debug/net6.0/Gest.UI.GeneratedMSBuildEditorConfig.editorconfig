@@ -51,6 +51,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3RvY2sucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Gest/Gest.UI/Pages/Users.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Gest/Gest.UI/Shared/AdminLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFkbWluTGF5b3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -205,6 +209,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Projects/Gest/Gest.UI/\[Features\]/Stock/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTdG9ja1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Users/Components/List.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxVc2Vyc1xDb21wb25lbnRzXExpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Users/Components/ToolBar.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxVc2Vyc1xDb21wb25lbnRzXFRvb2xCYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Users/Components/UserCard.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxVc2Vyc1xDb21wb25lbnRzXFVzZXJDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Users/Components/UserEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxVc2Vyc1xDb21wb25lbnRzXFVzZXJFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Users/Components/UserView.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxVc2Vyc1xDb21wb25lbnRzXFVzZXJWaWV3LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/Gest/Gest.UI/_Imports.razor]

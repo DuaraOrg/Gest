@@ -17,7 +17,7 @@ namespace Gest.SqlServerMigration.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -100,10 +100,10 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             Id = new Guid("453412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2701),
+                            CreatedAt = new DateTime(2022, 5, 10, 21, 21, 3, 999, DateTimeKind.Utc).AddTicks(5231),
                             FCToDollarRate = 2000m,
                             Name = "Default",
-                            UpdatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2694)
+                            UpdatedAt = new DateTime(2022, 5, 10, 21, 21, 3, 999, DateTimeKind.Utc).AddTicks(5228)
                         });
                 });
 
@@ -151,10 +151,10 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             Id = new Guid("654412a3-578b-446b-9406-bd7077bdce01"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            CreatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2711),
+                            CreatedAt = new DateTime(2022, 5, 10, 21, 21, 3, 999, DateTimeKind.Utc).AddTicks(5236),
                             Email = "clientanonyme@swala.com",
                             Names = "Client Anonyme",
-                            UpdatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2705)
+                            UpdatedAt = new DateTime(2022, 5, 10, 21, 21, 3, 999, DateTimeKind.Utc).AddTicks(5234)
                         });
                 });
 
@@ -194,10 +194,10 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             Id = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
                             Adress = "Bunia",
-                            CreatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2690),
+                            CreatedAt = new DateTime(2022, 5, 10, 21, 21, 3, 999, DateTimeKind.Utc).AddTicks(5226),
                             FCToDollarRate = 2000m,
                             Name = "Ets TUUNGANE",
-                            UpdatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2687)
+                            UpdatedAt = new DateTime(2022, 5, 10, 21, 21, 3, 999, DateTimeKind.Utc).AddTicks(5223)
                         });
                 });
 
@@ -396,10 +396,18 @@ namespace Gest.SqlServerMigration.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Permissions")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfileUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -416,13 +424,15 @@ namespace Gest.SqlServerMigration.Migrations
                         new
                         {
                             Id = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
-                            CreatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2659),
+                            CreatedAt = new DateTime(2022, 5, 10, 21, 21, 3, 999, DateTimeKind.Utc).AddTicks(5109),
                             Email = "admin@swala.com",
                             FirstName = "Admin",
                             LastName = "Swala",
-                            PasswordHash = "dzghSLPKG3GTVdAAO7ooJAN5ym3UDXXyWbDhFjS5O/GPzJFe0bCL6ALdGW1Quqw7LcM04Uz54+/b4FWYfW/KIcjUgBE4ywWyH6qIGhylwTTwQMcT4rlUz2gYQ8UzbpMoxdgEHV9qT0rM5qat/CvwTYDdHoLnGJejp8rZr6x/wfqq8xdhAI1MUihxonU+5BV/JKBISf6t3GiXMiaHmxriOui2n1+8g2A2OoAi8PkXmvRc071h1eAuk/y6LPtzpG5N2HDe2XiPmagkJ0chXMkNWGLKRE1Rk530f+J8En+XMyaqLb8xaeYqzHprcqGQI46C4hBf81cPdDjzg5vzvld23w==",
-                            PasswordSalt = "0O7nEzCAAegTYiOT0eK/8NT6mdzZEC5nDqakkYRpiwIo9FWQ63lQXqpY6a44PEtbmMwXLsG/+fbuIYwPcSx9Hw==",
-                            UpdatedAt = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2624)
+                            PasswordHash = "URtlu7uoF+xdNT/TS2XkYnaeAj9pygM/eiAg1nfUbQI+hg1Jrb8ebRoWnBmJ/RlcNp0xnl/eMEfze6vQsDAiHMxN7u0+X5fAFRh9AfDN8L15PDyhLGnwIErVRcv9BAw1cH5oVRWaIJIDCPAAwETq+DR2dvLhU62u6QNqqLfI31/nVXEq5Gh2QTTlES492/4GaWbgpsy8orWbYUUPzekChgCuwnV7ApGEWU0AAGjRGrVW7z7fSLTiaypRnbL39a4U4jt2gQDOymVnKS2c3dPl71OfaPLwPmSov6lIaU2iHSf8q6OiRporO05NwchKh6FVNqeHqH9XbBHVuASDYXZyVw==",
+                            PasswordSalt = "g2KIi7hfBsP4z5gu8om1ft/+4b44OOv1Tx4LXFfyvxuGrNA6olRY3u+jpucyoq6tHvzcH0oqNIHk2vyKJHpd0w==",
+                            Permissions = "Ventes:Lire,Créer,Mettre à jour,Supprimer;Caisse:Lire,Créer,Mettre à jour,Supprimer;Stock:Lire,Créer,Mettre à jour,Supprimer;Clients:Lire,Créer,Mettre à jour,Supprimer;Rapports:Lire,Créer,Mettre à jour,Supprimer",
+                            Role = "Superadmin",
+                            UpdatedAt = new DateTime(2022, 5, 10, 21, 21, 3, 999, DateTimeKind.Utc).AddTicks(5085)
                         });
                 });
 
@@ -455,7 +465,7 @@ namespace Gest.SqlServerMigration.Migrations
                         {
                             UserId = new Guid("d5ccad5b-6cbc-4993-96e3-e8cd7c76d8b9"),
                             CompanyId = new Guid("afdc3370-adb1-4de9-ad12-7678145b4485"),
-                            Joined = new DateTime(2022, 3, 27, 8, 20, 45, 194, DateTimeKind.Utc).AddTicks(2670),
+                            Joined = new DateTime(2022, 5, 10, 21, 21, 3, 999, DateTimeKind.Utc).AddTicks(5213),
                             Role = "Propriétaire",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });

@@ -65,8 +65,10 @@ namespace Gest.Core.Data
                 Email = "admin@swala.com",
                 PasswordHash = hash,
                 PasswordSalt = salt,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                Role = UserRole.SuperAdmin
             };
+            user = user.GiveAllPermissions();
             var userCompany = new UserCompany()
             {
                 UserId = new Guid("D5CCAD5B-6CBC-4993-96E3-E8CD7C76D8B9"),

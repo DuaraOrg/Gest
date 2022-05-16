@@ -20,8 +20,9 @@ namespace Gest.Win
         public MainWindow()
         {
             var serviceCollection = new ServiceCollection();
-            var localConString = $"Data Source=app.db";
-            serviceCollection.AddDbContext<GestDbContext>(opt => opt.UseSqlite(localConString, b => b.MigrationsAssembly("Gest.SqliteMigration")), ServiceLifetime.Singleton);
+            var connectionString = "Server=DESKTOP-43TH18V;Initial Catalog=DuaraDb;User Id=DESKTOP-43TH18V\\user;Integrated Security=true";
+            serviceCollection.AddDbContext<GestDbContext>(opt => 
+                opt.UseSqlServer(connectionString, b => b.MigrationsAssembly("Gest.SqlServerMigration")), ServiceLifetime.Singleton);
             serviceCollection.AddBlazorWebView();
 
             serviceCollection.AddSingleton(_ => new CurrentItems());

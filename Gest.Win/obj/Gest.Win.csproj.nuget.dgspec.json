@@ -86,14 +86,14 @@
         }
       }
     },
-    "D:\\Projects\\Gest\\Gest.SqliteMigration\\Gest.SqliteMigration.csproj": {
+    "D:\\Projects\\Gest\\Gest.SqlServerMigration\\Gest.SqlServerMigration.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Gest\\Gest.SqliteMigration\\Gest.SqliteMigration.csproj",
-        "projectName": "Gest.SqliteMigration",
-        "projectPath": "D:\\Projects\\Gest\\Gest.SqliteMigration\\Gest.SqliteMigration.csproj",
+        "projectUniqueName": "D:\\Projects\\Gest\\Gest.SqlServerMigration\\Gest.SqlServerMigration.csproj",
+        "projectName": "Gest.SqlServerMigration",
+        "projectPath": "D:\\Projects\\Gest\\Gest.SqlServerMigration\\Gest.SqlServerMigration.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Gest\\Gest.SqliteMigration\\obj\\",
+        "outputPath": "D:\\Projects\\Gest\\Gest.SqlServerMigration\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -278,8 +278,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "D:\\Projects\\Gest\\Gest.SqliteMigration\\Gest.SqliteMigration.csproj": {
-                "projectPath": "D:\\Projects\\Gest\\Gest.SqliteMigration\\Gest.SqliteMigration.csproj"
+              "D:\\Projects\\Gest\\Gest.SqlServerMigration\\Gest.SqlServerMigration.csproj": {
+                "projectPath": "D:\\Projects\\Gest\\Gest.SqlServerMigration\\Gest.SqlServerMigration.csproj"
               },
               "D:\\Projects\\Gest\\Gest.UI\\Gest.UI.csproj": {
                 "projectPath": "D:\\Projects\\Gest\\Gest.UI\\Gest.UI.csproj"
@@ -307,9 +307,9 @@
               "target": "Package",
               "version": "[6.0.3, )"
             },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.3, )"
+              "version": "[6.0.5, )"
             }
           },
           "imports": [

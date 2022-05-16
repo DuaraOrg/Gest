@@ -95,9 +95,7 @@ D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\runtimes\win-x64\native\e_sql
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\runtimes\win-x86\native\e_sqlite3.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Gest.Core.dll
-D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Gest.SqliteMigration.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Gest.UI.dll
-D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Gest.SqliteMigration.pdb
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Gest.UI.pdb
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Gest.Core.pdb
 D:\Projects\Gest\Gest.Win\obj\Debug\net6.0-windows\Gest.Win.csproj.AssemblyReference.cache
@@ -246,3 +244,5 @@ D:\Projects\Gest\new\Gest\Gest.Win\obj\Debug\net6.0-windows\refint\Duara.dll
 D:\Projects\Gest\new\Gest\Gest.Win\obj\Debug\net6.0-windows\Duara.pdb
 D:\Projects\Gest\new\Gest\Gest.Win\obj\Debug\net6.0-windows\Gest.Win.genruntimeconfig.cache
 D:\Projects\Gest\new\Gest\Gest.Win\obj\Debug\net6.0-windows\ref\Duara.dll
+D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Gest.SqlServerMigration.dll
+D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Gest.SqlServerMigration.pdb
