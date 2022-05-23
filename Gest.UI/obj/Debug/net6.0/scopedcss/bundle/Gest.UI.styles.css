@@ -4,3 +4,9 @@
 	display: flex;
 	flex-direction: column;
 }
+/* _content/Gest.UI/[Features]/Sales/Components/List.razor.rz.scp.css */
+.rz-paginator .rz-unselectable-text .rz-helper-clearfix .rz-align-justify .rz-paginator-bottom[b-jz6tomg8jl] {
+    position:fixed;
+    bottom:0;
+    width: 100%;
+}

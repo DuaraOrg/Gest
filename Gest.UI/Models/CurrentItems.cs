@@ -10,6 +10,8 @@ namespace Gest.UI.Models
 
         public User User { get; set; } = null!;
 
+        public string Theme { get; set; } = "dark";
+
         public DateTime DateOfOperations { get; set; } = DateTime.UtcNow.ToLocalTime();
     }
 }

@@ -50,3 +50,9 @@
     .blazor-error-boundary::after {
         content: "Une erreur est survenue."
     }
+.duaralist .rz-paginator{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+

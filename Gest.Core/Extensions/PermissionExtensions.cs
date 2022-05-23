@@ -159,5 +159,11 @@ namespace Gest.Core.Extensions
             }
             return string.Empty;
         }
+
+        public static string GetPermissionsFor(this User user, string section)
+        => user.GetPermissions().TryGetValue(section, out var permissions)
+            ? permissions.Where(x => x.IsChecked).Select(x => x.Permission)
+              .Aggregate((a,x) => $"{a},{x}")
+            : string.Empty;
     }
 }

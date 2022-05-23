@@ -157,8 +157,8 @@
         }
         var lastSaleId = DbContext.Sales
        .Where(x => x.CompanyId == CurrentItems.Company.Id)
-       .OrderBy(x => x.CreatedAt)
-       .LastOrDefault()?.SaleId ?? 0;
+       .OrderByDescending(x => x.SaleId)
+       .FirstOrDefault()?.SaleId ?? 0;
         var sale = new Sale()
         {
             SaleId = lastSaleId + 1,

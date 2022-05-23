@@ -1,9 +1,10 @@
 ﻿@inherits LayoutComponentBase
+@inject CurrentItems _currentItems
 <div data-theme="dark"></div>
 <div data-theme="forest"></div>
 <div data-theme="emerald"></div>
 <div data-theme="garden"></div>
-<div data-theme="@_selectedTheme">
+<div class="h-[100%]" data-theme="@_selectedTheme">
     <button @onclick=ChangeTheme class="btn my-4 ml-4">Switch Theme</button>
     @Body
 </div>
@@ -23,5 +24,6 @@
     {
         _selectedTheme = _themes.Dequeue();
         _themes.Enqueue(_selectedTheme);
+        _currentItems.Theme = _selectedTheme;
     }
 }

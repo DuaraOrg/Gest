@@ -2,6 +2,10 @@
 
 namespace Gest.Core.Entities
 {
+    public class ClientKeys
+    {
+        public const string DefaultClientName = "Client Anonyme";
+    }
     public class ClientState
     {
         public const string Tous = "Tous";

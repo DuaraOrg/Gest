@@ -7,7 +7,7 @@ namespace Gest.Core.Extensions
     {
         public static int GetLastPaymentId(this GestDbContext context, Guid companyId)
         => context.Payments.Where(x => x.CompanyId == companyId)
-            .OrderBy(x => x.CreatedAt)
+            .OrderBy(x => x.PayementId)
             .LastOrDefault()?.PayementId ?? 0;
     }
 }

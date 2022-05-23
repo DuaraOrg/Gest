@@ -1,4 +1,6 @@
-﻿<div class="space-y-1">
+﻿@if(_permissions is { Length: > 0 })
+{
+    <div class="space-y-1">
     <ToolBar NewItem=@(_ => NewSale()) OnRefresh=@(_ => InitialLoad())  
         OnSearchQuery=@(e => OnSearch(e)) PeriodChanged=@(e => OnPeriodChanged(e)) DateChanged=@(e => OnDateChanged(e.startDate,e.endDate)) 
         PaymentStateChanged=@(e => OnPaymentStateChanged(e)) DeliveryStateChanged=@(e => OnDeliveryStateChanged(e))/>
@@ -6,8 +8,8 @@
     {
         <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
     }
-    <div class="grid md:grid-cols-5 gap-2">
-        <RadzenDataList class="col-span-2 -space-y-5" Count=@_count Data=@_items TItem=@Sale LoadData=@LoadData AllowPaging=true>
+    <div class="grid md:grid-cols-5 gap-1 h-[78vh]">
+        <RadzenDataList class="col-span-2 -space-y-5 h-full overflow-y-auto duaralist" Count=@_count Data=@_items TItem=@Sale LoadData=@LoadData AllowPaging=true>
             <Template Context="item">
                 <SaleCard  Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item) />
             </Template>
@@ -19,7 +21,19 @@
              </div>
         }
     </div>
-</div>
+    </div>
+    <div>
+      <button @onclick="_ => NewSale()" class="btn btn-circle fixed bottom-8 left-2 shadow-md">
+       <svg class=" fill-current"  viewBox="0 0 50 50">
+            <path d="M24 9L24 24L9 24L9 26L24 26L24 41L26 41L26 26L41 26L41 24L26 24L26 9Z" />
+        </svg>
+    </button>
+    </div>
+}
+else
+{
+    <NotAuthorized Section=@AppSections.Sales User=@CurrentItems.User/>
+}
 <RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
 @code{
     [Inject] public DialogService DialogService { get; set; } = null!;
@@ -38,6 +52,7 @@
     DateTime _startDate = DateTime.UtcNow.ToLocalTime();
     DateTime _endDate = DateTime.UtcNow.ToLocalTime();
     IEnumerable<Sale> _items = new List<Sale>();
+    string _permissions = string.Empty;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -48,6 +63,11 @@
              .ExecuteAsync(InitialLoad);
             await InvokeAsync(() => StateHasChanged());
         }
+    }
+
+    protected override void OnParametersSet()
+    {
+        _permissions = CurrentItems.User.GetPermissionsFor(AppSections.Sales);
     }
 
     async Task InitialLoad()
@@ -100,12 +120,18 @@
     {
         _isBusy = true;
         var query = DbContext.Sales
-                   .Include(x => x.Client)
+                  .Include(x => x.Client)
+                  .Include(x => x.Seller)
                   .Include(x => x.Items).ThenInclude(x => x.Article)
                   .Where(x => _selectedPaymentState == PaymentStatus.Tous || x.PayStatus == _selectedPaymentState)
                   .Where(x => _selectedDeliveryState == DeliveryStatus.Tous || x.DeliverStatus == _selectedDeliveryState)
                   .Where(x => x.CompanyId == CurrentItems.Company.Id)
                   .AsNoTracking();
+
+        query = _permissions.Contains(AppPermissions.Read) && _permissions.Contains(AppPermissions.Update)
+            ? query
+            : query.Where(x => x.SellerId == CurrentItems.User.Id);
+
         var queryWithPeriodFilter = _selectedPeriod switch
         {
             Period.Tous => query,

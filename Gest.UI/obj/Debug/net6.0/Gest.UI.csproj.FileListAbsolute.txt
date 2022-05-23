@@ -64,3 +64,4 @@ D:\Projects\Gest\new\Gest\Gest.UI\obj\Debug\net6.0\Gest.UI.dll
 D:\Projects\Gest\new\Gest\Gest.UI\obj\Debug\net6.0\refint\Gest.UI.dll
 D:\Projects\Gest\new\Gest\Gest.UI\obj\Debug\net6.0\Gest.UI.pdb
 D:\Projects\Gest\new\Gest\Gest.UI\obj\Debug\net6.0\ref\Gest.UI.dll
+D:\Projects\Gest\Gest.UI\obj\Debug\net6.0\scopedcss\[Features]\Sales\Components\List.razor.rz.scp.css

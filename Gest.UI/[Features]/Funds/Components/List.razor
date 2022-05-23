@@ -61,7 +61,7 @@
         _take = 10;
         await LoadData(new LoadDataArgs() { Skip = _skip, Top = _take });
         _selectedItem = _items.FirstOrDefault();
-       _companyWallet = DbContext.Wallets.Single(x => x.Id == CurrentItems.Company.WalletId);
+       _companyWallet = DbContext.Wallets.SingleOrDefault(x => x.Id == CurrentItems.Company.WalletId);
     }
     async Task OnPeriodChanged(string period)
     {
