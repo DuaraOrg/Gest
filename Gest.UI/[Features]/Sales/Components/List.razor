@@ -143,7 +143,7 @@ else
             Period.IntervalDate => query.Where(x => x.CreatedAt >= _startDate && x.CreatedAt <= _endDate),
             _ => query
         };
-        if(string.IsNullOrEmpty(_searchQuery))
+        if(!string.IsNullOrEmpty(_searchQuery))
         {
             int saleId =  int.TryParse(_searchQuery, out saleId) ? saleId : 0;
             _items = await queryWithPeriodFilter
