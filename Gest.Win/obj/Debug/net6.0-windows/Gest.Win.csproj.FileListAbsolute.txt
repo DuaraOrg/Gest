@@ -245,4 +245,3 @@ D:\Projects\Gest\new\Gest\Gest.Win\obj\Debug\net6.0-windows\Duara.pdb
 D:\Projects\Gest\new\Gest\Gest.Win\obj\Debug\net6.0-windows\Gest.Win.genruntimeconfig.cache
 D:\Projects\Gest\new\Gest\Gest.Win\obj\Debug\net6.0-windows\ref\Duara.dll
 D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Gest.SqlServerMigration.dll
-D:\Projects\Gest\Gest.Win\bin\Debug\net6.0-windows\Gest.SqlServerMigration.pdb

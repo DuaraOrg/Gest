@@ -45,11 +45,11 @@
 
 
 	<ItemGroup>
-	  <MauiIcon Include="Resources\appicon.png" Color="#f5fcff" />
+	  <MauiIcon Include="Resources\appicon.png" Color="#FFFFFF" />
 	</ItemGroup>
 
 	<ItemGroup>	  
-		<MauiSplashScreen Include="Resources\splash.png" Color="#0f291c" />
+		<MauiSplashScreen Include="Resources\splash.png" Color="#010607" />
 	</ItemGroup>
 
 	<ItemGroup>
