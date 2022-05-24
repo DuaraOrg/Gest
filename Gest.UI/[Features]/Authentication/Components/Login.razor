@@ -27,6 +27,9 @@
         </FluentButton>
       </EditForm>
 </FluentCard>
+<div data-theme="@_selectedTheme" class="w-full py-5 -mt-2 flex items-center justify-center">
+     <button @onclick=ChangeTheme class="btn my-2 mt-4">Changer de Thème</button>
+</div>
 
 @code {
 
@@ -36,10 +39,15 @@
     [Inject] GestDbContext DbContext { get; set; } = null!;
     [Inject] NavigationManager NavigationManager { get; set; } = null!;
     [Inject] CurrentItems CurrentItems { get; set; } = null!;
+    Queue<string> _themes = new();
+    string _selectedTheme = "dark";
 
     protected override void OnInitialized()
     {
-        base.OnInitialized();
+        _themes.Enqueue("forest");
+        _themes.Enqueue("emerald");
+        _themes.Enqueue("garden");
+        _themes.Enqueue("dark");
     }
 
     async Task OnSubmit()
@@ -73,6 +81,15 @@
         }
 
     }
+
+
+    void ChangeTheme()
+    {
+        _selectedTheme = _themes.Dequeue();
+        _themes.Enqueue(_selectedTheme);
+        CurrentItems.Theme = _selectedTheme;
+    }
+
     class LoginInput
     {
         [Required(ErrorMessage = "Veuillez spécifier un mail")]

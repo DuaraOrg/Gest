@@ -2432,6 +2432,18 @@ html {
   margin-bottom: 0px;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.-mt-2 {
+  margin-top: -0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .block {
   display: block;
 }
@@ -2924,6 +2936,11 @@ html {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
 .pb-4 {

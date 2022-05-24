@@ -4,26 +4,6 @@
 <div data-theme="forest"></div>
 <div data-theme="emerald"></div>
 <div data-theme="garden"></div>
-<div class="h-[100%]" data-theme="@_selectedTheme">
-    <button @onclick=ChangeTheme class="btn my-4 ml-4">Switch Theme</button>
+<div class="h-[100%]" data-theme="@_currentItems.Theme">
     @Body
 </div>
-@code{
-    Queue<string> _themes = new();
-    string _selectedTheme = "dark";
-
-    protected override void OnInitialized()
-    {
-        _themes.Enqueue("forest");
-        _themes.Enqueue("emerald");
-        _themes.Enqueue("garden");
-        _themes.Enqueue("dark");
-    }
-
-    void ChangeTheme()
-    {
-        _selectedTheme = _themes.Dequeue();
-        _themes.Enqueue(_selectedTheme);
-        _currentItems.Theme = _selectedTheme;
-    }
-}
