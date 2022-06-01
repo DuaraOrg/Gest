@@ -1,66 +1,80 @@
 ﻿@using Gest.UI._Features_.Clients.Components
-<div class="space-y-2 bg-gray-100 -m-4 p-2 @(_isSmall ? "" : "px-2 pb-4")">
-    <div class="px-2 space-y-1">
-        <p class=" text-sm">Client</p>
-         <ClientCard Model=@Model.Client IsSelected/>
+<div tabindex="0" class="space-y-2 bg-base-200 p-2 @(_isSmall ? "" : "px-2 pb-16") overflow-y-auto">
+    <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100  rounded-md">
+         <input type="checkbox" /> 
+        <div class="collapse-title text-md font-medium">
+        Client
+        </div>
+        <div class="collapse-content bg-base-200 -my-2"> 
+            <div class="pt-2 -mx-3">
+               <ClientCard Model=@Model.Client IsSelected/>
+            </div>
+        </div>
     </div>
-    <div class="space-y-1">
-        <p class="text-sm">Panier</p>
-        @foreach(var item in Model.Items.Where(x => x.Article is not null))
-        {
-            <SaleItemView Sale=@Model Item=@item/>
-        }
+    <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100  rounded-md">
+         <input type="checkbox" /> 
+        <div class="collapse-title text-md font-medium">
+        Panier
+        </div>
+        <div class="collapse-content bg-base-200 -my-2"> 
+            <div class="pt-2 space-y-1 -mx-3">
+                @foreach (var item in Model.Items.Where(x => x.Article is not null))
+                {
+               <SaleItemView Sale=@Model Item=@item/>
+                }
+            </div>
+        </div>
     </div>
-    <div class="bg-gray-50 shadow px-2 my-4">
-       <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Etat de livraison</h2>
-            <h2 class="text-gray-800 font-medium">@Model.DeliverStatus</h2>
+    <div class="bg-base-100 text-base-content shadow px-2 my-4">
+       <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-primary-content">
+            <h2 class="font-light ">Etat de livraison</h2>
+            <h2 class="font-medium">@Model.DeliverStatus</h2>
         </div>
-        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Etat de paiement</h2>
-            <h2 class="text-gray-800 font-medium">@Model.PayStatus</h2>
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-primary-content">
+            <h2 class="font-light ">Etat de paiement</h2>
+            <h2 class="font-medium">@Model.PayStatus</h2>
         </div>
-       <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Total à payer</h2>
-            <h2 class="text-gray-800 font-medium">@Model.TotalAmount.ToString("#.##")$</h2>
+       <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-primary-content">
+            <h2 class="font-light">Total à payer</h2>
+            <h2 class="font-medium">@Model.TotalAmount.ToString("#.##")$</h2>
         </div>
-        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Total payé</h2>
-            <h2 class="text-gray-800 font-medium">@Model.AmountPaid.ToString("#.##")$</h2>
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-primary-content">
+            <h2 class="font-light">Total payé</h2>
+            <h2 class="font-medium">@Model.AmountPaid.ToString("#.##")$</h2>
         </div>
         @if ((Model.TotalAmount - Model.AmountPaid) > 0)
         {
-            <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-                <h2 class="font-light text-gray-600">Reste</h2>
-                <h2 class="text-gray-800 font-medium">@((Model.TotalAmount - Model.AmountPaid).ToString("#.##"))$</h2>
-            </div>
+                        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-primary-content">
+                            <h2 class="font-light">Reste</h2>
+                            <h2 class="font-medium">@((Model.TotalAmount - Model.AmountPaid).ToString("#.##"))$</h2>
+                        </div>
         }
-        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Par</h2>
-            <h2 class="text-gray-800">@Model.Seller?.FullName</h2>
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-primary-content">
+            <h2 class="font-light">Par</h2>
+            <h2 >@Model.Seller?.FullName</h2>
         </div>
-        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Date</h2>
-            <h2 class="text-gray-800">@Model.CreatedAt.ToLocalTime()</h2>
+        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-primary-content">
+            <h2 class="font-light">Date</h2>
+            <h2 >@Model.CreatedAt.ToLocalTime()</h2>
         </div>
     </div>
     @if (_isBusy)
     {
-        <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+                    <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
     }
-    <div class="grid @(_isSmall ? (Model.TotalAmount - Model.AmountPaid) >= 0 ? "grid-cols-4" : "grid-cols-3" : "grid-cols-3") gap-2 pt-4">
-        @if((Model.TotalAmount - Model.AmountPaid) > 0)
+    <div class="grid @(_isSmall ? (Model.TotalAmount - Model.AmountPaid) >= 0 ? "grid-cols-4" : "grid-cols-3" : "grid-cols-3") gap-2 px-2 py-4 md:py-2 ">
+        <button class="btn shadow">Facture</button>
+        @if ((Model.TotalAmount - Model.AmountPaid) > 0)
         {
-            <button @onclick=@(_ => OpenPayment())  class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Payer</button>
+              <button @onclick=@(_ => OpenPayment())  class="btn shadow">Payer</button>
         }
-        <button class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Facture</button>
-        @if(Model.DeliverStatus != DeliveryStatus.Delivered)
+        @if (Model.DeliverStatus != DeliveryStatus.Delivered)
         {
-             <button @onclick=@DeliverAll class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Livrer</button>
+             <button @onclick=@DeliverAll class="btn  shadow">Livrer</button>
         }
         @if (_isSmall)
         {
-            <button @onclick=@(_ => Cancel()) class="bg-gray-100 hover:bg-gray-200 px-4 py-2 text-gray-600 rounded shadow w-full">Annuler</button>
+            <label for="@($"modal-{Model.Id}")" class="btn btn-outline shadow">Fermer</label>
         }
    </div>
 </div>
@@ -84,31 +98,31 @@
 
     async Task OpenPayment()
     {
-        var param = new Dictionary<string, object?>() { { "Sale", Model}, {"Client",Model.Client} };
+        var param = new Dictionary<string, object?>() { { "Sale", Model }, { "Client", Model.Client } };
         var title = $"Paiement vente #{Model.SaleId}";
         var result = await DialogService.OpenAsync<CartPay>(title, param);
-        if(result is bool canRefresh)
+        if (result is bool canRefresh)
             Cancel(canRefresh);
     }
     async Task DeliverAll()
     {
         _isBusy = true;
         var items = new List<SaleItem>();
-        foreach(var item in Model.Items)
+        foreach (var item in Model.Items)
         {
             var stockMovement = new StockMouvement()
-                    {
-                        ArticleId = item.Article!.Id,
-                        Date = DateTime.UtcNow,
-                        PrevStock = item.Article.Stock.Qty,
-                        NewStock = item.Article.Stock.Qty - item.QtyInUnitOfMeasure,
-                        Qty = item.QtyInUnitOfMeasure,
-                        State = StockState.Out,
-                        PrevSellingPrice = item.Article.Price.SellingPricePerUnitOfMeasure,
-                        NewSellingPrice = item.Article.Price.SellingPricePerUnitOfMeasure,
-                        NewBuyingPrice = item.Article.Price.BuyingPricePerUnitOfMeasure,
-                        PrevBuyingPrice = item.Article.Price.BuyingPricePerUnitOfMeasure
-                    };
+                {
+                    ArticleId = item.Article!.Id,
+                    Date = DateTime.UtcNow,
+                    PrevStock = item.Article.Stock.Qty,
+                    NewStock = item.Article.Stock.Qty - item.QtyInUnitOfMeasure,
+                    Qty = item.QtyInUnitOfMeasure,
+                    State = StockState.Out,
+                    PrevSellingPrice = item.Article.Price.SellingPricePerUnitOfMeasure,
+                    NewSellingPrice = item.Article.Price.SellingPricePerUnitOfMeasure,
+                    NewBuyingPrice = item.Article.Price.BuyingPricePerUnitOfMeasure,
+                    PrevBuyingPrice = item.Article.Price.BuyingPricePerUnitOfMeasure
+                };
             var article = DbContext.Articles.First(x => x.Id == item.ArticleId);
             article.Stock.Qty = stockMovement.NewStock;
             await DbContext.StockMouvements.AddAsync(stockMovement);

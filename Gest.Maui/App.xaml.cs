@@ -1,5 +1,6 @@
 ﻿using Gest.Core.Data;
 using Microsoft.EntityFrameworkCore;
+using Sentry;
 
 namespace Gest.Maui
 {

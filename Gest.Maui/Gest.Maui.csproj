@@ -54,11 +54,13 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.4" />
+	  <PackageReference Include="Sentry" Version="3.17.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Gest.SqliteMigration\Gest.SqliteMigration.csproj" />
 	  <ProjectReference Include="..\Gest.UI\Gest.UI.csproj" />
+	  <ProjectReference Include="..\Sentry.Maui\Sentry.Maui.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

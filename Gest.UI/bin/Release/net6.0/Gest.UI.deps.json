@@ -16,7 +16,8 @@
           "Microsoft.AspNetCore.Components.Web": "6.0.3",
           "Microsoft.Fast.Components.FluentUI": "1.1.0",
           "Polly": "7.2.3",
-          "Radzen.Blazor": "3.16.3"
+          "Radzen.Blazor": "3.16.3",
+          "Sentry": "3.17.1"
         },
         "runtime": {
           "Gest.UI.dll": {}
@@ -525,6 +526,14 @@
           "lib/net5.0/Radzen.Blazor.dll": {
             "assemblyVersion": "3.16.3.0",
             "fileVersion": "3.16.3.0"
+          }
+        }
+      },
+      "Sentry/3.17.1": {
+        "runtime": {
+          "lib/net6.0/Sentry.dll": {
+            "assemblyVersion": "3.17.1.0",
+            "fileVersion": "3.17.1.0"
           }
         }
       },
@@ -1217,6 +1226,13 @@
       "sha512": "sha512-v+ZIS44csGyxoZUIug6QiUAGI5Ru1DgpvgxZYui9Pt5Uze9d/UGqUwC7CEUOpdti7xTQeXr6iEFQjiulcXr70g==",
       "path": "radzen.blazor/3.16.3",
       "hashPath": "radzen.blazor.3.16.3.nupkg.sha512"
+    },
+    "Sentry/3.17.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6SWXkfae8AsCm8S0m+sQNhuoivONq5k0OLDkK/6VCyDM5w1iOE7XYrdRWIhsXPD4uxcJ/WJ1FqtVg/iytNCYLw==",
+      "path": "sentry/3.17.1",
+      "hashPath": "sentry.3.17.1.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
       "type": "package",

@@ -5,6 +5,7 @@ using Gest.UI.Models;
 using Gest.UI.Shared;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
+using Sentry;
 
 namespace Gest.Maui
 {
@@ -15,6 +16,10 @@ namespace Gest.Maui
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                 .UseSentry(options =>
+                 {
+                     options.Dsn = "https://b7dd467ecd14487b9a53a05ae67fcadd@o1271105.ingest.sentry.io/6462880";
+                 })
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -22,10 +27,10 @@ namespace Gest.Maui
 
             builder.Services.AddMauiBlazorWebView();
 #if DEBUG
-		builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
             var localConString = $"Data Source={FileSystem.AppDataDirectory}/app.db";
-            builder.Services.AddDbContext<GestDbContext>(opt => 
+            builder.Services.AddDbContext<GestDbContext>(opt =>
                opt.UseSqlite(localConString, b => b.MigrationsAssembly("Gest.SqliteMigration")), ServiceLifetime.Singleton);
             builder.Services.AddSingleton(_ => new CurrentItems());
             builder.Services.AddSingleton<AdminNavState>();

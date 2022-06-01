@@ -1,11 +1,13 @@
 ﻿@using Gest.UI.Shared
-<button @onclick=@(e => NavigateTo(Link)) class="w-full flex space-x-3 py-2 px-1 @(IsSelected ? "bg-gray-800 text-gray-50" : "text-scorpion-600") hover:bg-gray-600 hover:text-gray-50 hover:cursor-pointer">
-    <svg class="h-6 w-6 text-current fill-current" viewBox="@ViewBox">
-        <path d="@Path" />
-    </svg>
-    <p>@Text</p>
-</button>
-<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => IsSmall = e) /> 
+<li>
+    <label @onclick=@(e => NavigateTo(Link)) for="my-drawer" class="w-full flex space-x-3 py-2 px-2 @(IsSelected ? "bg-gray-800 text-gray-50" : "text-scorpion-600") hover:bg-gray-600 hover:text-gray-50 hover:cursor-pointer">
+        <svg class="h-6 w-6 text-current fill-current" viewBox="@ViewBox">
+            <path d="@Path" />
+        </svg>
+        <p>@Text</p>
+    </label>
+</li>
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => IsSmall = e) />
 
 @code {
 
@@ -33,7 +35,7 @@
     bool IsSmall = false;
     void NavigateTo(string link)
     {
-        if(IsSmall)
+        if (IsSmall)
             AdminNavState.SetState(false);
         NavigationManager.NavigateTo(link);
     }

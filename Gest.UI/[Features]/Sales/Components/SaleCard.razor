@@ -1,6 +1,6 @@
 ﻿@if(Model.Items.Count > 0)
 {
-    <div @onclick=@(_ => Click.InvokeAsync()) class="grid @(ShowAvatar ? "grid-cols-12" : "grid-cols-11") gap-2 items-center -m-4 p-2 hover:cursor-pointer hover:bg-gray-100 @(IsSelected ? "border border-gray-600" : "")">
+    <label for="@($"modal-{Model.Id}")" @onclick=@(_ => Click.InvokeAsync()) class="bg-base-100 grid @(ShowAvatar ? "grid-cols-12" : "grid-cols-11") gap-2 items-center shadow-md p-2 hover:cursor-pointer hover:bg-base-200 @(IsSelected ? "border border-primary-content" : "")">
         @if (ShowAvatar)
         {
             <div class="col-span-1 bg-gray-600 flex items-center justify-center p-4 rounded-full w-10 h-10">
@@ -34,7 +34,7 @@
             <p class="text-center text-xs md:hidden">@Model.DeliverStatus[0]</p>
         </div>
     </div>
-</div>
+</label>
 }
 
 @code {
@@ -50,4 +50,5 @@
 
     [Parameter]
     public EventCallback Click { get; set; }
+
 }

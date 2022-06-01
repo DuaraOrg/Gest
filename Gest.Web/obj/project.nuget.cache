@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OOkbFoNDvKVwiLcR/kOsunCC9NWA9I80o+0jy5Z7gkw8t+otke/3jo9u7JR+IHOcVoXUEev8fWXuq39FYtMe0Q==",
+  "dgSpecHash": "qRZ5CsxNRtrKbTU5mg7K9+DhixSARFYKwVfN15zhIq1kLpJ9uF3pwrOH7RMLER2RKNaGKbxgt3jukZQoMZDmTw==",
   "success": true,
   "projectFilePath": "D:\\Projects\\Gest\\Gest.Web\\Gest.Web.csproj",
   "expectedPackageFiles": [
@@ -53,6 +53,7 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\polly\\7.2.3\\polly.7.2.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\radzen.blazor\\3.16.3\\radzen.blazor.3.16.3.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\sentry\\3.17.1\\sentry.3.17.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.6\\sqlitepclraw.bundle_e_sqlite3.2.0.6.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\sqlitepclraw.core\\2.0.6\\sqlitepclraw.core.2.0.6.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.6\\sqlitepclraw.lib.e_sqlite3.2.0.6.nupkg.sha512",

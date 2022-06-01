@@ -1,5 +1,5 @@
 ﻿<div>
-    <div class="shadow bg-gray-50 flex justify-between items-center px-2 py-1 space-x-1">
+    <div class="shadow-md rounded bg-base-100 flex justify-between items-center px-2 py-1 space-x-1">
         @if (ShowAvatar)
         {
             <div class="bg-gray-600 flex items-center justify-center p-4 rounded-full w-12 h-12">
@@ -41,7 +41,7 @@
 </div>
     @if (_canAdjustDelivery)
     {
-       <div class="bg-gray-50 px-2 py-2 my-1 shadow">
+     <div class="bg-base-300 px-2 py-2 my-1 shadow">
          <p class="text-sm">Nouvelle livraison</p>
         @if(_isNewDeliveryBusy)
         {
@@ -60,8 +60,8 @@
             </div>
             }
             <div>
-                 <button @onclick=@Save  class="bg-gray-600 hover:bg-gray-500 px-2 py-1 text-gray-50 rounded shadow w-28 mb-0.5">Enregistrer</button>
-                 <button @onclick=@Cancel  class="bg-gray-100 w-28 hover:bg-gray-200 px-2 py-1 text-gray-600 rounded shadow mb-0.5">Annuler</button>
+                 <button @onclick=@Save  class="btn btn-sm shadow normal-case">Enregistrer</button>
+                 <button @onclick=@Cancel  class="btn btn-sm btn-outline shadow normal-case">Annuler</button>
             </div>
            
          </div>

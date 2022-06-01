@@ -205,3 +205,4 @@ D:\Projects\Gest\new\Gest\Gest.Web\obj\Debug\net6.0\Gest.Web.pdb
 D:\Projects\Gest\new\Gest\Gest.Web\obj\Debug\net6.0\Gest.Web.genruntimeconfig.cache
 D:\Projects\Gest\new\Gest\Gest.Web\obj\Debug\net6.0\ref\Gest.Web.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Gest.SqlServerMigration.pdb
+D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Sentry.dll

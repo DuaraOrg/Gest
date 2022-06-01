@@ -16,6 +16,10 @@
     .btn-main {
         @apply bg-gray-600 hover:bg-gray-500 px-2 py-1 text-gray-50 rounded shadow;
     }
+
+    .duaralist .rz-paginator {
+        @apply bg-base-100;
+    }
 }
 
 .validation-message {
@@ -54,5 +58,9 @@
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+.rz-datalist-data > li {
+    border:0px;
+    border-radius:10px;
 }
 

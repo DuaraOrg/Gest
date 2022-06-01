@@ -8,10 +8,16 @@
     {
         <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
     }
-    <div class="grid md:grid-cols-5 gap-1 h-[78vh]">
-        <RadzenDataList class="col-span-2 -space-y-5 h-full overflow-y-auto duaralist" Count=@_count Data=@_items TItem=@Sale LoadData=@LoadData AllowPaging=true>
+    <div class="grid md:grid-cols-5 gap-1 h-full md:h-[80vh] pt-[4.5rem] pb-[3rem] md:pb-[4rem]">
+        <RadzenDataList class="col-span-2 -space-y-5 h-full overflow-y-auto duaralist no-scrollbar" Count=@_count Data=@_items TItem=@Sale LoadData=@LoadData AllowPaging=true>
             <Template Context="item">
-                <SaleCard  Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item) />
+                <div class="-m-4 rounded">
+                   <SaleCard  Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item) />
+                   @if (_isSmall)
+                   {
+                      <SaleViewModal Model=@item/>
+                   }
+                </div>
             </Template>
         </RadzenDataList>
         @if(_selectedItem is not null)
@@ -23,7 +29,7 @@
     </div>
     </div>
     <div>
-      <button @onclick="_ => NewSale()" class="btn btn-circle fixed bottom-8 left-2 shadow-md">
+      <button @onclick="_ => NewSale()" class="btn btn-circle fixed bottom-9 left-4 shadow-md">
        <svg class=" fill-current"  viewBox="0 0 50 50">
             <path d="M24 9L24 24L9 24L9 26L24 26L24 41L26 41L26 26L41 26L41 24L26 24L26 9Z" />
         </svg>
@@ -107,13 +113,9 @@ else
         await InitialLoad();
     }
 
-    async Task OnSelectItem(Sale value)
+    void OnSelectItem(Sale value)
     {
         _selectedItem = value;
-        if (_isSmall)
-        {
-            await ViewDetails(value);
-        }
     }
 
     async Task LoadData(LoadDataArgs args)
@@ -168,14 +170,6 @@ else
     async Task NewSale()
     {
         var result = await DialogService.OpenAsync<SaleNew>("Nouvelle vente", new Dictionary<string, object>());
-        if (result is bool canRefresh && canRefresh == true)
-            await InitialLoad();
-    }
-    async Task ViewDetails(Sale item)
-    {
-        var param = new Dictionary<string, object?>() { { "Model", item } };
-        var title = $"Vente No #{item.SaleId}";
-        var result = await DialogService.OpenAsync<SaleView>(title, param);
         if (result is bool canRefresh && canRefresh == true)
             await InitialLoad();
     }

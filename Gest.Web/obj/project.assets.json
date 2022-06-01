@@ -652,6 +652,15 @@
           "buildMultiTargeting/Radzen.Blazor.props": {}
         }
       },
+      "Sentry/3.17.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Sentry.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Sentry.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
         "type": "package",
         "dependencies": {
@@ -1201,7 +1210,8 @@
           "Microsoft.AspNetCore.Components.Web": "6.0.3",
           "Microsoft.Fast.Components.FluentUI": "1.1.0",
           "Polly": "7.2.3",
-          "Radzen.Blazor": "3.16.3"
+          "Radzen.Blazor": "3.16.3",
+          "Sentry": "3.17.1"
         },
         "compile": {
           "bin/placeholder/Gest.UI.dll": {}
@@ -2305,6 +2315,31 @@
         "staticwebassets/fonts/roboto-v15-latin-300.woff",
         "staticwebassets/fonts/roboto-v15-latin-700.woff",
         "staticwebassets/fonts/roboto-v15-latin-regular.woff"
+      ]
+    },
+    "Sentry/3.17.1": {
+      "sha512": "6SWXkfae8AsCm8S0m+sQNhuoivONq5k0OLDkK/6VCyDM5w1iOE7XYrdRWIhsXPD4uxcJ/WJ1FqtVg/iytNCYLw==",
+      "type": "package",
+      "path": "sentry/3.17.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net461/Sentry.dll",
+        "lib/net461/Sentry.xml",
+        "lib/net5.0/Sentry.dll",
+        "lib/net5.0/Sentry.xml",
+        "lib/net6.0/Sentry.dll",
+        "lib/net6.0/Sentry.xml",
+        "lib/netcoreapp3.0/Sentry.dll",
+        "lib/netcoreapp3.0/Sentry.xml",
+        "lib/netstandard2.0/Sentry.dll",
+        "lib/netstandard2.0/Sentry.xml",
+        "lib/netstandard2.1/Sentry.dll",
+        "lib/netstandard2.1/Sentry.xml",
+        "sentry-nuget.png",
+        "sentry.3.17.1.nupkg.sha512",
+        "sentry.nuspec"
       ]
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
@@ -3615,7 +3650,8 @@
     "net6.0": [
       "Gest.SqlServerMigration >= 1.0.0",
       "Gest.UI >= 1.0.0",
-      "Microsoft.EntityFrameworkCore.Design >= 6.0.3"
+      "Microsoft.EntityFrameworkCore.Design >= 6.0.3",
+      "Sentry >= 3.17.1"
     ]
   },
   "packageFolders": {
@@ -3677,6 +3713,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[6.0.3, )"
+          },
+          "Sentry": {
+            "target": "Package",
+            "version": "[3.17.1, )"
           }
         },
         "imports": [
