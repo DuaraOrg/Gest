@@ -1,4 +1,4 @@
-﻿<div class="shadow flex items-center text-sm text-base-content overflow-x-scroll space-x-3 px-2  py-1  no-scrollbar fixed w-full top-[4.3rem] bg-base-100 z-10 ">
+﻿<div class="shadow flex items-center text-sm text-base-content overflow-x-scroll space-x-3 px-2  py-1  no-scrollbar fixed w-full top-[4.29rem] bg-base-100 z-10 ">
     <div>
          <h2 >Rechercher</h2>
         <RadzenTextBox  @oninput=@(args => OnSearchQuery.InvokeAsync(args.Value?.ToString())) class="min-w-[10rem]" Placeholder="No de vente" />
@@ -33,7 +33,11 @@
     }
     </div>
      <div class="pt-4 flex space-x-2">
-        <RadzenButton Click=@(_ => NewItem.InvokeAsync()) MouseEnter=@(args => ShowTooltip(args,"Ajouter une vente"))  Icon="add_circle_outline" ButtonStyle="ButtonStyle.Secondary" />
+        @if (Permissions.Contains(AppPermissions.Create) || Permissions.Contains(AppPermissions.Update))
+        {
+            
+            <RadzenButton Click=@(_ => NewItem.InvokeAsync()) MouseEnter=@(args => ShowTooltip(args,"Ajouter une vente"))  Icon="add_circle_outline" ButtonStyle="ButtonStyle.Secondary" />
+        }
         <RadzenButton Click=@(_ => OnRefresh.InvokeAsync()) Icon="refresh" ButtonStyle="ButtonStyle.Light" />
     </div>
 
@@ -60,6 +64,10 @@
 
     [Parameter]
     public EventCallback<(DateTime startDate,DateTime endDate)> DateChanged { get; set; }
+
+    [EditorRequired]
+    [Parameter]
+    public string Permissions { get; set; } = null!;
 
     string? _searchQuery;
     string _selectedPeriod = Period.Tous;

@@ -27,10 +27,12 @@
             <p class="font-semibold">@_total $</p>
          </div>
          <div class="grid grid-cols-2 gap-2">
-            <button @onclick=@(_ => OpenPayment()) class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Payer</button>
+            <label for="@($"modal-pay-{Client.Id}")"  class="btn shadow w-full">Payer</label>
             <button @onclick=@(_ => Cancel(false)) class="bg-gray-100 hover:bg-gray-200 px-4 py-2 text-gray-600 rounded shadow w-full">Annuler</button>
          </div>
         </div>
+        <CartPayModal Client=@Client Items=@_items 
+            Permissions=@Permissions Refresh="_ => Refresh.InvokeAsync()" />
     }
 </div>
 
@@ -41,9 +43,15 @@
 
     [Inject] public DialogService DialogService { get; set; } = null!;
 
+    [Parameter] public EventCallback Refresh { get; set; }
+
     [Parameter]
     [EditorRequired]
     public Client Client { get; set; } = null!;
+
+    [EditorRequired]
+    [Parameter]
+    public string Permissions { get; set; } = null!;
 
     [Parameter]
     public Article? AddArticle { get; set; }
@@ -75,6 +83,7 @@
             _total = _items.Sum(x => x.SubTotal);
         }
     }
+
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && _items.Count <= 1)
@@ -131,15 +140,6 @@
         _items[index] = item;
         await localStorage.SetItemAsync("cart", _items.Select(x => x.Article));
         _total = _items.Sum(x => x.SubTotal);
-    }
-
-    async Task OpenPayment()
-    {
-        var param = new Dictionary<string, object?>() { { "Items", _items}, {"Client",Client} };
-        var title = $"Paiement vente";
-        var result = await DialogService.OpenAsync<CartPay>(title, param);
-        if(result is bool canRefresh)
-            await Cancel(canRefresh);
     }
 
     async Task Cancel(bool canRefresh)

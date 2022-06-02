@@ -1,0 +1,19 @@
+﻿<div class="flex items-center justify-between -mx-4 -mt-4">
+       <h3 class=" font-light text-md">@Title</h3>
+       <label for="@Id" class="text-base-content bg-base-300 rounded-full p-1.5 hover:cursor-pointer">
+           <svg class="h-4 fill-current" viewBox="0 0 50 50">
+                <path d="M7.71875 6.28125L6.28125 7.71875L23.5625 25L6.28125 42.28125L7.71875 43.71875L25 26.4375L42.28125 43.71875L43.71875 42.28125L26.4375 25L43.71875 7.71875L42.28125 6.28125L25 23.5625Z" />
+            </svg>
+       </label>
+</div>
+<div class="bg-base-100 h-[1px] w-[113.5%] -mx-10 mt-2 no-scrollbar overflow-x-hidden"></div>
+
+@code {
+    [EditorRequired]
+    [Parameter]
+    public string Title { get; set; } = null!;
+
+    [EditorRequired]
+    [Parameter]
+    public string Id { get; set; } = null!;
+}

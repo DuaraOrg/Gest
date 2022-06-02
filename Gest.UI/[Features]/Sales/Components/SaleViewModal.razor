@@ -1,24 +1,21 @@
-﻿<!-- Put this part before </body> tag -->
-<input type="checkbox" id="@($"modal-{Model.Id}")" class="modal-toggle" />
+﻿<input type="checkbox" id="@($"modal-{Model.Id}")" class="modal-toggle" />
 <div class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box bg-base-200 -mx-4 -mb-10 shadow-md border-t-base-300">
-    <div class="flex items-center justify-between -mx-4 -mt-4">
-       <h3 class=" font-light text-md">Vente No @Model.SaleId</h3>
-       <label for="@($"modal-{Model.Id}")" class="text-base-content bg-base-300 rounded-full p-1.5 hover:cursor-pointer">
-           <svg class="h-4 fill-current" viewBox="0 0 50 50">
-                <path d="M7.71875 6.28125L6.28125 7.71875L23.5625 25L6.28125 42.28125L7.71875 43.71875L25 26.4375L42.28125 43.71875L43.71875 42.28125L26.4375 25L43.71875 7.71875L42.28125 6.28125L25 23.5625Z" />
-            </svg>
-       </label>
-    </div>
-    <div class="bg-base-100 h-[1px] w-[118%] -mx-10 mt-2 no-scrollbar overflow-x-hidden"></div>
-    <div class="-mx-7">
-        <SaleView Model=@Model/>
+  <div class="modal-box modal-box-extra">
+    <ModalTop Id=@($"modal-{Model.Id}") Title=@($"Vente No {Model.SaleId}")/>
+    <div class="-mx-7 pb-2">
+        <SaleView Model=@Model Permissions=@Permissions Refresh="() => Refresh.InvokeAsync()"/>
     </div>
   </div>
 </div>
 @code {
-    
+
     [EditorRequired]
     [Parameter]
     public Sale Model { get; set; } = null!;
+
+    [EditorRequired]
+    [Parameter]
+    public string Permissions { get; set; } = null!;
+
+    [Parameter] public EventCallback Refresh { get; set; }
 }

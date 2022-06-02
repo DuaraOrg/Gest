@@ -1,0 +1,31 @@
+﻿<input type="checkbox" id="@_modalId" class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box modal-box-extra">
+    <ModalTop Id=@_modalId Title=@(Sale is null ? "Nouveau paiement" : $"Paiement vente no {Sale.SaleId}")/>
+    <div class="-mx-4 md:-mx-2 pt-4">
+        <CartPay Client=@Client Items=@Items Sale=@Sale Refresh="amount => Refresh.InvokeAsync(amount)"/>
+    </div>
+  </div>
+</div>
+@code {
+
+    [Parameter] 
+    public List<SaleItem> Items { get; set; } = null!;
+    [Parameter] 
+    public Client Client { get; set; } = null!;
+    [Parameter]
+    public Sale? Sale { get; set; }
+
+    [Parameter] public EventCallback<decimal> Refresh { get; set; }
+
+    [EditorRequired]
+    [Parameter]
+    public string Permissions { get; set; } = null!;
+
+    string _modalId = "";
+
+    protected override void OnParametersSet()
+    {
+        _modalId = Sale is null ? $"modal-pay-{Client.Id}" : $"modal-pay-{Sale.Id}";
+    }
+}

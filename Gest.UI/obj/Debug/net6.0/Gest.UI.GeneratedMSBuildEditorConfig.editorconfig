@@ -19,6 +19,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Gest/Gest.UI/Components/ModalTop.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNb2RhbFRvcC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Gest/Gest.UI/Components/PelekaAutoComplete.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQZWxla2FBdXRvQ29tcGxldGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -145,6 +149,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/CartPay.razor]
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXENhcnRQYXkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/CartPayModal.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXENhcnRQYXlNb2RhbC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/ListArticle.razor]

@@ -12,7 +12,7 @@ namespace Gest.Core.Entities
 
         public const string Expense = nameof(Expense);
 
-        public static IEnumerable<string> All() => new List<string>() { Cash, Credit,Bank,Expense };
+        public static IEnumerable<string> All() => new List<string>() { Cash, Credit };
     }
 
     public class TransactionType

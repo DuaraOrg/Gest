@@ -1,66 +1,89 @@
-﻿<div class="space-y-2">
+﻿<div class="space-y-3">
     @if (_isBusy)
     {
-        <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+        <progress class="progress w-full"></progress>
     }
     <div class="grid grid-cols-2 items-center gap-2">
         <p>Montant payé en dollar</p>
         <div class="flex items-center space-x-2">
-              <RadzenNumeric class="full" Min="0" Change=@(e => OnPaid(e,true)) @bind-Value=@_paidInUSD TValue=@decimal  Placeholder="1"/>
+              <input type="number"
+                  min="0"
+                  value="0"
+                  placeholder="0"
+                  @onchange="e => OnPaid(e.Value?.ToString(),true)"
+                  @oninput="e => OnPaid(e.Value?.ToString(),true)"
+                  class="input input-bordered input-md w-full"/>
               <p>USD</p>
         </div>
     </div>
-    <div class="grid grid-cols-2 gap-2">
+    <div class="grid grid-cols-2 items-center gap-2">
         <p>Montant payé en franc</p>
          <div class="flex items-center space-x-2">
-              <RadzenNumeric Min="0" Change=@(e => OnPaid(e,false))  TValue=@decimal  @bind-Value=@_paidInFC   Placeholder="1"/>
-              <p>FC</p>
+                <input type="number"
+                  min="0"
+                  value="0"
+                  placeholder="0"
+                  @onchange="e => OnPaid(e.Value?.ToString(),true)"
+                  @oninput="e => OnPaid(e.Value?.ToString(),false)"
+                  class="input input-bordered input-md w-full"/>
+              <p>FC<span class="invisible">C</span></p>
         </div>
     </div>
-    <div class="grid grid-cols-2 gap-2">
+    <div class="grid grid-cols-2 items-center gap-2">
         <p>Méthode de paiement</p>
-         <div class="flex items-center space-x-2">
-             <RadzenDropDown  @bind-Value=@_selectedPaymentMethod TValue=@string Data=@_paymentMethodes/>
+         <div class="flex items-center space-x-2 pr-[2rem]">
+             <select @bind=@_selectedPaymentMethod class="select select-bordered w-full">
+                @foreach(var item in _paymentMethodes)
+                {
+                    <option value="@item" selected=@(item == TypeOfAccount.Cash)>@item</option>
+                }
+            </select>
         </div>
     </div>
-    <div class="flex items-center spac-x-2">
-         <RadzenCheckBox @bind-Value=@_notDelivered  Name="Aretirer" TValue="bool"/>
-         <RadzenLabel class="ml-2" Text="A retirer" Component="Aretirer" />
-    </div>
-    <div class="bg-gray-50 shadow px-2 my-4">
+    @if (_isNew)
+    {
+        <div class="form-control max-w-[6rem]">
+        <label class="label cursor-pointer">
+            <span class="label-text">A retirer</span> 
+            <input @bind=@_notDelivered type="checkbox"  class="checkbox" />
+        </label>
+        </div>
+    }
+    <div class="bg-base-100 text-base-content font-medium shadow px-2 my-4">
        <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Total à payer</h2>
-            <h2 class="text-gray-800 font-medium">@_totalInFC.ToString("#.##")FC</h2>
-            <h2 class="text-gray-800 font-medium">@_total.ToString("#.##")$</h2>
+            <h2 class="font-light">Total à payer</h2>
+            <h2>@_totalInFC.ToString("#.##")FC</h2>
+            <h2>@_total.ToString("#.##")$</h2>
         </div>
         <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Total payé</h2>
-            <h2 class="text-gray-800 font-medium">@_totalPaid.ToString("#.##")$</h2>
+            <h2 class="font-light">Total payé</h2>
+            <h2>@_totalPaid.ToString("#.##")$</h2>
         </div>
         <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Reste</h2>
-            <h2 class="text-gray-800 font-medium">@_restInFC.ToString("#.##")FC</h2>
-            <h2 class="text-gray-800 font-medium">@_restInUSD.ToString("#.##")$</h2>
+            <h2 class="font-light">Reste</h2>
+            <h2>@_restInFC.ToString("#.##")FC</h2>
+            <h2>@_restInUSD.ToString("#.##")$</h2>
         </div>
         <div class="flex justify-between px-2 py-1.5 border-b-[0.5px] border-gray-400">
-            <h2 class="font-light text-gray-600">Echange</h2>
-            <h2 class="text-gray-800 font-medium">@_excessInFC.ToString("#.##")FC</h2>
-            <h2 class="text-gray-800 font-medium">@_excessInUSD.ToString("#.##")$</h2>
+            <h2 class="font-light">Echange</h2>
+            <h2>@_excessInFC.ToString("#.##")FC</h2>
+            <h2>@_excessInUSD.ToString("#.##")$</h2>
         </div>
     </div>
-    <div class="grid grid-cols-2 gap-2 pt-4">
-          <button @onclick=@(_ => Pay()) class="bg-gray-600 hover:bg-gray-500 px-4 py-2 text-gray-50 rounded shadow w-full">Confirmer</button>
-           <button @onclick=@(_ => Cancel()) class="bg-gray-100 hover:bg-gray-200 px-4 py-2 text-gray-600 rounded shadow w-full">Annuler</button>
+    <div class="grid grid-cols-2 gap-2 py-2 pb-8 md:pb-0">
+          <button @onclick=@(_ => Pay()) class="btn shadow w-full">Confirmer</button>
+          <label id=@($"btn{_modalId}") for=@($"modal{_modalId}") class="btn btn-outline shadow w-full">Annuler</label>
    </div>
 </div>
 
 @code {
-    [Inject] public DialogService DialogService { get; set; } = null!;
     [Inject] public CurrentItems CurrentItems { get; set; } = null!;
     [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] public IJSRuntime JSRuntime { get; set; } = null!;
     [Parameter] public List<SaleItem> Items { get; set; } = null!;
     [Parameter] public Client Client { get; set; } = null!;
     [Parameter] public Sale? Sale { get; set; }
+    [Parameter] public EventCallback<decimal> Refresh { get; set; }
     string _selectedPaymentMethod = "Cash";
     decimal _totalInFC = 0;
     decimal _total = 0;
@@ -74,6 +97,7 @@
     bool _notDelivered = false;
     bool _isBusy = false;
     bool _isNew = true;
+    string _modalId = "";
     IEnumerable<string> _paymentMethodes = TypeOfAccount.All();
 
     protected override void OnParametersSet()
@@ -84,26 +108,34 @@
         else
             _total = Sale!.TotalAmount - Sale.AmountPaid;
         _totalInFC = _total * CurrentItems.Company.FCToDollarRate;
+        _modalId = Sale is null ? $"-pay-{Client.Id}" : $"-pay-{Sale.Id}";
     }
 
-    void Cancel(bool canRefresh = false) => DialogService.Close(canRefresh);
-
-    void OnPaid(decimal amount, bool isDollar)
+    void OnPaid(string? value, bool isDollar)
     {
-        _totalPaid = (_paidInFC / CurrentItems.Company.FCToDollarRate) + _paidInUSD;
-        _excessInUSD = _total >= _totalPaid ? 0 : _totalPaid - _total;
-        _excessInFC = _excessInUSD * CurrentItems.Company.FCToDollarRate;
-        _restInUSD = _totalPaid >= _total ? 0 : _total - _totalPaid;
-        _restInFC = _restInUSD * CurrentItems.Company.FCToDollarRate;
+        if(decimal.TryParse(value, out var amount))
+        {
+            if(isDollar)
+                _paidInUSD = amount;
+            else
+                _paidInFC = amount;
+
+            _totalPaid = (_paidInFC / CurrentItems.Company.FCToDollarRate) + _paidInUSD;
+            _excessInUSD = _total >= _totalPaid ? 0 : _totalPaid - _total;
+            _excessInFC = _excessInUSD * CurrentItems.Company.FCToDollarRate;
+            _restInUSD = _totalPaid >= _total ? 0 : _total - _totalPaid;
+            _restInFC = _restInUSD * CurrentItems.Company.FCToDollarRate;
+        }
     }
 
-    async void Pay()
+    async Task Pay()
     {
         if (_isNew)
         {
             _selectedPaymentMethod = _totalPaid == 0 ? TypeOfAccount.Credit : TypeOfAccount.Cash;
             var result = await Save();
-            Cancel(result > 0);
+            await JSRuntime.InvokeVoidAsync("click",$"btn-pay-{Client.Id}");
+            await Refresh.InvokeAsync(_totalPaid);
         }
         else
         {
@@ -111,7 +143,8 @@
             {
                 _selectedPaymentMethod = TypeOfAccount.Cash;
                 var result = await Update();
-                Cancel(result > 0);
+                await JSRuntime.InvokeVoidAsync("click",$"btn-pay-{Sale!.Id}");
+                await Refresh.InvokeAsync(_totalPaid);
             }
         }
     }

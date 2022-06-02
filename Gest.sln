@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gest.SqlServerMigration", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gest.Maui", "Gest.Maui\Gest.Maui.csproj", "{FCB55D3F-9D89-41FE-A6A0-27AD92B18B0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sentry.Maui", "Sentry.Maui\Sentry.Maui.csproj", "{B723CE0F-7928-4161-83E1-4E8DB4ACE49C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sentry.Maui", "Sentry.Maui\Sentry.Maui.csproj", "{B723CE0F-7928-4161-83E1-4E8DB4ACE49C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

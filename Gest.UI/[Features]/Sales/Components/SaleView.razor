@@ -20,7 +20,7 @@
             <div class="pt-2 space-y-1 -mx-3">
                 @foreach (var item in Model.Items.Where(x => x.Article is not null))
                 {
-               <SaleItemView Sale=@Model Item=@item/>
+                    <SaleItemView Sale=@Model Item=@item Refresh="() => Refresh.InvokeAsync()"/>
                 }
             </div>
         </div>
@@ -60,15 +60,20 @@
     </div>
     @if (_isBusy)
     {
-                    <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
+         <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
     }
-    <div class="grid @(_isSmall ? (Model.TotalAmount - Model.AmountPaid) >= 0 ? "grid-cols-4" : "grid-cols-3" : "grid-cols-3") gap-2 px-2 py-4 md:py-2 ">
+    <div class="grid @(_isSmall ? (Model.TotalAmount - Model.AmountPaid) >= 0 ? "grid-cols-4" : "grid-cols-3" : "grid-cols-3") gap-2 px-2 md:py-2 ">
         <button class="btn shadow">Facture</button>
-        @if ((Model.TotalAmount - Model.AmountPaid) > 0)
+        @if ((Model.TotalAmount - Model.AmountPaid) > 0 
+        && Permissions.Contains(AppPermissions.Update))
         {
-              <button @onclick=@(_ => OpenPayment())  class="btn shadow">Payer</button>
+              <label for="@($"modal-pay-{Model.Id}")"  class="btn shadow">Payer</label>
+              <CartPayModal  
+                  Client=@Model.Client Items=@Model.Items.ToList() 
+                  Sale=@Model Permissions=@Permissions Refresh="e => OnCartPayRefresh(e)"/>
         }
-        @if (Model.DeliverStatus != DeliveryStatus.Delivered)
+        @if (Model.DeliverStatus != DeliveryStatus.Delivered 
+        && Permissions.Contains(AppPermissions.Update))
         {
              <button @onclick=@DeliverAll class="btn  shadow">Livrer</button>
         }
@@ -81,29 +86,22 @@
 <RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
 @code {
 
-    [Inject] public DialogService DialogService { get; set; } = null!;
-    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [Inject] 
+    public GestDbContext DbContext { get; set; } = null!;
 
     [EditorRequired]
     [Parameter]
     public Sale Model { get; set; } = null!;
 
+    [EditorRequired]
+    [Parameter]
+    public string Permissions { get; set; } = null!;
 
-    [Inject] IJSRuntime JSRuntime { get; set; } = null!;
+    [Parameter] public EventCallback Refresh { get; set; }
 
     bool _isSmall = false;
     bool _isBusy = false;
 
-    void Cancel(bool canRefresh = false) => DialogService.Close(canRefresh);
-
-    async Task OpenPayment()
-    {
-        var param = new Dictionary<string, object?>() { { "Sale", Model }, { "Client", Model.Client } };
-        var title = $"Paiement vente #{Model.SaleId}";
-        var result = await DialogService.OpenAsync<CartPay>(title, param);
-        if (result is bool canRefresh)
-            Cancel(canRefresh);
-    }
     async Task DeliverAll()
     {
         _isBusy = true;
@@ -140,5 +138,13 @@
         await DbContext.SaveChangesAsync();
         _isBusy = false;
         Model = DbContext.Sales.Include(x => x.Items).ThenInclude(x => x.Article).Single(x => x.Id == Model.Id);
+        await Refresh.InvokeAsync();
+    }
+
+    async Task OnCartPayRefresh(decimal paidAmount)
+    {
+        Model.AmountPaid += paidAmount;
+        Model.AmountPaid = Model.AmountPaid > Model.TotalAmount ? Model.TotalAmount : Model.AmountPaid;
+        await Refresh.InvokeAsync();
     }
 }

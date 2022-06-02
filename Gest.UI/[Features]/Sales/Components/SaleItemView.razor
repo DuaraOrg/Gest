@@ -48,18 +48,28 @@
             <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
         }
          <div class="flex space-x-2 items-end justify-center">
-            <div>
+            <div class="space-y-1">
                 <p class="text-sm">@Item.Article.UnitOfMeasure</p>
-                <RadzenNumeric  Min="0"  Change=@(e => OnQtyChanged(e.ToString(),true)) @oninput=@(e => OnQtyChanged(e.Value?.ToString(),true)) TValue=@double class="w-16" @bind-Value=@_qtyInUnitOfMeasure Placeholder="1"/>
+                <input type="number" placeholder="0"
+                    min="0"
+                    max="@_qtyNewTotalUnitOfMeasure"
+                    @bind=@_qtyInUnitOfMeasure
+                    @oninput=@(e => OnQtyChanged(e.Value?.ToString(),true))
+                    class="input input-bordered input-sm w-full max-w-[5rem]" />
             </div>
             @if(Item.Article.Conditionnement is not null)
             {
              <div>
                 <p class="text-sm">@Item.Article.Conditionnement.Name</p>
-                <RadzenNumeric Change=@(e => OnQtyChanged(e.ToString(),false)) @oninput=@(e => OnQtyChanged(e.Value?.ToString(),false)) TValue=@double    class="w-16" @bind-Value=@_qtyPerConidtionnement Placeholder="1"/>
+                <input type="number" placeholder="0"
+                    min="0"
+                    max="@(Math.Round(_qtyNewTotalUnitOfMeasure / Item.Article.Conditionnement.QtyPerUnitOfMeasure,0))"
+                    @bind=@_qtyPerConidtionnement
+                    @oninput=@(e => OnQtyChanged(e.Value?.ToString(),false))
+                    class="input input-bordered input-sm w-full max-w-[5rem]" />
             </div>
             }
-            <div>
+            <div class="flex space-x-1">
                  <button @onclick=@Save  class="btn btn-sm shadow normal-case">Enregistrer</button>
                  <button @onclick=@Cancel  class="btn btn-sm btn-outline shadow normal-case">Annuler</button>
             </div>
@@ -72,7 +82,8 @@
 @code {
     [Parameter] public SaleItem Item { get; set; } = null!;
     [Parameter] public Sale Sale { get; set; } = null!;
-     [Parameter] public bool ShowAvatar { get; set; } = true;
+    [Parameter] public bool ShowAvatar { get; set; } = true;
+    [Parameter] public EventCallback Refresh { get; set; }
     [Inject] public GestDbContext DbContext { get; set; } = null!;
     double _qtyPerConidtionnement = 0;
     bool _canAdjustDelivery = false;
@@ -83,10 +94,15 @@
     double _qtyAlreadyDelivered = 0;
     protected override void OnParametersSet()
     {
-        _isDelivered = Item.QtyDelivered >= Item.QtyInUnitOfMeasure;
-        _qtyAlreadyDelivered = Item.QtyDelivered;
+        Initialize(Item);
+    }
+
+    void Initialize(SaleItem item)
+    {
+        _isDelivered = item.QtyDelivered >= item.QtyInUnitOfMeasure;
+        _qtyAlreadyDelivered = item.QtyDelivered;
         if(!_isDelivered)
-            _qtyNewTotalUnitOfMeasure = Item.QtyInUnitOfMeasure - Item.QtyDelivered;
+            _qtyNewTotalUnitOfMeasure = item.QtyInUnitOfMeasure - item.QtyDelivered;
     }
 
     void OnQtyChanged(string? value, bool isUnitOfMeasure)
@@ -95,6 +111,7 @@
         {
             if (isUnitOfMeasure)
             {
+                _qtyInUnitOfMeasure = newValue;
                 if (Item.Article!.Conditionnement is not null)
                 {
                     _qtyPerConidtionnement = Math.Round(newValue * Item.Article.Conditionnement.QtyPerUnitOfMeasure, 0);
@@ -102,6 +119,7 @@
             }
             else
             {
+                _qtyPerConidtionnement = newValue;
                 if (Item.Article!.Conditionnement is not null)
                 {
                     _qtyInUnitOfMeasure = Math.Round(newValue / Item.Article!.Conditionnement!.QtyPerUnitOfMeasure, 0);
@@ -122,6 +140,7 @@
                 _isNewDeliveryBusy = false;
                 return;
             }
+
             var stockMovement = new StockMouvement()
          {
               ArticleId = Item.Article!.Id,
@@ -148,8 +167,11 @@
                                 ? DeliveryStatus.InDelivery : DeliveryStatus.Delivered;
             DbContext.Update(sale);
             await DbContext.SaveChangesAsync();
+
             _isNewDeliveryBusy = false;
             _canAdjustDelivery = false;
+            await Refresh.InvokeAsync();
+            Initialize(saleItem);
             StateHasChanged();
         }
         catch(Exception ex)
