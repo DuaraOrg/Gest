@@ -1,33 +1,22 @@
 ﻿@using System.ComponentModel.DataAnnotations 
 @using Microsoft.EntityFrameworkCore;
-<FluentCard class="px-5 py-2 space-y-2">
-      <div class="space-y-2">
-          <h2 class="text-gray-700 text-lg font-semibold">Bienvenu</h2>
-          <h3 class="text-gray-600 font-light">Veuillez vous identier pour vous connecter</h3>
-      </div>
-      <div class="h-[0.5px] w-full bg-gray-400 -mx-5 my-2"></div>
-
-      <EditForm class="space-y-3 my-2" Model=@_model OnValidSubmit=@OnSubmit>
+<div data-theme="@_selectedTheme" class="card bg-base-100 shadow-xl mx-4">
+  <div class="card-body">
+    <h2 class="card-title">Bienvenu</h2>
+    <p>Veuillez vous identier pour vous connecter</p>
+     <EditForm class="space-y-3 my-2" Model=@_model OnValidSubmit=@OnValidSubmit >
             <DataAnnotationsValidator/>
             <ValidationSummary/>
             <h2 class="text-red-500 text-sm">@_errors</h2>
             <div class="space-y-3 flex flex-col py-3">
-                <FluentTextField  autocomplete="username" aria-required="true"  @bind-Value=@_model.Email TextFieldType=@TextFieldType.Email Placeholder="admin@example.com" DisplayName="Email"/>
-                <FluentTextField  autocomplete="current-password" aria-required="true" @bind-Value=@_model.Password TextFieldType=@TextFieldType.Password Placeholder="************" DisplayName="Mot de passe"/>   
+                <input type="text" autocomplete="username" @bind=@_model.Email placeholder="Email" class="input input-bordered w-full max-w-xs" />
+                <input type="password"  autocomplete="current-password" aria-required="true" @bind=@_model.Password placeholder="Mot de passe" class="input input-bordered w-full max-w-xs" />  
             </div>
-            <FluentButton class="px-2 w-full" Disabled=@_isBusy type="submit" Appearance=@Appearance.Accent>
-            @if (_isBusy)
-            {
-                <FluentProgressRing />
-            }
-            else
-            {
-                <p>Se connecter</p>
-            }
-        </FluentButton>
+            <button type="submit" @onclick=@(e => _isBusy = true) class="btn w-full shadow @(_isBusy ? "loading" : "")" disabled="@_isBusy">Se connecter</button>
       </EditForm>
-</FluentCard>
-<div data-theme="@_selectedTheme" class="w-full py-5 -mt-2 flex items-center justify-center">
+  </div>
+</div>
+<div data-theme="@_selectedTheme" class="py-5 -mt-3 mx-4 flex items-center justify-center">
      <button @onclick=ChangeTheme class="btn my-2 mt-4">Changer de Thème</button>
 </div>
 
@@ -52,6 +41,11 @@
 
     async Task OnSubmit()
     {
+         _isBusy = true;
+    }
+
+    async Task OnValidSubmit()
+    {
         try
         {
             _isBusy = true;
@@ -59,7 +53,7 @@
                 .Include(x => x.Companies)
                 .ThenInclude(x => x.Company)
                 .SingleOrDefaultAsync(x => x.Email == _model.Email);
-            if(user is not null)
+            if (user is not null)
             {
                 var isValidPassword = _model.Password.VerifyPassword(user.PasswordHash, user.PasswordSalt);
                 if (isValidPassword)
@@ -75,7 +69,7 @@
             _errors = "Email ou mot de passe incorrect";
             _isBusy = false;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }

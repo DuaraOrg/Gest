@@ -1,6 +1,6 @@
 ﻿<input type="checkbox" id="@_modalId" class="modal-toggle" />
 <div class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box modal-box-extra">
+  <div class="modal-box modal-box-extra relative bottom-[2rem] md:bottom-0">
     <ModalTop Id=@_modalId Title=@(Sale is null ? "Nouveau paiement" : $"Paiement vente no {Sale.SaleId}")/>
     <div class="-mx-4 md:-mx-2 pt-4">
         <CartPay Client=@Client Items=@Items Sale=@Sale Refresh="amount => Refresh.InvokeAsync(amount)"/>

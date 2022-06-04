@@ -62,7 +62,7 @@
     {
          <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
     }
-    <div class="grid @(_isSmall ? (Model.TotalAmount - Model.AmountPaid) >= 0 ? "grid-cols-4" : "grid-cols-3" : "grid-cols-3") gap-2 px-2 md:py-2 ">
+    <div class="grid @(_isSmall ? (Model.TotalAmount - Model.AmountPaid) >= 0 ? "grid-cols-4" : "grid-cols-3" : "grid-cols-3") gap-2 px-2 py-2">
         <button class="btn shadow">Facture</button>
         @if ((Model.TotalAmount - Model.AmountPaid) > 0 
         && Permissions.Contains(AppPermissions.Update))
