@@ -1,4 +1,4 @@
-﻿<div @onclick=@(_ => Click.InvokeAsync()) class="flex items-center justify-between -m-4 p-2 hover:cursor-pointer hover:bg-gray-100 @(IsSelected ? "border border-gray-600" : "")">
+﻿<div @onclick=@(_ => Click.InvokeAsync()) class="bg-base-100 flex items-center justify-between -m-4 p-2 hover:cursor-pointer hover:bg-gray-100 @(IsSelected ? "border border-gray-600" : "")">
     <div class="flex space-x-2">
                         <div class="bg-gray-600 flex items-center justify-center p-4 rounded-full w-12 h-12">
                             <h2 class="text-gray-50 font-semibold">@Model.Name.ToAvatar()</h2>

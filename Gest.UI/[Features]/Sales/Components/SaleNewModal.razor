@@ -1,0 +1,16 @@
+﻿<input type="checkbox" id="modal-new-sale" class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box modal-box-extra md:max-w-[50rem] no-scrollbar">
+    <ModalTop Id="modal-new-sale" Title="Nouvelle vente"/>
+    <div class="-mx-7 px-1 pb-4">
+        <SaleNew Refresh="_ => Refresh.InvokeAsync()" Permissions=@Permissions/>
+    </div>
+  </div>
+</div>
+@code {
+
+    [Parameter] public EventCallback Refresh { get; set; }
+    [EditorRequired]
+    [Parameter]
+    public string Permissions { get; set; } = null!;
+}

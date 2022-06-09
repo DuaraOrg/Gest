@@ -1,34 +1,46 @@
-﻿<div @onfocusout=@(e => Change.InvokeAsync(Item))>
-    <div class="shadow bg-gray-50 flex justify-between items-center px-2 py-1 space-x-1">
-    <div class="bg-gray-600 flex items-center justify-center p-4 rounded-full w-12 h-12">
+﻿@if(Item.Article is not null)
+{
+    <div @onfocusout=@(e => Change.InvokeAsync(Item))>
+    <div class="shadow bg-base-100 flex justify-between items-center px-2 py-1 space-x-1">
+    <div class="bg-base-300 flex items-center justify-center p-4 rounded-full w-12 h-12">
            <h2 class="text-gray-50 font-semibold">@Item.Article!.Name.ToAvatar()</h2>
      </div>
      <div class="space-y-1">
           <h2 class="font-medium text-sm">@Item.Article.Name</h2>
-          @if(Item.Article.Conditionnement is not null)
-          {
-             <div class="flex space-x-2 items-center">
-                   <p class="text-sm">Détail</p>
-                   <RadzenSwitch Change=@(e => SwitchPrice(e)) class="h-[1rem]"/>
-                   <p class="text-sm">Gros</p>
-             </div>
-          }
+            @if (Item.Article.Conditionnement is not null)
+            {
+                 <div class="flex space-x-2 items-center">
+                       <p class="text-sm">Détail</p>
+                       <input  @onchange=@(e => SwitchPrice((bool)e.Value!)) type="checkbox" class="toggle toggle-sm" />
+                       <p class="text-sm">Gros</p>
+                 </div>
+            }
           <p class="text-sm text-gray-500">@Item.UnitPricePerUnitOfMeasure.ToString("#.##") $ par @Item.Article.UnitOfMeasure</p>
           <p class="text-sm font-medium">Total: @Item.SubTotal.ToString("#.##") $</p>
-         
+
     </div>
      <div>
          <div>
              <p class="text-sm">@Item.Article.UnitOfMeasure</p>
-             <RadzenNumeric Change=@(e => OnQtyChanged(e.ToString(),true)) @oninput=@(e => OnQtyChanged(e.Value?.ToString(),true)) TValue=@double class="w-16" @bind-Value=@Item.QtyInUnitOfMeasure Placeholder="1"/>
+              <input type="number" placeholder="0"
+                    min="0"
+                    step="1"
+                    @bind=@Item.QtyInUnitOfMeasure
+                    @oninput=@(e => OnQtyChanged(e.Value?.ToString(),true))
+                    class="input input-bordered input-sm w-full max-w-[5rem]" />
          </div>
-        @if(Item.Article.Conditionnement is not null)
-        {
-             <div>
-                <p class="text-sm">@Item.Article.Conditionnement.Name</p>
-                <RadzenNumeric Change=@(e => OnQtyChanged(e.ToString(),false)) @oninput=@(e => OnQtyChanged(e.Value?.ToString(),false)) TValue=@double    class="w-16" @bind-Value=@_qtyPerConidtionnement Placeholder="1"/>
-            </div>
-        }
+            @if (Item.Article.Conditionnement is not null)
+            {
+                 <div>
+                    <p class="text-sm">@Item.Article.Conditionnement.Name</p>
+                    <input type="number" placeholder="0"
+                    min="0"
+                    step="1"
+                    @bind=@_qtyPerConidtionnement
+                    @oninput=@(e => OnQtyChanged(e.Value?.ToString(),false))
+                    class="input input-bordered input-sm w-full max-w-[5rem]" />
+                </div>
+            }
      </div>
      <div class="space-y-2">
          <button @onclick=@(e => Remove.InvokeAsync(Item)) class="bg-red-400 hover:bg-red-300 text-gray-50 flex items-center justify-center py-1 px-1 rounded">
@@ -45,24 +57,34 @@
 </div>
     @if (_canAdjustPrice)
     {
-         <div class="bg-gray-50 px-2 py-2 my-1 shadow">
-            <p class="text-sm">Modifier le prix</p>
-            <div class="flex items-center justify-center space-x-2">
-                <div>
-                    <p class="text-sm">Prix par @Item.Article.UnitOfMeasure</p>
-                    <RadzenNumeric  TValue=@decimal class="w-20" @bind-Value=@Item.UnitPricePerUnitOfMeasure   Placeholder="1"/>
+             <div class="bg-base-300 px-2 py-2 my-1 shadow">
+                <p class="text-sm">Modifier le prix</p>
+                <div class="flex items-center justify-center space-x-2">
+                    <div>
+                        <p class="text-sm">Prix par @Item.Article.UnitOfMeasure</p>
+                         <input type="number" placeholder="0"
+                    min="0"
+                    step="1"
+                    @bind=@Item.UnitPricePerUnitOfMeasure
+                    class="input input-bordered input-sm w-full max-w-[5rem]" />
+                    </div>
+                @if (Item.Article.Conditionnement is not null)
+                {
+                        <div>
+                            <p class="text-sm">Prix par @Item.Article.Conditionnement.Name</p>
+                             <input type="number" placeholder="0"
+                    min="0"
+                    step="1"
+                    @bind="@Item.Article.Price.SellingPricePerConditionnement"
+                    @oninput=@(e => ChangePriceOnGros())
+                    class="input input-bordered input-sm w-full max-w-[5rem]" />
+                        </div>
+                }
                 </div>
-            @if(Item.Article.Conditionnement is not null)
-            {
-                <div>
-                    <p class="text-sm">Prix par @Item.Article.Conditionnement.Name</p>
-                    <RadzenNumeric Change=@(e => ChangePriceOnGros()) @oninput=@(e => ChangePriceOnGros())  TValue="decimal?" class="w-20" @bind-Value=@Item.Article.Price.SellingPricePerConditionnement Placeholder="1"/>
-                </div>
-            }
             </div>
-        </div>
     }
 </div>
+}
 
 @code {
     [Parameter] public SaleItem Item { get; set; } = null!;
@@ -96,20 +118,23 @@
 
     void OnQtyChanged(string? value, bool isUnitOfMeasure)
     {
-        if(double.TryParse(value ?? "",out var newValue))
+        if (double.TryParse(value ?? "", out var newValue))
         {
-            if (isUnitOfMeasure)
+            if (Item.Article is not null)
             {
-                if (Item.Article!.Conditionnement is not null)
+                if (isUnitOfMeasure)
                 {
-                    _qtyPerConidtionnement = Math.Round(newValue * Item.Article.Conditionnement.QtyPerUnitOfMeasure, 0);
+                    if (Item.Article!.Conditionnement is not null)
+                    {
+                        _qtyPerConidtionnement = Math.Round(newValue / Item.Article.Conditionnement.QtyPerUnitOfMeasure, 0);
+                    }
                 }
-            }
-            else
-            {
-                if (Item.Article!.Conditionnement is not null)
+                else
                 {
-                    Item.QtyInUnitOfMeasure = Math.Round(newValue / Item.Article!.Conditionnement!.QtyPerUnitOfMeasure, 0);
+                    if (Item.Article!.Conditionnement is not null)
+                    {
+                        Item.QtyInUnitOfMeasure = Math.Round(newValue * Item.Article!.Conditionnement!.QtyPerUnitOfMeasure, 0);
+                    }
                 }
             }
         }

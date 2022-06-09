@@ -1,71 +1,53 @@
-﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
-@if(_isSmall)
+﻿@if (_isSmall)
 {
-    <RadzenSteps>
-        <Steps>
-            <RadzenStepsItem Text="Client">
-                <div class="py-1"><ListClient OnSelect=@(e => _selectedClient = e)/></div>
-            </RadzenStepsItem>
-             <RadzenStepsItem Text="Article">
-                  <div class="py-1"><ListArticle OnSelect=@(e => OnArticleSelected(e))/></div>
-            </RadzenStepsItem>
-             <RadzenStepsItem Text="Panier">
-                @if(_selectedClient is not null)
-                {
-                    <div class="py-1"><Cart AddArticle=@_lastSelectedArticle Client=@_selectedClient/></div>
-                }
-            </RadzenStepsItem>
-        </Steps>
-    </RadzenSteps>
-}
-else
-{
-    <div class="grid grid-cols-12 gap-1">
-        <div class="col-span-3">
-            <ListClient OnSelect=@(e => _selectedClient = e)/>
-        </div>
-    <div class="col-span-4">
-        <ListArticle OnSelect=@(e => OnArticleSelected(e))/>
-    </div>
-    <div class="col-span-5">
-        <Cart  AddArticle=@_lastSelectedArticle Client=@_selectedClient/>
-    </div>
-</div>
-}
-<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
-<RadzenMediaQuery Query="(min-width: 992px)" Change=@(e => _isLarge = e)/>
-@code {
-
-    [Inject] IJSRuntime JSRuntime { get; set; } = null!;
-
-    bool _isSmall = false;
-    bool _isLarge = false;
-    bool _isBusy = true;
-
-    Client? _selectedClient;
-    Article? _lastSelectedArticle;
-    List<Article> _selectedArticles = new List<Article>();
-
-    protected async override Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
+    <div>
+        @if (_currentStep == "Articles")
         {
-            if(!_isSmall)
-                await JSRuntime.InvokeVoidAsync("changeDialogSize", _isLarge ? "1000px" : "900px");
-        }
-    }
-
-    async Task OnArticleSelected(Article article)
-    {
-        if (_isSmall && !_selectedArticles.Any(x => x.Id == article.Id))
-        {
-            _selectedArticles.Add(article);
-            await localStorage.SetItemAsync("cart", _selectedArticles);
+            <ListArticle SaleItems=@_saleItems 
+                OnItems=@(items => _saleItems = items)
+                MoveToNext=@(e => _currentStep = "Cart")/>
         }
         else
         {
-            _lastSelectedArticle = article;
+            <Cart Items=@_saleItems 
+                MoveToBack=@(e => _currentStep = "Articles")
+                OnItems=@(items => _saleItems = items) 
+                Refresh="_ => Refresh.InvokeAsync()"
+                Permissions=@Permissions Client=@_client />
         }
+    </div>
+}
+else
+{
+    <div class="grid grid-cols-2">
+        <ListArticle SaleItems=@_saleItems 
+            OnItems=@(items => _saleItems = items)/>
+        <Cart Items=@_saleItems OnItems=@(items => _saleItems = items) 
+                Permissions=@Permissions Client=@_client
+                Refresh="_ => Refresh.InvokeAsync()"/>
+    </div>
+}
+<RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
+@code {
+
+    bool _isSmall = false;
+    bool _isBusy = true;
+    string _currentStep = "Articles";
+    Client _client = null!;
+
+    [Inject] public GestDbContext DbContext { get; set; } = null!;
+    [EditorRequired]
+    [Parameter]
+    public string Permissions { get; set; } = null!;
+
+        [Parameter] public EventCallback Refresh { get; set; }
+
+    List<SaleItem> _saleItems = new List<SaleItem>();
+
+    protected async override Task OnInitializedAsync()
+    {
+        _client = await DbContext.Clients
+        .FirstAsync(x => x.Email!.Contains("clientanonyme"));
     }
 
 

@@ -1,4 +1,5 @@
-﻿<div class="space-y-3">
+﻿@using Gest.UI._Features_.Sales
+<div class="space-y-3">
     @if (_isBusy)
     {
         <progress class="progress w-full"></progress>
@@ -152,140 +153,9 @@
     async Task<int> Save()
     {
         _isBusy = true;
-        DbContext.ChangeTracker.Clear();
-        if (!_notDelivered)
-        {
-            foreach(var item in Items)
-            {
-                var stockMovement = new StockMouvement()
-                    {
-                        ArticleId = item.Article!.Id,
-                        Date = DateTime.UtcNow,
-                        PrevStock = item.Article.Stock.Qty,
-                        NewStock = item.Article.Stock.Qty - item.QtyInUnitOfMeasure,
-                        Qty = item.QtyInUnitOfMeasure,
-                        State = StockState.Out,
-                        PrevSellingPrice = item.Article.Price.SellingPricePerUnitOfMeasure,
-                        NewSellingPrice = item.Article.Price.SellingPricePerUnitOfMeasure,
-                        NewBuyingPrice = item.Article.Price.BuyingPricePerUnitOfMeasure,
-                        PrevBuyingPrice = item.Article.Price.BuyingPricePerUnitOfMeasure
-                    };
-                var article = DbContext.Articles.First(x => x.Id == item.ArticleId);
-                article.Stock.Qty = stockMovement.NewStock;
-                await DbContext.StockMouvements.AddAsync(stockMovement);
-                DbContext.Update(article);
-            }
-            Items.ForEach(x =>
-            {
-                x.QtyDelivered = x.QtyInUnitOfMeasure;
-                x.Article = null;
-            });
-        }
-        else
-        {
-            Items.ForEach(x =>
-            {
-                x.Article = null;
-            });
-        }
-        var lastSaleId = DbContext.Sales
-       .Where(x => x.CompanyId == CurrentItems.Company.Id)
-       .OrderByDescending(x => x.SaleId)
-       .FirstOrDefault()?.SaleId ?? 0;
-        var sale = new Sale()
-        {
-            SaleId = lastSaleId + 1,
-            Items = Items,
-            AmountPaid = _totalPaid,
-            ClientId = Client.Id,
-            CompanyId = CurrentItems.Company.Id,
-            BranchId = CurrentItems.Branch.Id,
-            CreatedAt = CurrentItems.DateOfOperations,
-            UpdatedAt = DateTime.UtcNow,
-            DeliverStatus = _notDelivered ? DeliveryStatus.Pending : DeliveryStatus.Delivered,
-            PayStatus = _totalPaid >= _total ? PaymentStatus.Paid : _totalPaid > 0 ? PaymentStatus.InPayement : PaymentStatus.InPayement,
-            SellerId = CurrentItems.User.Id,
-            TotalAmount = _total
-        };
-        var addedSale = await DbContext.AddAsync(sale);
-        var wallet = DbContext.Wallets.SingleOrDefault(x => x.Id == CurrentItems.Company.WalletId);
-        if(wallet is null)
-        {
-            var newWallet = new Wallet()
-                {
-                    CreatedAt = DateTime.UtcNow
-                };
-            var addWallet = await DbContext.AddAsync(newWallet);
-            wallet = addWallet.Entity;
-            CurrentItems.Company.WalletId = wallet.Id;
-            var company = DbContext.Companies.First(x => x.Id == CurrentItems.Company.Id);
-            company.WalletId = wallet.Id;
-            DbContext.Update(company);
-            await DbContext.SaveChangesAsync();
-        }
-        if(_totalPaid > 0)
-        {
-            var lastPaymentId = DbContext.GetLastPaymentId(CurrentItems.Company.Id);
-            var payment = new Payment()
-            {
-                PayementId = lastPaymentId + 1,
-                ClientId = Client.Id,
-                AccountType = _selectedPaymentMethod,
-                Amount = _totalPaid,
-                CreatedAt = DateTime.UtcNow,
-                SaleId = addedSale.Entity.Id,
-                CompanyId = CurrentItems.Company.Id,
-                TransType = TransactionType.SalePayment,
-                UserId = CurrentItems.User.Id,
-                UpdatedAt = DateTime.UtcNow,
-                Category = "Vente"
-            };
-            await DbContext.AddAsync(payment);
-            var walletMouvement = new WalletMovement()
-                {
-                    ToAccountType = TypeOfAccount.Cash,
-                    Amount = _totalPaid,
-                    ToWalletId = wallet.Id,
-                    Date = DateTime.UtcNow,
-                    TransType = TransactionType.SalePayment
-                };
-            await DbContext.AddAsync(walletMouvement);
-            wallet.Cash.Amount += _totalPaid;
-            wallet.UpdatedAt = DateTime.UtcNow;
-            DbContext.Update(wallet);
-        }
-        if(_restInUSD > 0)
-        {
-            var clientWallet = DbContext.Wallets.SingleOrDefault(x => x.Id == Client.WalletId);
-            if(clientWallet is null)
-            {
-                var newWallet = new Wallet()
-                {
-                    CreatedAt = DateTime.UtcNow
-                };
-                var addWallet = await DbContext.AddAsync(newWallet);
-                clientWallet = addWallet.Entity;
-                var client = DbContext.Clients.First(x => x.Id == Client.Id);
-                client.WalletId = wallet.Id;
-                DbContext.Update(client);
-                await DbContext.SaveChangesAsync();
-            }
-            var walletMouvement = new WalletMovement()
-                {
-                    FromWalletId = wallet.Id,
-                    ToAccountType = TypeOfAccount.Credit,
-                    Amount = _restInUSD,
-                    ToWalletId = clientWallet.Id,
-                    Date = DateTime.UtcNow,
-                    TransType = TransactionType.SalePayment
-                };
-            await DbContext.AddAsync(walletMouvement);
-            clientWallet.Credit.Amount += _restInUSD;
-            clientWallet.UpdatedAt = DateTime.UtcNow;
-            DbContext.Update(wallet);
-        }
-
-        var result =  await DbContext.SaveChangesAsync();
+        var result = await DbContext.SaveSale(Items, Client, CurrentItems.Company, CurrentItems.User,
+            CurrentItems.Branch, CurrentItems.DateOfOperations, _total, 
+            _totalPaid, _restInUSD, _selectedPaymentMethod, _notDelivered);
         _isBusy = false;
         return result;
     }

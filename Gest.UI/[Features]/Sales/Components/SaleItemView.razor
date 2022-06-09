@@ -114,7 +114,7 @@
                 _qtyInUnitOfMeasure = newValue;
                 if (Item.Article!.Conditionnement is not null)
                 {
-                    _qtyPerConidtionnement = Math.Round(newValue * Item.Article.Conditionnement.QtyPerUnitOfMeasure, 0);
+                    _qtyPerConidtionnement = Math.Round(newValue / Item.Article.Conditionnement.QtyPerUnitOfMeasure, 0);
                 }
             }
             else
@@ -122,7 +122,7 @@
                 _qtyPerConidtionnement = newValue;
                 if (Item.Article!.Conditionnement is not null)
                 {
-                    _qtyInUnitOfMeasure = Math.Round(newValue / Item.Article!.Conditionnement!.QtyPerUnitOfMeasure, 0);
+                    _qtyInUnitOfMeasure = Math.Round(newValue * Item.Article!.Conditionnement!.QtyPerUnitOfMeasure, 0);
                 }
             }
             Item.QtyDelivered = _qtyAlreadyDelivered + _qtyInUnitOfMeasure;
