@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZfI7/SnrVuhlreFn18NbHogu8f58p+4YwC+GaPu4gF4=",
+  "Hash": "YK4AUSc/6Kj2bp/e+zhoO/5CV2/VuTfyw4ikmHlrixs=",
   "Source": "Gest.Web",
   "BasePath": "_content/Gest.Web",
   "Mode": "Default",
@@ -35,23 +35,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\Microsoft.Fast.Components.FluentUI.lib.module.js",
-      "SourceId": "Microsoft.Fast.Components.FluentUI",
-      "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\",
-      "BasePath": "_content/Microsoft.Fast.Components.FluentUI",
-      "RelativePath": "Microsoft.Fast.Components.FluentUI.lib.module.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "JSModule",
-      "AssetTraitValue": "JSLibraryModule",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\Microsoft.Fast.Components.FluentUI.lib.module.js"
-    },
     {
       "Identity": "C:\\Users\\user\\.nuget\\packages\\radzen.blazor\\3.16.3\\staticwebassets\\css\\dark-base.css",
       "SourceId": "Radzen.Blazor",
@@ -527,23 +510,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Gest.UI.bundle.scp.css"
-    },
-    {
-      "Identity": "D:\\Projects\\Gest\\Gest.Web\\obj\\Debug\\net6.0\\jsmodules\\jsmodules.build.manifest.json",
-      "SourceId": "Gest.Web",
-      "SourceType": "Computed",
-      "ContentRoot": "D:\\Projects\\Gest\\Gest.Web\\obj\\Debug\\net6.0\\jsmodules\\",
-      "BasePath": "_content/Gest.Web",
-      "RelativePath": "Gest.Web.modules.json",
-      "AssetKind": "Build",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "JSModule",
-      "AssetTraitValue": "JSModuleManifest",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "obj\\Debug\\net6.0\\jsmodules\\jsmodules.build.manifest.json"
     },
     {
       "Identity": "D:\\Projects\\Gest\\Gest.Web\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Gest.Web.styles.css",

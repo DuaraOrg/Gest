@@ -1,6 +1,6 @@
 ﻿@if(Model.Items.Count > 0)
 {
-    <label for="@($"modal-{Model.Id}")" @onclick=@(_ => Click.InvokeAsync()) class="bg-base-100 grid @(ShowAvatar ? "grid-cols-12" : "grid-cols-11") gap-2 items-center shadow-md p-2 hover:cursor-pointer hover:bg-base-200 @(IsSelected ? "border border-primary-content" : "")">
+    <label for="@($"modal-{Model.Id}")" @onclick=@(_ => Click.InvokeAsync()) class="bg-base-100 p-2 grid @(ShowAvatar ? "grid-cols-12" : "grid-cols-11") gap-2 items-center shadow-md hover:cursor-pointer hover:bg-base-200 @(IsSelected ? "border border-base-content" : "")">
         @if (ShowAvatar)
         {
             <div class="col-span-1 bg-gray-600 flex items-center justify-center p-4 rounded-full w-10 h-10">
@@ -34,7 +34,44 @@
             <p class="text-center text-xs md:hidden">@Model.DeliverStatus[0]</p>
         </div>
     </div>
-</label>
+    </label>
+}
+else
+{
+     <label for="@($"modal-{Model.Id}")" @onclick=@(_ => Click.InvokeAsync()) class="bg-base-100 p-2 grid @(ShowAvatar ? "grid-cols-12" : "grid-cols-11") gap-2 items-center shadow-md hover:cursor-pointer hover:bg-base-200 @(IsSelected ? "border border-base-content" : "")">
+        @if (ShowAvatar)
+        {
+            <div class="col-span-1 bg-gray-600 flex items-center justify-center p-4 rounded-full w-10 h-10">
+                <h2 class="text-gray-50 font-semibold">@Model.Client!.Names.ToAvatar()</h2>
+            </div>
+        }
+    <div class="col-span-5 ml-4 md:ml-3">
+        <p class="text-sm font-medium">Vente No #@Model.SaleId</p>
+            @if(Model.Client!.Names != ClientKeys.DefaultClientName)
+            {
+                <p class="text-sm text-gray-600">@Model.Client!.Names</p>
+            }
+    </div>
+    <div class="col-span-4">
+        <p class="text-sm">Total: <span class="text-sm font-medium">@Model.TotalAmount.ToString("#.##")$</span></p>
+        @if((Model.TotalAmount - Model.AmountPaid) > 0)
+        {
+           <p class="text-sm">Reste: <span class="text-sm font-medium">@((Model.TotalAmount - Model.AmountPaid).ToString("#.##"))$</span></p>
+        }
+        <p class="text-sm text-gray-600 text-xs hidden md:block">@Model.CreatedAt.ToLocalTime()</p>
+        <p class="text-sm text-gray-600 text-xs md:hidden">@Model.CreatedAt.ToLocalTime().ToShortDateString()</p>
+    </div>
+    <div class="col-span-2 space-y-2">
+        <div class="bg-sky-400 text-gray-50 py-1 rounded-full">
+            <p class="text-center text-xs hidden md:block">@Model.PayStatus</p>
+            <p class="text-center text-xs md:hidden">@Model.PayStatus[0]</p>
+        </div>
+        <div class="bg-slate-400 text-gray-50 py-1 rounded-full">
+            <p class="text-center text-xs hidden md:block">@Model.DeliverStatus</p>
+            <p class="text-center text-xs md:hidden">@Model.DeliverStatus[0]</p>
+        </div>
+    </div>
+    </label>
 }
 
 @code {

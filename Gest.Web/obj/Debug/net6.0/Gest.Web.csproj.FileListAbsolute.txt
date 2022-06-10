@@ -29,7 +29,6 @@ D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServ
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
-D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Fast.Components.FluentUI.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.Identity.Client.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\Projects\Gest\Gest.Web\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
@@ -94,7 +93,6 @@ D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\Gest.Web.RazorAssemblyInfo.cs
 D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\staticwebassets.build.json
 D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\staticwebassets.development.json
 D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\scopedcss\bundle\Gest.Web.styles.css
-D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\jsmodules\jsmodules.build.manifest.json
 D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\Gest.Web.csproj.CopyComplete
 D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\Gest.Web.dll
 D:\Projects\Gest\Gest.Web\obj\Debug\net6.0\refint\Gest.Web.dll

@@ -12,8 +12,11 @@
         Client
         </div>
         <div class="collapse-content bg-base-200 -my-2"> 
-            <div class="pt-2 -mx-3">
-               <ClientCard Model=@Client IsSelected/>
+            <div class="-mx-3 -my-4">
+               <label id="btn-select-client" for="modal-select-client" class="-mx-5">
+                    <ClientCard Model=@Client IsSelected/>
+                </label>
+                <ListClientModal Client=@Client OnClientSelected=@(e => SetClient(e))/>
             </div>
         </div>
     </div>
@@ -22,10 +25,11 @@
         <div class="space-y-1  min-h-[15rem]">
             @foreach (var item in _items)
             {
-                    <CartItem Remove=@RemoveFromCart Change=@OnItemChanged Item=@item/>
+                            <CartItem Remove=@RemoveFromCart Change=@OnItemChanged Item=@item/>
             }
         </div>
     </div>
+              
     <div class="px-2">
         <div class="flex justify-between px-2 py-2 @(_items.Count > 0 ? "" : "hidden")">
             <p class="font-medium">Total</p>
@@ -34,24 +38,25 @@
          <div class="grid grid-cols-2 gap-2">
             @if (_items.Count > 0)
             {
-                <div class="dropdown dropdown-top">
-                    <label tabindex="0" class="btn shadow w-full">Confirmer</label>
-                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><label for="@($"modal-pay-{Client?.Id}")">Dette</label></li>
-                        <li><button class=@(_isBusy ? "" : "loading") @onclick=@(e => Pay(false))>A retirer</button></li>
-                        <li><button class=@(_isBusy ? "" : "loading") @onclick=@(e => Pay(true))>Payer</button></li>
-                    </ul>
-                </div>
-            <CartPayModal  Client=@Client Items=@_items 
+                        <div class="dropdown dropdown-top">
+                            <label tabindex="0" class="btn shadow w-full">Confirmer</label>
+                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><label for="@($"modal-pay-{Client?.Id}")">Dette</label></li>
+                                <li><button class=@(_isBusy ? "" : "loading") @onclick=@(e => Pay(false))>A retirer</button></li>
+                                <li><button class=@(_isBusy ? "" : "loading") @onclick=@(e => Pay(true))>Payer</button></li>
+                            </ul>
+                        </div>
+                    <CartPayModal  Client=@Client Items=@_items 
             Permissions=@Permissions Refresh=@Close />
             }
             else
             {
-                    <button @onclick=@(e => MoveToBack.InvokeAsync())  class="btn shadow w-full md:hidden">Retour aux articles</button>
+                            <button @onclick=@(e => MoveToBack.InvokeAsync())  class="btn shadow w-full md:hidden">Retour aux articles</button>
             }
             <label id="btn-close-modal-new-sale" for="modal-new-sale" class="btn btn-outline shadow w-full md:hidden">Fermer</label>
          </div>
     </div>
+
 </div>
 
 <RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
@@ -81,6 +86,7 @@
 
     List<SaleItem> _items = new List<SaleItem>();
     decimal _total = 0;
+
 
     protected override void OnParametersSet()
     {
@@ -139,5 +145,11 @@
         if (result > 0)
             await Close();
         _isBusy = false;
+    }
+
+    async Task SetClient(Client client)
+    {
+        Client = client;
+        await JSRuntime.InvokeVoidAsync("click", "btn-select-client");
     }
 }

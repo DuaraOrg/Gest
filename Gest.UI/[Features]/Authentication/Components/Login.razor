@@ -12,7 +12,9 @@
                 <input type="text" autocomplete="username" @bind=@_model.Email placeholder="Email" class="input input-bordered w-full max-w-xs" />
                 <input type="password"  autocomplete="current-password" aria-required="true" @bind=@_model.Password placeholder="Mot de passe" class="input input-bordered w-full max-w-xs" />  
             </div>
-            <button type="submit" @onclick=@(e => _isBusy = true) class="btn w-full shadow @(_isBusy ? "loading" : "")" disabled="@_isBusy">Se connecter</button>
+                        <button type="submit"  class="btn w-full shadow @(_isBusy ? "loading" : "")" disabled="@_isBusy">
+                            <div @onclick=@(e => _isBusy = true)>Se connecter</div>
+                        </button>
       </EditForm>
   </div>
 </div>
@@ -37,11 +39,6 @@
         _themes.Enqueue("emerald");
         _themes.Enqueue("garden");
         _themes.Enqueue("dark");
-    }
-
-    async Task OnSubmit()
-    {
-         _isBusy = true;
     }
 
     async Task OnValidSubmit()

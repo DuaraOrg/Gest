@@ -16,7 +16,7 @@
          <p class="text-sm">@Item.QtyInUnitOfMeasure @Item.Article.UnitOfMeasure</p>
         @if(Item.Article.Conditionnement is not null)
         {
-          <p class="text-sm">@(Item.QtyInUnitOfMeasure * Item.Article.Conditionnement.QtyPerUnitOfMeasure) @Item.Article.Conditionnement.Name</p>
+          <p class="text-sm">@Math.Round(Item.QtyInUnitOfMeasure / Item.Article.Conditionnement.QtyPerUnitOfMeasure,2) @Item.Article.Conditionnement.Name</p>
         }
      </div>
       <div  class="space-y-1">
@@ -24,7 +24,7 @@
          <p class="text-sm">@Item.QtyDelivered @Item.Article.UnitOfMeasure</p>
         @if(Item.Article.Conditionnement is not null)
         {
-          <p class="text-sm">@(Item.QtyDelivered * Item.Article.Conditionnement.QtyPerUnitOfMeasure) @Item.Article.Conditionnement.Name</p>
+          <p class="text-sm">@Math.Round(Item.QtyDelivered / Item.Article.Conditionnement.QtyPerUnitOfMeasure,2) @Item.Article.Conditionnement.Name</p>
         }
      </div>
         @if (!_isDelivered)

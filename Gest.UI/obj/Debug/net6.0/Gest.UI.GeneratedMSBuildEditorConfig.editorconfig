@@ -163,6 +163,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXExpc3RDbGllbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/ListClientModal.razor]
+build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXExpc3RDbGllbnRNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Gest/Gest.UI/\[Features\]/Sales/Components/SaleCard.razor]
 build_metadata.AdditionalFiles.TargetPath = W0ZlYXR1cmVzXVxTYWxlc1xDb21wb25lbnRzXFNhbGVDYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 

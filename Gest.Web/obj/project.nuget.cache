@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qRZ5CsxNRtrKbTU5mg7K9+DhixSARFYKwVfN15zhIq1kLpJ9uF3pwrOH7RMLER2RKNaGKbxgt3jukZQoMZDmTw==",
+  "dgSpecHash": "TTB7vzTRlbPHSdYHp/40HvMmNu/ZVnut2XfazdHQMF0JLFOZYryKJdDERZ2R5m55Xt1YJOlaO+ienDL7KVphDQ==",
   "success": true,
   "projectFilePath": "D:\\Projects\\Gest\\Gest.Web\\Gest.Web.csproj",
   "expectedPackageFiles": [
@@ -39,7 +39,6 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.1\\microsoft.extensions.logging.abstractions.6.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\microsoft.fast.components.fluentui.1.1.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.identity.client\\4.21.1\\microsoft.identity.client.4.21.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\6.8.0\\microsoft.identitymodel.jsonwebtokens.6.8.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.identitymodel.logging\\6.8.0\\microsoft.identitymodel.logging.6.8.0.nupkg.sha512",

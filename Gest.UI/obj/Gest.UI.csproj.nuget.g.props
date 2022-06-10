@@ -16,6 +16,5 @@
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)radzen.blazor\3.16.3\buildTransitive\Radzen.Blazor.props" Condition="Exists('$(NuGetPackageRoot)radzen.blazor\3.16.3\buildTransitive\Radzen.Blazor.props')" />
-    <Import Project="$(NuGetPackageRoot)microsoft.fast.components.fluentui\1.1.0\buildTransitive\Microsoft.Fast.Components.FluentUI.props" Condition="Exists('$(NuGetPackageRoot)microsoft.fast.components.fluentui\1.1.0\buildTransitive\Microsoft.Fast.Components.FluentUI.props')" />
   </ImportGroup>
 </Project>

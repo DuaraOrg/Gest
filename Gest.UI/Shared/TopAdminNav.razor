@@ -25,7 +25,7 @@
                     <h3 class="font-semibold">1$</h3>
                     <p>=</p>
                     <div class="flex items-center">
-                         <FluentNumberField class="w-[5rem]" @bind-Value=@_currentItems.Company!.FCToDollarRate  />
+                         <input type="number" class="input input-bordered w-[5rem]" @bind=@_currentItems.Company!.FCToDollarRate  />
                          <h3 class="relative -left-[1.5rem] text-gray-500">FC</h3>
                     </div>
                 </div>

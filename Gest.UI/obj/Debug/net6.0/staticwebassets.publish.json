@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eOFjoXf5vslEvo9+B6kontEB9bLjyhQ2cZP8PtHXQuU=",
+  "Hash": "YKQcqk8OhPXzoU9UdXnamdu+wtQuGxjHC7zgQPtztyM=",
   "Source": "Gest.UI",
   "BasePath": "_content/Gest.UI",
   "Mode": "Default",
@@ -16,23 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\Microsoft.Fast.Components.FluentUI.lib.module.js",
-      "SourceId": "Microsoft.Fast.Components.FluentUI",
-      "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\",
-      "BasePath": "_content/Microsoft.Fast.Components.FluentUI",
-      "RelativePath": "Microsoft.Fast.Components.FluentUI.lib.module.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "JSModule",
-      "AssetTraitValue": "JSLibraryModule",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\user\\.nuget\\packages\\microsoft.fast.components.fluentui\\1.1.0\\staticwebassets\\Microsoft.Fast.Components.FluentUI.lib.module.js"
-    },
     {
       "Identity": "C:\\Users\\user\\.nuget\\packages\\radzen.blazor\\3.16.3\\staticwebassets\\css\\dark.css",
       "SourceId": "Radzen.Blazor",
@@ -491,23 +474,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\user\\.nuget\\packages\\radzen.blazor\\3.16.3\\staticwebassets\\Radzen.Blazor.js"
-    },
-    {
-      "Identity": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\jsmodules\\jsmodules.publish.manifest.json",
-      "SourceId": "Gest.UI",
-      "SourceType": "Computed",
-      "ContentRoot": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\jsmodules\\",
-      "BasePath": "_content/Gest.UI",
-      "RelativePath": "Gest.UI.modules.json",
-      "AssetKind": "Publish",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "JSModule",
-      "AssetTraitValue": "JSModuleManifest",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "obj\\Debug\\net6.0\\jsmodules\\jsmodules.publish.manifest.json"
     },
     {
       "Identity": "D:\\Projects\\Gest\\Gest.UI\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Gest.UI.styles.css",

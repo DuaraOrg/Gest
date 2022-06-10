@@ -67,6 +67,13 @@
     .duaralist .rz-paginator {
         position: fixed;
         bottom: 0;
+        width: 39%
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .duaralist .rz-paginator {
+        position: fixed;
+        bottom: 0;
         width: 34.3%
     }
 }

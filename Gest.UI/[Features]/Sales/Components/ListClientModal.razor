@@ -1,0 +1,17 @@
+﻿<input type="checkbox" id="modal-select-client" class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle bottom-10">
+  <div class="modal-box modal-box-extra md:max-w-[50rem] no-scrollbar">
+    <ModalTop Id="modal-select-client" Title="Sélectionner un client"/>
+    <div class="-mx-7 px-1 pb-4">
+        <ListClient Client=@Client OnSelect="e => OnClientSelected.InvokeAsync(e)" />
+    </div>
+  </div>
+</div>
+@code {
+
+    [Parameter]
+    public Client Client { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback<Client> OnClientSelected { get; set; }
+}

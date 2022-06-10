@@ -465,24 +465,6 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
-      "Microsoft.Fast.Components.FluentUI/1.1.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Components.Web": "6.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.Fast.Components.FluentUI.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.Fast.Components.FluentUI.dll": {}
-        },
-        "build": {
-          "buildTransitive/Microsoft.Fast.Components.FluentUI.props": {}
-        },
-        "buildMultiTargeting": {
-          "buildMultiTargeting/Microsoft.Fast.Components.FluentUI.props": {}
-        }
-      },
       "Microsoft.Identity.Client/4.21.1": {
         "type": "package",
         "compile": {
@@ -1208,7 +1190,6 @@
           "Mapster.DependencyInjection": "1.0.0",
           "Mapster.EFCore": "5.1.0",
           "Microsoft.AspNetCore.Components.Web": "6.0.3",
-          "Microsoft.Fast.Components.FluentUI": "1.1.0",
           "Polly": "7.2.3",
           "Radzen.Blazor": "3.16.3",
           "Sentry": "3.17.1"
@@ -1969,24 +1950,6 @@
         "microsoft.extensions.primitives.6.0.0.nupkg.sha512",
         "microsoft.extensions.primitives.nuspec",
         "useSharedDesignerContext.txt"
-      ]
-    },
-    "Microsoft.Fast.Components.FluentUI/1.1.0": {
-      "sha512": "bKhN9ExRxaSpjvHxSA5IqRma0/xTXldlxG/V3AaSba1ha2Do7sIb/0F/vio2HD3yf/SEEQwz2/Ex2N1vs0Co8w==",
-      "type": "package",
-      "path": "microsoft.fast.components.fluentui/1.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "build/Microsoft.AspNetCore.StaticWebAssets.props",
-        "build/Microsoft.Fast.Components.FluentUI.props",
-        "buildMultiTargeting/Microsoft.Fast.Components.FluentUI.props",
-        "buildTransitive/Microsoft.Fast.Components.FluentUI.props",
-        "lib/net6.0/Microsoft.Fast.Components.FluentUI.dll",
-        "microsoft.fast.components.fluentui.1.1.0.nupkg.sha512",
-        "microsoft.fast.components.fluentui.nuspec",
-        "staticwebassets/Microsoft.Fast.Components.FluentUI.lib.module.js"
       ]
     },
     "Microsoft.Identity.Client/4.21.1": {

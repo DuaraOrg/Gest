@@ -367,17 +367,6 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
-      "Microsoft.Fast.Components.FluentUI/1.1.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Components.Web": "6.0.3"
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.Fast.Components.FluentUI.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "Microsoft.Identity.Client/4.21.1": {
         "runtime": {
           "lib/netcoreapp2.1/Microsoft.Identity.Client.dll": {
@@ -877,7 +866,6 @@
           "Mapster.DependencyInjection": "1.0.0",
           "Mapster.EFCore": "5.1.0",
           "Microsoft.AspNetCore.Components.Web": "6.0.3",
-          "Microsoft.Fast.Components.FluentUI": "1.1.0",
           "Polly": "7.2.3",
           "Radzen.Blazor": "3.16.3",
           "Sentry": "3.17.1"
@@ -1138,13 +1126,6 @@
       "sha512": "sha512-9+PnzmQFfEFNR9J2aDTfJGGupShHjOuGw4VUv+JB044biSHrnmCIMD+mJHmb2H7YryrfBEXDurxQ47gJZdCKNQ==",
       "path": "microsoft.extensions.primitives/6.0.0",
       "hashPath": "microsoft.extensions.primitives.6.0.0.nupkg.sha512"
-    },
-    "Microsoft.Fast.Components.FluentUI/1.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-bKhN9ExRxaSpjvHxSA5IqRma0/xTXldlxG/V3AaSba1ha2Do7sIb/0F/vio2HD3yf/SEEQwz2/Ex2N1vs0Co8w==",
-      "path": "microsoft.fast.components.fluentui/1.1.0",
-      "hashPath": "microsoft.fast.components.fluentui.1.1.0.nupkg.sha512"
     },
     "Microsoft.Identity.Client/4.21.1": {
       "type": "package",
