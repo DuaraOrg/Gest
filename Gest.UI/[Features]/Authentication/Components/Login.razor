@@ -12,9 +12,9 @@
                 <input type="text" autocomplete="username" @bind=@_model.Email placeholder="Email" class="input input-bordered w-full max-w-xs" />
                 <input type="password"  autocomplete="current-password" aria-required="true" @bind=@_model.Password placeholder="Mot de passe" class="input input-bordered w-full max-w-xs" />  
             </div>
-                        <button type="submit"  class="btn w-full shadow @(_isBusy ? "loading" : "")" disabled="@_isBusy">
-                            <div @onclick=@(e => _isBusy = true)>Se connecter</div>
-                        </button>
+            <button type="submit"  class="btn w-full shadow @(_isBusy ? "loading" : "")" disabled="@_isBusy">
+                <div @onclick=@(e => _isBusy = true)>Se connecter</div>
+            </button>
       </EditForm>
   </div>
 </div>

@@ -1,0 +1,21 @@
+﻿<input type="checkbox" id="@($"modal-article-{Model.Id}")" class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box modal-box-extra md:max-w-[50rem] no-scrollbar relative bottom-[2rem] md:bottom-0">
+    <ModalTop Id="@($"modal-article-{Model.Id}")" Title="@Model.Name"/>
+    <div class="-mx-7  px-2 pb-4 min-h-[15rem]">
+        <ArticleView Model=@Model Refresh="_ => Refresh.InvokeAsync()" Permissions=@Permissions/>
+    </div>
+  </div>
+</div>
+
+@code {
+    [EditorRequired]
+    [Parameter] 
+    public Article Model { get; set; } = null!;
+
+    [Parameter] public EventCallback Refresh { get; set; }
+    [EditorRequired]
+    [Parameter]
+    public string Permissions { get; set; } = null!;
+
+}

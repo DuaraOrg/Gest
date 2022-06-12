@@ -21,6 +21,10 @@
         @apply bg-base-100;
     }
 
+    .duaralist-modal .rz-paginator {
+        @apply bg-base-100;
+    }
+
     .modal-box-extra {
         @apply bg-base-200 -mx-4 -mb-10 shadow-md border-t-base-300;
     }
@@ -80,5 +84,27 @@
 .rz-datalist-data > li {
     border:0px;
     border-radius:10px;
+}
+
+.duaralist-modal .rz-paginator {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+@media only screen and (min-width: 700px) {
+    .duaralist-modal .rz-paginator {
+        position: fixed;
+        bottom: 0;
+        right:0;
+        width: 62%;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .duaralist-modal .rz-paginator {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 53%;
+    }
 }
 

@@ -22,12 +22,13 @@ namespace Gest.UI._Features_.Stock.Components
 
         public string? ImageUrl { get; set; }
 
-        [Range(double.Epsilon, double.MaxValue)]
-        public double? StockMinimum { get; set; }
-
         [Required(ErrorMessage = "Veuillez spécifier le stock minimum")]
         [Range(double.Epsilon, double.MaxValue)]
-        public double? StockMaximum { get; set; }
+        public double? StockMinimum { get; set; } = 1;
+
+        [Required(ErrorMessage = "Veuillez spécifier le stock maximum")]
+        [Range(double.Epsilon, double.MaxValue)]
+        public double? StockMaximum { get; set; } = 2;
 
         [Required(ErrorMessage = "Veuillez spécifier la qté en Stock")]
         [Range(double.Epsilon, double.MaxValue)]

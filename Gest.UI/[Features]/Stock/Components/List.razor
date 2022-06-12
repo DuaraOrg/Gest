@@ -1,35 +1,59 @@
-﻿<div class="space-y-1">
-    <ToolBar NewItem=@(_ => EditItem()) OnRefresh=@(_ => InitialLoad()) OnCategorySelected=@(e => OnSelectCategorie(e))
-        OnStateSelected=@(e => OnStateFilter(e)) OnSearchQuery=@(e => OnSearch(e)) />
-    @if (_isBusy)
-    {
-        <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
-    }
-    <div class="grid md:grid-cols-5 gap-2">
-        <RadzenDataList class="col-span-2 -space-y-5" Count=@_count Data=@_items TItem=@Article LoadData=@LoadData AllowPaging=true>
-            <Template Context="item">
-                <ArticleCard BtnActionClick=@(_ => NewStock(item)) Click=@(_ => OnSelectItem(item)) Model=@item IsSelected=@(_selectedItem == item) BtnActionText="Ajouter au stock"/>
-            </Template>
-        </RadzenDataList>
-        @if(_selectedItem is not null)
+﻿@if (_permissions is { Length: > 0 })
+{
+        <div class="space-y-1">
+        <ToolBar  OnRefresh=@(_ => InitialLoad()) OnCategorySelected=@(e => OnSelectCategorie(e))
+        OnStateSelected=@(e => OnStateFilter(e)) OnSearchQuery=@(e => OnSearch(e)) Permissions=@_permissions />
+        @if (_isBusy)
         {
-             <div class="hidden md:block col-span-3 ">
-                <ArticleView  Model=@_selectedItem/>
-             </div>
+                <RadzenProgressBar  class="w-full h-1"  Value="100" ShowValue=@false Mode=@ProgressBarMode.Indeterminate/>
         }
+        <div class="grid md:grid-cols-5 gap-2 pt-[5.5rem] md:pt-24 h-full md:h-[70vh] pb-8">
+            <RadzenDataList class="col-span-2 -space-y-5" Count=@_count Data=@_items TItem=@Article LoadData=@LoadData AllowPaging=true>
+                <Template Context="item">
+                     <label for="@($"modal-article-{item.Id}")" >
+                           <ArticleCard Click=@(e => OnSelectItem(item)) ShowBtnText=@(_permissions.Contains(AppPermissions.Update)) BtnActionClick=@(_ => NewStock(item))  Model=@item IsSelected=@(_selectedItem == item) BtnActionText="Ajouter au stock"/>
+                     </label>
+                     <label id="@($"btn-modal-new-stock-{item.Id}")" for="@($"modal-new-stock-{item.Id}")" class="hidden"></label>
+                     <AddToStockModal Article=@item Permissions=@_permissions Refresh="_ => InitialLoad()"/>
+                    @if (_isSmall)
+                    {
+                        <ArticleViewModal Model=@item Permissions=@_permissions Refresh="_ => InitialLoad()"/>
+                    }
+                </Template>
+            </RadzenDataList>
+            @if (_selectedItem is not null)
+            {
+                     <div class="hidden md:block col-span-3 ">
+                        <ArticleView Permissions=@_permissions Refresh="_ => InitialLoad()" Model=@_selectedItem/>
+                     </div>
+            }
+        </div>
     </div>
-</div>
+    @if(_permissions.Contains(AppPermissions.Create) || _permissions.Contains(AppPermissions.Update))
+    {
+        <div class="tooltip" data-tip="Ajouter un article">
+             <label for="modal-new-article"  class="btn btn-square fixed bottom-9 left-4 shadow-md">
+                 <svg class=" fill-current"  viewBox="0 0 50 50">
+                      <path d="M24 9L24 24L9 24L9 26L24 26L24 41L26 41L26 26L41 26L41 24L26 24L26 9Z" />
+                 </svg>
+             </label>
+        </div>
+        <ArticleEditModal Permissions=@_permissions Refresh=@(() => InitialLoad())/>
+    }
+}
 <RadzenMediaQuery Query="(max-width: 768px)" Change=@(e => _isSmall = e)/>
 
 @code {
     [Inject] public DialogService DialogService { get; set; } = null!;
     [Inject] public GestDbContext DbContext { get; set; } = null!;
     [Inject] public CurrentItems CurrentItems { get; set; } = null!;
+    [Inject] public IJSRuntime JSRuntime { get; set; } = null!;
     bool _isSmall = false;
     bool _isBusy = false;
     string _searchQuery = string.Empty;
     string _selectedFilterState = StockFilter.Tous;
     string _selectedCategorie = "Tous";
+    string _permissions = string.Empty;
     Article? _selectedItem;
     int _count;
     int _skip = 0;
@@ -40,6 +64,7 @@
     {
         if (firstRender)
         {
+            _permissions = CurrentItems.User.GetPermissionsFor(AppSections.Stock);
             await Policy.Handle<InvalidOperationException>()
              .WaitAndRetryAsync(3, attempt => TimeSpan.FromMilliseconds(100 * attempt))
              .ExecuteAsync(InitialLoad);
@@ -73,13 +98,9 @@
         await InitialLoad();
     }
 
-    async Task OnSelectItem(Article value)
+    void OnSelectItem(Article value)
     {
         _selectedItem = value;
-        if (_isSmall)
-        {
-            await ViewDetails(value);
-        }
     }
 
     async Task LoadData(LoadDataArgs args)
@@ -100,57 +121,27 @@
 
         if (!string.IsNullOrEmpty(_searchQuery))
         {
-             _items = await queryWithFilterState
-                 .Where(x => x.Name.Contains(_searchQuery))
-                 .OrderByDescending(x => x.CreatedAt)
-                 .Paginate(args.Skip,args.Top).ToListAsync();
-              _count = await queryWithFilterState
-                 .Where(x => x.Name.Contains(_searchQuery))
-                 .CountAsync();
+            _items = await queryWithFilterState
+                .Where(x => x.Name.Contains(_searchQuery))
+                .OrderByDescending(x => x.CreatedAt)
+                .Paginate(args.Skip, args.Top).ToListAsync();
+            _count = await queryWithFilterState
+               .Where(x => x.Name.Contains(_searchQuery))
+               .CountAsync();
         }
         else
         {
             _items = await queryWithFilterState
                  .OrderByDescending(x => x.CreatedAt)
-                 .Paginate(args.Skip,args.Top).ToListAsync();
-              _count = await queryWithFilterState
-                 .CountAsync();
+                 .Paginate(args.Skip, args.Top).ToListAsync();
+            _count = await queryWithFilterState
+               .CountAsync();
         }
         _isBusy = false;
     }
 
-    async Task EditItem(Article? item = null)
-    {
-
-        var itemModel = item?.Adapt<ArticleModel>() ?? new ArticleModel();
-        var param = item is null ? new Dictionary<string, object?>()
-               : new Dictionary<string, object?>() { { "Model", itemModel } };
-        var title = item is null ? "Ajouter un article" : $"Article {itemModel.Name}";
-        var result = await DialogService.OpenAsync<ArticleEdit>(title, param);
-        if (result is bool canRefresh && canRefresh == true)
-            await InitialLoad();
-    }
-    async Task ViewDetails(Article item)
-    {
-        var param = item is null ? new Dictionary<string, object?>()
-               : new Dictionary<string, object?>() { { "Model", item } };
-        var title = $"{item!.Name}";
-        var result = await DialogService.OpenAsync<ArticleView>(title, param);
-        if (result is bool canRefresh && canRefresh == true)
-            await InitialLoad();
-    }
-
     async Task NewStock(Article item)
     {
-        var param = item is null ? new Dictionary<string, object?>()
-               : new Dictionary<string, object?>() { { "Model", item } };
-        var title = $"{item!.Name}";
-        var result = await DialogService.OpenAsync<AddToStock>(title, param);
-        if (result is bool canRefresh && canRefresh == true)
-            await InitialLoad();
+       await JSRuntime.InvokeVoidAsync("click", $"btn-modal-new-stock-{item.Id}");
     }
-
-    [Inject] TooltipService TooltipService { get; set; } = null!;
-    void ShowTooltip(ElementReference elementReference, string message, TooltipOptions options = null!)
-      => TooltipService.Open(elementReference, message, options);
 }

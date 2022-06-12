@@ -36,8 +36,14 @@
 		<AndroidKeyStore>True</AndroidKeyStore>
 		<AndroidSigningKeyStore>duara.keystore</AndroidSigningKeyStore>
 		<AndroidSigningKeyAlias>key</AndroidSigningKeyAlias>
-		<AndroidSigningKeyPass></AndroidSigningKeyPass>
-		<AndroidSigningStorePass></AndroidSigningStorePass>
+		<AndroidSigningKeyPass>freedum</AndroidSigningKeyPass>
+		<AndroidSigningStorePass>freedum</AndroidSigningStorePass>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-android|AnyCPU'">
+	  <PublishTrimmed>False</PublishTrimmed>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <AndroidLinkMode>None</AndroidLinkMode>
 	</PropertyGroup>
 
 	<ItemGroup>

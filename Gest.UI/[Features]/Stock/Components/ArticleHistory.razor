@@ -1,37 +1,68 @@
 ﻿<div>
-   <div class="flex space-x-2  overflow-x-scroll no-scrollbar shadow px-2 py-1 -mx-4">
+   <div class="flex space-x-2  overflow-x-scroll no-scrollbar shadow px-2 py-1">
        <div >
             <h2 class="text-sm text-gray-600">Type</h2>
-            <RadzenDropDown @bind-Value=@_selectedState  TValue=string Change=@(args => OnStateChange(args.ToString())) Data=@StockState.AllWithTous()/>
+             <select value="@_selectedState" @onchange=@(args => OnStateChange(args.Value!.ToString())) 
+              class="select min-w-[7.5rem] select-bordered w-full">
+                @foreach (var item in StockState.AllWithTous())
+                {
+                        <option value="@item" selected=@(item == StockFilter.Tous)>@item</option>
+                }
+            </select>
         </div>
         <div>
             <h2 class="text-sm text-gray-600">Période</h2>
-            <RadzenDropDown @bind-Value=@_selectedPeriod Change=@(args => OnPeriodChange(args.ToString()))  Data=@Period.AllWithTous()/>
+            <select value="@_selectedPeriod" @onchange=@(args => OnPeriodChange(args.Value!.ToString())) 
+              class="select min-w-[7.5rem] select-bordered w-full">
+                @foreach (var item in Period.AllWithTous())
+                {
+                        <option value="@item" selected=@(item == Period.Tous)>@item</option>
+                }
+            </select>
         </div>
-    <div class="flex items-center space-x-4">
-    @if(_selectedPeriod == Period.Date || _selectedPeriod == Period.IntervalDate)
-    {
-       <div>
-        <h2 class="text-sm text-gray-600">@(_selectedPeriod == Period.Date ? "Date" : "Date de début")</h2>
-        <RadzenDatePicker class="w-[7rem]" Change=@(args => OnPeriodChange(_selectedPeriod)) @bind-Value=@_startDate DateFormat="d"/>
-       </div>
-    }
-    @if(_selectedPeriod == Period.IntervalDate)
-    {
-      <h2 class="text-gray-600">-</h2>
-      <div>
-       <h2 class="text-sm text-gray-600">Date de fin</h2>
-       <RadzenDatePicker class="w-[7rem]" Change=@(args => OnPeriodChange(_selectedPeriod)) @bind-Value=@_endDate DateFormat="d"/>
-    </div>
-    }
+   <div class="flex items-center space-x-4">
+            @if (_selectedPeriod == Period.Date || _selectedPeriod == Period.IntervalDate)
+            {
+               <div>
+                <h2 class="text-sm text-gray-600">@(_selectedPeriod == Period.Date ? "Date" : "Date de début")</h2>
+                <RadzenDatePicker class="w-[7rem]" Change=@(args => OnPeriodChange(_selectedPeriod)) @bind-Value=@_startDate DateFormat="d"/>
+               </div>
+            }
+            @if (_selectedPeriod == Period.IntervalDate)
+            {
+              <h2 class="text-gray-600">-</h2>
+              <div>
+               <h2 class="text-sm text-gray-600">Date de fin</h2>
+               <RadzenDatePicker class="w-[7rem]" Change=@(args => OnPeriodChange(_selectedPeriod)) @bind-Value=@_endDate DateFormat="d"/>
+            </div>
+            }
    </div>
     <div class="pt-5">
-        <RadzenButton Click=@(_ => LoadData(new LoadDataArgs() { Skip = 0, Top = 2 })) Icon="refresh" ButtonStyle="ButtonStyle.Light" />
+        <button class="btn btn-outline" @onclick=@(_ => LoadData(new LoadDataArgs() { Skip = 0, Top = _take }))>
+             <svg class="h-6 fill-current"  viewBox="0 0 30 30">
+                 <path d="M15 3C12.031398 3 9.3028202 4.0834384 7.2070312 5.875 A 1.0001 1.0001 0 1 0 8.5058594 7.3945312C10.25407 5.9000929 12.516602 5 15 5C20.19656 5 24.450989 8.9379267 24.951172 14L22 14L26 20L30 14L26.949219 14C26.437925 7.8516588 21.277839 3 15 3 z M 4 10L0 16L3.0507812 16C3.562075 22.148341 8.7221607 27 15 27C17.968602 27 20.69718 25.916562 22.792969 24.125 A 1.0001 1.0001 0 1 0 21.494141 22.605469C19.74593 24.099907 17.483398 25 15 25C9.80344 25 5.5490109 21.062074 5.0488281 16L8 16L4 10 z" />
+             </svg>
+        </button>
     </div>
    </div>
-   <RadzenDataList PageSize=2  Count=@_count Data=@_items TItem=@StockMouvement LoadData=@LoadData AllowPaging=true>
+  <div class="bg-base-100 h-[1px] w-full"></div>
+  <div class="h-[60vh] relative">
+     <RadzenDataList class="-space-y-5 h-full overflow-y-auto pb-10 duaralist-modal" PageSize=_take  Count=@_count Data=@_items TItem=@StockMouvement LoadData=@LoadData AllowPaging=true>
     <Template Context="item">
-        <div class="space-y-3">
+             <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 -m-4 px-3 py-2 rounded-md">
+         <input type="checkbox" /> 
+        <div class="collapse-title text-md font-medium">
+           <div class="flex justify-between items-center">
+               <div>
+                   <h2 class="text-sm font-medium">@GetType(item)</h2>
+                   <h2 class="text-sm">@item.Qty @item.Article!.UnitOfMeasure</h2>
+               </div>
+                <h2 class="text-sm">@item.Date.ToLocalTime().ToLongDateString()</h2>
+           </div>
+        </div>
+        <div class="collapse-content bg-base-200 -mx-3 -my-2"> 
+            <div class=" pt-2">
+                      <div class="space-y-3">
             <div class="flex justify-between">
                 <div class="flex space-x-2">
                     <h2 class="text-sm font-light">Type:</h2>
@@ -44,16 +75,16 @@
             </div>
             <div class="flex justify-between">
                 <div class="space-y-1">
-                        @if(GetType(item) == "Sortie")
-                        {
-                            <h2 class="text-sm font-light">Qté sortie:</h2>
-                            <h2 class="text-sm font-medium">@item.Qty @item.Article!.UnitOfMeasure</h2>
-                        }
-                        else
-                        {
-                            <h2 class="text-sm font-light">Nouvelle Qté:</h2>
-                            <h2 class="text-sm font-medium">@item.Qty @item.Article!.UnitOfMeasure</h2>
-                        }
+                                        @if (GetType(item) == "Sortie")
+                                        {
+                                    <h2 class="text-sm font-light">Qté sortie:</h2>
+                                    <h2 class="text-sm font-medium">@item.Qty @item.Article!.UnitOfMeasure</h2>
+                                        }
+                                        else
+                                        {
+                                    <h2 class="text-sm font-light">Nouvelle Qté:</h2>
+                                    <h2 class="text-sm font-medium">@item.Qty @item.Article!.UnitOfMeasure</h2>
+                                        }
                 </div>
                 <div class="space-y-1">
                     <h2 class="text-sm font-light">Nouveau Stock:</h2>
@@ -74,22 +105,26 @@
                     <h2 class="text-sm font-medium">@item.NewBuyingPrice $</h2>
                 </div>
             </div>
-
         </div>
+            </div>
+        </div>
+    </div>
     </Template>
-</RadzenDataList>
+    </RadzenDataList>
+  </div>
 </div>
 
 @code {
-    bool _isBusy =true;
+    bool _isBusy = true;
     int _count = 0;
+    int _take = 10;
     string _selectedState = StockState.Tous;
     string _selectedPeriod = Period.Tous;
     DateTime _startDate = DateTime.UtcNow.ToLocalTime();
     DateTime _endDate = DateTime.UtcNow.ToLocalTime();
     [Inject] GestDbContext DbContext { get; set; } = null!;
     [EditorRequired]
-    [Parameter] 
+    [Parameter]
     public Article Model { get; set; } = null!;
 
     IEnumerable<StockMouvement> _items = new List<StockMouvement>();
@@ -97,21 +132,21 @@
     protected async override Task OnParametersSetAsync()
     {
         await Policy.Handle<InvalidOperationException>()
-             .WaitAndRetryAsync(3, attempt => TimeSpan.FromMilliseconds(100 * attempt))
-             .ExecuteAsync(() => LoadData(new LoadDataArgs() { Skip = 0, Top = 2 }));
+             .WaitAndRetryAsync(5, attempt => TimeSpan.FromMilliseconds(100 * attempt))
+             .ExecuteAsync(() => LoadData(new LoadDataArgs() { Skip = 0, Top = _take }));
         StateHasChanged();
     }
 
     async Task OnStateChange(string? value)
     {
         _selectedState = value ?? StockState.Tous;
-        await LoadData(new LoadDataArgs() { Skip = 0, Top = 2 });
+        await LoadData(new LoadDataArgs() { Skip = 0, Top = _take });
     }
 
     async Task OnPeriodChange(string? value)
     {
         _selectedPeriod = value ?? Period.Tous;
-        await LoadData(new LoadDataArgs() { Skip = 0, Top = 2 });
+        await LoadData(new LoadDataArgs() { Skip = 0, Top = _take });
     }
 
     string GetType(StockMouvement stockMouvement)
@@ -124,29 +159,30 @@
 
     async Task LoadData(LoadDataArgs args)
     {
-         _isBusy = true;
-            var itemsStockMvmts = DbContext.StockMouvements
-                    .Include(x => x.Article)
-                    .AsNoTracking()
-                    .Where(x => _selectedState == StockState.Tous || x.State == _selectedState)
-                    .Where(x => x.ArticleId == Model.Id)
-                    .OrderByDescending(x => x.Date);
-            var itemsWithPeriod = _selectedPeriod switch
-            {
-                Period.Today => itemsStockMvmts.Where(x => x.Date.Date == DateTime.UtcNow.Date),
-                Period.ThisWeek => itemsStockMvmts.Where(x => x.Date <= DateTime.Today && x.Date >= DateTime.Today.AddDays(-7)),
-                Period.ThisMonth => itemsStockMvmts.Where(x => x.Date.Month == DateTime.UtcNow.Month),
-                Period.Date => itemsStockMvmts.Where(x => x.Date.Date == _startDate.Date),
-                Period.IntervalDate => itemsStockMvmts.Where(x => x.Date >= _startDate && x.Date <= _endDate),
-                _ => itemsStockMvmts
-            };
-            _items = await itemsWithPeriod
-                    .Paginate(args.Skip,args.Top).ToListAsync();
-            _count = await DbContext.StockMouvements
-                    .Where(x => _selectedState == StockState.Tous || x.State == _selectedState)
-                    .OrderByDescending(x => x.Date)
-                    .CountAsync();
-            _isBusy = false;
+        _isBusy = true;
+        var itemsStockMvmts = DbContext.StockMouvements
+                .Include(x => x.Article)
+                .AsNoTracking()
+                .Where(x => _selectedState == StockState.Tous || x.State == _selectedState)
+                .Where(x => x.ArticleId == Model.Id)
+                .OrderByDescending(x => x.Date);
+        var itemsWithPeriod = _selectedPeriod switch
+        {
+            Period.Today => itemsStockMvmts.Where(x => x.Date.Date == DateTime.UtcNow.Date),
+             Period.Yesterday => itemsStockMvmts.Where(x => x.Date.Date == DateTime.UtcNow.Date.AddDays(-1)),
+            Period.ThisWeek => itemsStockMvmts.Where(x => x.Date <= DateTime.Today && x.Date >= DateTime.Today.AddDays(-7)),
+            Period.ThisMonth => itemsStockMvmts.Where(x => x.Date.Month == DateTime.UtcNow.Month),
+            Period.Date => itemsStockMvmts.Where(x => x.Date.Date == _startDate.Date),
+            Period.IntervalDate => itemsStockMvmts.Where(x => x.Date >= _startDate && x.Date <= _endDate),
+            _ => itemsStockMvmts
+        };
+        _items = await itemsWithPeriod
+                .Paginate(args.Skip, args.Top).ToListAsync();
+        _count = await DbContext.StockMouvements
+                .Where(x => _selectedState == StockState.Tous || x.State == _selectedState)
+                .OrderByDescending(x => x.Date)
+                .CountAsync();
+        _isBusy = false;
     }
 
 }

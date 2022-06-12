@@ -1,45 +1,84 @@
 ﻿<div>
-    <EditForm class="space-y-2" Model=@Model OnValidSubmit=@OnSave>
+    <EditForm class="space-y-2 px-3 py-2" Model=@Model OnValidSubmit=@OnSave>
        <DataAnnotationsValidator/>
        <ValidationSummary/>
        <span class="grid md:grid-cols-3"/>@*For tailwind css*@
        <div class="grid md:@(Model.Category == "Autres" ? "grid-cols-3" : "grid-cols-2") gap-2">
-           <RadzenTextBox class="w-full" @bind-Value=@Model.Name Placeholder="Nom de l'article"/>
-           <RadzenDropDown class="w-full" Data=@_categories @bind-Value=@Model.Category  Placeholder="Catégorie" />
-            @if(Model.Category == "Autres")
+          <InputText @bind-Value=@Model.Name  placeholder="Nom de l'article" class="input w-full max-w-lg" />
+          <InputSelect class="select w-full max-w-lg" @bind-Value=@Model.Category>
+            <option selected value="@(string.IsNullOrEmpty(Model.Category) || _categories.Any(x => x == Model.Category) ? "Autres" : Model.Category)">@(string.IsNullOrEmpty(Model.Category) || _categories.Any(x => x == Model.Category) ? "Catégorie" : Model.Category)</option>
+                @foreach (var item in _categories)
+                {
+                    <option value="@item">@item</option>
+                }
+          </InputSelect>
+            @if (Model.Category == "Autres")
             {
-                 <RadzenTextBox class="w-full" @bind-Value=@Model.Category  Placeholder="Catégorie"/>
+                <InputText @bind-Value=@Model.Category  placeholder="Catégorie" class="input w-full max-w-lg" />
             }
        </div>
        <div class="grid md:grid-cols-2 gap-2">
-           <RadzenTextBox class="w-full" @bind-Value=@Model.UnitOfMeasure Placeholder="Unité de mesure"/>
-           <RadzenNumeric class="w-full" @bind-Value=@Model.StockQty Min=0 Format=@($"#.##  {Model.UnitOfMeasure}") Placeholder=@($"Qté en stock en {Model.UnitOfMeasure ??  "unité de mesure"}")/>
+           <InputText @bind-Value=@Model.UnitOfMeasure  placeholder="Unité de mesure" class="input w-full max-w-lg" />
+            <label class="input-group">
+               <InputNumber @bind-Value=@Model.StockQty min="0"  Placeholder=@($"Qté en stock en {Model.UnitOfMeasure ??  "unité de mesure"}") class="input w-full max-w-lg" />
+               <span>@Model.UnitOfMeasure</span>
+            </label>
        </div>
+       <div class="grid md:grid-cols-2 gap-2">
+           <label class="input-group">
+               <InputNumber @bind-Value=@Model.SellingPricePerUnitOfMeasure min="0"  Placeholder=@($"Prix de vente par {Model.UnitOfMeasure ??  "unité de mesure"}") class="input w-full max-w-lg" />
+               <span class="min-w-[10rem]">@($"$ par {Model.UnitOfMeasure}")</span>
+           </label>
+           <label class="input-group">
+               <InputNumber @bind-Value=@Model.BuyingPricePerUnitOfMeasure min="0"  Placeholder=@($"Prix d'achat par {Model.UnitOfMeasure ??  "unité de mesure"}") class="input w-full max-w-lg" />
+               <span class="min-w-[10rem]">@($"$ par {Model.UnitOfMeasure}")</span>
+           </label>
+       </div>
+       <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100  rounded-md">
+         <input type="checkbox" /> 
+        <div class="collapse-title text-md font-medium">
+        Autres détails
+        </div>
+        <div class="collapse-content bg-base-200 -my-2 space-y-2"> 
+             <div class="grid md:grid-cols-2 gap-2 mt-2">
+                 <InputText @bind-Value=@Model.ConditionementName  placeholder="Conditionement(optionel)" class="input w-full max-w-lg" />
+                 <label class="input-group">
+                    <InputNumber @bind-Value=@Model.ConditionnementQtyPerUnitOfMeasure min="0"  Placeholder=@($"Qté en {Model.UnitOfMeasure  ??  "unité de mesure"} par {Model.ConditionementName ?? "conditionnement(optionel)"}") class="input w-full max-w-lg" />
+                    <span class="min-w-xs">@($"{Model.UnitOfMeasure} par {Model.ConditionementName}")</span>
+                </label>
+            </div>
+            <div class="grid md:grid-cols-2 gap-2">
+                <label class="input-group">
+                    <InputNumber @bind-Value=@Model.SellingPricePerConditionnement min="0"  Placeholder=@($"Prix de vente par {Model.ConditionementName ?? "conditionnement(optionel)"}") class="input w-full max-w-lg" />
+                    <span class="min-w-[5rem]">@($"$ par {Model.ConditionementName}")</span>
+                </label>
+                 <label class="input-group">
+                    <InputNumber @bind-Value=@Model.BuyingPricePerConditionnement min="0"  Placeholder=@($"Prix de vente par {Model.ConditionementName ?? "conditionnement(optionel)"}") class="input w-full max-w-lg" />
+                    <span class="min-w-[5rem]">@($"$ par {Model.ConditionementName}")</span>
+                </label>
+            </div>
         <div class="grid md:grid-cols-2 gap-2">
-           <RadzenTextBox class="w-full" @bind-Value=@Model.ConditionementName Placeholder="Conditionement(optionel)"/>
-           <RadzenNumeric class="w-full" @bind-Value=@Model.ConditionnementQtyPerUnitOfMeasure Min=0 Format=@($"#.##  {Model.UnitOfMeasure} par {Model.ConditionementName}") Placeholder=@($"Qté en {Model.UnitOfMeasure  ??  "unité de mesure"} par {Model.ConditionementName ?? "conditionnement(optionel)"}")/>
+             <label class="input-group">
+                    <InputNumber @bind-Value=@Model.StockMinimum min="1"  Placeholder=@($"Stock Minimum en {Model.UnitOfMeasure ??  "unité de mesure"}") class="input w-full max-w-lg" />
+                    <span class="min-w-[8rem]">@($" {Model.UnitOfMeasure} minimum")</span>
+             </label>
+             <label class="input-group">
+                    <InputNumber @bind-Value=@Model.StockMaximum min="2"  Placeholder=@($"Stock Maximum en {Model.UnitOfMeasure ??  "unité de mesure"}") class="input w-full max-w-lg" />
+                    <span class="min-w-[8rem]">@($" {Model.UnitOfMeasure} maximum")</span>
+             </label>
        </div>
-        <div class="grid md:grid-cols-2 gap-2">
-           <RadzenNumeric class="w-full" @bind-Value=@Model.SellingPricePerUnitOfMeasure Min=0 Format=@($"#.## $ par {Model.UnitOfMeasure}") Placeholder=@($"Prix de vente par {Model.UnitOfMeasure ??  "unité de mesure"}")/>
-           <RadzenNumeric class="w-full" @bind-Value=@Model.SellingPricePerConditionnement Min=0 Format=@($"#.## $ par {Model.ConditionementName}") Placeholder=@($"Prix de vente par {Model.ConditionementName ?? "conditionnement(optionel)"}")/>
-       </div>
-        <div class="grid md:grid-cols-2 gap-2">
-           <RadzenNumeric class="w-full" @bind-Value=@Model.BuyingPricePerUnitOfMeasure Min=0 Format=@($"#.## $ par {Model.UnitOfMeasure}") Placeholder=@($"Prix d'achat par {Model.UnitOfMeasure ??  "unité de mesure"}")/>
-           <RadzenNumeric class="w-full" @bind-Value=@Model.BuyingPricePerConditionnement Min=0 Format=@($"#.## $ par {Model.ConditionementName}") Placeholder=@($"Prix d'achat par {Model.ConditionementName ?? "conditionnement(optionel)"}")/>
-       </div>
-        <div class="grid md:grid-cols-2 gap-2">
-           <RadzenNumeric class="w-full" @bind-Value=@Model.StockMinimum Min=1 Format=@($"#.## {Model.UnitOfMeasure}") Placeholder=@($"Stock Minimum en {Model.UnitOfMeasure ??  "unité de mesure"}") />
-           <RadzenNumeric class="w-full" @bind-Value=@Model.StockMaximum Min=2 Format=@($"#.## {Model.UnitOfMeasure}") Placeholder=@($"Stock Maximum en {Model.UnitOfMeasure ?? "unité de mesure"}") />
-       </div>
-        <div class="py-2">
-            <RadzenButton class="m-1 px-2" type="submit" IsBusy=@_isBusy Icon="save" Text="Enregistrer" ButtonStyle="ButtonStyle.Secondary" />
+        </div>
+    </div>
+
+        <div class="py-2 grid grid-cols-2 gap-2">
+            <button type="submit"  class="btn shadow w-full @(_isBusy ? "loading" : "")">Enregistrer</button>
             @if (_isNew)
             {
-                 <RadzenButton class="m-1 px-2" Click=@(_ => Cancel(false)) Icon="close" Text="Annuler" ButtonStyle="ButtonStyle.Light" />
+                 <label id="btn-close-modal-new-article" for="modal-new-article" class="btn btn-outline shadow w-full md:hidden">Annuler</label>
             }
             else
             {
-                 <RadzenButton class="m-1 px-2" Click=@ConfirmDelete Icon="delete" Text="Supprimer" ButtonStyle="ButtonStyle.Danger" />
+                 <button  @onclick=@ConfirmDelete class="btn btn-error btn-outline shadow w-full">Supprimer</button>
             }
         </div>
    </EditForm>
@@ -48,9 +87,15 @@
     bool _isBusy = false;
     bool _isNew = true;
     IEnumerable<string> _categories = new List<string>();
+
+    [Inject] public IJSRuntime JSRuntime { get; set; } = null!;
     [Inject] public DialogService DialogService { get; set; } = null!;
     [Inject] public GestDbContext DbContext { get; set; } = null!;
     [Inject] public CurrentItems CurrentItems { get; set; } = null!;
+    [Parameter] public EventCallback Refresh { get; set; }
+    [EditorRequired]
+    [Parameter]
+    public string Permissions { get; set; } = null!;
 
     [Parameter] public ArticleModel Model { get; set; } = new ArticleModel();
 
@@ -63,13 +108,20 @@
     {
         if (firstRender)
         {
-            var categories = await DbContext.Articles.Select(x => x.Category)
-                    .Distinct().ToListAsync();
-            if (!categories.Any(x => x == "Autres"))
-                categories.Add("Autres");
-            _categories = categories;
+            await Policy.Handle<InvalidOperationException>()
+              .WaitAndRetryAsync(10, attempt => TimeSpan.FromMilliseconds(100 * attempt))
+              .ExecuteAsync(InitializeItems);
             await InvokeAsync(() => StateHasChanged());
         }
+    }
+
+    async Task InitializeItems()
+    {
+        var categories = await DbContext.Articles.Select(x => x.Category)
+                  .Distinct().ToListAsync();
+        if (!categories.Any(x => x == "Autres"))
+            categories.Add("Autres");
+        _categories = categories;
     }
 
     async Task OnSave()
@@ -79,8 +131,8 @@
         var result = await Policy.Handle<Exception>()
                 .RetryAsync(3, (ex, attempt) => DbContext.ChangeTracker.Clear())
                 .ExecuteAsync(() => Save(item));
-        if(result > 0)
-            Cancel(true);
+        if (result > 0)
+            await Cancel(true);
         _isBusy = false;
     }
 
@@ -102,7 +154,14 @@
         return result;
     }
 
-    void Cancel(bool canRefresh = false) => DialogService.Close(canRefresh);
+    async Task Cancel(bool canRefresh = false){
+        if(canRefresh)
+        {
+            Model = new ArticleModel();
+            await Refresh.InvokeAsync();
+            await JSRuntime.InvokeVoidAsync("click", _isNew ? "btn-close-modal-new-article" : $"modal-edit-article-{Model.Id}");
+        }
+    }
 
     async Task Delete()
     {
@@ -112,7 +171,7 @@
         var item = DbContext.Articles.First(x => x.Id == Model.Id);
         DbContext.Articles.Remove(item);
         await DbContext.SaveChangesAsync();
-        Cancel(true);
+        await  Cancel(true);
         _isBusy = false;
     }
     async Task ConfirmDelete()

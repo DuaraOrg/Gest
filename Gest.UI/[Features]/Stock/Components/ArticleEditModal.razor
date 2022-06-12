@@ -1,0 +1,30 @@
+﻿<input type="checkbox" id="@_id" class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box modal-box-extra md:max-w-[50rem] no-scrollbar">
+    <ModalTop Id=@_id Title="Nouveau article"/>
+    <div class="-mx-7 px-1 pb-4">
+        <ArticleEdit Model=@_formModel Refresh="_ => Refresh.InvokeAsync()" Permissions=@Permissions/>
+    </div>
+  </div>
+</div>
+@code {
+
+    [Parameter] public EventCallback Refresh { get; set; }
+    [EditorRequired]
+    [Parameter]
+    public string Permissions { get; set; } = null!;
+
+    [Parameter]
+    public Article? Model { get; set; }
+
+    ArticleModel? _formModel;
+    string _title = "";
+    string _id = "";
+
+    protected override void OnParametersSet()
+    {
+        _formModel = Model?.Adapt<ArticleModel>() ?? new ArticleModel();
+        _title = Model is null ? "Nouveau article" : $"Modifier {Model.Name}";
+        _id = Model is null ? "modal-new-article" : $"modal-edit-article-{Model.Id}";
+    }
+}
